@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Zap, Award, CheckCircle2, ChevronRight, Apple, Smartphone } from 'lucide-react';
+import { SignInButton } from '@clerk/clerk-react';
 
 export default function Landing() {
   return (
@@ -26,18 +27,20 @@ export default function Landing() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/auth?tab=register"
-                className="w-full sm:w-auto bg-brand-blue hover:bg-brand-blue/90 text-white font-display font-bold py-4 px-10 rounded-2xl shadow-xl shadow-brand-blue/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
-              >
-                Prøv gratis nå <ChevronRight className="w-5 h-5" />
-              </Link>
-              <Link
-                to="/auth"
-                className="w-full sm:w-auto glass-card py-4 px-10 font-display font-bold text-white hover:bg-brand-dark-2 transition-all flex items-center justify-center gap-2"
-              >
-                Logg inn
-              </Link>
+              <SignInButton mode="modal">
+                <button
+                  className="w-full sm:w-auto bg-brand-blue hover:bg-brand-blue/90 text-white font-display font-bold py-4 px-10 rounded-2xl shadow-xl shadow-brand-blue/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+                >
+                  Prøv gratis nå <ChevronRight className="w-5 h-5" />
+                </button>
+              </SignInButton>
+              <SignInButton mode="modal">
+                <button
+                  className="w-full sm:w-auto glass-card py-4 px-10 font-display font-bold text-white hover:bg-brand-dark-2 transition-all flex items-center justify-center gap-2"
+                >
+                  Logg inn
+                </button>
+              </SignInButton>
             </div>
 
             <div className="mt-16 flex items-center justify-center gap-8 text-slate-500">
@@ -112,10 +115,10 @@ export default function Landing() {
       <footer className="py-12 border-t border-brand-border bg-brand-dark">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="font-display text-lg font-extrabold">
-            teoriøving<span className="gradient-text">.no</span>
+            Teorigo<span className="gradient-text">.no</span>
           </div>
           <p className="text-slate-500 text-xs text-center md:text-left">
-            &copy; 2026 teoriøving.no – Eies og driftes av Teoriøving AS. Alle rettigheter reservert.
+            &copy; 2026 Teorigo.no – Eies og driftes av Teoriøving AS. Alle rettigheter reservert.
           </p>
           <div className="flex gap-4">
             <Apple className="w-5 h-5 text-slate-600 hover:text-slate-400 cursor-pointer transition-colors" />

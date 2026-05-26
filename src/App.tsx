@@ -4,54 +4,33 @@
  */
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
 import Navbar from './components/Navbar';
 import Landing from './pages/Landing';
-import Auth from './pages/Auth';
-import Dashboard from './pages/Dashboard';
+import Teori from './pages/Teori';
 import Admin from './pages/Admin';
-import AppPlaceholder from './pages/AppPlaceholder';
-import { useEffect, useState } from 'react';
-import { getSupabase, ADMIN_EMAIL } from './lib/supabase';
-import type { User } from '@supabase/supabase-js';
 
 export default function App() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { isLoaded, isSignedIn, user } = useUser();
+  const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
 
-  useEffect(() => {
-    try {
-      const supabase = getSupabase();
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        setUser(session?.user ?? null);
-        setLoading(false);
-      });
+  if (!isLoaded) {
+    return <div className="min-h-screen bg-brand-dark flex items-center justify-center text-white">Laster...</div>;
+  }
 
-      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-        setUser(session?.user ?? null);
-      });
-
-      return () => subscription.unsubscribe();
-    } catch (e) {
-      console.error("Supabase not initialized:", e);
-      setLoading(false);
-    }
-  }, []);
-
-  if (loading) return null;
+  const isAdmin = user?.primaryEmailAddress?.emailAddress === adminEmail;
 
   return (
     <Router>
-      <div className="min-h-screen bg-brand-dark overflow-x-hidden">
+      <div className="min-h-screen bg-brand-dark text-white overflow-x-hidden">
         <Navbar />
         <main>
           <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/auth" element={user ? <Navigate to="/dashboard" /> : <Auth />} />
-            <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/auth" />} />
-            <Route path="/app" element={user ? <AppPlaceholder /> : <Navigate to="/auth" />} />
+            <Route path="/" element={isSignedIn ? <Navigate to="/teori" /> : <Landing />} />
+            <Route path="/teori" element={isSignedIn ? <Teori /> : <Navigate to="/" />} />
             <Route 
               path="/admin" 
-              element={user?.email === ADMIN_EMAIL ? <Admin /> : <Navigate to="/dashboard" />} 
+              element={isSignedIn && isAdmin ? <Admin /> : <Navigate to="/" />} 
             />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
