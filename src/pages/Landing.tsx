@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser, useClerk } from '@clerk/clerk-react';
+import { useUser, useClerk, SignInButton, UserButton } from '@clerk/clerk-react';
 import { motion } from 'motion/react';
 import { CATS, UI, CategoryId } from '../data/questions';
 import { useStore } from '../lib/store';
@@ -9,7 +9,7 @@ import Navbar from '../components/Navbar';
 
 export default function Landing() {
   const { lang, setLang, setCatId } = useStore();
-  const { isSignedIn } = useUser();
+  const { isSignedIn, user } = useUser();
   const { openSignIn } = useClerk();
   const navigate = useNavigate();
 
@@ -34,25 +34,56 @@ export default function Landing() {
       paddingBottom: '80px'
     }}>
       
-      <div className="absolute top-0 right-0 z-10 flex flex-row items-center justify-end gap-1.5 p-3 px-4">
-        {[
-          { code: 'no', flag: '🇳🇴', label: 'Norsk' },
-          { code: 'en', flag: '🇬🇧', label: 'English' },
-          { code: 'ar', flag: '🇸🇦', label: 'عربي' },
-          { code: 'pl', flag: '🇵🇱', label: 'Polski' }
-        ].map(l => (
-          <button
-            key={l.code}
-            onClick={() => setLang(l.code as any)}
-            title={l.label}
-            className={cn(
-              "flex items-center justify-center w-9 h-9 rounded-lg border-[1.5px] border-brand-border bg-white/5 text-lg cursor-pointer transition-all p-0 overflow-hidden relative",
-              lang === l.code ? "border-brand-blue bg-brand-blue/15 shadow-[0_0_0_2px_rgba(29,111,235,0.3)]" : "hover:border-[#253347] hover:bg-white/10"
+      <div className="absolute top-0 left-0 right-0 z-10 flex flex-row items-center justify-between p-3 px-4 gap-4">
+        {/* Logo/tittel til venstre på toppen for balanse */}
+        <div className="font-display text-sm font-extrabold tracking-tight text-white/50 select-none">
+          Teorigo<span className="text-brand-blue">.no</span>
+        </div>
+
+        <div className="flex flex-row items-center justify-end gap-2.5">
+          {/* Innloggingsstatus / knapp på forsiden */}
+          <div className="flex items-center gap-2">
+            {isSignedIn ? (
+              <div className="flex items-center gap-2 bg-white/5 border border-brand-border rounded-lg px-2.5 py-1.5">
+                <span className="text-xs text-slate-300 hidden sm:inline-block max-w-[120px] truncate">
+                  {user?.firstName || user?.primaryEmailAddress?.emailAddress}
+                </span>
+                <UserButton afterSignOutUrl="/" appearance={{ elements: { userButtonAvatarBox: "w-7 h-7" } }} />
+              </div>
+            ) : (
+              <SignInButton mode="modal" forceRedirectUrl="/teori" signUpForceRedirectUrl="/teori">
+                <button className="flex items-center justify-center h-9 px-3 sm:px-4 rounded-lg border border-brand-blue bg-brand-blue/15 text-xs font-bold text-[#7eb8f7] cursor-pointer hover:bg-brand-blue/30 hover:text-white transition-all shadow-[0_0_15px_rgba(29,111,235,0.1)]">
+                  {lang === 'no' ? 'Logg inn / Registrer' :
+                   lang === 'en' ? 'Log in / Register' :
+                   lang === 'ar' ? 'تسجيل الدخول' :
+                   'Zaloguj / Rejestracja'}
+                </button>
+              </SignInButton>
             )}
-          >
-            {l.flag}
-          </button>
-        ))}
+          </div>
+
+          {/* Språkvelger */}
+          <div className="flex flex-row items-center gap-1">
+            {[
+              { code: 'no', flag: '🇳🇴', label: 'Norsk' },
+              { code: 'en', flag: '🇬🇧', label: 'English' },
+              { code: 'ar', flag: '🇸🇦', label: 'عربي' },
+              { code: 'pl', flag: '🇵🇱', label: 'Polski' }
+            ].map(l => (
+              <button
+                key={l.code}
+                onClick={() => setLang(l.code as any)}
+                title={l.label}
+                className={cn(
+                  "flex items-center justify-center w-9 h-9 rounded-lg border-[1.5px] border-brand-border bg-white/5 text-lg cursor-pointer transition-all p-0 overflow-hidden relative",
+                  lang === l.code ? "border-brand-blue bg-brand-blue/15 shadow-[0_0_0_2px_rgba(29,111,235,0.3)]" : "hover:border-[#253347] hover:bg-white/10"
+                )}
+              >
+                {l.flag}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="w-full text-center pt-16 pb-6 px-5 bg-gradient-to-b from-brand-blue/5 to-transparent border-b border-brand-border relative overflow-hidden">
