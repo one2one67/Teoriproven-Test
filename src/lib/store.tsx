@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Language, CategoryId } from './data/questions';
+import { Language, CategoryId } from '../data/questions';
 
 interface MainState {
   lang: Language;

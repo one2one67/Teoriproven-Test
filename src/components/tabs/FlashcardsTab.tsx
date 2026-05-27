@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useStore } from '../../lib/store';
 import { UI, QDATA } from '../../data/questions';
-import { Play, X, RotateCcw, Hand, Check } from 'lucide-react';
+import { Play, X, RotateCcw, Hand, Check, ArrowLeft } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { motion } from 'motion/react';
 

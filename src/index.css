@@ -14,6 +14,30 @@
 @layer base {
   body {
     @apply bg-brand-dark text-slate-100 font-sans antialiased;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hindre lagring av bilder og tekst-menyer på mobil */
+  * {
+    -webkit-touch-callout: none !important;
+  }
+  
+  /* Sørg for at input-felter fremdeles kan skrives i */
+  input, select, textarea {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+  }
+}
+
+/* Forhindre utskrift, PDF-lagring og skjermdump-utskrift */
+@media print {
+  body, #root, div, main, header, footer {
+    display: none !important;
   }
 }
 
