@@ -18,7 +18,7 @@ export default function Landing() {
       setCatId(id);
       navigate('/teori');
     } else {
-      openSignIn({ afterSignInUrl: '/teori' });
+      openSignIn({ forceRedirectUrl: '/teori', signUpForceRedirectUrl: '/teori' });
     }
   };
 

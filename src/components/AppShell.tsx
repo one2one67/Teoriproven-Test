@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser, UserButton } from '@clerk/clerk-react';
 import { ArrowLeft, Home, BookOpen, PenSquare, ClipboardList, Info } from 'lucide-react';
 import { useStore } from '../lib/store';
 import { CATS, UI, QDATA } from '../data/questions';
@@ -12,6 +13,7 @@ import ExamTab from './tabs/ExamTab';
 export default function AppShell() {
   const { lang, setLang, catId, setCatId } = useStore();
   const navigate = useNavigate();
+  const { user } = useUser();
   const [activeTab, setActiveTab] = useState<'home'|'fc'|'quiz'|'exam'>('home');
 
   if (!catId) {
@@ -22,6 +24,9 @@ export default function AppShell() {
   const cat = CATS.find(c => c.id === catId)!;
   const ui = UI[lang] || UI['no'];
   
+  const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
+  const isAdmin = user?.primaryEmailAddress?.emailAddress === adminEmail;
+
   return (
     <div className="flex flex-col h-full bg-brand-dark overflow-hidden fixed inset-0 z-50">
       {/* Topbar */}
@@ -38,7 +43,15 @@ export default function AppShell() {
             {(cat as any)[lang]?.name || (cat as any)['no'].name}
           </span>
         </div>
-        <div className="flex flex-row gap-1 items-center">
+        <div className="flex flex-row gap-2 items-center">
+          {isAdmin && (
+            <button
+              onClick={() => navigate('/admin')}
+              className="hidden sm:flex items-center justify-center px-3 h-8 rounded border border-red-500/30 bg-red-500/10 text-[11px] font-bold text-red-300 hover:bg-red-500/20 transition-all"
+            >
+              🛠 Admin
+            </button>
+          )}
           {['no', 'en', 'ar', 'pl'].map(l => (
             <button
               key={l}
@@ -51,6 +64,9 @@ export default function AppShell() {
               {l === 'ar' ? 'ع' : l}
             </button>
           ))}
+          <div className="ml-1 flex items-center justify-center bg-white/5 border border-brand-border rounded-md p-1">
+            <UserButton afterSignOutUrl="/" appearance={{ elements: { userButtonAvatarBox: "w-6 h-6" } }} />
+          </div>
         </div>
       </div>
 

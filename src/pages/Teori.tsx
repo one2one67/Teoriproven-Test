@@ -24,9 +24,17 @@ export default function Teori() {
 
   const checkActiveAccess = async () => {
     try {
+      const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
+      const userId = user?.primaryEmailAddress?.emailAddress || user?.id;
+
+      if (userId === adminEmail) {
+        // Administratorer har automatisk evig tilgang
+        setExpiration(new Date('2099-12-31T23:59:59Z'));
+        return;
+      }
+
       const token = await getToken({ template: "supabase" });
       const supabase = token ? getAuthenticatedSupabase(token) : getSupabase();
-      const userId = user?.primaryEmailAddress?.emailAddress || user?.id;
 
       const { data, error } = await supabase
         .from('access_codes')

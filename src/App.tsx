@@ -16,7 +16,6 @@ import { StoreProvider } from './lib/store';
 
 export default function App() {
   const { isLoaded, isSignedIn, user } = useUser();
-  const [isScreenBlocked, setIsScreenBlocked] = useState(false);
   const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
 
   useEffect(() => {
@@ -61,27 +60,14 @@ export default function App() {
       }
     };
 
-    // 4. Detekter når appen legges i bakgrunnen for å skjule innhold (skjermbilde på mobil/bytte app)
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        setIsScreenBlocked(true);
-      } else {
-        setIsScreenBlocked(false);
-      }
-    };
-
     document.addEventListener('contextmenu', handleContextMenu);
     document.addEventListener('copy', handleCopy);
     document.addEventListener('keydown', handleKeyDown);
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu);
       document.removeEventListener('copy', handleCopy);
       document.removeEventListener('keydown', handleKeyDown);
-
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 
@@ -95,22 +81,8 @@ export default function App() {
     <StoreProvider>
       <Router>
         <div className="min-h-[100dvh] bg-brand-dark text-white overflow-hidden flex flex-col relative select-none">
-          
-          {isScreenBlocked && (
-            <div 
-              onClick={() => setIsScreenBlocked(false)}
-              className="fixed inset-0 z-[10000] bg-brand-dark flex flex-col items-center justify-center p-6 text-center select-none cursor-pointer pointer-events-auto"
-            >
-              <div className="text-4xl mb-4">🔒</div>
-              <div className="font-display text-lg font-bold text-white mb-2">Skjermbeskyttelse aktiv</div>
-              <div className="text-xs text-slate-400 max-w-xs leading-relaxed">
-                Innholdet er midlertidig skjult for å beskytte mot skjermbilder og kopiering.
-                Gå tilbake til appen eller trykk på skjermen for å fortsette.
-              </div>
-            </div>
-          )}
-
-          <div className={isScreenBlocked ? "filter blur-xl opacity-20 pointer-events-none transition-all duration-300 flex-1 flex flex-col" : "flex-1 flex flex-col transition-all duration-300"}>
+          <Navbar />
+          <div className="flex-1 flex flex-col transition-all duration-300">
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/teori" element={isSignedIn ? <Teori /> : <Navigate to="/" />} />
