@@ -1,131 +1,106 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser, useClerk } from '@clerk/clerk-react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
-import { ShieldCheck, Zap, Award, CheckCircle2, ChevronRight, Apple, Smartphone } from 'lucide-react';
-import { SignInButton } from '@clerk/clerk-react';
+import { CATS, UI, CategoryId } from '../data/questions';
+import { useStore } from '../lib/store';
+import { cn } from '../lib/utils';
+import Navbar from '../components/Navbar';
 
 export default function Landing() {
+  const { lang, setLang, setCatId } = useStore();
+  const { isSignedIn } = useUser();
+  const { openSignIn } = useClerk();
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (id: CategoryId) => {
+    if (isSignedIn) {
+      setCatId(id);
+      navigate('/teori');
+    } else {
+      openSignIn({ afterSignInUrl: '/teori' });
+    }
+  };
+
+  useEffect(() => {
+    document.body.className = lang === 'ar' ? 'rtl' : lang === 'pl' ? 'pl-font' : '';
+  }, [lang]);
+
+  const ui = UI[lang] || UI['no'];
+
   return (
-    <div className="relative overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-32 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-[radial-gradient(circle_at_50%_0%,rgba(29,111,235,0.2),transparent_70%)] -z-10" />
-
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+    <div className="min-h-[100dvh] flex flex-col relative w-full overflow-y-auto" style={{ 
+      background: 'radial-gradient(ellipse 90% 55% at 50% -5%, rgba(29,111,235,0.18), transparent), radial-gradient(ellipse 55% 35% at 85% 90%, rgba(6,182,212,0.1), transparent), var(--color-brand-dark)',
+      paddingBottom: '80px'
+    }}>
+      
+      <div className="absolute top-0 right-0 z-10 flex flex-row items-center justify-end gap-1.5 p-3 px-4">
+        {[
+          { code: 'no', flag: '🇳🇴', label: 'Norsk' },
+          { code: 'en', flag: '🇬🇧', label: 'English' },
+          { code: 'ar', flag: '🇸🇦', label: 'عربي' },
+          { code: 'pl', flag: '🇵🇱', label: 'Polski' }
+        ].map(l => (
+          <button
+            key={l.code}
+            onClick={() => setLang(l.code as any)}
+            title={l.label}
+            className={cn(
+              "flex items-center justify-center w-9 h-9 rounded-lg border-[1.5px] border-brand-border bg-white/5 text-lg cursor-pointer transition-all p-0 overflow-hidden relative",
+              lang === l.code ? "border-brand-blue bg-brand-blue/15 shadow-[0_0_0_2px_rgba(29,111,235,0.3)]" : "hover:border-[#253347] hover:bg-white/10"
+            )}
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[10px] font-bold uppercase tracking-widest mb-6">
-              <Zap className="w-3 h-3" /> Oppdatert for 2026
-            </span>
-            <h1 className="font-display text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-              Bestå teoriprøven<br />på <span className="gradient-text">første forsøk</span>
-            </h1>
-            <p className="max-w-2xl mx-auto text-slate-400 text-lg mb-10 leading-relaxed">
-              Norges mest moderne plattform for teoriøving. Tusenvis av spørsmål til varebilløyve, taxiløyve, drosjeeksamen og lastebilløyve.
-            </p>
+            {l.flag}
+          </button>
+        ))}
+      </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <SignInButton mode="modal">
-                <button
-                  className="w-full sm:w-auto bg-brand-blue hover:bg-brand-blue/90 text-white font-display font-bold py-4 px-10 rounded-2xl shadow-xl shadow-brand-blue/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
-                >
-                  Prøv gratis nå <ChevronRight className="w-5 h-5" />
-                </button>
-              </SignInButton>
-              <SignInButton mode="modal">
-                <button
-                  className="w-full sm:w-auto glass-card py-4 px-10 font-display font-bold text-white hover:bg-brand-dark-2 transition-all flex items-center justify-center gap-2"
-                >
-                  Logg inn
-                </button>
-              </SignInButton>
-            </div>
-
-            <div className="mt-16 flex items-center justify-center gap-8 text-slate-500">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                <span className="text-sm font-medium">98% bestått-rate</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                <span className="text-sm font-medium">Tusenvis av elever</span>
-              </div>
-            </div>
-          </motion.div>
+      <div className="w-full text-center pt-16 pb-6 px-5 bg-gradient-to-b from-brand-blue/5 to-transparent border-b border-brand-border relative overflow-hidden">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-brand-blue to-cyan-500 rounded-sm"></div>
+        <div className="inline-flex items-center gap-1.5 bg-brand-blue text-white font-display text-[9px] font-bold tracking-[0.12em] uppercase px-2.5 py-1 rounded mb-2.5 before:content-[''] before:inline-block before:w-1.5 before:h-1.5 before:bg-white before:rounded-full before:opacity-70">
+          {ui.badge}
         </div>
-      </section>
+        <div className="font-display text-[clamp(26px,6vw,38px)] font-extrabold bg-gradient-to-br from-white via-white/80 to-[#7eb8f7] bg-clip-text text-transparent tracking-[-1.5px] mb-1">
+          teorigo<span className="bg-gradient-to-br from-[#4d8ef5] to-cyan-500 bg-clip-text text-transparent">.no</span>
+        </div>
+        <div className="text-[13px] text-slate-400 max-w-[280px] mx-auto">
+          {ui.tagline}
+        </div>
+      </div>
 
-      {/* Features */}
-      <section className="py-24 bg-brand-dark-2/30">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: ShieldCheck,
-                title: "Alltid oppdatert",
-                description: "Spørsmålene våre følger Vegvesenets nyeste retningslinjer for 2026."
-              },
-              {
-                icon: Zap,
-                title: "Effektiv øving",
-                description: "Vår adaptive plattform fokuserer på emnene du trenger mest hjelp med."
-              },
-              {
-                icon: Award,
-                title: "Eksamensimulering",
-                description: "Opplev den ekte prøven før du tar den hos Statens Vegvesen."
-              }
-            ].map((f, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="glass-card p-8 group hover:border-brand-blue/40 transition-all"
+      <div className="grid grid-cols-2 gap-3 w-full max-w-[480px] px-4 pt-4 mx-auto">
+        {CATS.map((cat, i) => {
+          const cd = (cat as any)[lang] || (cat as any)['no'];
+          return (
+            <motion.div
+              key={cat.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05, duration: 0.4 }}
+              onClick={() => handleCategoryClick(cat.id as CategoryId)}
+              className="bg-brand-dark-2 border-[1.5px] border-brand-border border-t-[3px] rounded-2xl pb-3.5 cursor-pointer overflow-hidden relative transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/40 active:scale-[0.97]"
+              style={{ borderTopColor: cat.color }}
+            >
+              <div 
+                className="h-[72px] flex items-center justify-center text-[38px] mb-2.5 relative overflow-hidden"
+                style={{ background: 'linear-gradient(135deg, rgba(29,111,235,0.15), transparent)' }}
               >
-                <div className="w-14 h-14 bg-brand-blue/10 rounded-2xl flex items-center justify-center text-brand-blue mb-6 group-hover:scale-110 transition-transform">
-                  <f.icon className="w-7 h-7" />
-                </div>
-                <h3 className="font-display font-bold text-xl mb-3">{f.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{f.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Categories */}
-      <section className="py-24 border-t border-brand-border">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
-          <h2 className="font-display text-4xl font-extrabold mb-16 text-center">Alle kategorier på ett sted</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-            {['Varebilløyve', 'Taxiløyve', 'Lastebilløyve', 'Drosjeeksamen'].map((cat, i) => (
-              <div key={i} className="glass-card p-6 text-center hover:bg-brand-blue/5 border-brand-blue/10">
-                <span className="font-display font-bold text-sm">{cat}</span>
+                {cat.icon}
+                <div className="absolute bottom-0 left-0 right-0 h-[1px]" style={{ background: `linear-gradient(90deg, transparent, ${cat.color} 50%, transparent)` }}></div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <div className="px-3">
+                <div className="font-display text-[13px] font-bold text-white mb-0.5 leading-[1.2]">{cd.name}</div>
+                <div className="text-[10px] text-slate-400 leading-[1.3] mb-2">{cd.sub}</div>
+              </div>
+              <div className="absolute top-2 right-2 w-3.5 h-3.5 rounded-full opacity-35" style={{ background: cat.color }}></div>
+            </motion.div>
+          );
+        })}
+      </div>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-brand-border bg-brand-dark">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="font-display text-lg font-extrabold">
-            Teorigo<span className="gradient-text">.no</span>
-          </div>
-          <p className="text-slate-500 text-xs text-center md:text-left">
-            &copy; 2026 Teorigo.no – Eies og driftes av Teoriøving AS. Alle rettigheter reservert.
-          </p>
-          <div className="flex gap-4">
-            <Apple className="w-5 h-5 text-slate-600 hover:text-slate-400 cursor-pointer transition-colors" />
-            <Smartphone className="w-5 h-5 text-slate-600 hover:text-slate-400 cursor-pointer transition-colors" />
-          </div>
-        </div>
-      </footer>
+      <p className="text-[11px] text-[#4a5f73] text-center pt-3.5 px-5">
+        {ui.hint}
+      </p>
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { getSupabase, getAuthenticatedSupabase } from '@/src/lib/supabase';
-import { Ticket, CheckCircle2, AlertCircle, Loader2, BookOpen, Clock } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import { useUser, useAuth } from '@clerk/clerk-react';
-import { Link } from 'react-router-dom';
+import AppShell from '../components/AppShell';
 
 export default function Teori() {
   const { user } = useUser();
@@ -12,9 +12,8 @@ export default function Teori() {
 
   const [code, setCode] = useState('');
   const [codeLoading, setCodeLoading] = useState(false);
-  const [codeMessage, setCodeMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+  const [codeError, setCodeError] = useState('');
   const [expiration, setExpiration] = useState<Date | null>(null);
-  const [timeLeft, setTimeLeft] = useState<string>('');
   const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
@@ -29,7 +28,6 @@ export default function Teori() {
       const supabase = token ? getAuthenticatedSupabase(token) : getSupabase();
       const userId = user?.primaryEmailAddress?.emailAddress || user?.id;
 
-      // Hent aktive koder for denne brukeren
       const { data, error } = await supabase
         .from('access_codes')
         .select('expires_at')
@@ -49,36 +47,10 @@ export default function Teori() {
     }
   };
 
-  useEffect(() => {
-    if (!expiration) return;
-
-    const updateTimer = () => {
-      const now = new Date().getTime();
-      const distance = expiration.getTime() - now;
-
-      if (distance < 0) {
-        setExpiration(null);
-        setTimeLeft('Utløpt');
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setTimeLeft(`${days}d ${hours}t ${minutes}m ${seconds}s`);
-    };
-
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
-    return () => clearInterval(interval);
-  }, [expiration]);
-
   const handleRedeem = async () => {
     if (!code || !user) return;
     setCodeLoading(true);
-    setCodeMessage(null);
+    setCodeError('');
 
     const inputCode = code.trim().toUpperCase();
     const userId = user.primaryEmailAddress?.emailAddress || user.id;
@@ -87,7 +59,6 @@ export default function Teori() {
       const token = await getToken({ template: "supabase" });
       const supabase = token ? getAuthenticatedSupabase(token) : getSupabase();
       
-      // Check code
       const { data: codeData, error: fetchError } = await supabase
         .from('access_codes')
         .select('*')
@@ -95,17 +66,16 @@ export default function Teori() {
         .single();
 
       if (fetchError || !codeData) {
-        throw new Error('Koden finnes ikke, er ugyldig eller RLS mangler tillatelse.');
+        throw new Error('Koden finnes ikke eller er ugyldig.');
       }
 
       if (codeData.is_used) {
-        // Hvis koden allerede er brukt av MEG, og er gyldig, slipp meg inn!
         if (codeData.redeemed_by === userId && codeData.expires_at) {
           const exp = new Date(codeData.expires_at);
           if (exp > new Date()) {
             setExpiration(exp);
             setCode('');
-            return; // Vi er allerede logget inn med denne
+            return;
           } else {
             throw new Error('Denne koden har utløpt.');
           }
@@ -113,23 +83,16 @@ export default function Teori() {
         throw new Error('Denne koden er allerede aktivert av en annen bruker.');
       }
 
-      // Determine time
       let days = codeData.plan_days;
       let hours = 0;
-      if (inputCode.startsWith('T24-')) {
-        days = 0;
-        hours = 24;
-      } else if (inputCode.startsWith('D3-')) {
-        days = 3;
-      } else if (inputCode.startsWith('D7-')) {
-        days = 7;
-      }
+      if (inputCode.startsWith('T24-')) { days = 0; hours = 24; }
+      else if (inputCode.startsWith('D3-')) { days = 3; }
+      else if (inputCode.startsWith('D7-')) { days = 7; }
 
       const expDate = new Date();
       expDate.setDate(expDate.getDate() + days);
       expDate.setHours(expDate.getHours() + hours);
 
-      // Mark as used
       const { error: updateError } = await supabase
         .from('access_codes')
         .update({
@@ -140,15 +103,13 @@ export default function Teori() {
         .eq('code', inputCode);
 
       if (updateError) {
-        throw new Error('Kunne ikke aktivere koden i databasen.');
+        throw new Error('Kunne ikke aktivere koden.');
       }
 
-      // Success
       setExpiration(expDate);
-      setCodeMessage({ text: `✓ Kode aktivert! Tilgang til ${expDate.toLocaleString('no-NO')}.`, type: 'success' });
       setCode('');
     } catch (err: any) {
-      setCodeMessage({ text: err.message, type: 'error' });
+      setCodeError(err.message || 'Kunne ikke aktivere kode.');
     } finally {
       setCodeLoading(false);
     }
@@ -156,7 +117,7 @@ export default function Teori() {
 
   if (initialLoad) {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-20 flex justify-center">
+      <div className="min-h-screen bg-brand-dark flex justify-center items-center">
          <Loader2 className="w-8 h-8 animate-spin text-brand-blue" />
       </div>
     );
@@ -164,90 +125,50 @@ export default function Teori() {
 
   if (!expiration) {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-20 flex flex-col items-center">
-        <div className="glass-card p-10 bg-linear-to-br from-brand-dark-2 to-brand-dark border-brand-blue/20 w-full max-w-2xl">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="p-3 bg-brand-blue/10 rounded-2xl text-brand-blue">
-              <Ticket className="w-8 h-8" />
+      <div className="fixed inset-0 z-[999] bg-[#0b0f1a]/95 backdrop-blur-md flex items-center justify-center p-5">
+        <div className="w-full max-w-[400px] bg-brand-dark-2 border-[1.5px] border-brand-border rounded-[20px] overflow-hidden">
+          <div className="bg-gradient-to-br from-brand-blue/15 to-cyan-500/10 p-7 px-6 text-center border-b border-brand-border">
+            <div className="font-display text-lg font-extrabold bg-gradient-to-br from-white via-white/70 to-[#7eb8f7] bg-clip-text text-transparent mb-1">
+              teorigo<span className="bg-gradient-to-br from-brand-blue to-cyan-500 bg-clip-text text-transparent">.no</span>
             </div>
+            <div className="font-display text-xl font-extrabold text-white mb-1.5">Lås opp full tilgang</div>
+            <div className="text-[13px] text-slate-400 leading-relaxed">Skriv inn koden du har mottatt på e-post</div>
+          </div>
+          <div className="p-5 px-5">
+            <div className="text-center text-4xl mb-2">🎟</div>
             <div>
-              <h3 className="font-display font-bold text-2xl tracking-tight">Skriv inn aktiveringskode</h3>
-              <p className="text-slate-400 text-sm">Du trenger en gyldig kode for å åpne teorisiden.</p>
+              <div className="text-[12px] text-slate-400 mb-2 leading-relaxed text-center">
+                Har du ikke en kode? Ta kontakt for å få tilgang.
+              </div>
+              <div className="flex gap-2">
+                <input
+                  className={cn("flex-1 bg-brand-dark text-white border-[1.5px] rounded-lg px-3.5 py-2.5 text-sm font-display tracking-widest outline-none transition-colors focus:border-brand-blue uppercase", codeError ? "border-red-500" : "border-brand-border")}
+                  placeholder="XXXX-XXXX-XXXX"
+                  maxLength={30}
+                  value={code}
+                  onChange={(e) => { setCode(e.target.value.toUpperCase()); setCodeError(''); }}
+                />
+                <button
+                  onClick={handleRedeem}
+                  disabled={codeLoading}
+                  className="px-3.5 py-2.5 rounded-lg border-[1.5px] border-brand-border bg-[#1a2235] text-white font-display text-[13px] font-bold cursor-pointer whitespace-nowrap hover:border-brand-blue transition-all disabled:opacity-50"
+                >
+                  {codeLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Aktiver"}
+                </button>
+              </div>
+              {codeError && (
+                <div className="text-xs text-red-400 mt-1.5">{codeError}</div>
+              )}
             </div>
           </div>
-
-          <AnimatePresence mode="wait">
-            {codeMessage && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className={cn(
-                  "p-5 rounded-2xl mb-6 text-sm font-semibold flex items-center gap-4 border",
-                  codeMessage.type === 'success' ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" : "bg-red-500/10 border-red-500/20 text-red-400"
-                )}
-              >
-                {codeMessage.type === 'success' ? <CheckCircle2 className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
-                {codeMessage.text}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <div className="flex flex-col gap-4">
-            <input
-              type="text"
-              value={code}
-              onChange={(e) => setCode(e.target.value.toUpperCase())}
-              placeholder="F.eks. T24-XXXX-XXXX"
-              className="w-full bg-brand-dark border border-brand-border rounded-2xl px-6 py-4 font-display font-extrabold tracking-[0.1em] text-center outline-none focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 transition-all text-xl"
-            />
-            <button
-              onClick={handleRedeem}
-              disabled={codeLoading || !code}
-              className="w-full bg-brand-blue hover:bg-brand-blue/90 disabled:opacity-50 text-white font-display font-bold px-10 py-4 rounded-2xl transition-all flex items-center justify-center shadow-xl shadow-brand-blue/20 text-lg hover:scale-105 active:scale-95 mt-2"
-            >
-              {codeLoading ? <Loader2 className="w-6 h-6 animate-spin" /> : "Aktiver tilgang"}
-            </button>
+          <div className="text-[11px] text-[#4a5f73] text-center px-5 pb-4 leading-relaxed">
+            Kontakt support på amjmah87@gmail.com ved problemer.
           </div>
         </div>
       </div>
     );
   }
 
-  return (
-    <div className="max-w-5xl mx-auto px-6 py-12">
-      <header className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h1 className="font-display text-4xl font-extrabold mb-2 tracking-tight">Teori og Øving</h1>
-          <p className="text-slate-400 text-sm">Velkommen tilbake, {user?.firstName || user?.primaryEmailAddress?.emailAddress}</p>
-        </div>
-        
-        <div className="glass-card px-6 py-3 flex items-center gap-3 border-emerald-500/20 bg-emerald-500/5">
-          <Clock className="w-5 h-5 text-emerald-400" />
-          <div>
-            <div className="text-[10px] text-emerald-500 font-bold uppercase tracking-widest">Tid igjen</div>
-            <div className="text-lg font-display font-bold text-emerald-400">{timeLeft}</div>
-          </div>
-        </div>
-      </header>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Link to="/eksamen" className="glass-card p-8 border-brand-blue/20 hover:border-brand-blue/40 transition-all cursor-pointer group block">
-           <div className="p-4 bg-brand-blue/10 w-fit rounded-2xl text-brand-blue mb-6 group-hover:scale-110 transition-transform">
-              <BookOpen className="w-8 h-8" />
-           </div>
-           <h2 className="font-display text-2xl font-bold mb-3">Eksamensimulering</h2>
-           <p className="text-slate-400">Ta en full eksamen med 45 spørsmål, akkurat som hos Statens Vegvesen.</p>
-        </Link>
-        
-        <Link to="/bank" className="glass-card p-8 border-purple-500/20 hover:border-purple-500/40 transition-all cursor-pointer group block">
-           <div className="p-4 bg-purple-500/10 w-fit rounded-2xl text-purple-400 mb-6 group-hover:scale-110 transition-transform">
-              <BookOpen className="w-8 h-8" />
-           </div>
-           <h2 className="font-display text-2xl font-bold mb-3">Spørsmålsbank</h2>
-           <p className="text-slate-400">Bla gjennom alle spørsmål tematisk og øv på det du er svakest på.</p>
-        </Link>
-      </div>
-    </div>
-  );
+  // Active state: show App Shell
+  return <AppShell />;
 }

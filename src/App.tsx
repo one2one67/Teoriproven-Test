@@ -11,6 +11,7 @@ import Teori from './pages/Teori';
 import Eksamen from './pages/Eksamen';
 import Bank from './pages/Bank';
 import Admin from './pages/Admin';
+import { StoreProvider } from './lib/store';
 
 export default function App() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -23,10 +24,9 @@ export default function App() {
   const isAdmin = user?.primaryEmailAddress?.emailAddress === adminEmail;
 
   return (
-    <Router>
-      <div className="min-h-screen bg-brand-dark text-white overflow-x-hidden">
-        <Navbar />
-        <main>
+    <StoreProvider>
+      <Router>
+        <div className="min-h-[100dvh] bg-brand-dark text-white overflow-hidden flex flex-col">
           <Routes>
             <Route path="/" element={isSignedIn ? <Navigate to="/teori" /> : <Landing />} />
             <Route path="/teori" element={isSignedIn ? <Teori /> : <Navigate to="/" />} />
@@ -38,9 +38,9 @@ export default function App() {
             />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-        </main>
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </StoreProvider>
   );
 }
 
