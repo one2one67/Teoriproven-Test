@@ -8,6 +8,8 @@ import { useUser } from '@clerk/clerk-react';
 import Navbar from './components/Navbar';
 import Landing from './pages/Landing';
 import Teori from './pages/Teori';
+import Eksamen from './pages/Eksamen';
+import Bank from './pages/Bank';
 import Admin from './pages/Admin';
 
 export default function App() {
@@ -28,6 +30,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={isSignedIn ? <Navigate to="/teori" /> : <Landing />} />
             <Route path="/teori" element={isSignedIn ? <Teori /> : <Navigate to="/" />} />
+            <Route path="/eksamen" element={isSignedIn ? <Eksamen /> : <Navigate to="/" />} />
+            <Route path="/bank" element={isSignedIn ? <Bank /> : <Navigate to="/" />} />
             <Route 
               path="/admin" 
               element={isSignedIn && isAdmin ? <Admin /> : <Navigate to="/" />} 

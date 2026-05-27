@@ -4,6 +4,7 @@ import { getSupabase, getAuthenticatedSupabase } from '@/src/lib/supabase';
 import { Ticket, CheckCircle2, AlertCircle, Loader2, BookOpen, Clock } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import { useUser, useAuth } from '@clerk/clerk-react';
+import { Link } from 'react-router-dom';
 
 export default function Teori() {
   const { user } = useUser();
@@ -193,21 +194,21 @@ export default function Teori() {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="glass-card p-8 border-brand-blue/20 hover:border-brand-blue/40 transition-all cursor-pointer group">
+        <Link to="/eksamen" className="glass-card p-8 border-brand-blue/20 hover:border-brand-blue/40 transition-all cursor-pointer group block">
            <div className="p-4 bg-brand-blue/10 w-fit rounded-2xl text-brand-blue mb-6 group-hover:scale-110 transition-transform">
               <BookOpen className="w-8 h-8" />
            </div>
            <h2 className="font-display text-2xl font-bold mb-3">Eksamensimulering</h2>
            <p className="text-slate-400">Ta en full eksamen med 45 spørsmål, akkurat som hos Statens Vegvesen.</p>
-        </div>
+        </Link>
         
-        <div className="glass-card p-8 border-purple-500/20 hover:border-purple-500/40 transition-all cursor-pointer group">
+        <Link to="/bank" className="glass-card p-8 border-purple-500/20 hover:border-purple-500/40 transition-all cursor-pointer group block">
            <div className="p-4 bg-purple-500/10 w-fit rounded-2xl text-purple-400 mb-6 group-hover:scale-110 transition-transform">
               <BookOpen className="w-8 h-8" />
            </div>
            <h2 className="font-display text-2xl font-bold mb-3">Spørsmålsbank</h2>
            <p className="text-slate-400">Bla gjennom alle spørsmål tematisk og øv på det du er svakest på.</p>
-        </div>
+        </Link>
       </div>
     </div>
   );
