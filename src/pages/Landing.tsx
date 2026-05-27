@@ -43,6 +43,14 @@ export default function Landing() {
         <div className="flex flex-row items-center justify-end gap-2.5">
           {/* Innloggingsstatus / knapp på forsiden */}
           <div className="flex items-center gap-2">
+            {isSignedIn && user?.primaryEmailAddress?.emailAddress === (import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com') && (
+              <button
+                onClick={() => navigate('/admin')}
+                className="flex items-center justify-center h-9 px-3.5 rounded-lg border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 text-xs font-bold text-red-300 cursor-pointer transition-all shadow-[0_0_15px_rgba(239,68,68,0.05)]"
+              >
+                🛠 Admin
+              </button>
+            )}
             {isSignedIn ? (
               <div className="flex items-center gap-2 bg-white/5 border border-brand-border rounded-lg px-2.5 py-1.5">
                 <span className="text-xs text-slate-300 hidden sm:inline-block max-w-[120px] truncate">

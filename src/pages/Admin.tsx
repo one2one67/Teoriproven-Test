@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useNavigate } from 'react-router-dom';
 import { getSupabase, getAuthenticatedSupabase } from '@/src/lib/supabase';
 import { useUser, useAuth } from '@clerk/clerk-react';
 import {
@@ -8,7 +9,8 @@ import {
   Copy,
   Ticket,
   Loader2,
-  ExternalLink
+  ExternalLink,
+  ArrowLeft
 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import type { AccessCode } from '@/src/types';
@@ -16,6 +18,7 @@ import type { AccessCode } from '@/src/types';
 export default function Admin() {
   const { user } = useUser();
   const { getToken } = useAuth();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState({ total: 0, used: 0 });
@@ -114,6 +117,14 @@ export default function Admin() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
+      {/* Back to Home Button */}
+      <button
+        onClick={() => navigate('/')}
+        className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-brand-border bg-white/5 text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 cursor-pointer transition-all"
+      >
+        <ArrowLeft className="w-3.5 h-3.5" /> Tilbake til Teorigo.no
+      </button>
+
       <header className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 className="font-display text-3xl font-extrabold tracking-tight">Admin-panel</h1>
