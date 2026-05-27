@@ -15,20 +15,39 @@ export default function Teori() {
   const [codeMessage, setCodeMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
   const [expiration, setExpiration] = useState<Date | null>(null);
   const [timeLeft, setTimeLeft] = useState<string>('');
+  const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
     if (user) {
-      const storedExp = localStorage.getItem(`${user.id}_expiration`);
-      if (storedExp) {
-        const expDate = new Date(storedExp);
-        if (expDate > new Date()) {
-          setExpiration(expDate);
-        } else {
-          localStorage.removeItem(`${user.id}_expiration`);
-        }
-      }
+      checkActiveAccess();
     }
   }, [user]);
+
+  const checkActiveAccess = async () => {
+    try {
+      const token = await getToken({ template: "supabase" });
+      const supabase = token ? getAuthenticatedSupabase(token) : getSupabase();
+      const userId = user?.primaryEmailAddress?.emailAddress || user?.id;
+
+      // Hent aktive koder for denne brukeren
+      const { data, error } = await supabase
+        .from('access_codes')
+        .select('expires_at')
+        .eq('redeemed_by', userId)
+        .eq('is_used', true)
+        .gte('expires_at', new Date().toISOString())
+        .order('expires_at', { ascending: false })
+        .limit(1);
+
+      if (!error && data && data.length > 0 && data[0].expires_at) {
+        setExpiration(new Date(data[0].expires_at));
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setInitialLoad(false);
+    }
+  };
 
   useEffect(() => {
     if (!expiration) return;
@@ -39,7 +58,6 @@ export default function Teori() {
 
       if (distance < 0) {
         setExpiration(null);
-        if (user) localStorage.removeItem(`${user.id}_expiration`);
         setTimeLeft('Utløpt');
         return;
       }
@@ -55,7 +73,7 @@ export default function Teori() {
     updateTimer();
     const interval = setInterval(updateTimer, 1000);
     return () => clearInterval(interval);
-  }, [expiration, user]);
+  }, [expiration]);
 
   const handleRedeem = async () => {
     if (!code || !user) return;
@@ -63,6 +81,7 @@ export default function Teori() {
     setCodeMessage(null);
 
     const inputCode = code.trim().toUpperCase();
+    const userId = user.primaryEmailAddress?.emailAddress || user.id;
 
     try {
       const token = await getToken({ template: "supabase" });
@@ -80,7 +99,18 @@ export default function Teori() {
       }
 
       if (codeData.is_used) {
-        throw new Error('Denne koden er allerede brukt.');
+        // Hvis koden allerede er brukt av MEG, og er gyldig, slipp meg inn!
+        if (codeData.redeemed_by === userId && codeData.expires_at) {
+          const exp = new Date(codeData.expires_at);
+          if (exp > new Date()) {
+            setExpiration(exp);
+            setCode('');
+            return; // Vi er allerede logget inn med denne
+          } else {
+            throw new Error('Denne koden har utløpt.');
+          }
+        }
+        throw new Error('Denne koden er allerede aktivert av en annen bruker.');
       }
 
       // Determine time
@@ -104,7 +134,8 @@ export default function Teori() {
         .from('access_codes')
         .update({
           is_used: true,
-          redeemed_by: user.primaryEmailAddress?.emailAddress || user.id
+          redeemed_by: userId,
+          expires_at: expDate.toISOString()
         })
         .eq('code', inputCode);
 
@@ -113,7 +144,6 @@ export default function Teori() {
       }
 
       // Success
-      localStorage.setItem(`${user.id}_expiration`, expDate.toISOString());
       setExpiration(expDate);
       setCodeMessage({ text: `✓ Kode aktivert! Tilgang til ${expDate.toLocaleString('no-NO')}.`, type: 'success' });
       setCode('');
@@ -123,6 +153,14 @@ export default function Teori() {
       setCodeLoading(false);
     }
   };
+
+  if (initialLoad) {
+    return (
+      <div className="max-w-3xl mx-auto px-6 py-20 flex justify-center">
+         <Loader2 className="w-8 h-8 animate-spin text-brand-blue" />
+      </div>
+    );
+  }
 
   if (!expiration) {
     return (
