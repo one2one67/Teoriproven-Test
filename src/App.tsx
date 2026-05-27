@@ -62,17 +62,11 @@ export default function App() {
     };
 
     // 4. Detekter når appen legges i bakgrunnen for å skjule innhold (skjermbilde på mobil/bytte app)
-    const handleBlur = () => {
-      setIsScreenBlocked(true);
-    };
-
-    const handleFocus = () => {
-      setIsScreenBlocked(false);
-    };
-
     const handleVisibilityChange = () => {
       if (document.hidden) {
         setIsScreenBlocked(true);
+      } else {
+        setIsScreenBlocked(false);
       }
     };
 
@@ -80,8 +74,6 @@ export default function App() {
     document.addEventListener('copy', handleCopy);
     document.addEventListener('keydown', handleKeyDown);
 
-    window.addEventListener('blur', handleBlur);
-    window.addEventListener('focus', handleFocus);
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
@@ -89,8 +81,6 @@ export default function App() {
       document.removeEventListener('copy', handleCopy);
       document.removeEventListener('keydown', handleKeyDown);
 
-      window.removeEventListener('blur', handleBlur);
-      window.removeEventListener('focus', handleFocus);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
@@ -107,7 +97,10 @@ export default function App() {
         <div className="min-h-[100dvh] bg-brand-dark text-white overflow-hidden flex flex-col relative select-none">
           
           {isScreenBlocked && (
-            <div className="fixed inset-0 z-[10000] bg-brand-dark flex flex-col items-center justify-center p-6 text-center select-none pointer-events-auto">
+            <div 
+              onClick={() => setIsScreenBlocked(false)}
+              className="fixed inset-0 z-[10000] bg-brand-dark flex flex-col items-center justify-center p-6 text-center select-none cursor-pointer pointer-events-auto"
+            >
               <div className="text-4xl mb-4">🔒</div>
               <div className="font-display text-lg font-bold text-white mb-2">Skjermbeskyttelse aktiv</div>
               <div className="text-xs text-slate-400 max-w-xs leading-relaxed">
