@@ -5,15 +5,16 @@ import { Loader2 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import { useUser, useAuth } from '@clerk/clerk-react';
 import AppShell from '../components/AppShell';
+import { useStore } from '../lib/store';
 
 export default function Teori() {
   const { user } = useUser();
   const { getToken } = useAuth();
+  const { expiration, setExpiration } = useStore();
 
   const [code, setCode] = useState('');
   const [codeLoading, setCodeLoading] = useState(false);
   const [codeError, setCodeError] = useState('');
-  const [expiration, setExpiration] = useState<Date | null>(null);
   const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {

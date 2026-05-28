@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser, UserButton } from '@clerk/clerk-react';
-import { ArrowLeft, Home, BookOpen, PenSquare, ClipboardList, Info } from 'lucide-react';
+import { ArrowLeft, Home, BookOpen, PenSquare, ClipboardList, Info, Clock } from 'lucide-react';
 import { useStore } from '../lib/store';
 import { CATS, UI, QDATA } from '../data/questions';
 import { cn } from '../lib/utils';
@@ -11,10 +11,56 @@ import QuizTab from './tabs/QuizTab';
 import ExamTab from './tabs/ExamTab';
 
 export default function AppShell() {
-  const { lang, setLang, catId, setCatId } = useStore();
+  const { lang, setLang, catId, setCatId, expiration } = useStore();
   const navigate = useNavigate();
   const { user } = useUser();
   const [activeTab, setActiveTab] = useState<'home'|'fc'|'quiz'|'exam'>('home');
+  const [timeLeft, setTimeLeft] = useState<string>('');
+
+  useEffect(() => {
+    if (!expiration) return;
+    
+    // Admin evig tilgang
+    if (expiration.getFullYear() > 2050) {
+      setTimeLeft('Evig');
+      return;
+    }
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const diff = expiration.getTime() - now.getTime();
+      
+      if (diff <= 0) {
+        setTimeLeft('Utløpt');
+        window.location.reload(); 
+        return;
+      }
+
+      const h = Math.floor(diff / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      
+      if (h > 48) {
+        const d = Math.floor(h / 24);
+        setTimeLeft(`${d} dager igjen`);
+      } else {
+        setTimeLeft(`${h}t ${m}m igjen`);
+      }
+    }, 1000);
+    
+    // Trigger initially
+    const initDiff = expiration.getTime() - new Date().getTime();
+    if (initDiff > 0) {
+       const h = Math.floor(initDiff / (1000 * 60 * 60));
+       const m = Math.floor((initDiff % (1000 * 60 * 60)) / (1000 * 60));
+       if (h > 48) {
+         setTimeLeft(`${Math.floor(h / 24)} dager igjen`);
+       } else {
+         setTimeLeft(`${h}t ${m}m igjen`);
+       }
+    }
+
+    return () => clearInterval(interval);
+  }, [expiration]);
 
   if (!catId) {
     navigate('/');
@@ -44,6 +90,12 @@ export default function AppShell() {
           </span>
         </div>
         <div className="flex flex-row gap-2 items-center">
+          {timeLeft && timeLeft !== 'Evig' && (
+            <div className="hidden sm:flex items-center justify-center gap-1.5 px-3 h-8 rounded border border-brand-border bg-white/5 text-[11px] font-bold text-slate-300">
+              <Clock className="w-3.5 h-3.5 text-brand-blue" />
+              {timeLeft}
+            </div>
+          )}
           {isAdmin && (
             <button
               onClick={() => navigate('/admin')}
@@ -52,16 +104,16 @@ export default function AppShell() {
               🛠 Admin
             </button>
           )}
-          <div className="relative">
+          <div className="relative" translate="no">
             <select
               value={lang}
               onChange={(e) => setLang(e.target.value as any)}
               className="appearance-none flex items-center justify-between pl-2 pr-6 h-7 rounded-md border-[1.5px] border-brand-border bg-transparent text-[11px] font-bold uppercase text-slate-300 cursor-pointer transition-all hover:bg-white/5 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:text-white [&>option]:bg-brand-dark-2 [&>option]:text-white"
             >
-              <option value="no">NO</option>
-              <option value="en">EN</option>
-              <option value="ar">AR</option>
-              <option value="pl">PL</option>
+              <option value="no">Norsk</option>
+              <option value="en">Engelsk</option>
+              <option value="ar">Arabisk</option>
+              <option value="pl">Polsk</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1.5 text-slate-500">
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

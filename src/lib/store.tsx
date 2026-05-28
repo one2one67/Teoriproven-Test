@@ -13,6 +13,8 @@ interface MainState {
   addHist: (h: any) => void;
   streak: number;
   updateStreak: () => void;
+  expiration: Date | null;
+  setExpiration: (d: Date | null) => void;
 }
 
 const StoreContext = createContext<MainState | undefined>(undefined);
@@ -23,6 +25,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [mastered, setMastered] = useState<Set<string>>(new Set());
   const [hist, setHist] = useState<any[]>([]);
   const [streak, setStreak] = useState(0);
+  const [expiration, setExpiration] = useState<Date | null>(null);
 
   useEffect(() => {
     try {
@@ -92,7 +95,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <StoreContext.Provider value={{ lang, setLang, catId, setCatId, mastered, toggleMastered, clearMastered, hist, addHist, streak, updateStreak }}>
+    <StoreContext.Provider value={{ lang, setLang, catId, setCatId, mastered, toggleMastered, clearMastered, hist, addHist, streak, updateStreak, expiration, setExpiration }}>
       {children}
     </StoreContext.Provider>
   );

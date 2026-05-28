@@ -16,4 +16,5 @@ export interface AccessCode {
   created_by: string;
   redeemed_at?: string;
   redeemed_by?: string;
+  expires_at?: string;
 }

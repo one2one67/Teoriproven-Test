@@ -251,11 +251,24 @@ export default function Admin() {
                     <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Kode</th>
                     <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Status</th>
                     <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Innløst av</th>
-                    <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Dato</th>
+                    <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Aktivert</th>
+                    <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Utløper</th>
+                    <th className="p-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Opprettet D.</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-brand-border">
-                  {codes.map((c) => (
+                  {codes.map((c) => {
+                    let activatedStr = '–';
+                    if (c.is_used && c.expires_at) {
+                      const exp = new Date(c.expires_at);
+                      let hours = c.plan_days === 0 ? 24 : c.plan_days * 24;
+                      // Fallback for T24 where plan_days might be 1 but it's 24 hours
+                      if (c.code.startsWith('T24-')) hours = 24;
+                      const act = new Date(exp.getTime() - hours * 60 * 60 * 1000);
+                      activatedStr = act.toLocaleString('no-NO', { dateStyle: 'short', timeStyle: 'short' });
+                    }
+                    
+                    return (
                     <tr key={c.id} className="hover:bg-white/[0.02] transition-colors">
                       <td className="p-4 font-display font-bold tracking-widest text-sm">{c.code}</td>
                       <td className="p-4">
@@ -266,10 +279,12 @@ export default function Admin() {
                           {c.is_used ? "Brukt" : "Ledig"}
                         </span>
                       </td>
-                      <td className="p-4 text-xs text-slate-400 truncate max-w-[200px]">{c.redeemed_by || '–'}</td>
+                      <td className="p-4 text-xs text-slate-400 truncate max-w-[150px]">{c.redeemed_by || '–'}</td>
+                      <td className="p-4 text-xs text-slate-400">{activatedStr}</td>
+                      <td className="p-4 text-xs text-slate-400">{c.expires_at ? new Date(c.expires_at).toLocaleString('no-NO', { dateStyle: 'short', timeStyle: 'short' }) : '–'}</td>
                       <td className="p-4 text-[10px] text-slate-500">{new Date(c.created_at).toLocaleDateString()}</td>
                     </tr>
-                  ))}
+                  )})}
                 </tbody>
               </table>
             </div>
