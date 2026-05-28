@@ -58,10 +58,10 @@ export default function QuizTab() {
     const total = qPool.length;
     const pct = Math.round((correct / total) * 100);
     let emoji = '📚', title = ui.grOev, color = 'var(--text)';
-    if (pct >= 90) { emoji = '🏆'; title = ui.grEx; color = 'var(--color-emerald-400)'; }
+    if (pct >= 90) { emoji = '🏆'; title = ui.grEx; color = '#4ade80'; }
     else if (pct >= 70) { emoji = '👍'; title = ui.grBra; color = '#4dd4e4'; }
-    else if (pct >= 50) { emoji = '✓'; title = ui.grGod; color = 'var(--color-amber-400)'; }
-    else { color = 'var(--color-red-400)'; }
+    else if (pct >= 50) { emoji = '✓'; title = ui.grGod; color = '#fbbf24'; }
+    else { color = '#f87171'; }
 
     return (
       <div className="animate-in fade-in duration-300">
@@ -79,10 +79,10 @@ export default function QuizTab() {
               <div key={i} className="flex gap-2.5 items-start py-2.5 border-t border-brand-border">
                 <span className="shrink-0 pt-0.5">
                   {a.ok ? (
-                    <div className="w-6 h-6 rounded-full bg-emerald-600 border-2 border-emerald-400 flex items-center justify-center text-white text-xs font-bold">✓</div>
+                    <div className="w-6 h-6 rounded-full bg-[#1a9e52] border-2 border-[#4ade80] flex items-center justify-center text-white text-xs font-bold">✓</div>
                   ) : (
                     <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                      <div className="relative w-0 h-0 border-l-[10px] border-r-[10px] border-b-[20px] border-l-transparent border-r-transparent border-b-red-600 flex items-center justify-center">
+                      <div className="relative w-0 h-0 border-l-[10px] border-r-[10px] border-b-[20px] border-l-transparent border-r-transparent border-b-[#cf222e] flex items-center justify-center">
                         <span className="absolute top-[3px] -left-[2px] text-[10px] font-black text-white">!</span>
                       </div>
                     </div>
@@ -90,7 +90,7 @@ export default function QuizTab() {
                 </span>
                 <div>
                   <div className="text-xs leading-relaxed text-slate-300"><b>{i+1}.</b> {a.q.q}</div>
-                  {!a.ok && <div className="text-[11px] text-emerald-400 mt-1 font-medium">{a.q.o[a.q.c]}</div>}
+                  {!a.ok && <div className="text-[11px] text-[#4ade80] mt-1 font-medium">{a.q.o[a.q.c]}</div>}
                 </div>
               </div>
             ))}
@@ -135,7 +135,7 @@ export default function QuizTab() {
               {recentHist.map((h, i) => (
                 <div key={i} className="flex justify-between items-center py-2 border-b border-brand-border last:border-b-0">
                   <span className="text-xs text-slate-400">{h.date}</span>
-                  <span className={cn("font-display text-xs font-bold", h.pct >= 70 ? 'text-emerald-400' : 'text-amber-400')}>
+                  <span className={cn("font-display text-xs font-bold", h.pct >= 70 ? 'text-[#4ade80]' : 'text-[#fbbf24]')}>
                     {h.score}/{h.total} · {h.pct}%
                   </span>
                 </div>
@@ -182,11 +182,11 @@ export default function QuizTab() {
           if (ans) {
             stateClass = "border-[#253347] bg-brand-dark opacity-70 cursor-default";
             if (i === q.c) {
-              stateClass = "border-emerald-600 bg-[rgba(26,158,82,0.1)] opacity-100";
-              letterClass = "bg-emerald-600 text-white border-emerald-600";
+              stateClass = "border-[#1a9e52] bg-[rgba(26,158,82,0.1)] opacity-100";
+              letterClass = "bg-[#1a9e52] text-white border-[#1a9e52]";
             } else if (ans.chosen === i && !ans.ok) {
-              stateClass = "border-red-600 bg-[rgba(207,34,46,0.1)] opacity-100";
-              letterClass = "bg-red-600 text-white border-red-600";
+              stateClass = "border-[#cf222e] bg-[rgba(207,34,46,0.1)] opacity-100";
+              letterClass = "bg-[#cf222e] text-white border-[#cf222e]";
             }
           }
 
@@ -205,15 +205,15 @@ export default function QuizTab() {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={cn("mt-2.5 p-3 rounded-xl text-[13px] leading-relaxed flex gap-2.5 items-start", ans.ok ? "bg-[rgba(26,158,82,0.09)] border border-[rgba(74,222,128,0.22)]" : "bg-[rgba(207,34,46,0.09)] border border-[rgba(248,113,113,0.22)]")}>
           <span className="shrink-0 mt-0.5">
             {ans.ok ? (
-              <div className="w-[26px] h-[26px] rounded-full bg-emerald-600 border-2 border-emerald-400 flex items-center justify-center text-white text-[13px] font-extrabold">✓</div>
+              <div className="w-[26px] h-[26px] rounded-full bg-[#1a9e52] border-2 border-[#4ade80] flex items-center justify-center text-white text-[13px] font-extrabold">✓</div>
             ) : (
-              <div className="relative w-0 h-0 border-l-[13px] border-r-[13px] border-b-[24px] border-l-transparent border-r-transparent border-b-red-600 flex items-center justify-center">
+              <div className="relative w-0 h-0 border-l-[13px] border-r-[13px] border-b-[24px] border-l-transparent border-r-transparent border-b-[#cf222e] flex items-center justify-center">
                 <span className="absolute top-[3px] -left-[2px] text-[10px] font-black text-white">!</span>
               </div>
             )}
           </span>
           <div>
-            <div className={cn("font-display text-xs font-bold mb-1", ans.ok ? "text-emerald-400" : "text-red-400")}>
+            <div className={cn("font-display text-xs font-bold mb-1", ans.ok ? "text-[#4ade80]" : "text-[#f87171]")}>
               {ans.ok ? ui.correct : ui.wrong}
             </div>
             <div className="text-slate-400">{q.e}</div>

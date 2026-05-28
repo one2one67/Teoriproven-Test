@@ -52,18 +52,23 @@ export default function AppShell() {
               🛠 Admin
             </button>
           )}
-          {['no', 'en', 'ar', 'pl'].map(l => (
-            <button
-              key={l}
-              onClick={() => setLang(l as any)}
-              className={cn(
-                "flex items-center justify-center w-7 h-7 rounded-md border-[1.5px] text-[10px] font-bold uppercase transition-all cursor-pointer",
-                lang === l ? "bg-brand-blue border-brand-blue text-white" : "border-brand-border bg-transparent text-slate-400 hover:border-[#253347] hover:bg-white/5"
-              )}
+          <div className="relative">
+            <select
+              value={lang}
+              onChange={(e) => setLang(e.target.value as any)}
+              className="appearance-none flex items-center justify-between pl-2 pr-6 h-7 rounded-md border-[1.5px] border-brand-border bg-transparent text-[11px] font-bold uppercase text-slate-300 cursor-pointer transition-all hover:bg-white/5 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:text-white [&>option]:bg-brand-dark-2 [&>option]:text-white"
             >
-              {l === 'ar' ? 'ع' : l}
-            </button>
-          ))}
+              <option value="no">NO</option>
+              <option value="en">EN</option>
+              <option value="ar">AR</option>
+              <option value="pl">PL</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1.5 text-slate-500">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </div>
           <div className="ml-1 flex items-center justify-center bg-white/5 border border-brand-border rounded-md p-1">
             <UserButton afterSignOutUrl="/" appearance={{ elements: { userButtonAvatarBox: "w-6 h-6" } }} />
           </div>

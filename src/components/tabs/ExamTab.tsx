@@ -35,8 +35,11 @@ export default function ExamTab() {
   }, [playing, showResults, timeLeft]);
 
   const start = () => {
+    const isSpecial = catId === 'drosje' || catId === 'lastebil';
+    const limit = isSpecial ? 27 : 30;
+    
     let pool = allQs.map((q, i) => ({ ...(q[lang] || q['no']), gi: i }));
-    pool = pool.sort(() => Math.random() - 0.5).slice(0, Math.min(30, pool.length));
+    pool = pool.sort(() => Math.random() - 0.5).slice(0, Math.min(limit, pool.length));
     setQPool(pool);
     setQIdx(0);
     setAnswers([]);
@@ -61,7 +64,8 @@ export default function ExamTab() {
     const correct = finalAnswers.filter(a => a.chosen === a.q.c).length;
     const total = qPool.length;
     const pct = Math.round((correct / total) * 100);
-    const passed = pct >= 75;
+    const passReq = Math.ceil((total * 22) / 30);
+    const passed = correct >= passReq;
     addHist({ ty: 'e', cat: catId, date: new Date().toLocaleDateString(), score: correct, total, pct, passed });
     setShowResults(true);
   };
@@ -78,19 +82,20 @@ export default function ExamTab() {
     const correct = answers.filter(a => a.chosen === a.q.c).length;
     const total = qPool.length;
     const pct = Math.round((correct / total) * 100);
-    const passed = pct >= 75;
+    const passReq = Math.ceil((total * 22) / 30);
+    const passed = correct >= passReq;
 
     return (
       <div className="animate-in fade-in duration-300">
         <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-4 mb-3 text-center">
           <div className="text-5xl mb-2">{passed ? '🎉' : '📚'}</div>
-          <div className="font-display text-[22px] font-extrabold mb-1" style={{ color: passed ? 'var(--color-emerald-400)' : 'var(--color-red-400)' }}>
+          <div className="font-display text-[22px] font-extrabold mb-1" style={{ color: passed ? '#4ade80' : '#f87171' }}>
             {passed ? ui.passed : ui.notPassed}
           </div>
           <div className="font-display text-[38px] font-extrabold text-white mb-0">{correct} / {total}</div>
-          <div className="text-xs text-slate-400 mt-1">{pct}{ui.pct} · {ui.req}</div>
+          <div className="text-xs text-slate-400 mt-1">{pct}{ui.pct} · Krav: {passReq} / {total}</div>
           <div className="mt-3">
-            <span className={cn("inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold border", passed ? "bg-[rgba(26,158,82,0.13)] text-emerald-400 border-[rgba(74,222,128,0.28)]" : "bg-[rgba(207,34,46,0.1)] text-red-400 border-[rgba(248,113,113,0.22)]")}>
+            <span className={cn("inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold border", passed ? "bg-[rgba(26,158,82,0.13)] text-[#4ade80] border-[rgba(74,222,128,0.28)]" : "bg-[rgba(207,34,46,0.1)] text-[#f87171] border-[rgba(248,113,113,0.22)]")}>
               {passed ? <Check className="w-3.5 h-3.5"/> : <X className="w-3.5 h-3.5"/>} {passed ? ui.passMsg : ui.failMsg}
             </span>
           </div>
@@ -105,10 +110,10 @@ export default function ExamTab() {
                 <div key={i} className="flex gap-2.5 items-start py-2.5 border-t border-brand-border">
                   <span className="shrink-0 pt-0.5">
                     {ok ? (
-                      <div className="w-6 h-6 rounded-full bg-emerald-600 border-2 border-emerald-400 flex items-center justify-center text-white text-xs font-bold">✓</div>
+                      <div className="w-6 h-6 rounded-full bg-[#1a9e52] border-2 border-[#4ade80] flex items-center justify-center text-white text-xs font-bold">✓</div>
                     ) : (
                       <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                        <div className="relative w-0 h-0 border-l-[10px] border-r-[10px] border-b-[20px] border-l-transparent border-r-transparent border-b-red-600 flex items-center justify-center">
+                        <div className="relative w-0 h-0 border-l-[10px] border-r-[10px] border-b-[20px] border-l-transparent border-r-transparent border-b-[#cf222e] flex items-center justify-center">
                           <span className="absolute top-[3px] -left-[2px] text-[10px] font-black text-white">!</span>
                         </div>
                       </div>
@@ -116,7 +121,7 @@ export default function ExamTab() {
                   </span>
                   <div>
                     <div className="text-xs leading-relaxed text-slate-300"><b>{i+1}.</b> {a.q.q}</div>
-                    {!ok && <div className="text-[11px] text-emerald-400 mt-1 font-medium">{a.q.o[a.q.c]}</div>}
+                    {!ok && <div className="text-[11px] text-[#4ade80] mt-1 font-medium">{a.q.o[a.q.c]}</div>}
                   </div>
                 </div>
               );
@@ -137,6 +142,12 @@ export default function ExamTab() {
   }
 
   if (!playing) {
+    const isSpecial = catId === 'drosje' || catId === 'lastebil';
+    const totalQs = isSpecial ? 27 : 30;
+    const passReq = Math.ceil((totalQs * 22) / 30);
+    const reqText = ui.exReqLbl.replace('22', passReq.toString()).replace('30', totalQs.toString()).replace('٢٢', passReq.toString()).replace('٣٠', totalQs.toString());
+    const hintText = ui.exHint.replace('30', totalQs.toString()).replace('٣٠', totalQs.toString());
+
     return (
       <div className="animate-in fade-in duration-300">
         <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-4 mb-3">
@@ -146,13 +157,13 @@ export default function ExamTab() {
               75
             </div>
             <div>
-              <div className="font-display text-[12px] font-bold text-white mb-1">{ui.exReqLbl}</div>
-              <div className="text-[12px] text-slate-400 leading-relaxed">{ui.exHint}</div>
+              <div className="font-display text-[12px] font-bold text-white mb-1">{reqText}</div>
+              <div className="text-[12px] text-slate-400 leading-relaxed">{hintText}</div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-2 mb-3.5">
             <div className="bg-[#1a2235] border border-[#253347] rounded-lg p-2.5 text-center">
-              <div className="font-display text-lg font-extrabold text-white leading-none">30</div>
+              <div className="font-display text-lg font-extrabold text-white leading-none">{totalQs}</div>
               <div className="text-[10px] text-slate-400 mt-1">{ui.exInfoQ}</div>
             </div>
             <div className="bg-[#1a2235] border border-[#253347] rounded-lg p-2.5 text-center">
@@ -170,7 +181,7 @@ export default function ExamTab() {
 
   const m = Math.floor(timeLeft / 60);
   const s = timeLeft % 60;
-  const timerClass = timeLeft < 60 ? 'border-red-600 animate-pulse' : timeLeft < 300 ? 'border-amber-500' : 'border-emerald-600';
+  const timerClass = timeLeft < 60 ? 'border-[#cf222e] animate-pulse' : timeLeft < 300 ? 'border-[#d4a017]' : 'border-[#1a9e52]';
   const q = qPool[qIdx];
   const ans = answers[qIdx];
 

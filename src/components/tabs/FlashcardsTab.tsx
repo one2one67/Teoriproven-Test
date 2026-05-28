@@ -121,10 +121,10 @@ export default function FlashcardsTab() {
         <motion.div 
           animate={{ rotateY: flipped ? 180 : 0 }}
           transition={{ duration: 0.4 }}
-          className="relative w-full min-h-[230px] transform-style-3d"
+          className="relative w-full min-h-[230px] [transform-style:preserve-3d]"
         >
           {/* Front */}
-          <div className="absolute inset-0 backface-hidden bg-brand-dark-2 border-[1.5px] border-brand-border border-t-[3px] rounded-2xl p-6 flex flex-col justify-center" style={{ borderTopColor: 'var(--cat-c)' }}>
+          <div className="absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] bg-brand-dark-2 border-[1.5px] border-brand-border border-t-[3px] rounded-2xl p-6 flex flex-col justify-center" style={{ borderTopColor: 'var(--cat-c)' }}>
             <div className="text-[11px] text-slate-500 text-center mb-3.5 flex items-center justify-center gap-1">
               <Hand className="w-3.5 h-3.5" /> {ui.fcHint}
             </div>
@@ -133,8 +133,8 @@ export default function FlashcardsTab() {
             </div>
           </div>
           {/* Back */}
-          <div className="absolute inset-0 backface-hidden bg-brand-dark-2 border-[1.5px] border-brand-border border-t-[3px] border-t-emerald-500 rounded-2xl p-6 flex flex-col justify-center" style={{ transform: 'rotateY(180deg)' }}>
-            <div className="text-sm text-emerald-400 font-semibold mb-2.5 leading-snug">
+          <div className="absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] bg-brand-dark-2 border-[1.5px] border-brand-border border-t-[3px] border-t-[#1a9e52] rounded-2xl p-6 flex flex-col justify-center" style={{ transform: 'rotateY(180deg)' }}>
+            <div className="text-sm text-[#4ade80] font-semibold mb-2.5 leading-snug">
               {q.o[q.c]}
             </div>
             <div className="text-xs text-slate-400 leading-relaxed">
@@ -146,10 +146,10 @@ export default function FlashcardsTab() {
 
       {flipped && (
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex gap-2 mt-2">
-          <button onClick={() => mark(false)} className="flex-1 bg-[rgba(207,34,46,0.13)] text-red-400 border-[1.5px] border-[rgba(207,34,46,0.28)] font-display text-sm font-bold rounded-xl py-3 flex items-center justify-center gap-2 transition-all active:scale-[0.97]">
+          <button onClick={() => mark(false)} className="flex-1 bg-[rgba(207,34,46,0.13)] text-[#f87171] border-[1.5px] border-[rgba(207,34,46,0.28)] font-display text-sm font-bold rounded-xl py-3 flex items-center justify-center gap-2 transition-all active:scale-[0.97]">
             <RotateCcw className="w-4 h-4" /> {ui.fcMore}
           </button>
-          <button onClick={() => mark(true)} className="flex-1 bg-gradient-to-br from-emerald-600 to-[#138340] text-white font-display text-sm font-bold rounded-xl py-3 flex items-center justify-center gap-2 transition-all active:scale-[0.97] border-0">
+          <button onClick={() => mark(true)} className="flex-1 bg-gradient-to-br from-[#1a9e52] to-[#138340] text-white font-display text-sm font-bold rounded-xl py-3 flex items-center justify-center gap-2 transition-all active:scale-[0.97] border-0">
             <Check className="w-4 h-4" /> {ui.fcGot}
           </button>
         </motion.div>

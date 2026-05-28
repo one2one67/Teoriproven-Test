@@ -1,10 +1,12 @@
 import React from 'react';
 import { useStore } from '../../lib/store';
 import { UI, QDATA, CATS } from '../../data/questions';
-import { Flame, BookOpen, PenSquare, ClipboardList, ChevronRight } from 'lucide-react';
+import { Flame, BookOpen, PenSquare, ClipboardList, ChevronRight, Library } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomeTab({ onNavigate }: { onNavigate: (tab: 'fc'|'quiz'|'exam') => void }) {
   const { lang, catId, streak, hist, mastered } = useStore();
+  const navigate = useNavigate();
   const ui = UI[lang] || UI['no'];
   
   if (!catId) return null;
@@ -101,6 +103,17 @@ export default function HomeTab({ onNavigate }: { onNavigate: (tab: 'fc'|'quiz'|
         <div className="flex-1 min-w-0">
           <div className="font-display text-sm font-bold text-white mb-0.5">{ui.hmEx}</div>
           <div className="text-[11px] text-slate-400 leading-snug">{ui.hmExd}</div>
+        </div>
+        <ChevronRight className="w-5 h-5 text-[#4a5f73] shrink-0 rtl:scale-x-[-1]" />
+      </div>
+
+      <div onClick={() => navigate('/bank')} className="bg-brand-dark-2 border-[1.5px] border-brand-border rounded-2xl p-3.5 mb-2.5 cursor-pointer flex items-center gap-3 transition-all hover:border-brand-blue hover:bg-brand-dark active:scale-[0.98]">
+        <div className="w-11 h-11 rounded-xl bg-brand-dark border border-[#253347] flex items-center justify-center text-xl shrink-0 text-purple-500">
+          <Library className="w-6 h-6" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="font-display text-sm font-bold text-white mb-0.5">Spørsmålsbank</div>
+          <div className="text-[11px] text-slate-400 leading-snug">Se gjennom alle spørsmål og forklaringer</div>
         </div>
         <ChevronRight className="w-5 h-5 text-[#4a5f73] shrink-0 rtl:scale-x-[-1]" />
       </div>
