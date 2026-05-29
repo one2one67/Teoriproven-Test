@@ -2,6 +2,7 @@ import { LayoutDashboard } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { SignInButton, UserButton, useUser } from '@clerk/clerk-react';
 import { cn } from '@/src/lib/utils';
+import { useStore } from '@/src/lib/store';
 
 export default function Navbar() {
   const { isSignedIn, user } = useUser();
@@ -9,6 +10,7 @@ export default function Navbar() {
   const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
   
   const isAdmin = user?.primaryEmailAddress?.emailAddress === adminEmail;
+  const { lang, setLang } = useStore();
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-brand-border bg-brand-dark/80 backdrop-blur-md">
@@ -16,12 +18,12 @@ export default function Navbar() {
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
             <Link to="/" className="font-display text-xl font-extrabold tracking-tight">
-              Teorigo<span className="gradient-text">.no</span>
+              Teorigo
             </Link>
           </div>
 
           <div className="flex items-center gap-4">
-            {isSignedIn ? (
+            {isSignedIn && (
               <>
                 <Link
                   to="/teori"
@@ -43,14 +45,44 @@ export default function Navbar() {
                     Admin
                   </Link>
                 )}
-                <UserButton afterSignOutUrl="/" appearance={{ elements: { userButtonAvatarBox: "w-8 h-8" } }} />
               </>
-            ) : (
+            )}
+
+            {!isSignedIn && (
               <SignInButton mode="modal">
-                <button className="text-sm font-bold text-white hover:text-brand-blue transition-colors px-4 py-2">
-                  Logg inn
+                <button className="text-sm font-bold text-white hover:text-brand-blue transition-colors px-2 py-2">
+                  {lang === 'no' ? 'Logg inn' : lang === 'en' ? 'Log in' : lang === 'ar' ? 'تسجيل الدخول' : 'Zaloguj'}
                 </button>
               </SignInButton>
+            )}
+
+            {/* Språkvelger */}
+            <div className="relative">
+              <select
+                value={lang}
+                onChange={(e) => setLang(e.target.value as any)}
+                className="appearance-none flex items-center justify-between pl-3 pr-8 min-w-[100px] h-9 rounded-lg border-[1.5px] border-brand-border bg-white/5 text-xs font-medium text-white cursor-pointer transition-all hover:bg-white/10 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:bg-brand-blue/15 focus:shadow-[0_0_0_2px_rgba(29,111,235,0.3)] [&>option]:bg-brand-dark-2"
+              >
+                {[
+                  { code: 'no', label: '🇳🇴 Norsk' },
+                  { code: 'en', label: '🇬🇧 English' },
+                  { code: 'ar', label: '🇸🇦 عربي' },
+                  { code: 'pl', label: '🇵🇱 Polski' }
+                ].map(l => (
+                  <option key={l.code} value={l.code}>
+                    {l.label}
+                  </option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-400">
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+
+            {isSignedIn && (
+              <UserButton afterSignOutUrl="/" appearance={{ elements: { userButtonAvatarBox: "w-8 h-8" } }} />
             )}
           </div>
         </div>

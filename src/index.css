@@ -41,10 +41,6 @@
   }
 }
 
-.gradient-text {
-  @apply bg-linear-to-br from-[#4d8ef5] to-[#06b6d4] bg-clip-text text-transparent;
-}
-
 .glass-card {
   @apply bg-brand-dark-2/80 backdrop-blur-md border border-brand-border rounded-2xl;
 }

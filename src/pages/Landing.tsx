@@ -6,6 +6,7 @@ import { CATS, UI, CategoryId } from '../data/questions';
 import { useStore } from '../lib/store';
 import { cn } from '../lib/utils';
 import Navbar from '../components/Navbar';
+import KnowledgePortal from '../components/KnowledgePortal';
 
 export default function Landing() {
   const { lang, setLang, setCatId } = useStore();
@@ -34,83 +35,28 @@ export default function Landing() {
       paddingBottom: '80px'
     }}>
       
-      <div className="absolute top-0 left-0 right-0 z-10 flex flex-row items-center justify-between p-3 px-4 gap-4">
-        {/* Logo/tittel til venstre på toppen for balanse */}
-        <div className="font-display text-sm font-extrabold tracking-tight text-white/50 select-none">
-          Teorigo<span className="text-brand-blue">.no</span>
+      {/* Fjernet duplikat header. Navigasjon og språkvelger ligger i Navbar */}
+      <div className="w-full text-center pt-24 pb-12 px-5 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-full bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(29,111,235,0.14),transparent)] pointer-events-none"></div>
+        <div className="inline-flex items-center gap-1.5 bg-brand-blue/10 border border-brand-blue/20 text-[#7eb8f7] text-[11px] font-bold px-3 py-1 rounded-full mb-4.5 tracking-[0.04em] shadow-sm relative z-10">
+          📚 {(lang === 'no' ? 'Komplett transportportal' : lang === 'en' ? 'Complete transport portal' : lang === 'ar' ? 'بوابة نقل شاملة' : 'Kompletny portal transportowy')}
         </div>
-
-        <div className="flex flex-row items-center justify-end gap-2.5">
-          {/* Innloggingsstatus / knapp på forsiden */}
-          <div className="flex items-center gap-2">
-            {isSignedIn && user?.primaryEmailAddress?.emailAddress === (import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com') && (
-              <button
-                onClick={() => navigate('/admin')}
-                className="flex items-center justify-center h-9 px-3.5 rounded-lg border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 text-xs font-bold text-red-300 cursor-pointer transition-all shadow-[0_0_15px_rgba(239,68,68,0.05)]"
-              >
-                🛠 Admin
-              </button>
-            )}
-            {isSignedIn ? (
-              <div className="flex items-center gap-2 bg-white/5 border border-brand-border rounded-lg px-2.5 py-1.5">
-                <span className="text-xs text-slate-300 hidden sm:inline-block max-w-[120px] truncate">
-                  {user?.firstName || user?.primaryEmailAddress?.emailAddress}
-                </span>
-                <UserButton afterSignOutUrl="/" appearance={{ elements: { userButtonAvatarBox: "w-7 h-7" } }} />
-              </div>
-            ) : (
-              <SignInButton mode="modal" forceRedirectUrl="/teori" signUpForceRedirectUrl="/teori">
-                <button className="flex items-center justify-center h-9 px-3 sm:px-4 rounded-lg border border-brand-blue bg-brand-blue/15 text-xs font-bold text-[#7eb8f7] cursor-pointer hover:bg-brand-blue/30 hover:text-white transition-all shadow-[0_0_15px_rgba(29,111,235,0.1)]">
-                  {lang === 'no' ? 'Logg inn / Registrer' :
-                   lang === 'en' ? 'Log in / Register' :
-                   lang === 'ar' ? 'تسجيل الدخول' :
-                   'Zaloguj / Rejestracja'}
-                </button>
-              </SignInButton>
-            )}
-          </div>
-
-          {/* Språkvelger */}
-          <div className="relative">
-            <select
-              value={lang}
-              onChange={(e) => setLang(e.target.value as any)}
-              className="appearance-none flex items-center justify-between pl-3 pr-8 min-w-[100px] h-9 rounded-lg border-[1.5px] border-brand-border bg-white/5 text-xs font-medium text-white cursor-pointer transition-all hover:bg-white/10 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:bg-brand-blue/15 focus:shadow-[0_0_0_2px_rgba(29,111,235,0.3)] [&>option]:bg-brand-dark-2"
-            >
-              {[
-                { code: 'no', label: '🇳🇴 Norsk' },
-                { code: 'en', label: '🇬🇧 English' },
-                { code: 'ar', label: '🇸🇦 عربي' },
-                { code: 'pl', label: '🇵🇱 Polski' }
-              ].map(l => (
-                <option key={l.code} value={l.code}>
-                  {l.label}
-                </option>
-              ))}
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-400">
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
+        <h1 className="font-display text-[clamp(26px,5.5vw,48px)] font-extrabold tracking-[-1.5px] leading-[1.1] mb-3 text-white max-w-2xl mx-auto relative z-10">
+          {(lang === 'no' ? 'Alt du trenger å vite om ' : lang === 'en' ? 'Everything you need to know about ' : lang === 'ar' ? 'كل ما تحتاج معرفته عن ' : 'Wszystko co musisz wiedzieć o ')}
+        </h1>
+        <p className="text-[clamp(13px,2vw,16px)] text-slate-400 max-w-[580px] mx-auto mb-8 leading-[1.7] relative z-10">
+          {(lang === 'no' ? 'Kildebasert kunnskap om teoriprøver, løyver, trafikksikkerhet, HMS, kjøre-/hviletid, ADR og mye mer. For sjåfører, elever og transportbedrifter.' : lang === 'en' ? 'Source-based knowledge about theory tests, licences, road safety, HSE, driving/rest times, ADR and much more. For drivers, students and transport companies.' : lang === 'ar' ? 'معرفة مستندة للمصادر حول الاختبارات النظرية والرخص وسلامة السير والسلامة المهنية وأوقات القيادة/الراحة وADR والمزيد. للسائقين والطلاب وشركات النقل.' : 'Wiedza oparta na źródłach dotycząca egzaminów teoretycznych, licencji, bezpieczeństwa drogowego, BHP, czasu jazdy/odpoczynku, ADR i innych. Dla kierowców, uczniów i firm transportowych.')}
+        </p>
       </div>
 
-      <div className="w-full text-center pt-16 pb-6 px-5 bg-gradient-to-b from-brand-blue/5 to-transparent border-b border-brand-border relative overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[3px] bg-gradient-to-r from-brand-blue to-cyan-500 rounded-sm"></div>
-        <div className="inline-flex items-center gap-1.5 bg-brand-blue text-white font-display text-[9px] font-bold tracking-[0.12em] uppercase px-2.5 py-1 rounded mb-2.5 before:content-[''] before:inline-block before:w-1.5 before:h-1.5 before:bg-white before:rounded-full before:opacity-70">
-          {ui.badge}
-        </div>
-        <div className="font-display text-[clamp(26px,6vw,38px)] font-extrabold bg-gradient-to-br from-white via-white/80 to-[#7eb8f7] bg-clip-text text-transparent tracking-[-1.5px] mb-1">
-          teorigo<span className="bg-gradient-to-br from-[#4d8ef5] to-cyan-500 bg-clip-text text-transparent">.no</span>
-        </div>
-        <div className="text-[13px] text-slate-400 max-w-[280px] mx-auto">
-          {ui.tagline}
-        </div>
+      <KnowledgePortal />
+
+      <div className="w-full text-center mt-4 mb-4">
+        <h2 className="font-display text-lg font-bold text-white mb-2">{(lang === 'no' ? 'Løyver og teoriprøver' : lang === 'en' ? 'Licences and theory tests' : lang === 'ar' ? 'الرخص والاختبارات النظرية' : 'Licencje i egzaminy teoretyczne')}</h2>
+        <p className="text-xs text-slate-400">{(lang === 'no' ? 'Velg for å begynne' : lang === 'en' ? 'Select to start' : lang === 'ar' ? 'اختر للبدء' : 'Wybierz, aby rozpocząć')}</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 w-full max-w-[480px] px-4 pt-4 mx-auto">
+      <div className="grid grid-cols-2 gap-3 w-full max-w-[480px] px-4 mx-auto mb-16">
         {CATS.map((cat, i) => {
           const cd = (cat as any)[lang] || (cat as any)['no'];
           return (
