@@ -43,10 +43,32 @@ export default function Landing() {
         </div>
         <h1 className="font-display text-[clamp(26px,5.5vw,48px)] font-extrabold tracking-[-1.5px] leading-[1.1] mb-3 text-white max-w-2xl mx-auto relative z-10">
           {(lang === 'no' ? 'Alt du trenger å vite om ' : lang === 'en' ? 'Everything you need to know about ' : lang === 'ar' ? 'كل ما تحتاج معرفته عن ' : 'Wszystko co musisz wiedzieć o ')}
+          <span className="bg-gradient-to-br from-[#4d8ef5] to-cyan-500 bg-clip-text text-transparent">
+            {(lang === 'no' ? 'transport i Norge' : lang === 'en' ? 'transport in Norway' : lang === 'ar' ? 'النقل في النرويج' : 'transporcie w Norwegii')}
+          </span>
         </h1>
         <p className="text-[clamp(13px,2vw,16px)] text-slate-400 max-w-[580px] mx-auto mb-8 leading-[1.7] relative z-10">
           {(lang === 'no' ? 'Kildebasert kunnskap om teoriprøver, løyver, trafikksikkerhet, HMS, kjøre-/hviletid, ADR og mye mer. For sjåfører, elever og transportbedrifter.' : lang === 'en' ? 'Source-based knowledge about theory tests, licences, road safety, HSE, driving/rest times, ADR and much more. For drivers, students and transport companies.' : lang === 'ar' ? 'معرفة مستندة للمصادر حول الاختبارات النظرية والرخص وسلامة السير والسلامة المهنية وأوقات القيادة/الراحة وADR والمزيد. للسائقين والطلاب وشركات النقل.' : 'Wiedza oparta na źródłach dotycząca egzaminów teoretycznych, licencji, bezpieczeństwa drogowego, BHP, czasu jazdy/odpoczynku, ADR i innych. Dla kierowców, uczniów i firm transportowych.')}
         </p>
+        
+        <div className="flex flex-wrap justify-center gap-5 relative z-10">
+          <div className="text-center px-5 py-2.5 bg-white/[0.04] border border-brand-border rounded-xl shadow-lg">
+            <div className="font-display text-2xl font-extrabold text-white">8+</div>
+            <div className="text-[11px] text-slate-400">{(lang === 'no' ? 'Kategorier' : lang === 'en' ? 'Categories' : lang === 'ar' ? 'الفئات' : 'Kategorie')}</div>
+          </div>
+          <div className="text-center px-5 py-2.5 bg-white/[0.04] border border-brand-border rounded-xl shadow-lg">
+            <div className="font-display text-2xl font-extrabold text-white">20+</div>
+            <div className="text-[11px] text-slate-400">{(lang === 'no' ? 'FAQ-spørsmål' : lang === 'en' ? 'FAQ questions' : lang === 'ar' ? 'أسئلة FAQ' : 'Pytania FAQ')}</div>
+          </div>
+          <div className="text-center px-5 py-2.5 bg-white/[0.04] border border-brand-border rounded-xl shadow-lg">
+            <div className="font-display text-2xl font-extrabold text-white">4</div>
+            <div className="text-[11px] text-slate-400">{(lang === 'no' ? 'Språk' : lang === 'en' ? 'Languages' : lang === 'ar' ? 'اللغات' : 'Języki')}</div>
+          </div>
+          <div className="text-center px-5 py-2.5 bg-white/[0.04] border border-brand-border rounded-xl shadow-lg">
+            <div className="font-display text-2xl font-extrabold text-white">100%</div>
+            <div className="text-[11px] text-slate-400">{(lang === 'no' ? 'Kildebasert' : lang === 'en' ? 'Source-based' : lang === 'ar' ? 'مستندة للمصادر' : 'Oparte na źródłach')}</div>
+          </div>
+        </div>
       </div>
 
       <KnowledgePortal />
