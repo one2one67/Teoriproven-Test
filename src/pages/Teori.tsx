@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { getSupabase, getAuthenticatedSupabase } from '@/src/lib/supabase';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
-import { useUser, useAuth } from '@clerk/clerk-react';
+import { getSupabase } from '@/src/lib/supabase';
+import { useUser } from '../lib/AuthContext';
 import AppShell from '../components/AppShell';
 import { useStore } from '../lib/store';
 
 export default function Teori() {
   const { user } = useUser();
-  const { getToken } = useAuth();
   const { expiration, setExpiration } = useStore();
 
   const [code, setCode] = useState('');
@@ -34,8 +32,7 @@ export default function Teori() {
         return;
       }
 
-      const token = await getToken({ template: "supabase" });
-      const supabase = token ? getAuthenticatedSupabase(token) : getSupabase();
+      const supabase = getSupabase();
 
       const { data, error } = await supabase
         .from('access_codes')
@@ -65,8 +62,7 @@ export default function Teori() {
     const userId = user.primaryEmailAddress?.emailAddress || user.id;
 
     try {
-      const token = await getToken({ template: "supabase" });
-      const supabase = token ? getAuthenticatedSupabase(token) : getSupabase();
+      const supabase = getSupabase();
       
       const { data: codeData, error: fetchError } = await supabase
         .from('access_codes')
@@ -89,7 +85,7 @@ export default function Teori() {
             throw new Error('Denne koden har utløpt.');
           }
         }
-        throw new Error('Denne koden er allerede aktivert av en annen bruker.');
+        throw new Error('Denne koden er allerede aktivert av en herdet bruker.');
       }
 
       let days = codeData.plan_days;

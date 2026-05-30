@@ -7,35 +7,24 @@
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-let supabaseInstance: SupabaseClient | null = null;
+const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL || 'https://eyulnlvvtvnjbptlsusr.supabase.co').trim();
+const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5dWxubHZ2dHZuamJwdGxzdXNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MzkwNjcsImV4cCI6MjA5NTMxNTA2N30.Yg6R6Gr3bfxDfkEMAuwimyl9NgCnTvalcT01tvzz8Sw').trim();
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn(
+    'Supabase URL og Anon Key mangler. Vennligst sjekk dine secrets i AI Studio.'
+  );
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export function getSupabase(): SupabaseClient {
-  if (!supabaseInstance) {
-    const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL || 'https://eyulnlvvtvnjbptlsusr.supabase.co').trim();
-    const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5dWxubHZ2dHZuamJwdGxzdXNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MzkwNjcsImV4cCI6MjA5NTMxNTA2N30.Yg6R6Gr3bfxDfkEMAuwimyl9NgCnTvalcT01tvzz8Sw').trim();
-
-    if (!supabaseUrl || !supabaseAnonKey) {
-      throw new Error(
-        'Supabase URL og Anon Key er påkrevd. Vennligst legg dem til i Secrets-panelet i AI Studio.'
-      );
-    }
-
-    supabaseInstance = createClient(supabaseUrl, supabaseAnonKey);
-  }
-  return supabaseInstance;
+  return supabase;
 }
 
-export function getAuthenticatedSupabase(clerkToken: string): SupabaseClient {
-  const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL || 'https://eyulnlvvtvnjbptlsusr.supabase.co').trim();
-  const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5dWxubHZ2dHZuamJwdGxzdXNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MzkwNjcsImV4cCI6MjA5NTMxNTA2N30.Yg6R6Gr3bfxDfkEMAuwimyl9NgCnTvalcT01tvzz8Sw').trim();
-
-  return createClient(supabaseUrl, supabaseAnonKey, {
-    global: {
-      headers: {
-        Authorization: `Bearer ${clerkToken}`,
-      },
-    },
-  });
+// Retained for backward-compat (no longer needs a clerkToken parameter)
+export function getAuthenticatedSupabase(_clerkToken?: string): SupabaseClient {
+  return supabase;
 }
 
-export const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || 'admin@teoriøving.no';
+export const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';

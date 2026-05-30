@@ -1,17 +1,14 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser, useClerk, SignInButton, UserButton } from '@clerk/clerk-react';
 import { motion } from 'motion/react';
 import { CATS, UI, CategoryId } from '../data/questions';
 import { useStore } from '../lib/store';
-import { cn } from '../lib/utils';
-import Navbar from '../components/Navbar';
+import { useUser } from '../lib/AuthContext';
 import KnowledgePortal from '../components/KnowledgePortal';
 
 export default function Landing() {
-  const { lang, setLang, setCatId } = useStore();
-  const { isSignedIn, user } = useUser();
-  const { openSignIn } = useClerk();
+  const { lang, setCatId } = useStore();
+  const { isSignedIn } = useUser();
   const navigate = useNavigate();
 
   const handleCategoryClick = (id: CategoryId) => {
@@ -19,7 +16,7 @@ export default function Landing() {
       setCatId(id);
       navigate('/teori');
     } else {
-      openSignIn({ forceRedirectUrl: '/teori', signUpForceRedirectUrl: '/teori' });
+      navigate('/auth?redirect=/teori');
     }
   };
 

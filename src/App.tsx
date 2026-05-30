@@ -3,18 +3,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useUser } from '@clerk/clerk-react';
 import Navbar from './components/Navbar';
 import Landing from './pages/Landing';
 import Teori from './pages/Teori';
 import Eksamen from './pages/Eksamen';
 import Bank from './pages/Bank';
 import Admin from './pages/Admin';
+import Auth from './pages/Auth';
 import { StoreProvider } from './lib/store';
+import { AuthProvider, useUser } from './lib/AuthContext';
 
-export default function App() {
+function MainAppContent() {
   const { isLoaded, isSignedIn, user } = useUser();
   const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
 
@@ -78,26 +79,34 @@ export default function App() {
   const isAdmin = user?.primaryEmailAddress?.emailAddress === adminEmail;
 
   return (
-    <StoreProvider>
-      <Router>
-        <div className="min-h-[100dvh] bg-brand-dark text-white overflow-hidden flex flex-col relative select-none">
-          <Navbar />
-          <div className="flex-1 flex flex-col transition-all duration-300">
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/teori" element={isSignedIn ? <Teori /> : <Navigate to="/" />} />
-              <Route path="/eksamen" element={isSignedIn ? <Eksamen /> : <Navigate to="/" />} />
-              <Route path="/bank" element={isSignedIn ? <Bank /> : <Navigate to="/" />} />
-              <Route 
-                path="/admin" 
-                element={isSignedIn && isAdmin ? <Admin /> : <Navigate to="/" />} 
-              />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </div>
+    <Router>
+      <div className="min-h-[100dvh] bg-brand-dark text-white overflow-hidden flex flex-col relative select-none">
+        <Navbar />
+        <div className="flex-1 flex flex-col transition-all duration-300">
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/teori" element={isSignedIn ? <Teori /> : <Navigate to="/auth?redirect=/teori" />} />
+            <Route path="/eksamen" element={isSignedIn ? <Eksamen /> : <Navigate to="/auth?redirect=/eksamen" />} />
+            <Route path="/bank" element={isSignedIn ? <Bank /> : <Navigate to="/auth?redirect=/bank" />} />
+            <Route 
+              path="/admin" 
+              element={isSignedIn && isAdmin ? <Admin /> : <Navigate to="/" />} 
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
         </div>
-      </Router>
-    </StoreProvider>
+      </div>
+    </Router>
   );
 }
 
+export default function App() {
+  return (
+    <AuthProvider>
+      <StoreProvider>
+        <MainAppContent />
+      </StoreProvider>
+    </AuthProvider>
+  );
+}

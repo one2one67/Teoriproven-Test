@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { getSupabase, getAuthenticatedSupabase } from '@/src/lib/supabase';
-import { useUser, useAuth } from '@clerk/clerk-react';
+import { getSupabase } from '@/src/lib/supabase';
+import { useUser } from '../lib/AuthContext';
 import {
   Plus,
   RefreshCcw,
   Copy,
   Ticket,
-  Loader2,
-  ExternalLink,
   ArrowLeft
 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
@@ -17,7 +15,6 @@ import type { AccessCode } from '@/src/types';
 
 export default function Admin() {
   const { user } = useUser();
-  const { getToken } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -47,8 +44,7 @@ export default function Admin() {
 
   const loadStats = async () => {
     try {
-      const token = await getToken({ template: "supabase" });
-      const supabase = token ? getAuthenticatedSupabase(token) : getSupabase();
+      const supabase = getSupabase();
       const { count: total } = await supabase.from('access_codes').select('*', { count: 'exact', head: true });
       const { count: used } = await supabase.from('access_codes').select('*', { count: 'exact', head: true }).eq('is_used', true);
       setStats({ total: total || 0, used: used || 0 });
@@ -59,8 +55,7 @@ export default function Admin() {
 
   const loadCodes = async () => {
     try {
-      const token = await getToken({ template: "supabase" });
-      const supabase = token ? getAuthenticatedSupabase(token) : getSupabase();
+      const supabase = getSupabase();
       const { data } = await supabase.from('access_codes').select('*').order('created_at', { ascending: false }).limit(100);
       if (data) setCodes(data);
     } catch (e) {
@@ -90,8 +85,7 @@ export default function Admin() {
         created_by: user?.primaryEmailAddress?.emailAddress || 'Admin'
       };
 
-      const token = await getToken({ template: "supabase" });
-      const supabase = token ? getAuthenticatedSupabase(token) : getSupabase();
+      const supabase = getSupabase();
 
       const { error } = await supabase.from('access_codes').insert([row]);
       if (error) {
@@ -102,8 +96,7 @@ export default function Admin() {
       await loadStats();
     } catch (e: any) {
       console.error(e);
-      alert('Kunne ikke generere kode:\n' + e.message + '\n\n' + 
-      (e.message.includes('RLS') ? 'Dette skjer fordi du bruker Clerk, men databasen (Supabase) har RLS. Opprett en JWT Template i Clerk for Supabase.' : ''));
+      alert('Kunne ikke generere kode:\n' + e.message);
     } finally {
       setGenLoading(false);
     }
@@ -120,7 +113,7 @@ export default function Admin() {
       {/* Back to Home Button */}
       <button
         onClick={() => navigate('/')}
-        className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-brand-border bg-white/5 text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 cursor-pointer transition-all"
+        className="mb-6 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-brand-border bg-white/5 text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 cursor-pointer transition-all"
       >
         <ArrowLeft className="w-3.5 h-3.5" /> Tilbake til Teorigo.no
       </button>
@@ -142,6 +135,12 @@ export default function Admin() {
           </div>
         </div>
       </header>
+
+      {error && (
+        <div className="mb-6 p-4 rounded-xl border border-red-500/20 bg-red-500/5 text-red-300 text-sm">
+          {error}
+        </div>
+      )}
 
       <div className="flex gap-1 p-1 bg-brand-dark border border-brand-border rounded-2xl mb-8 w-fit">
         <button
@@ -181,21 +180,21 @@ export default function Admin() {
                   <button
                     onClick={() => generateSingleCode(1)}
                     disabled={genLoading}
-                    className="w-full bg-slate-800 hover:bg-slate-700 text-white font-display font-bold py-4 rounded-xl transition-all border border-slate-600"
+                    className="w-full bg-slate-800 hover:bg-slate-700 text-white font-display font-bold py-4 rounded-xl transition-all border border-slate-600 cursor-pointer"
                   >
                     Generer 24 timer (T24)
                   </button>
                   <button
                     onClick={() => generateSingleCode(3)}
                     disabled={genLoading}
-                    className="w-full bg-slate-800 hover:bg-slate-700 text-white font-display font-bold py-4 rounded-xl transition-all border border-slate-600"
+                    className="w-full bg-slate-800 hover:bg-slate-700 text-white font-display font-bold py-4 rounded-xl transition-all border border-slate-600 cursor-pointer"
                   >
                     Generer 3 dager (D3)
                   </button>
                   <button
                     onClick={() => generateSingleCode(7)}
                     disabled={genLoading}
-                    className="w-full bg-brand-blue hover:bg-brand-blue/90 text-white font-display font-bold py-4 rounded-xl transition-all shadow-lg shadow-brand-blue/20"
+                    className="w-full bg-brand-blue hover:bg-brand-blue/90 text-white font-display font-bold py-4 rounded-xl transition-all shadow-lg shadow-brand-blue/20 cursor-pointer"
                   >
                     Generer 7 dager (D7)
                   </button>
@@ -207,7 +206,7 @@ export default function Admin() {
                   <div className="glass-card p-8 border-emerald-500/20 bg-emerald-500/5 h-full">
                     <div className="flex items-center justify-between mb-6">
                       <h3 className="font-display font-bold text-lg text-emerald-400">Resultat</h3>
-                      <button onClick={copyCodes} className="p-2 hover:bg-emerald-500/10 rounded-lg transition-colors text-emerald-400">
+                      <button onClick={copyCodes} className="p-2 hover:bg-emerald-500/10 rounded-lg transition-colors text-emerald-400 cursor-pointer">
                         <Copy className="w-5 h-5" />
                       </button>
                     </div>
@@ -220,7 +219,7 @@ export default function Admin() {
                     </div>
                     <button
                       onClick={copyCodes}
-                      className="w-full mt-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-display font-bold transition-all"
+                      className="w-full mt-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-display font-bold transition-all cursor-pointer"
                     >
                       Kopier kode
                     </button>
@@ -262,7 +261,7 @@ export default function Admin() {
                     if (c.is_used && c.expires_at) {
                       const exp = new Date(c.expires_at);
                       let hours = c.plan_days === 0 ? 24 : c.plan_days * 24;
-                      // Fallback for T24 where plan_days might be 1 but it's 24 hours
+                      // Fallback for T24 where plan_days may be 1 but it's 24 hours
                       if (c.code.startsWith('T24-')) hours = 24;
                       const act = new Date(exp.getTime() - hours * 60 * 60 * 1000);
                       activatedStr = act.toLocaleString('no-NO', { dateStyle: 'short', timeStyle: 'short' });
@@ -284,12 +283,13 @@ export default function Admin() {
                       <td className="p-4 text-xs text-slate-400">{c.expires_at ? new Date(c.expires_at).toLocaleString('no-NO', { dateStyle: 'short', timeStyle: 'short' }) : '–'}</td>
                       <td className="p-4 text-[10px] text-slate-500">{new Date(c.created_at).toLocaleDateString()}</td>
                     </tr>
-                  )})}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
             <div className="p-4 border-t border-brand-border flex justify-center">
-              <button onClick={loadCodes} className="text-xs font-bold text-brand-blue flex items-center gap-2 hover:underline">
+              <button onClick={loadCodes} className="text-xs font-bold text-brand-blue flex items-center gap-2 hover:underline cursor-pointer">
                 <RefreshCcw className="w-3 h-3" /> Last inn flere
               </button>
             </div>

@@ -1,23 +1,29 @@
-import { LayoutDashboard } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import { SignInButton, UserButton, useUser } from '@clerk/clerk-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/src/lib/utils';
 import { useStore } from '@/src/lib/store';
+import { useUser } from '../lib/AuthContext';
+import { supabase } from '../lib/supabase';
 
 export default function Navbar() {
   const { isSignedIn, user } = useUser();
   const location = useLocation();
+  const navigate = useNavigate();
   const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
   
   const isAdmin = user?.primaryEmailAddress?.emailAddress === adminEmail;
   const { lang, setLang } = useStore();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-brand-border bg-brand-dark/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
-            <Link to="/" className="font-display text-xl font-extrabold tracking-tight">
+            <Link to="/" className="font-display text-xl font-extrabold tracking-tight text-white hover:text-brand-blue transition-colors">
               Teorigo
             </Link>
           </div>
@@ -49,11 +55,12 @@ export default function Navbar() {
             )}
 
             {!isSignedIn && (
-              <SignInButton mode="modal">
-                <button className="text-sm font-bold text-white hover:text-brand-blue transition-colors px-2 py-2">
-                  {lang === 'no' ? 'Logg inn' : lang === 'en' ? 'Log in' : lang === 'ar' ? 'تسجيل الدخول' : 'Zaloguj'}
-                </button>
-              </SignInButton>
+              <button 
+                onClick={() => navigate('/auth')} 
+                className="text-sm font-bold text-white hover:text-brand-blue transition-colors px-2.5 py-2 cursor-pointer"
+              >
+                {lang === 'no' ? 'Logg inn' : lang === 'en' ? 'Log in' : lang === 'ar' ? 'تسجيل الدخول' : 'Zaloguj'}
+              </button>
             )}
 
             {/* Språkvelger */}
@@ -82,7 +89,26 @@ export default function Navbar() {
             </div>
 
             {isSignedIn && (
-              <UserButton afterSignOutUrl="/" appearance={{ elements: { userButtonAvatarBox: "w-8 h-8" } }} />
+              <div className="flex items-center gap-3">
+                <span className="hidden md:inline-block text-xs text-slate-400 max-w-[120px] truncate font-sans">
+                  {user?.firstName || user?.email}
+                </span>
+                
+                {/* Beautiful Custom Avatar Badge */}
+                <div 
+                  className="w-8 h-8 rounded-full bg-brand-blue/20 border border-brand-blue text-brand-blue-lt flex items-center justify-center text-xs font-bold font-display uppercase tracking-wider select-none shrink-0" 
+                  title={user?.email}
+                >
+                  {(user?.email?.[0] || 'U')}
+                </div>
+
+                <button 
+                  onClick={handleSignOut}
+                  className="text-xs font-bold text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer h-9 px-3 border border-brand-border rounded-lg bg-white/5 hover:bg-white/10"
+                >
+                  {lang === 'no' ? 'Logg ut' : lang === 'en' ? 'Log out' : lang === 'ar' ? 'خروج' : 'Wyloguj'}
+                </button>
+              </div>
             )}
           </div>
         </div>

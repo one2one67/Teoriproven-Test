@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser, UserButton } from '@clerk/clerk-react';
-import { ArrowLeft, Home, BookOpen, PenSquare, ClipboardList, Info, Clock } from 'lucide-react';
+import { ArrowLeft, Home, BookOpen, PenSquare, ClipboardList, Clock } from 'lucide-react';
 import { useStore } from '../lib/store';
-import { CATS, UI, QDATA } from '../data/questions';
+import { CATS, UI } from '../data/questions';
 import { cn } from '../lib/utils';
+import { useUser } from '../lib/AuthContext';
+import { supabase } from '../lib/supabase';
 import HomeTab from './tabs/HomeTab';
 import FlashcardsTab from './tabs/FlashcardsTab';
 import QuizTab from './tabs/QuizTab';
@@ -73,6 +74,11 @@ export default function AppShell() {
   const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
   const isAdmin = user?.primaryEmailAddress?.emailAddress === adminEmail;
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
+  };
+
   return (
     <div className="flex flex-col h-full bg-brand-dark overflow-hidden fixed inset-0 z-50">
       {/* Topbar */}
@@ -121,9 +127,12 @@ export default function AppShell() {
               </svg>
             </div>
           </div>
-          <div className="ml-1 flex items-center justify-center bg-white/5 border border-brand-border rounded-md p-1">
-            <UserButton afterSignOutUrl="/" appearance={{ elements: { userButtonAvatarBox: "w-6 h-6" } }} />
-          </div>
+          <button
+            onClick={handleSignOut}
+            className="ml-1 flex items-center justify-center bg-white/5 border border-brand-border rounded-md hover:bg-white/10 hover:border-slate-500 cursor-pointer h-7 px-2.5 text-slate-300 hover:text-white transition-all text-[11px] font-bold"
+          >
+            {lang === 'no' ? 'Ut' : lang === 'en' ? 'Exit' : lang === 'ar' ? 'خروج' : 'Wyjdź'}
+          </button>
         </div>
       </div>
 
