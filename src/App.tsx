@@ -87,6 +87,7 @@ function MainAppContent() {
             <Route path="/" element={<Landing />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/teori" element={isSignedIn ? <Teori /> : <Navigate to="/auth?redirect=/teori" />} />
+            <Route path="/dashboard" element={isSignedIn ? <Teori /> : <Navigate to="/auth?redirect=/dashboard" />} />
             <Route path="/eksamen" element={isSignedIn ? <Eksamen /> : <Navigate to="/auth?redirect=/eksamen" />} />
             <Route path="/bank" element={isSignedIn ? <Bank /> : <Navigate to="/auth?redirect=/bank" />} />
             <Route 
