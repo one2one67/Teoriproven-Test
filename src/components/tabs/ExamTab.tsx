@@ -303,7 +303,7 @@ export default function ExamTab() {
               <button 
                 key={i} 
                 onClick={() => handleAns(i)} 
-                className={cn("w-full text-left p-3.5 min-h-[48px] rounded-xl border-[1.5px] transition-all flex items-center gap-3 justify-start focus:outline-none cursor-pointer active:scale-[0.99]", stateClass)}
+                className={cn("w-full text-left rtl:text-right p-3.5 min-h-[48px] rounded-xl border-[1.5px] transition-all flex items-center gap-3 justify-start focus:outline-none cursor-pointer active:scale-[0.99]", stateClass)}
               >
                 <span className={cn("flex items-center justify-center min-w-[26px] h-[26px] rounded-lg font-display text-[11px] font-extrabold shrink-0 border-[1.5px]", letterClass)}>
                   {String.fromCharCode(65 + i)}

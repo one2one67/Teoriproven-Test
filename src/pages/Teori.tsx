@@ -65,7 +65,19 @@ export default function Teori() {
       support: "Kontakt support på amjmah87@gmail.com ved problemer.",
       invalid: "Koden finnes ikke eller er ugyldig.",
       expired: "Denne koden har utløpt.",
-      already_used: "Denne koden er allerede benyttet."
+      already_used: "Denne koden er allerede benyttet.",
+      availablePlans: "Tilgjengelige tidsplaner:",
+      t24Title: "T24 - 24 Timer",
+      t24Sub: "Siste-liten repetisjon",
+      t24Badge: "1 Dag",
+      d3Title: "D3 - 3 Dager",
+      d3Sub: "Populær helgepakke",
+      d3Badge: "3 Dager",
+      d3Pop: "POPPIS",
+      d7Title: "D7 - 7 Dager",
+      d7Sub: "Full beståttgaranti",
+      d7Badge: "1 Uke",
+      footSafe: "Kildebasert og trygt"
     },
     en: {
       title: "Unlock Full Access",
@@ -76,7 +88,19 @@ export default function Teori() {
       support: "Contact support at amjmah87@gmail.com if you face issues.",
       invalid: "Token is invalid or does not exist.",
       expired: "This access token has expired.",
-      already_used: "This access token has already been used."
+      already_used: "This access token has already been used.",
+      availablePlans: "Available Study Passes:",
+      t24Title: "T24 - 24 Hours",
+      t24Sub: "Last-minute study pass",
+      t24Badge: "1 Day",
+      d3Title: "D3 - 3 Days",
+      d3Sub: "Popular weekend pass",
+      d3Badge: "3 Days",
+      d3Pop: "POPULAR",
+      d7Title: "D7 - 7 Days",
+      d7Sub: "Pass guaranteed pass",
+      d7Badge: "1 Week",
+      footSafe: "Source-verified and secure"
     },
     ar: {
       title: "فتح قفل الوصول الكامل",
@@ -87,7 +111,19 @@ export default function Teori() {
       support: "تواصل مع الدعم الفني amjmah87@gmail.com في حال وجود مشاكل.",
       invalid: "الكود المدخل غير موجود أو منتهي الصلاحية.",
       expired: "انتهت صلاحية كود التفعيل هذا.",
-      already_used: "كود التفعيل هذا مستخدم بالفعل للحساب."
+      already_used: "كود التفعيل هذا مستخدم بالفعل للحساب.",
+      availablePlans: "باقات الدراسة المتاحة:",
+      t24Title: "T24 - ٢٤ ساعة",
+      t24Sub: "مراجعة اللحظات الأخيرة قبل الاختبار",
+      t24Badge: "يوم واحد",
+      d3Title: "D3 - ٣ أيام",
+      d3Sub: "باقة عطلة نهاية الأسبوع الأكثر شعبية",
+      d3Badge: "٣ أيام",
+      d3Pop: "شائع",
+      d7Title: "D7 - ٧ أيام",
+      d7Sub: "ضمان كامل ومثالي للنجاح",
+      d7Badge: "أسبوع واحد",
+      footSafe: "معتمد وآمن ١٠٠٪"
     },
     pl: {
       title: "Odblokuj Pełny Dostęp",
@@ -98,7 +134,19 @@ export default function Teori() {
       support: "W razie problemów skontaktuj się z obsługą pod adresem amjmah87@gmail.com.",
       invalid: "Kod nie istnieje lub jest nieprawidłowy.",
       expired: "Ten kod dostępu wygasł.",
-      already_used: "Ten kod został już wykorzystany."
+      already_used: "Ten kod został już wykorzystany.",
+      availablePlans: "Dostępne pakiety nauki:",
+      t24Title: "T24 - 24 Godziny",
+      t24Sub: "Powtórka na ostatnią chwilę",
+      t24Badge: "1 Dzień",
+      d3Title: "D3 - 3 Dni",
+      d3Sub: "Popularny pakiet weekendowy",
+      d3Badge: "3 Dni",
+      d3Pop: "HIT",
+      d7Title: "D7 - 7 Dni",
+      d7Sub: "Pełna gwarancja zdania",
+      d7Badge: "1 Tydzień",
+      footSafe: "Rzetelność i bezpieczeństwo"
     }
   };
 
@@ -249,32 +297,32 @@ export default function Teori() {
                 {/* Pricing Tiers summary list */}
                 <div className="pt-6 border-t border-brand-border/40 space-y-3.5">
                   <h4 className="text-[11px] font-black font-display text-white uppercase tracking-wider pl-0.5">
-                    {lang === 'no' ? 'Tilgjengelige tidsplaner:' : 'Available Study Passes:'}
+                    {t.availablePlans}
                   </h4>
                   <div className="space-y-2.5">
                     <div className="bg-white/[0.02] border border-brand-border/40 rounded-xl p-2.5 flex items-center justify-between">
                       <div>
-                        <div className="text-xs font-bold text-white">T24 - 24 Timer</div>
-                        <p className="text-[10px] text-slate-400 leading-none mt-0.5">Siste-liten repetisjon</p>
+                        <div className="text-xs font-bold text-white">{t.t24Title}</div>
+                        <p className="text-[10px] text-slate-400 leading-none mt-0.5">{t.t24Sub}</p>
                       </div>
-                      <span className="text-[10px] font-mono text-brand-blue-lt bg-brand-blue/10 px-2 py-0.5 rounded border border-brand-blue/20 font-bold uppercase">1 Dag</span>
+                      <span className="text-[10px] font-mono text-brand-blue-lt bg-brand-blue/10 px-2 py-0.5 rounded border border-brand-blue/20 font-bold uppercase">{t.t24Badge}</span>
                     </div>
 
                     <div className="bg-white/[0.02] border border-[#2563eb]/25 rounded-xl p-2.5 flex items-center justify-between relative overflow-hidden">
-                      <div className="absolute top-0 right-0 bg-[#2563eb] text-white text-[8px] font-black px-1.5 py-0.5 rounded-bl">POPPIS</div>
+                      <div className="absolute top-0 right-0 bg-[#2563eb] text-white text-[8px] font-black px-1.5 py-0.5 rounded-bl">{t.d3Pop}</div>
                       <div>
-                        <div className="text-xs font-bold text-white">D3 - 3 Dager</div>
-                        <p className="text-[10px] text-slate-400 leading-none mt-0.5">Populær helgepakke</p>
+                        <div className="text-xs font-bold text-white">{t.d3Title}</div>
+                        <p className="text-[10px] text-slate-400 leading-none mt-0.5">{t.d3Sub}</p>
                       </div>
-                      <span className="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20 font-bold uppercase">3 Dager</span>
+                      <span className="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20 font-bold uppercase">{t.d3Badge}</span>
                     </div>
 
                     <div className="bg-white/[0.02] border border-brand-border/40 rounded-xl p-2.5 flex items-center justify-between">
                       <div>
-                        <div className="text-xs font-bold text-white">D7 - 7 Dager</div>
-                        <p className="text-[10px] text-slate-400 leading-none mt-0.5">Full beståttgaranti</p>
+                        <div className="text-xs font-bold text-white">{t.d7Title}</div>
+                        <p className="text-[10px] text-slate-400 leading-none mt-0.5">{t.d7Sub}</p>
                       </div>
-                      <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 font-bold uppercase">1 Uke</span>
+                      <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 font-bold uppercase">{t.d7Badge}</span>
                     </div>
                   </div>
                 </div>
@@ -283,7 +331,7 @@ export default function Teori() {
               {/* Bottom Support Badge */}
               <div className="pt-4 mt-6 border-t border-brand-border/30 flex items-center gap-2 text-slate-500 font-mono text-[9px] uppercase tracking-wider">
                 <HelpCircle className="w-3.5 h-3.5" />
-                Kildebasert og trygt
+                {t.footSafe}
               </div>
             </div>
 

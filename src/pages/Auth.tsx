@@ -50,6 +50,7 @@ export default function Auth() {
       subLogin: 'Logg inn for å fortsette den kildebaserte teoriprøveforberedelsen din på Teorigo.no',
       subRegister: 'Begynn å forberede deg til yrkessjåførprøver og løyveeksamen i dag',
       email: 'E-postadresse',
+      emailPlh: 'Skriv din e-postadresse',
       password: 'Ditt passord',
       buttonLogin: 'Logg inn på konto',
       buttonRegister: 'Motta din tilgang',
@@ -64,7 +65,10 @@ export default function Auth() {
         'Smart flashkortsystem for raskere begrepslæring',
         'Nøyaktig eksamensimulator (45 minutter tidsbegrenset)',
         'Full språksvitsjing (Norsk, Engelsk, Polsk, Arabisk)'
-      ]
+      ],
+      leftDesc: 'Norges moderne, kildebaserte læringsplattform for yrkessjåførprøver, drosje, og tunge kjøretøy.',
+      leftFoot: 'Sikker, kildebasert verifisering',
+      supportFoot: 'Har du spørsmål om tilgang eller bestilling? Kontakt support på'
     },
     en: {
       titleLogin: 'Welcome Back',
@@ -72,6 +76,7 @@ export default function Auth() {
       subLogin: 'Sign in to resume study progress and master your exam candidates',
       subRegister: 'Register today to access elite commercial driving prep databases',
       email: 'Email Address',
+      emailPlh: 'Enter your email address',
       password: 'Password',
       buttonLogin: 'Secure Sign In',
       buttonRegister: 'Unlock Access Now',
@@ -86,29 +91,36 @@ export default function Auth() {
         'Intelligent flashcard repetition to build reflex knowledge',
         'Authentic exam simulator with precise time restrictions',
         'Instantly switch languages: Norwegian, English, Polish, Arabic'
-      ]
+      ],
+      leftDesc: 'Norway’s modern, source-verified learning platform for commercial vehicle and taxi exams.',
+      leftFoot: 'Secure, source-verified verification',
+      supportFoot: 'Questions about access or order? Contact support at'
     },
     ar: {
-      titleLogin: 'مرحباً بطلب السائقين',
-      titleRegister: 'إنشاء حسابك الأكاديمي',
-      subLogin: 'سجل دخولك لمواصلة التدريب النظري والتحقق في منصة تيوريغو',
-      subRegister: 'سجل اليوم للوصول لخدمات التدريب المهني في قطاع النقل البري بالترخيص',
+      titleLogin: 'مرحباً بك مجدداً',
+      titleRegister: 'إنشاء حساب جديد',
+      subLogin: 'قم بتسجيل الدخول لمتابعة التحضير المعتمد لاختبار السياقة النظري',
+      subRegister: 'سجل اليوم للوصول الفوري إلى بنك أسئلة النقل التجاري في النرويج',
       email: 'البريد الإلكتروني',
+      emailPlh: 'أدخل بريدك الإلكتروني',
       password: 'كلمة المرور',
-      buttonLogin: 'تسجيل دخول آمن',
-      buttonRegister: 'تفعيل الحساب الآن',
-      switchLogin: 'لديك حساب مسجل بالفعل؟ قم بتسجيل الدخول هنا ←',
-      switchRegister: 'مستخدم جديد؟ أنشئ حسابك التعليمي هنا ←',
-      errorEmpty: 'يرجى تقديم مستندات بريد إلكتروني وكلمة مرور صالحة.',
-      successRegister: 'تم إنشاء الحساب بنجاح! يرجى تسجيل الدخول الآن.',
-      authHeader: 'بوابة تسجيل الدخول والتحقق الآمنة',
-      benefitTitle: 'ماذا يميز منصة Teorigo؟',
+      buttonLogin: 'تسجيل الدخول',
+      buttonRegister: 'إنشاء حساب',
+      switchLogin: 'لديك حساب بالفعل؟ سجل دخولك هنا ←',
+      switchRegister: 'ليس لديك حساب؟ أنشئ حساباً جديداً هنا ←',
+      errorEmpty: 'يرجى إدخال البريد الإلكتروني وكلمة المرور بشكل صحيح.',
+      successRegister: 'تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.',
+      authHeader: 'تسجيل دخول آمن والتحقق من الهوية',
+      benefitTitle: 'لماذا تختار Teorigo؟',
       benefits: [
-        'توافق تام مع معايير ومناهج إدارة الطرق والتشريعات النرويجية',
-        'مصفوفة بطاقات تفعيل للتمكن والتدريب الممنهج',
-        'محاكاة دقيقة للاختبار الحقيقي بوقت قياسي (٤٥ دقيقة)',
-        'تغيير فوري ومنتظم للغة: النرويجية، الإنجليزية، البولندية، العربية'
-      ]
+        'مطابقة تامة ومباشرة مع معايير ومناهج إدارة الطرق واللوائح النرويجية الرسمي (Lovdata)',
+        'نظام بطاقات تعليمية ذكي لتسريع وتحسين مستواك الدراسي والعملي',
+        'محاكاة دقيقة للاختبار الرسمي بوقت محدد (٤٥ دقيقة) وبدون مساعدات خارجية',
+        'دعم لغوي كامل في أي وقت: النرويجية، الإنجليزية، البولندية، والعربية'
+      ],
+      leftDesc: 'منصة التعليم الحديثة والمعتمدة لاختبارات السياقة المهنية والنقل التجاري والتاكسي في النرويج.',
+      leftFoot: 'تحقق آمن ومستند للمصادر والقوانين',
+      supportFoot: 'لديك استفسار حول الوصول أو الطلبات؟ تواصل مع الدعم عبر'
     },
     pl: {
       titleLogin: 'Witaj Ponownie',
@@ -116,6 +128,7 @@ export default function Auth() {
       subLogin: 'Zaloguj się, aby kontynuować rzetelne przygotowania na Teorigo.no',
       subRegister: 'Zarejestruj się dziś, aby odblokować bazę szkoleniową i testy',
       email: 'Adres e-mail',
+      emailPlh: 'Wpisz swój adres e-mail',
       password: 'Hasło',
       buttonLogin: 'Zaloguj się bezpiecznie',
       buttonRegister: 'Zyskaj Pełny Dostęp',
@@ -130,7 +143,10 @@ export default function Auth() {
         'Inteligentne flaszkarty wspomagające trwałe zapamiętywanie',
         'Wierny symulator egzaminu państwowego (ograniczenie do 45 min)',
         'Przełączanie języków w locie: Norweski, Angielski, Polski, Arabski'
-      ]
+      ],
+      leftDesc: 'Nowoczesna platforma szkoleniowa do egzaminów transportowych i taksówkowych w Norwegii.',
+      leftFoot: 'Bezpieczna weryfikacja oparta na źródłach',
+      supportFoot: 'Masz pytania dotyczące dostępu lub zamówienia? Skontaktuj się z pomocą pod adresem'
     }
   };
 
@@ -214,7 +230,7 @@ export default function Auth() {
                 teorigo<span className="bg-gradient-to-br from-[#2563eb] to-[#60a5fa] bg-clip-text text-transparent">.no</span>
               </div>
               <p className="text-xs text-slate-400 font-sans leading-relaxed">
-                Norges moderne, kildebaserte læringsplattform for yrkessjåførprøver, drosje, og tunge kjøretøy.
+                {labels.leftDesc}
               </p>
             </div>
 
@@ -240,7 +256,7 @@ export default function Auth() {
             {/* Bottom footnote */}
             <div className="pt-4 border-t border-brand-border/30 flex items-center gap-2.5 text-[#4a5f73] font-mono text-[10px] tracking-wider uppercase">
               <ShieldCheck className="w-4 h-4 text-[#1d6feb]" />
-              Sikker, kildebasert verifisering
+              {labels.leftFoot}
             </div>
           </div>
 
@@ -303,7 +319,7 @@ export default function Auth() {
                     <input
                       type="email"
                       required
-                      placeholder="Brukernavn eller e-post"
+                      placeholder={labels.emailPlh}
                       className="w-full bg-brand-dark/50 text-white border-[1.5px] border-brand-border rounded-xl pl-11 pr-4 rtl:pl-4 rtl:pr-11 py-3 text-sm focus:outline-none focus:border-brand-blue focus:bg-brand-dark/80 transition-all font-sans"
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); setError(null); }}
@@ -363,7 +379,7 @@ export default function Auth() {
 
               {/* Help & Support footnote footer inside form card */}
               <div className="text-[10px] text-slate-500 text-center leading-relaxed font-sans pt-1">
-                Har du spørsmål om tilgang eller bestilling? Kontakt support på <span className="text-slate-400 font-mono">amjmah87@gmail.com</span>
+                {labels.supportFoot} <span className="text-slate-400 font-mono">amjmah87@gmail.com</span>
               </div>
 
             </div>

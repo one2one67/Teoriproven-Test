@@ -20,7 +20,15 @@ interface MainState {
 const StoreContext = createContext<MainState | undefined>(undefined);
 
 export function StoreProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Language>('no');
+  const [lang, setLangState] = useState<Language>(() => {
+    try {
+      const l = localStorage.getItem('tov3_lang');
+      if (l && (l === 'no' || l === 'en' || l === 'ar' || l === 'pl')) {
+        return l as Language;
+      }
+    } catch {}
+    return 'no';
+  });
   const [catId, setCatId] = useState<CategoryId | null>(null);
   const [mastered, setMastered] = useState<Set<string>>(new Set());
   const [hist, setHist] = useState<any[]>([]);
@@ -29,8 +37,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      const l = localStorage.getItem('tov3_lang') as Language;
-      if (l) setLangState(l);
       const m = localStorage.getItem('tov3_m');
       if (m) setMastered(new Set(JSON.parse(m)));
       const h = localStorage.getItem('tov3_h');
