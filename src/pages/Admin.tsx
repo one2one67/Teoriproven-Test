@@ -237,9 +237,9 @@ export default function Admin() {
     // Elastic search mapping
     if (searchTerm.trim() !== '') {
       const q = searchTerm.toLowerCase();
-      const codeMatch = c.code.toLowerCase().includes(q);
-      const creatorMatch = c.created_by ? c.created_by.toLowerCase().includes(q) : false;
-      const redeemerMatch = c.redeemed_by ? c.redeemed_by.toLowerCase().includes(q) : false;
+      const codeMatch = String(c.code || '').toLowerCase().includes(q);
+      const creatorMatch = String(c.created_by || '').toLowerCase().includes(q);
+      const redeemerMatch = String(c.redeemed_by || '').toLowerCase().includes(q);
       return codeMatch || creatorMatch || redeemerMatch;
     }
 

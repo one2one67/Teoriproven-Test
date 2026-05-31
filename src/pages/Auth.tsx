@@ -21,7 +21,7 @@ import { cn } from '../lib/utils';
 
 export default function Auth() {
   const { isSignedIn } = useAuth();
-  const { lang, setLang } = useStore();
+  const { lang } = useStore();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -171,8 +171,8 @@ export default function Auth() {
       }
     } catch (err: any) {
       console.error('Supabase Auth error:', err);
-      let msg = err.message || 'Det oppstod en feil under verifiseringen.';
-      const lower = msg.toLowerCase();
+      let msg = err?.message || 'Det oppstod en feil under verifiseringen.';
+      const lower = String(msg).toLowerCase();
       if (lower.includes('rate limit') || lower.includes('rate_limit') || lower.includes('limit exceeded') || lower.includes('excessive')) {
         msg = lang === 'no'
           ? 'E-postgrensen til Supabase er overskredet (2 e-poster/time på gratisnivået). Vennligst unngå denne feilen ved å slå av "Confirm email" i Supabase-konsollen under Authentication -> Email Templates, eller prøv igjen senere.'
@@ -197,24 +197,7 @@ export default function Auth() {
           <span>{(lang === 'no' ? 'Tilbake til Hjem' : lang === 'en' ? 'Back' : lang === 'ar' ? 'الرجوع للرئيسية' : 'Wróć')}</span>
         </button>
 
-        <div className="flex items-center gap-3">
-          {/* Custom language selector embedded right inside the auth page to match the rest of the application */}
-          <div className="relative" translate="no">
-            <span className="absolute left-2.5 rtl:left-auto rtl:right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
-              <Globe className="w-3.5 h-3.5" />
-            </span>
-            <select
-              value={lang}
-              onChange={(e) => setLang(e.target.value as any)}
-              className="appearance-none flex items-center justify-between pl-8 pr-6 rtl:pl-6 rtl:pr-8 h-8 rounded-lg border border-brand-border bg-brand-dark-2 text-xs font-bold uppercase text-slate-300 cursor-pointer transition-all hover:bg-white/5 hover:border-slate-500 focus:outline-none focus:border-brand-blue focus:text-white"
-            >
-              <option value="no">no</option>
-              <option value="en">en</option>
-              <option value="ar">ar</option>
-              <option value="pl">pl</option>
-            </select>
-          </div>
-        </div>
+
       </header>
 
       {/* Main Container Layout */}

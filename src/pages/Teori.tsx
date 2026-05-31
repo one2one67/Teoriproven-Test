@@ -10,7 +10,7 @@ import { Lock, Unlock, Globe, HelpCircle, ArrowLeft, Ticket, AlertCircle } from 
 
 export default function Teori() {
   const { user } = useUser();
-  const { expiration, setExpiration, lang, setLang, catId } = useStore();
+  const { expiration, setExpiration, lang, catId } = useStore();
 
   const [code, setCode] = useState('');
   const [codeLoading, setCodeLoading] = useState(false);
@@ -207,22 +207,6 @@ export default function Teori() {
             <ArrowLeft className="w-4 h-4 rtl:scale-x-[-1]" />
             <span>{lang === 'no' ? 'Gå til Hjem' : lang === 'en' ? 'Back to Home' : lang === 'ar' ? 'الرئيسية' : 'Hjem'}</span>
           </button>
-          
-          <div className="relative" translate="no">
-            <span className="absolute left-2.5 rtl:left-auto rtl:right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
-              <Globe className="w-3.5 h-3.5" />
-            </span>
-            <select
-              value={lang}
-              onChange={(e) => setLang(e.target.value as any)}
-              className="appearance-none flex items-center justify-between pl-8 pr-6 rtl:pl-6 rtl:pr-8 h-8 rounded-lg border border-brand-border bg-brand-dark-2 text-xs font-bold uppercase text-slate-300 cursor-pointer transition-all hover:border-slate-500"
-            >
-              <option value="no">no</option>
-              <option value="en">en</option>
-              <option value="ar">ar</option>
-              <option value="pl">pl</option>
-            </select>
-          </div>
         </header>
 
         {/* Content locks overview container */}

@@ -12,7 +12,7 @@ import QuizTab from './tabs/QuizTab';
 import ExamTab from './tabs/ExamTab';
 
 export default function AppShell() {
-  const { lang, setLang, catId, setCatId, expiration } = useStore();
+  const { lang, catId, setCatId, expiration } = useStore();
   const navigate = useNavigate();
   const { user } = useUser();
   const [activeTab, setActiveTab] = useState<'home'|'fc'|'quiz'|'exam'>('home');
@@ -110,23 +110,7 @@ export default function AppShell() {
               🛠 Admin
             </button>
           )}
-          <div className="relative" translate="no">
-            <select
-              value={lang}
-              onChange={(e) => setLang(e.target.value as any)}
-              className="appearance-none flex items-center justify-between pl-2 pr-6 rtl:pl-6 rtl:pr-2 h-7 rounded-md border-[1.5px] border-brand-border bg-transparent text-[11px] font-bold uppercase text-slate-300 cursor-pointer transition-all hover:bg-white/5 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:text-white [&>option]:bg-brand-dark-2 [&>option]:text-white"
-            >
-              <option value="no">Norsk</option>
-              <option value="en">Engelsk</option>
-              <option value="ar">Arabisk</option>
-              <option value="pl">Polsk</option>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 rtl:right-auto rtl:left-0 flex items-center px-1.5 text-slate-500">
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </div>
-          </div>
+          {/* Språkvelger fjernet for å kun vises på hjemmesiden */}
           <button
             onClick={handleSignOut}
             className="ml-1 rtl:ml-0 rtl:mr-1 flex items-center justify-center bg-white/5 border border-brand-border rounded-md hover:bg-white/10 hover:border-slate-500 cursor-pointer h-7 px-2.5 text-slate-300 hover:text-white transition-all text-[11px] font-bold"

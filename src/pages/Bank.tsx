@@ -130,13 +130,15 @@ export default function Bank() {
   
   // Flatten and prepare questions with index
   const list = qs.map((q, i) => {
-    const data = q[lang] || q['no'];
+    const data = q[lang] || q['no'] || {};
     return { ...data, gi: i, original: q };
   }).filter(q => {
     if (!query) return true;
     const search = query.toLowerCase();
-    return (q.q && q.q.toLowerCase().includes(search)) || 
-           (q.e && q.e.toLowerCase().includes(search));
+    const questionText = q.q || '';
+    const explanationText = q.e || '';
+    return questionText.toLowerCase().includes(search) || 
+           explanationText.toLowerCase().includes(search);
   });
 
   return (

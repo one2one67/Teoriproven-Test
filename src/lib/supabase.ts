@@ -7,8 +7,11 @@
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL || 'https://eyulnlvvtvnjbptlsusr.supabase.co').trim();
-const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5dWxubHZ2dHZuamJwdGxzdXNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MzkwNjcsImV4cCI6MjA5NTMxNTA2N30.Yg6R6Gr3bfxDfkEMAuwimyl9NgCnTvalcT01tvzz8Sw').trim();
+const rawUrl = (import.meta.env.VITE_SUPABASE_URL || 'https://eyulnlvvtvnjbptlsusr.supabase.co').trim();
+const supabaseUrl = rawUrl.endsWith('/') ? rawUrl.slice(0, -1) : rawUrl;
+
+const rawKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV5dWxubHZ2dHZuamJwdGxzdXNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MzkwNjcsImV4cCI6MjA5NTMxNTA2N30.Yg6R6Gr3bfxDfkEMAuwimyl9NgCnTvalcT01tvzz8Sw').trim();
+const supabaseAnonKey = rawKey;
 
 if (!supabaseUrl || !supabaseAnonKey) {
   console.warn(

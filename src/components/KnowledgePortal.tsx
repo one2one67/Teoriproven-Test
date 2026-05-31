@@ -33,8 +33,10 @@ export default function KnowledgePortal() {
     return KNOWLEDGE_CATS.map(cat => {
       const qs = cat.faqs.filter(faq => {
         if (!searchQuery) return true;
-        const qText = ((faq.q as any)[lang] || (faq.q as any)['no']).toLowerCase();
-        const aText = ((faq.a as any)[lang] || (faq.a as any)['no']).toLowerCase();
+        const qRaw = ((faq.q as any)[lang] || (faq.q as any)['no']) || '';
+        const aRaw = ((faq.a as any)[lang] || (faq.a as any)['no']) || '';
+        const qText = qRaw.toLowerCase();
+        const aText = aRaw.toLowerCase();
         const s = searchQuery.toLowerCase();
         return qText.includes(s) || aText.includes(s);
       });
@@ -44,8 +46,10 @@ export default function KnowledgePortal() {
 
   const searchHits = KNOWLEDGE_CATS.reduce((acc, cat) => {
     return acc + cat.faqs.filter(faq => {
-      const qText = ((faq.q as any)[lang] || (faq.q as any)['no']).toLowerCase();
-      const aText = ((faq.a as any)[lang] || (faq.a as any)['no']).toLowerCase();
+      const qRaw = ((faq.q as any)[lang] || (faq.q as any)['no']) || '';
+      const aRaw = ((faq.a as any)[lang] || (faq.a as any)['no']) || '';
+      const qText = qRaw.toLowerCase();
+      const aText = aRaw.toLowerCase();
       const s = searchQuery.toLowerCase();
       return qText.includes(s) || aText.includes(s);
     }).length;

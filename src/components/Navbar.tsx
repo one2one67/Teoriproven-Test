@@ -11,7 +11,7 @@ export default function Navbar() {
   const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
   
   const isAdmin = user?.primaryEmailAddress?.emailAddress === adminEmail;
-  const { lang, setLang } = useStore();
+  const { lang, setLang, catId } = useStore();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -64,29 +64,31 @@ export default function Navbar() {
             )}
 
             {/* Språkvelger */}
-            <div className="relative">
-              <select
-                value={lang}
-                onChange={(e) => setLang(e.target.value as any)}
-                className="appearance-none flex items-center justify-between pl-3 pr-8 rtl:pl-8 rtl:pr-3 min-w-[100px] h-9 rounded-lg border-[1.5px] border-brand-border bg-white/5 text-xs font-medium text-white cursor-pointer transition-all hover:bg-white/10 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:bg-brand-blue/15 focus:shadow-[0_0_0_2px_rgba(29,111,235,0.3)] [&>option]:bg-brand-dark-2"
-              >
-                {[
-                  { code: 'no', label: '🇳🇴 Norsk' },
-                  { code: 'en', label: '🇬🇧 English' },
-                  { code: 'ar', label: '🇸🇦 عربي' },
-                  { code: 'pl', label: '🇵🇱 Polski' }
-                ].map(l => (
-                  <option key={l.code} value={l.code}>
-                    {l.label}
-                  </option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 rtl:right-auto rtl:left-0 flex items-center px-2.5 text-slate-400">
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
-                </svg>
+            {location.pathname === '/' && catId === null && (
+              <div className="relative">
+                <select
+                  value={lang}
+                  onChange={(e) => setLang(e.target.value as any)}
+                  className="appearance-none flex items-center justify-between pl-3 pr-8 rtl:pl-8 rtl:pr-3 min-w-[100px] h-9 rounded-lg border-[1.5px] border-brand-border bg-white/5 text-xs font-medium text-white cursor-pointer transition-all hover:bg-white/10 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:bg-brand-blue/15 focus:shadow-[0_0_0_2px_rgba(29,111,235,0.3)] [&>option]:bg-brand-dark-2"
+                >
+                  {[
+                    { code: 'no', label: '🇳🇴 Norsk' },
+                    { code: 'en', label: '🇬🇧 English' },
+                    { code: 'ar', label: '🇸🇦 عربي' },
+                    { code: 'pl', label: '🇵🇱 Polski' }
+                  ].map(l => (
+                    <option key={l.code} value={l.code}>
+                      {l.label}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 rtl:right-auto rtl:left-0 flex items-center px-2.5 text-slate-400">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
               </div>
-            </div>
+            )}
 
             {isSignedIn && (
               <div className="flex items-center gap-3">
