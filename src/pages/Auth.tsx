@@ -281,7 +281,19 @@ export default function Auth() {
             
             {/* Top Logo branding */}
             <div className="space-y-4">
-              <img src="/logo.png" alt="Teorigo" className="h-12 w-auto object-contain mix-blend-screen brightness-125" />
+              <img 
+                src="/logo.png" 
+                alt="Teorigo" 
+                className="h-12 w-auto object-contain mix-blend-screen brightness-125" 
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const nextSibling = e.currentTarget.nextElementSibling as HTMLElement;
+                  if (nextSibling) nextSibling.classList.remove('hidden');
+                }}
+              />
+              <div className="hidden font-display text-2xl font-black text-white hover:opacity-95 transition-all">
+                teorigo<span className="bg-gradient-to-br from-[#2563eb] to-[#60a5fa] bg-clip-text text-transparent">.no</span>
+              </div>
               <p className="text-xs text-slate-400 font-sans leading-relaxed">
                 {labels.leftDesc}
               </p>

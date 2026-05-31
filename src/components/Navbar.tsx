@@ -24,7 +24,19 @@ export default function Navbar() {
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
             <Link to="/" className="flex items-center hover:opacity-90 transition-opacity">
-              <img src="/logo.png" alt="Teorigo" className="h-8 w-auto object-contain mix-blend-screen brightness-125" />
+              <img 
+                src="/logo.png" 
+                alt="Teorigo" 
+                className="h-8 w-auto object-contain mix-blend-screen brightness-125"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const nextSibling = e.currentTarget.nextElementSibling as HTMLElement;
+                  if (nextSibling) nextSibling.classList.remove('hidden');
+                }}
+              />
+              <span className="hidden font-display text-xl font-extrabold tracking-tight text-white">
+                Teorigo
+              </span>
             </Link>
           </div>
 
