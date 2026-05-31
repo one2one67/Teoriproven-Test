@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useStore } from '../../lib/store';
 import { UI, QDATA } from '../../data/questions';
-import { Play, ArrowRight, Home } from 'lucide-react';
+import { Play, ArrowRight, Home, CheckCircle2, AlertCircle, HelpCircle, RefreshCw, Sparkles, BookOpen } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function QuizTab() {
   const { lang, catId, hist, addHist } = useStore();
@@ -18,7 +18,7 @@ export default function QuizTab() {
   if (!catId) return null;
   const allQs = QDATA[catId].q;
   const th = QDATA[catId].themes[lang] || QDATA[catId].themes['no'];
-  const recentHist = hist.filter(h => h.ty === 'q' && h.cat === catId).slice(-5).reverse();
+  const recentHist = hist.filter(h => h.ty === 'q' && h.cat === catId).slice(-4).reverse();
 
   const start = () => {
     let pool = allQs.map((q, i) => ({ ...(q[lang] || q['no']), gi: i, _no_t: (q['no'] || {}).t }));
@@ -57,51 +57,84 @@ export default function QuizTab() {
     const correct = answers.filter(a => a.ok).length;
     const total = qPool.length;
     const pct = Math.round((correct / total) * 100);
-    let emoji = '📚', title = ui.grOev, color = 'var(--text)';
-    if (pct >= 90) { emoji = '🏆'; title = ui.grEx; color = '#4ade80'; }
-    else if (pct >= 70) { emoji = '👍'; title = ui.grBra; color = '#4dd4e4'; }
-    else if (pct >= 50) { emoji = '✓'; title = ui.grGod; color = '#fbbf24'; }
-    else { color = '#f87171'; }
+    let emoji = '📚', title = ui.grOev, headingColor = 'text-white';
+    
+    if (pct >= 90) { 
+      emoji = '🏆'; 
+      title = ui.grEx; 
+      headingColor = 'text-emerald-400'; 
+    } else if (pct >= 70) { 
+      emoji = '✨'; 
+      title = ui.grBra; 
+      headingColor = 'text-teal-400'; 
+    } else if (pct >= 50) { 
+      emoji = '👍'; 
+      title = ui.grGod; 
+      headingColor = 'text-amber-400'; 
+    } else { 
+      headingColor = 'text-red-400'; 
+    }
 
     return (
-      <div className="animate-in fade-in duration-300">
-        <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-4 mb-3 text-center">
-          <div className="text-5xl mb-2">{emoji}</div>
-          <div className="font-display text-[22px] font-extrabold mb-1" style={{color}}>{title}</div>
-          <div className="font-display text-[38px] font-extrabold text-white mb-0">{correct} / {total}</div>
-          <div className="text-xs text-slate-400 mt-1">{pct}{ui.pct}</div>
+      <div className="animate-in fade-in duration-300 space-y-4">
+        {/* Results Card */}
+        <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-6 text-center relative overflow-hidden shadow-lg">
+          <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-teal-500/5 to-transparent rounded-bl-full pointer-events-none" />
+          <div className="text-5xl mb-3">{emoji}</div>
+          <div className={cn("font-display text-xl font-extrabold mb-1", headingColor)}>{title}</div>
+          <div className="font-display text-4xl font-extrabold text-white mb-1">{correct} / {total}</div>
+          <div className="text-xs text-slate-400">{pct}{ui.pct} {lang === 'no' ? 'korrekt besvart' : lang === 'en' ? 'correctly answered' : lang === 'ar' ? 'إجابات صحيحة' : 'prawidłowych odpowiedzi'}</div>
         </div>
 
-        <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-4 mb-3">
-          <div className="font-display text-sm font-bold text-white mb-3">{ui.qrRevTit}</div>
-          <div className="flex flex-col gap-0 border-b border-brand-border">
+        {/* Detailed reviews */}
+        <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-4.5 shadow-md">
+          <div className="font-display text-xs font-bold text-white mb-3.5 uppercase tracking-wider flex items-center gap-1.5 border-b border-brand-border/40 pb-2.5">
+            <BookOpen className="w-4 h-4 text-brand-blue" />
+            {ui.qrRevTit}
+          </div>
+          <div className="divide-y divide-brand-border/40 max-h-[320px] overflow-y-auto pr-1.5 custom-scrollbar space-y-2.5">
             {answers.map((a, i) => (
-              <div key={i} className="flex gap-2.5 items-start py-2.5 border-t border-brand-border">
-                <span className="shrink-0 pt-0.5">
+              <div key={i} className="flex gap-3 items-start pt-3.5 first:pt-1">
+                <span className="shrink-0 mt-0.5">
                   {a.ok ? (
-                    <div className="w-6 h-6 rounded-full bg-[#1a9e52] border-2 border-[#4ade80] flex items-center justify-center text-white text-xs font-bold">✓</div>
+                    <CheckCircle2 className="w-5 h-5 text-emerald-500 fill-emerald-500/5" />
                   ) : (
-                    <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                      <div className="relative w-0 h-0 border-l-[10px] border-r-[10px] border-b-[20px] border-l-transparent border-r-transparent border-b-[#cf222e] flex items-center justify-center">
-                        <span className="absolute top-[3px] -left-[2px] text-[10px] font-black text-white">!</span>
-                      </div>
-                    </div>
+                    <AlertCircle className="w-5 h-5 text-red-500 fill-red-500/5" />
                   )}
                 </span>
-                <div>
-                  <div className="text-xs leading-relaxed text-slate-300"><b>{i+1}.</b> {a.q.q}</div>
-                  {!a.ok && <div className="text-[11px] text-[#4ade80] mt-1 font-medium">{a.q.o[a.q.c]}</div>}
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs font-semibold text-slate-200 leading-normal">
+                    <span className="text-slate-400 font-mono mr-1">{i + 1}.</span>
+                    {a.q.q}
+                  </div>
+                  {!a.ok ? (
+                    <div className="text-[11px] text-emerald-400 mt-1.5 bg-emerald-500/5 border border-emerald-500/10 rounded px-2 py-1 leading-snug">
+                      <span className="font-bold">{lang === 'no' ? 'Riktig svar: ' : lang === 'en' ? 'Correct answer: ' : lang === 'ar' ? 'الجواب الصحيح: ' : 'Prawidłowa odpowiedź: '}</span>
+                      {a.q.o[a.q.c]}
+                    </div>
+                  ) : (
+                    <div className="text-[11px] text-slate-400 mt-1 pl-1">
+                      {lang === 'no' ? 'Du valgte riktig svar.' : lang === 'en' ? 'You chose the correct answer.' : lang === 'ar' ? 'لقد اخترت الإجابة الصحيحة.' : 'Hicior! Wybrałeś prawidłowo.'}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="flex gap-2">
-          <button onClick={start} className="flex-1 bg-gradient-to-br from-brand-blue to-[#1d5fcc] text-white font-display text-sm font-bold rounded-xl py-3 flex items-center justify-center gap-2 transition-all active:scale-[0.97]">
-            <Play className="w-4 h-4" /> {ui.qrRetry}
+        {/* Buttons */}
+        <div className="flex gap-2.5 pt-2">
+          <button 
+            onClick={start} 
+            className="flex-1 bg-gradient-to-br from-brand-blue to-[#1d5fcc] hover:from-brand-blue/95 hover:to-[#1d5fcc]/95 text-white font-display text-sm font-bold rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
+          >
+            <RefreshCw className="w-4 h-4" /> {ui.qrRetry}
           </button>
-          <button onClick={() => setPlaying(false)} className="flex-1 bg-brand-dark-2 border-[1.5px] border-brand-border text-white font-display text-sm font-bold rounded-xl py-3 flex items-center justify-center gap-2 transition-all active:scale-[0.97]">
+          <button 
+            onClick={() => setPlaying(false)} 
+            className="flex-1 bg-brand-dark-2 border-[1.5px] border-brand-border text-slate-300 hover:text-white font-display text-sm font-bold rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
+          >
             <Home className="w-4 h-4" /> {ui.qrHome}
           </button>
         </div>
@@ -111,32 +144,62 @@ export default function QuizTab() {
 
   if (!playing) {
     return (
-      <div className="animate-in fade-in duration-300">
-        <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-4 mb-3">
-          <div className="font-display text-sm font-bold text-white mb-3">{ui.qzTit}</div>
-          <label className="text-[10px] text-slate-400 block mb-1 uppercase tracking-widest">{ui.qzLblT}</label>
-          <div className="relative mb-3">
-            <select value={topic} onChange={e => setTopic(e.target.value)} className="w-full bg-brand-dark text-white border-[1.5px] border-brand-border rounded-lg p-2.5 text-sm appearance-none outline-none focus:border-brand-blue">
-              <option value="all">{ui.allTopics}</option>
-              {Object.keys(th).map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
+      <div className="animate-in fade-in duration-300 space-y-4">
+        {/* Setup card */}
+        <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-5 shadow-lg relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-emerald-500/5 to-transparent rounded-bl-full pointer-events-none" />
+          
+          <div className="flex items-center gap-2.5 mb-4">
+            <span className="text-xl p-1.5 bg-emerald-500/10 rounded-lg text-emerald-400 border border-emerald-500/20">✍️</span>
+            <h3 className="font-display text-base font-extrabold text-white leading-tight">{ui.qzTit}</h3>
           </div>
-          <button onClick={start} className="w-full bg-gradient-to-br from-brand-blue to-[#1d5fcc] text-white font-display text-sm font-bold rounded-xl py-3 flex items-center justify-center gap-2 transition-all active:scale-[0.97]">
-            <Play className="w-4 h-4" /> {ui.qzStart}
-          </button>
+
+          <div className="space-y-4">
+            <div>
+              <label className="text-[10px] font-bold text-slate-400 block mb-1.5 uppercase tracking-widest pl-0.5">
+                {ui.qzLblT}
+              </label>
+              <div className="relative">
+                <select 
+                  value={topic} 
+                  onChange={e => setTopic(e.target.value)} 
+                  className="w-full bg-brand-dark text-white border-[1.5px] border-brand-border rounded-xl p-3 text-sm appearance-none outline-none focus:border-brand-blue cursor-pointer transition-all"
+                >
+                  <option value="all">{ui.allTopics}</option>
+                  {Object.keys(th).map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 rtl:right-auto rtl:left-0 flex items-center px-3.5 text-slate-500">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <button 
+              onClick={start} 
+              className="mt-2 w-full bg-gradient-to-br from-brand-blue to-[#1d5fcc] hover:from-brand-blue/95 hover:to-[#1d5fcc]/95 text-white font-display text-sm font-bold rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer min-h-[46px]"
+            >
+              <Play className="w-4 h-4 fill-white" /> {ui.qzStart}
+            </button>
+          </div>
         </div>
 
-        <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-4">
-          <div className="font-display text-sm font-bold text-white mb-2">{ui.qzHistTit}</div>
+        {/* Practice history */}
+        <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-4.5 shadow-md">
+          <div className="font-display text-xs font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-1.5 border-b border-brand-border/40 pb-2.5">
+            <Sparkles className="w-4 h-4 text-emerald-400" />
+            {ui.qzHistTit}
+          </div>
           {recentHist.length === 0 ? (
-            <p className="text-xs text-[#4a5f73]">{ui.noHist}</p>
+            <p className="text-xs text-slate-500 p-2 italic">{ui.noHist}</p>
           ) : (
-            <div className="flex flex-col">
+            <div className="divide-y divide-brand-border/40">
               {recentHist.map((h, i) => (
-                <div key={i} className="flex justify-between items-center py-2 border-b border-brand-border last:border-b-0">
-                  <span className="text-xs text-slate-400">{h.date}</span>
-                  <span className={cn("font-display text-xs font-bold", h.pct >= 70 ? 'text-[#4ade80]' : 'text-[#fbbf24]')}>
-                    {h.score}/{h.total} · {h.pct}%
+                <div key={i} className="flex justify-between items-center py-2.5 first:pt-1 last:pb-1 text-xs">
+                  <span className="text-slate-400 font-mono">{h.date}</span>
+                  <span className={cn("font-display text-xs font-extrabold px-2.5 py-0.5 rounded-full", h.pct >= 70 ? 'bg-emerald-500/10 text-[#4ade80]' : 'bg-amber-500/10 text-[#fbbf24]')}>
+                    {h.score} / {h.total} ({h.pct}%)
                   </span>
                 </div>
               ))}
@@ -151,79 +214,107 @@ export default function QuizTab() {
   const ans = answers[qIdx];
   const color = th[q.t] || 'var(--color-brand-blue)';
   const correctCount = answers.filter(a => a.ok).length;
+  const pctProgress = Math.round((qIdx / qPool.length) * 100);
 
   return (
-    <div className="animate-in fade-in duration-300">
-      <div className="flex justify-between text-[11px] text-slate-400 mb-0.5">
-        <span>{qIdx + 1} {ui.of} {qPool.length}</span>
-        <span className="text-emerald-400 font-bold font-display">{correctCount} {ui.correct2}</span>
-      </div>
-      <div className="bg-brand-border rounded-full h-1 overflow-hidden my-2">
-        <div className="h-full bg-gradient-to-r from-brand-blue to-cyan-500 transition-all duration-400" style={{ width: `${(qIdx / qPool.length) * 100}%` }}></div>
+    <div className="animate-in fade-in duration-300 space-y-4">
+      {/* Header Info */}
+      <div className="flex justify-between items-center bg-brand-dark-2/40 border border-brand-border p-2.5 px-3.5 rounded-xl text-[11px] text-slate-400">
+        <span className="font-bold">
+          {qIdx + 1} / {qPool.length}
+        </span>
+        <span className="text-emerald-400 font-extrabold flex items-center gap-1 bg-emerald-500/5 border border-emerald-500/10 px-2 py-0.5 rounded">
+          <CheckCircle2 className="w-3.5 h-3.5" /> {correctCount} {ui.correct2}
+        </span>
       </div>
 
-      <div className="bg-brand-dark-2 border border-brand-border border-t-[3px] rounded-2xl p-4 mb-3" style={{ borderTopColor: 'var(--cat-c)' }}>
+      {/* Progress Bar */}
+      <div className="space-y-1">
+        <div className="bg-brand-border rounded-full h-1.5 overflow-hidden">
+          <div className="h-full bg-gradient-to-r from-brand-blue to-cyan-500 transition-all duration-300" style={{ width: `${pctProgress}%` }}></div>
+        </div>
+      </div>
+
+      {/* Question Card */}
+      <div className="bg-brand-dark-2 border border-brand-border border-t-[4px] rounded-2xl p-4.5 shadow-md" style={{ borderTopColor: 'var(--cat-c)' }}>
         <div className="mb-2">
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[5px] text-[10px] font-bold tracking-wider border-l-[3px] rtl:border-l-0 rtl:border-r-[3px]" style={{ background: `${color}18`, color: color, borderColor: color }}>
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold tracking-wider" style={{ background: `${color}18`, color: color }}>
             {q.t.replace(/T\d+[^:]*:\s*/, '')}
           </span>
         </div>
-        <div className="text-[10px] text-slate-400 mb-2 font-medium uppercase tracking-wider">{qIdx + 1} / {qPool.length}</div>
-        <div className="font-display text-[clamp(15px,3.8vw,19px)] font-bold text-white leading-relaxed">
+        <h4 className="font-display text-sm sm:text-base font-bold text-white leading-relaxed mt-1">
           {q.q}
-        </div>
+        </h4>
       </div>
 
-      <div className="flex flex-col gap-2">
+      {/* Answer buttons */}
+      <div className="space-y-2.5">
         {q.o.map((opt: string, i: number) => {
-          let stateClass = "border-[#253347] bg-brand-dark hover:border-brand-blue hover:bg-[#1a2235]";
-          let letterClass = "bg-[#1a2235] border-brand-border text-slate-400";
+          let stateClass = "border-brand-border/60 bg-brand-dark hover:border-brand-blue hover:bg-brand-dark-2";
+          let letterClass = "bg-brand-dark border-brand-border text-slate-400";
           
           if (ans) {
-            stateClass = "border-[#253347] bg-brand-dark opacity-70 cursor-default";
+            stateClass = "border-brand-border/40 bg-brand-dark opacity-60 cursor-default";
             if (i === q.c) {
-              stateClass = "border-[#1a9e52] bg-[rgba(26,158,82,0.1)] opacity-100";
-              letterClass = "bg-[#1a9e52] text-white border-[#1a9e52]";
+              stateClass = "border-emerald-500 bg-emerald-500/10 opacity-100 shadow-sm shadow-emerald-500/5";
+              letterClass = "bg-emerald-500 text-white border-emerald-500";
             } else if (ans.chosen === i && !ans.ok) {
-              stateClass = "border-[#cf222e] bg-[rgba(207,34,46,0.1)] opacity-100";
-              letterClass = "bg-[#cf222e] text-white border-[#cf222e]";
+              stateClass = "border-red-500 bg-red-500/10 opacity-100";
+              letterClass = "bg-red-500 text-white border-red-500";
             }
           }
 
           return (
-            <button key={i} disabled={!!ans} onClick={() => handleAns(i)} className={cn("w-full text-left p-3 rounded-xl border-[1.5px] transition-all flex items-center gap-2.5", stateClass)}>
-              <span className={cn("flex items-center justify-center min-w-[26px] h-[26px] rounded-md font-display text-[11px] font-bold shrink-0 transition-all border-[1.5px]", letterClass)}>
+            <button 
+              key={i} 
+              disabled={!!ans} 
+              onClick={() => handleAns(i)} 
+              className={cn("w-full text-left p-3.5 min-h-[48px] rounded-xl border-[1.5px] transition-all flex items-center gap-3 justify-start focus:outline-none cursor-pointer active:scale-[0.99]", stateClass)}
+            >
+              <span className={cn("flex items-center justify-center min-w-[26px] h-[26px] rounded-lg font-display text-[11px] font-extrabold shrink-0 border-[1.5px] tracking-none", letterClass)}>
                 {String.fromCharCode(65 + i)}
               </span>
-              <span className="flex-1 text-sm leading-relaxed text-slate-200 rtl:text-right">{opt}</span>
+              <span className="flex-1 text-xs sm:text-sm leading-relaxed text-slate-200 rtl:text-right font-medium">{opt}</span>
             </button>
           );
         })}
       </div>
 
-      {ans && (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={cn("mt-2.5 p-3 rounded-xl text-[13px] leading-relaxed flex gap-2.5 items-start", ans.ok ? "bg-[rgba(26,158,82,0.09)] border border-[rgba(74,222,128,0.22)]" : "bg-[rgba(207,34,46,0.09)] border border-[rgba(248,113,113,0.22)]")}>
-          <span className="shrink-0 mt-0.5">
-            {ans.ok ? (
-              <div className="w-[26px] h-[26px] rounded-full bg-[#1a9e52] border-2 border-[#4ade80] flex items-center justify-center text-white text-[13px] font-extrabold">✓</div>
-            ) : (
-              <div className="relative w-0 h-0 border-l-[13px] border-r-[13px] border-b-[24px] border-l-transparent border-r-transparent border-b-[#cf222e] flex items-center justify-center">
-                <span className="absolute top-[3px] -left-[2px] text-[10px] font-black text-white">!</span>
+      {/* Immediate Explanation Panel */}
+      <AnimatePresence>
+        {ans && (
+          <motion.div 
+            initial={{ opacity: 0, y: 8 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            className={cn("p-4 rounded-xl text-xs leading-relaxed flex gap-3 items-start shadow-md", ans.ok ? "bg-[rgba(26,158,82,0.06)] border border-[rgba(74,222,128,0.18)]" : "bg-[rgba(207,34,46,0.06)] border border-[rgba(248,113,113,0.18)]")}
+          >
+            <span className="shrink-0 mt-0.5">
+              {ans.ok ? (
+                <CheckCircle2 className="w-5 h-5 text-emerald-500 fill-emerald-500/5" />
+              ) : (
+                <HelpCircle className="w-5 h-5 text-red-500 fill-red-500/5" />
+              )}
+            </span>
+            <div className="flex-1 min-w-0">
+              <div className={cn("font-display text-xs font-extrabold mb-1", ans.ok ? "text-emerald-400" : "text-red-400")}>
+                {ans.ok ? ui.correct : ui.wrong}
               </div>
-            )}
-          </span>
-          <div>
-            <div className={cn("font-display text-xs font-bold mb-1", ans.ok ? "text-[#4ade80]" : "text-[#f87171]")}>
-              {ans.ok ? ui.correct : ui.wrong}
+              <p className="text-slate-300 font-sans leading-relaxed text-[11.5px]">{q.e}</p>
             </div>
-            <div className="text-slate-400">{q.e}</div>
-          </div>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
+      {/* Next Question Floating Button */}
       {ans && (
-        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={next} className="mt-3 w-full bg-brand-blue text-white font-display text-sm font-bold rounded-xl py-3 flex items-center justify-center gap-2 transition-all active:scale-[0.97]">
-          {qIdx + 1 >= qPool.length ? ui.submitEx : ui.nextQ} <ArrowRight className="w-4 h-4 rtl:scale-x-[-1]" />
+        <motion.button 
+          initial={{ opacity: 0, scale: 0.98 }} 
+          animate={{ opacity: 1, scale: 1 }} 
+          onClick={next} 
+          className="w-full bg-brand-blue hover:bg-brand-blue/90 text-white font-display text-sm font-bold rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer min-h-[46px] shadow-sm shadow-brand-blue/20"
+        >
+          {qIdx + 1 >= qPool.length ? ui.submitEx : ui.nextQ} 
+          <ArrowRight className="w-4 h-4 rtl:scale-x-[-1]" />
         </motion.button>
       )}
     </div>

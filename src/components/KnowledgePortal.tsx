@@ -56,16 +56,16 @@ export default function KnowledgePortal() {
       
       {/* Search box */}
       <div className="w-full max-w-2xl mx-auto mb-6 relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+        <Search className="absolute left-3 rtl:left-auto rtl:right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={t.filter}
-          className="w-full bg-brand-dark-2 border-[1.5px] border-brand-border rounded-xl pl-9 pr-4 py-2.5 text-sm outline-none focus:border-brand-blue transition-colors text-white placeholder:text-slate-500"
+          className="w-full bg-brand-dark-2 border-[1.5px] border-brand-border rounded-xl pl-9 pr-4 rtl:pl-4 rtl:pr-9 py-2.5 text-sm outline-none focus:border-brand-blue transition-colors text-white placeholder:text-slate-500"
         />
         {searchQuery && (
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-brand-blue font-bold">
+          <div className="absolute right-3 rtl:right-auto rtl:left-3 top-1/2 -translate-y-1/2 text-xs text-brand-blue font-bold">
             {searchHits} {t.hits}
           </div>
         )}

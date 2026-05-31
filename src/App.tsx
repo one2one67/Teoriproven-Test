@@ -12,12 +12,20 @@ import Eksamen from './pages/Eksamen';
 import Bank from './pages/Bank';
 import Admin from './pages/Admin';
 import Auth from './pages/Auth';
-import { StoreProvider } from './lib/store';
+import { StoreProvider, useStore } from './lib/store';
 import { AuthProvider, useUser } from './lib/AuthContext';
 
 function MainAppContent() {
   const { isLoaded, isSignedIn, user } = useUser();
+  const { lang } = useStore();
   const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
+
+  useEffect(() => {
+    // Sett global retning og språk
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+    document.body.className = lang === 'ar' ? 'rtl' : lang === 'pl' ? 'pl-font' : '';
+  }, [lang]);
 
   useEffect(() => {
     // 1. Forhindre høyreklikk

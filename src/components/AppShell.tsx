@@ -87,7 +87,7 @@ export default function AppShell() {
           className="flex items-center justify-center w-8 h-8 rounded-lg border-[1.5px] border-transparent hover:border-brand-border bg-transparent text-slate-400 hover:text-white transition-all shrink-0 cursor-pointer"
           onClick={() => { setCatId(null); navigate('/'); }}
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-5 h-5 rtl:scale-x-[-1]" />
         </button>
         <div className="flex-1 flex items-center gap-1.5 overflow-hidden min-w-0" style={{'--cat-c': cat.color} as any}>
           <span className="text-lg shrink-0">{cat.icon}</span>
@@ -104,8 +104,8 @@ export default function AppShell() {
           )}
           {isAdmin && (
             <button
-              onClick={() => navigate('/admin')}
-              className="hidden sm:flex items-center justify-center px-3 h-8 rounded border border-red-500/30 bg-red-500/10 text-[11px] font-bold text-red-300 hover:bg-red-500/20 transition-all"
+               onClick={() => navigate('/admin')}
+               className="hidden sm:flex items-center justify-center px-3 h-8 rounded border border-red-500/30 bg-red-500/10 text-[11px] font-bold text-red-300 hover:bg-red-500/20 transition-all"
             >
               🛠 Admin
             </button>
@@ -114,14 +114,14 @@ export default function AppShell() {
             <select
               value={lang}
               onChange={(e) => setLang(e.target.value as any)}
-              className="appearance-none flex items-center justify-between pl-2 pr-6 h-7 rounded-md border-[1.5px] border-brand-border bg-transparent text-[11px] font-bold uppercase text-slate-300 cursor-pointer transition-all hover:bg-white/5 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:text-white [&>option]:bg-brand-dark-2 [&>option]:text-white"
+              className="appearance-none flex items-center justify-between pl-2 pr-6 rtl:pl-6 rtl:pr-2 h-7 rounded-md border-[1.5px] border-brand-border bg-transparent text-[11px] font-bold uppercase text-slate-300 cursor-pointer transition-all hover:bg-white/5 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:text-white [&>option]:bg-brand-dark-2 [&>option]:text-white"
             >
               <option value="no">Norsk</option>
               <option value="en">Engelsk</option>
               <option value="ar">Arabisk</option>
               <option value="pl">Polsk</option>
             </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1.5 text-slate-500">
+            <div className="pointer-events-none absolute inset-y-0 right-0 rtl:right-auto rtl:left-0 flex items-center px-1.5 text-slate-500">
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
               </svg>
@@ -129,7 +129,7 @@ export default function AppShell() {
           </div>
           <button
             onClick={handleSignOut}
-            className="ml-1 flex items-center justify-center bg-white/5 border border-brand-border rounded-md hover:bg-white/10 hover:border-slate-500 cursor-pointer h-7 px-2.5 text-slate-300 hover:text-white transition-all text-[11px] font-bold"
+            className="ml-1 rtl:ml-0 rtl:mr-1 flex items-center justify-center bg-white/5 border border-brand-border rounded-md hover:bg-white/10 hover:border-slate-500 cursor-pointer h-7 px-2.5 text-slate-300 hover:text-white transition-all text-[11px] font-bold"
           >
             {lang === 'no' ? 'Ut' : lang === 'en' ? 'Exit' : lang === 'ar' ? 'خروج' : 'Wyjdź'}
           </button>
