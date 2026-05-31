@@ -477,12 +477,10 @@ export default function Landing() {
                   <div className="absolute top-0 right-0 h-28 w-28 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.1),transparent)] pointer-events-none rounded-tr-3xl"></div>
                   
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-brand-blue/10 border border-brand-blue/25 flex items-center justify-center text-lg text-brand-blue-lt font-bold shrink-0">
-                      🇳🇴
-                    </div>
-                    <div>
-                      <div className="font-display text-sm font-bold text-white">Teorigo.no</div>
-                      <div className="text-[11px] text-slate-400 font-sans">Multi-language transport academy</div>
+                    <img src="/logo.png" alt="Teorigo.no" className="h-12 w-auto object-contain mix-blend-screen brightness-125 shrink-0" />
+                    <div className="flex-1">
+                      <div className="text-[11px] text-slate-400 font-sans font-medium uppercase tracking-wide">Multi-language</div>
+                      <div className="text-xs text-brand-blue-lt font-sans">Transport academy</div>
                     </div>
                   </div>
 

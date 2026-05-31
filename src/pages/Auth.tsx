@@ -26,6 +26,7 @@ export default function Auth() {
   const location = useLocation();
 
   const [isLogin, setIsLogin] = useState(true);
+  const [isForgot, setIsForgot] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -68,7 +69,14 @@ export default function Auth() {
       ],
       leftDesc: 'Norges moderne, kildebaserte læringsplattform for yrkessjåførprøver, drosje, og tunge kjøretøy.',
       leftFoot: 'Sikker, kildebasert verifisering',
-      supportFoot: 'Har du spørsmål om tilgang eller bestilling? Kontakt support på'
+      supportFoot: 'Har du spørsmål om tilgang eller bestilling? Kontakt support på',
+      forgotTitle: 'Glemt passord?',
+      forgotSub: 'Skriv inn e-posten din for å få tilsendt instruksjoner.',
+      btnForgot: 'Glemt passord?',
+      btnSendReset: 'Send lenke for tilbakestilling',
+      backLogin: 'Tilbake til innlogging',
+      resetSent: 'Sjekk e-posten din for instruksjoner!',
+      errorEmail: 'Vennligst oppgi en e-postadresse.'
     },
     en: {
       titleLogin: 'Welcome Back',
@@ -94,7 +102,14 @@ export default function Auth() {
       ],
       leftDesc: 'Norway’s modern, source-verified learning platform for commercial vehicle and taxi exams.',
       leftFoot: 'Secure, source-verified verification',
-      supportFoot: 'Questions about access or order? Contact support at'
+      supportFoot: 'Questions about access or order? Contact support at',
+      forgotTitle: 'Forgot password?',
+      forgotSub: 'Enter your email to receive reset instructions.',
+      btnForgot: 'Forgot password?',
+      btnSendReset: 'Send reset link',
+      backLogin: 'Back to login',
+      resetSent: 'Check your email for reset instructions!',
+      errorEmail: 'Please enter your email address.'
     },
     ar: {
       titleLogin: 'مرحباً بك مجدداً',
@@ -120,7 +135,14 @@ export default function Auth() {
       ],
       leftDesc: 'منصة التعليم الحديثة والمعتمدة لاختبارات السياقة المهنية والنقل التجاري والتاكسي في النرويج.',
       leftFoot: 'تحقق آمن ومستند للمصادر والقوانين',
-      supportFoot: 'لديك استفسار حول الوصول أو الطلبات؟ تواصل مع الدعم عبر'
+      supportFoot: 'لديك استفسار حول الوصول أو الطلبات؟ تواصل مع الدعم عبر',
+      forgotTitle: 'نسيت كلمة المرور؟',
+      forgotSub: 'أدخل بريدك الإلكتروني لتلقي تعليمات إعادة التعيين.',
+      btnForgot: 'نسيت كلمة المرور؟',
+      btnSendReset: 'إرسال رابط استعادة',
+      backLogin: 'العودة لتسجيل الدخول',
+      resetSent: 'تحقق من بريدك الإلكتروني للحصول على التعليمات!',
+      errorEmail: 'يرجى إدخال بريدك الإلكتروني.'
     },
     pl: {
       titleLogin: 'Witaj Ponownie',
@@ -146,11 +168,44 @@ export default function Auth() {
       ],
       leftDesc: 'Nowoczesna platforma szkoleniowa do egzaminów transportowych i taksówkowych w Norwegii.',
       leftFoot: 'Bezpieczna weryfikacja oparta na źródłach',
-      supportFoot: 'Masz pytania dotyczące dostępu lub zamówienia? Skontaktuj się z pomocą pod adresem'
+      supportFoot: 'Masz pytania dotyczące dostępu lub zamówienia? Skontaktuj się z pomocą pod adresem',
+      forgotTitle: 'Zapomniałeś hasła?',
+      forgotSub: 'Podaj e-mail, aby otrzymać instrukcje.',
+      btnForgot: 'Zapomniałeś hasła?',
+      btnSendReset: 'Wyślij link resetujący',
+      backLogin: 'Wróć do logowania',
+      resetSent: 'Sprawdź pocztę – wysłaliśmy instrukcje!',
+      errorEmail: 'Proszę podać adres e-mail.'
     }
   };
 
   const labels = t[lang] || t['no'];
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccessMsg(null);
+
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
+      setError(labels.errorEmail);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { error: resetErr } = await supabase.auth.resetPasswordForEmail(trimmedEmail, {
+        redirectTo: window.location.origin + '/auth?type=recovery',
+      });
+      if (resetErr) throw resetErr;
+      setSuccessMsg(labels.resetSent);
+    } catch (err: any) {
+      console.error('Reset error:', err);
+      setError(err.message || 'Error sending reset email');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -225,10 +280,8 @@ export default function Auth() {
             <div className="absolute top-0 right-0 h-48 w-48 bg-gradient-to-bl from-brand-blue/10 to-transparent blur-xl rounded-tr-3xl pointer-events-none"></div>
             
             {/* Top Logo branding */}
-            <div className="space-y-2">
-              <div className="font-display text-2xl font-black text-white hover:opacity-95 transition-all">
-                teorigo<span className="bg-gradient-to-br from-[#2563eb] to-[#60a5fa] bg-clip-text text-transparent">.no</span>
-              </div>
+            <div className="space-y-4">
+              <img src="/logo.png" alt="Teorigo" className="h-12 w-auto object-contain mix-blend-screen brightness-125" />
               <p className="text-xs text-slate-400 font-sans leading-relaxed">
                 {labels.leftDesc}
               </p>
@@ -270,15 +323,15 @@ export default function Auth() {
                   {labels.authHeader}
                 </span>
                 <h1 className="font-display text-xl sm:text-2xl font-black text-white leading-tight">
-                  {isLogin ? labels.titleLogin : labels.titleRegister}
+                  {isForgot ? labels.forgotTitle : isLogin ? labels.titleLogin : labels.titleRegister}
                 </h1>
                 <p className="text-xs text-slate-400 leading-relaxed font-sans mt-1.5 pl-0.5">
-                  {isLogin ? labels.subLogin : labels.subRegister}
+                  {isForgot ? labels.forgotSub : isLogin ? labels.subLogin : labels.subRegister}
                 </p>
               </div>
 
               {/* Form trigger action */}
-              <form onSubmit={handleSubmit} className="space-y-4 pt-1">
+              <form onSubmit={isForgot ? handleResetPassword : handleSubmit} className="space-y-4 pt-1">
                 
                 {/* Alerts Area */}
                 <AnimatePresence mode="wait">
@@ -328,36 +381,53 @@ export default function Auth() {
                 </div>
 
                 {/* Password field */}
-                <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold text-slate-400 block mb-1.5 uppercase tracking-widest pl-0.5 rtl:text-right">
-                    {labels.password}
-                  </label>
-                  <div className="relative">
-                    <span className="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 flex items-center pl-3.5 rtl:pl-0 rtl:pr-3.5 text-slate-500 pointer-events-none">
-                      <Lock className="w-4 h-4" />
-                    </span>
-                    <input
-                      type="password"
-                      required
-                      minLength={6}
-                      placeholder="••••••••"
-                      className="w-full bg-brand-dark/50 text-white border-[1.5px] border-brand-border rounded-xl pl-11 pr-4 rtl:pl-4 rtl:pr-11 py-3 text-sm focus:outline-none focus:border-brand-blue focus:bg-brand-dark/80 transition-all font-sans"
-                      value={password}
-                      onChange={(e) => { setPassword(e.target.value); setError(null); }}
-                    />
+                {!isForgot && (
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between mb-1.5 px-0.5">
+                      <label className="text-[10px] font-bold text-slate-400 block uppercase tracking-widest rtl:text-right">
+                        {labels.password}
+                      </label>
+                      {isLogin && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsForgot(true);
+                            setError(null);
+                            setSuccessMsg(null);
+                          }}
+                          className="text-[10px] font-medium text-brand-blue-lt hover:text-brand-blue transition-colors focus:outline-none"
+                        >
+                          {labels.btnForgot}
+                        </button>
+                      )}
+                    </div>
+                    <div className="relative">
+                      <span className="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 flex items-center pl-3.5 rtl:pl-0 rtl:pr-3.5 text-slate-500 pointer-events-none">
+                        <Lock className="w-4 h-4" />
+                      </span>
+                      <input
+                        type="password"
+                        required
+                        minLength={6}
+                        placeholder="••••••••"
+                        className="w-full bg-brand-dark/50 text-white border-[1.5px] border-brand-border rounded-xl pl-11 pr-4 rtl:pl-4 rtl:pr-11 py-3 text-sm focus:outline-none focus:border-brand-blue focus:bg-brand-dark/80 transition-all font-sans"
+                        value={password}
+                        onChange={(e) => { setPassword(e.target.value); setError(null); }}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Submit action button */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3.5. mt-2 bg-gradient-to-br from-brand-blue to-[#1d5fcc] hover:from-brand-blue/95 hover:to-[#1d5fcc]/95 text-white border-0 font-display font-bold rounded-xl transition-all shadow-lg shadow-brand-blue/15 hover:shadow-brand-blue/20 cursor-pointer flex items-center justify-center gap-2 text-xs uppercase tracking-wide min-h-[46px] disabled:opacity-45"
+                  className="w-full mt-2 bg-gradient-to-br from-brand-blue to-[#1d5fcc] hover:from-brand-blue/95 hover:to-[#1d5fcc]/95 text-white border-0 font-display font-bold rounded-xl transition-all shadow-lg shadow-brand-blue/15 hover:shadow-brand-blue/20 cursor-pointer flex items-center justify-center gap-2 text-xs uppercase tracking-wide min-h-[46px] disabled:opacity-45"
                 >
                   {loading ? (
                     <Loader2 className="w-4 h-4 animate-spin text-white" />
                   ) : (
-                    <span>{isLogin ? labels.buttonLogin : labels.buttonRegister}</span>
+                    <span>{isForgot ? labels.btnSendReset : isLogin ? labels.buttonLogin : labels.buttonRegister}</span>
                   )}
                 </button>
               </form>
@@ -367,13 +437,18 @@ export default function Auth() {
                 <button
                   type="button"
                   onClick={() => {
-                    setIsLogin(!isLogin);
+                    if (isForgot) {
+                      setIsForgot(false);
+                      setIsLogin(true);
+                    } else {
+                      setIsLogin(!isLogin);
+                    }
                     setError(null);
                     setSuccessMsg(null);
                   }}
                   className="text-xs text-brand-blue-lt hover:text-brand-blue hover:underline cursor-pointer font-bold transition-colors uppercase tracking-wide"
                 >
-                  {isLogin ? labels.switchRegister : labels.switchLogin}
+                  {isForgot ? labels.backLogin : isLogin ? labels.switchRegister : labels.switchLogin}
                 </button>
               </div>
 

@@ -23,8 +23,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
-            <Link to="/" className="font-display text-xl font-extrabold tracking-tight text-white hover:text-brand-blue transition-colors">
-              Teorigo
+            <Link to="/" className="flex items-center hover:opacity-90 transition-opacity">
+              <img src="/logo.png" alt="Teorigo" className="h-8 w-auto object-contain mix-blend-screen brightness-125" />
             </Link>
           </div>
 
