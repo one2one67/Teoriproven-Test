@@ -38,7 +38,7 @@ export default function Navbar() {
                     location.pathname === '/teori' ? "text-white" : "text-slate-400"
                   )}
                 >
-                  Teori
+                  {lang === 'no' ? 'Hjem' : lang === 'en' ? 'Home' : lang === 'ar' ? 'الرئيسية' : 'Strona główna'}
                 </Link>
                 {isAdmin && (
                   <Link
