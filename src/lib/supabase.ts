@@ -15,7 +15,7 @@ const supabaseAnonKey = rawKey;
 
 if (!supabaseUrl || !supabaseAnonKey) {
   console.warn(
-    'Supabase URL og Anon Key mangler. Vennligst sjekk dine secrets i AI Studio.'
+    'Supabase URL og Anon Key mangler. Vennligst sjekk konfigurasjonen i .env.'
   );
 }
 

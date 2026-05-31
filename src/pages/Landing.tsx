@@ -427,7 +427,7 @@ export default function Landing() {
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
               {/* Left Column: Information Editorial */}
-              <div className="lg:col-span-7 flex flex-col items-start text-left">
+              <div className="lg:col-span-7 flex flex-col items-start rtl:items-end text-left rtl:text-right">
                 <div className="inline-flex items-center gap-2 bg-brand-blue/10 border border-brand-blue/25 text-[#60a5fa] text-[11px] font-bold px-3 py-1.5 rounded-full mb-6 tracking-wide shadow-sm uppercase font-sans">
                   <span className="flex h-2 w-2 rounded-full bg-brand-blue animate-pulse"></span>
                   {text.heroBadge}
@@ -540,7 +540,7 @@ export default function Landing() {
 
           {/* Category Selector Grid - Explanatory category lists */}
           <section id="theory-categories" className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div className="max-w-4xl mb-12 flex flex-col items-start justify-start text-left">
+            <div className="max-w-4xl mb-12 flex flex-col items-start rtl:items-end justify-start text-left rtl:text-right">
               <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
                 {UiText(lang, 'licenceHeader', 'Velg ditt teoripensum')}
               </h2>

@@ -105,6 +105,9 @@ function MainAppContent() {
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
+        <footer className="py-6 border-t border-brand-border/20 bg-brand-dark-2/20 text-center text-[11px] text-slate-500 font-sans tracking-wide">
+          Copyright Teorigo.no
+        </footer>
       </div>
     </Router>
   );

@@ -1,5 +1,5 @@
 {
-  "name": "Teoriøving",
+  "name": "Teorigo",
   "description": "En moderne og profesjonell plattform for teoriøving til varebilløyve, taxiløyve, drosjeeksamen og lastebilløyve.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

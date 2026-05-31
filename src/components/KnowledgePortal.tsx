@@ -207,11 +207,11 @@ export default function KnowledgePortal() {
                               {/* Table */}
                               {faq.table && (
                                 <div className="mt-4 overflow-x-auto border border-brand-border rounded-lg bg-brand-dark">
-                                  <table className="w-full text-left border-collapse text-xs">
+                                  <table className="w-full text-left rtl:text-right border-collapse text-xs">
                                     <thead>
                                       <tr>
                                         {((faq.table.headers as any)[lang || 'no']).map((h: string, hi: number) => (
-                                          <th key={hi} className="bg-brand-dark-2 p-2.5 text-[10px] uppercase font-bold tracking-widest text-slate-400 border-b border-brand-border">
+                                          <th key={hi} className="bg-brand-dark-2 p-2.5 text-[10px] uppercase font-bold tracking-widest text-slate-400 border-b border-brand-border text-left rtl:text-right">
                                             {h}
                                           </th>
                                         ))}
@@ -332,7 +332,7 @@ function QuizModule({ qz, qid, lang, t }: { qz: any, qid: string, lang: 'no'|'en
               disabled={answered !== null}
               onClick={() => handleAnswer(i)}
               className={cn(
-                "flex items-center gap-3 p-2.5 rounded-lg border-[1.5px] text-xs font-medium text-left transition-all",
+                "flex items-center gap-3 p-2.5 rounded-lg border-[1.5px] text-xs font-medium text-left rtl:text-right transition-all",
                 btnClass
               )}
             >

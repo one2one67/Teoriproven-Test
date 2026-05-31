@@ -221,7 +221,7 @@ export default function Auth() {
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-5xl rounded-3xl overflow-hidden bg-brand-dark-2/40 border border-brand-border/60 shadow-2xl relative">
           
           {/* Left Column: Premium Pitch Screen. Hidden on mobile, vibrant on desktop */}
-          <div className="hidden lg:flex lg:col-span-5 bg-gradient-to-br from-brand-blue/15 via-cyan-500/5 to-transparent p-10 flex-col justify-between border-r border-brand-border/50 relative">
+          <div className="hidden lg:flex lg:col-span-5 bg-gradient-to-br from-brand-blue/15 via-cyan-500/5 to-transparent p-10 flex-col justify-between border-r rtl:border-r-0 rtl:border-l border-brand-border/50 relative">
             <div className="absolute top-0 right-0 h-48 w-48 bg-gradient-to-bl from-brand-blue/10 to-transparent blur-xl rounded-tr-3xl pointer-events-none"></div>
             
             {/* Top Logo branding */}
