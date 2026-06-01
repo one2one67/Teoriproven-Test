@@ -4,7 +4,7 @@
  */
 
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Landing from './pages/Landing';
 import Teori from './pages/Teori';
@@ -12,8 +12,37 @@ import Eksamen from './pages/Eksamen';
 import Bank from './pages/Bank';
 import Admin from './pages/Admin';
 import Auth from './pages/Auth';
+import Legal from './pages/Legal';
+import CookieBanner from './components/CookieBanner';
 import { StoreProvider, useStore } from './lib/store';
 import { AuthProvider, useUser } from './lib/AuthContext';
+
+function Footer() {
+  const { lang } = useStore();
+  const t = {
+    no: { privacy: 'Personvern', terms: 'Vilkår', cookies: 'Cookies', contact: 'Kontakt' },
+    en: { privacy: 'Privacy Policy', terms: 'Terms', cookies: 'Cookies', contact: 'Contact' },
+    ar: { privacy: 'سياسة الخصوصية', terms: 'الشروط', cookies: 'ملفات تعريف الارتباط', contact: 'اتصل بنا' },
+    pl: { privacy: 'Prywatność', terms: 'Warunki', cookies: 'Cookies', contact: 'Kontakt' },
+  };
+  const labels = t[lang as keyof typeof t] || t.no;
+
+  return (
+    <footer className="py-8 border-t border-brand-border/20 bg-brand-dark-2/20 text-center font-sans">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[12px] text-slate-400 font-medium">
+          <Link to="/privacy" className="hover:text-white transition-colors">{labels.privacy}</Link>
+          <Link to="/terms" className="hover:text-white transition-colors">{labels.terms}</Link>
+          <Link to="/cookies" className="hover:text-white transition-colors">{labels.cookies}</Link>
+          <Link to="/contact" className="hover:text-white transition-colors">{labels.contact}</Link>
+        </div>
+        <div className="text-[11px] text-slate-500 tracking-wide mt-2">
+          Copyright © Teorigo.no
+        </div>
+      </div>
+    </footer>
+  );
+}
 
 function MainAppContent() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -43,30 +72,11 @@ function MainAppContent() {
       const isMeta = e.ctrlKey || e.metaKey;
       const key = e.key.toLowerCase();
 
-      // Ctrl+C / Cmd+C (Kopier)
-      if (isMeta && key === 'c') {
-        e.preventDefault();
-      }
-
-      // Ctrl+P / Cmd+P (Utskrift / PDF)
-      if (isMeta && key === 'p') {
-        e.preventDefault();
-      }
-
-      // Ctrl+S / Cmd+S (Lagre nettside)
-      if (isMeta && key === 's') {
-        e.preventDefault();
-      }
-
-      // F12 eller Ctrl+Shift+I / Cmd+Option+I (Utviklerverktøy)
-      if (e.key === 'F12' || (isMeta && e.shiftKey && key === 'i')) {
-        e.preventDefault();
-      }
-
-      // PrintScreen tast (Prøve å fjerne utklipp)
-      if (e.key === 'PrintScreen') {
-        navigator.clipboard?.writeText?.('');
-      }
+      if (isMeta && key === 'c') e.preventDefault();
+      if (isMeta && key === 'p') e.preventDefault();
+      if (isMeta && key === 's') e.preventDefault();
+      if (e.key === 'F12' || (isMeta && e.shiftKey && key === 'i')) e.preventDefault();
+      if (e.key === 'PrintScreen') navigator.clipboard?.writeText?.('');
     };
 
     document.addEventListener('contextmenu', handleContextMenu);
@@ -94,6 +104,13 @@ function MainAppContent() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/auth" element={<Auth />} />
+            
+            {/* Legal Pages */}
+            <Route path="/privacy" element={<Legal pageType="privacy" />} />
+            <Route path="/terms" element={<Legal pageType="terms" />} />
+            <Route path="/cookies" element={<Legal pageType="cookies" />} />
+            <Route path="/contact" element={<Legal pageType="contact" />} />
+
             <Route path="/teori" element={isSignedIn ? <Teori /> : <Navigate to="/auth?redirect=/teori" />} />
             <Route path="/dashboard" element={isSignedIn ? <Teori /> : <Navigate to="/auth?redirect=/dashboard" />} />
             <Route path="/eksamen" element={isSignedIn ? <Eksamen /> : <Navigate to="/auth?redirect=/eksamen" />} />
@@ -105,9 +122,8 @@ function MainAppContent() {
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
-        <footer className="py-6 border-t border-brand-border/20 bg-brand-dark-2/20 text-center text-[11px] text-slate-500 font-sans tracking-wide">
-          Copyright Teorigo.no
-        </footer>
+        <Footer />
+        <CookieBanner />
       </div>
     </Router>
   );

@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/src/lib/utils';
 import { useStore } from '@/src/lib/store';
@@ -12,6 +13,19 @@ export default function Navbar() {
   
   const isAdmin = user?.primaryEmailAddress?.emailAddress === adminEmail;
   const { lang, setLang, catId } = useStore();
+
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (langRef.current && !langRef.current.contains(event.target as Node)) {
+        setIsLangOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -77,28 +91,50 @@ export default function Navbar() {
 
             {/* Språkvelger */}
             {location.pathname === '/' && catId === null && (
-              <div className="relative">
-                <select
-                  value={lang}
-                  onChange={(e) => setLang(e.target.value as any)}
-                  className="appearance-none flex items-center justify-between pl-3 pr-8 rtl:pl-8 rtl:pr-3 min-w-[100px] h-9 rounded-lg border-[1.5px] border-brand-border bg-white/5 text-xs font-medium text-white cursor-pointer transition-all hover:bg-white/10 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:bg-brand-blue/15 focus:shadow-[0_0_0_2px_rgba(29,111,235,0.3)] [&>option]:bg-brand-dark-2"
+              <div className="relative" ref={langRef}>
+                <button
+                  type="button"
+                  onClick={() => setIsLangOpen(!isLangOpen)}
+                  className="appearance-none flex items-center justify-between px-3 min-w-[105px] h-9 rounded-lg border-[1.5px] border-brand-border bg-white/5 text-xs font-medium text-white cursor-pointer transition-all hover:bg-white/10 hover:border-[#253347] focus:outline-none focus:border-brand-blue focus:bg-brand-blue/15 focus:shadow-[0_0_0_2px_rgba(29,111,235,0.3)]"
                 >
-                  {[
-                    { code: 'no', label: '🇳🇴 Norsk' },
-                    { code: 'en', label: '🇬🇧 English' },
-                    { code: 'ar', label: '🇸🇦 عربي' },
-                    { code: 'pl', label: '🇵🇱 Polski' }
-                  ].map(l => (
-                    <option key={l.code} value={l.code}>
-                      {l.label}
-                    </option>
-                  ))}
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 rtl:right-auto rtl:left-0 flex items-center px-2.5 text-slate-400">
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <div className="flex items-center gap-2">
+                    {lang === 'no' && <img src="https://flagcdn.com/w40/no.png" alt="Norway" className="w-4 h-[11px] object-cover rounded-sm" />}
+                    {lang === 'en' && <img src="https://flagcdn.com/w40/gb.png" alt="UK" className="w-4 h-[11px] object-cover rounded-sm" />}
+                    {lang === 'ar' && <img src="https://flagcdn.com/w40/sa.png" alt="Saudi Arabia" className="w-4 h-[11px] object-cover rounded-sm" />}
+                    {lang === 'pl' && <img src="https://flagcdn.com/w40/pl.png" alt="Poland" className="w-4 h-[11px] object-cover rounded-sm" />}
+                    <span>{lang === 'no' ? 'Norsk' : lang === 'en' ? 'English' : lang === 'ar' ? 'عربي' : 'Polski'}</span>
+                  </div>
+                  <svg className={cn("w-3.5 h-3.5 text-slate-400 ml-2 rtl:mr-2 rtl:ml-0 transition-transform duration-200", isLangOpen && "rotate-180")} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
                   </svg>
-                </div>
+                </button>
+
+                {isLangOpen && (
+                  <div className="absolute top-full mt-1.5 right-0 rtl:right-auto rtl:left-0 min-w-full bg-[#0a0f18] border border-brand-border rounded-lg shadow-2xl overflow-hidden z-50 flex flex-col py-1">
+                    {[
+                      { code: 'no', label: 'Norsk', flag: 'no' },
+                      { code: 'en', label: 'English', flag: 'gb' },
+                      { code: 'ar', label: 'عربي', flag: 'sa' },
+                      { code: 'pl', label: 'Polski', flag: 'pl' }
+                    ].map(l => (
+                      <button
+                        key={l.code}
+                        type="button"
+                        onClick={() => {
+                          setLang(l.code as any);
+                          setIsLangOpen(false);
+                        }}
+                        className={cn(
+                          "w-full flex items-center justify-start gap-2.5 px-3 py-2 text-xs font-medium transition-colors hover:bg-brand-blue/20",
+                          lang === l.code ? "bg-brand-blue/10 text-brand-blue-lt" : "text-white"
+                        )}
+                      >
+                        <img src={`https://flagcdn.com/w40/${l.flag}.png`} alt={l.label} className="w-4 h-[11px] object-cover rounded-sm" />
+                        <span>{l.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 

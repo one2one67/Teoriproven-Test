@@ -28,10 +28,12 @@ import KnowledgePortal from '../components/KnowledgePortal';
 const L = {
   no: {
     heroBadge: "Statens vegvesen Læreplaner",
+    academySubtitle: "Flerspråklig",
+    academyDesc: "Transportakademi",
     heroTitle: "Kildebasert kunnskap til din teoriprøve",
     heroSpan: "med 100% trygghet",
     heroDesc: "Forbered deg effektivt til teoriprøver for varebil, taxi, drosje og lastebilløyver i Norge. Teorigo leverer nøyaktig kildebasert kunnskap tilpasset dine læringsbehov.",
-    ctaStart: "Begynn gratis øving",
+    ctaStart: "Begynn øving",
     ctaHelp: "Ingen kredittkort kreves",
     learnMore: "Lær mer under",
     
@@ -77,10 +79,12 @@ const L = {
   },
   en: {
     heroBadge: "Public Roads Administration Curriculums",
+    academySubtitle: "Multi-language",
+    academyDesc: "Transport academy",
     heroTitle: "Source-Verified Theory for Commercial Exams",
     heroSpan: "with 100% confidence",
     heroDesc: "Prepare efficiently for theory tests for light vans, taxis, driver permits, and heavy trucks in Norway. Teorigo supplies accurate, source-based knowledge optimized for quick learning.",
-    ctaStart: "Start free practice",
+    ctaStart: "Start practice",
     ctaHelp: "No credit card required",
     learnMore: "Learn more below",
     
@@ -126,10 +130,12 @@ const L = {
   },
   ar: {
     heroBadge: "مناهج إدارة الطرق العامة النرويجية",
+    academySubtitle: "متعدد اللغات",
+    academyDesc: "أكاديمية النقل",
     heroTitle: "معرفة مستندة للمصادر لقطاع النقل",
     heroSpan: "بثقة كاملة وموثوقية عالية",
     heroDesc: "استعد بذكاء للاختبارات النظرية لرخص سيارات الأجرة، الشاحنات، وسيارات النقل في النرويج. نقدم لك مادة علمية معتمدة ومحدثة.",
-    ctaStart: "ابدأ الدراسة مجاناً",
+    ctaStart: "ابدأ الدراسة",
     ctaHelp: "لا يتطلب بطاقة ائتمان",
     learnMore: "تعرف على المزيد أدناه",
     
@@ -175,10 +181,12 @@ const L = {
   },
   pl: {
     heroBadge: "Oficjalna podstawa programowa Statens Vegvesen",
+    academySubtitle: "Wielojęzyczna",
+    academyDesc: "Akademia transportu",
     heroTitle: "Dedykowana Teoria do Egzaminów w Norwegii",
     heroSpan: "ze 100% pewnością",
     heroDesc: "Przygotuj się skutecznie do egzaminów teoretycznych na busy, taksówki, przewóz osób i towarów. Teorigo zapewnia rzetelną wiedzę opartą na norweskich przepisach.",
-    ctaStart: "Rozpocznij darmową naukę",
+    ctaStart: "Rozpocznij naukę",
     ctaHelp: "Nie wymagamy karty płatniczej",
     learnMore: "Sprawdź szczegóły poniżej",
     
@@ -425,9 +433,8 @@ export default function Landing() {
           <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-48 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.15),transparent_70%)] pointer-events-none"></div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-              {/* Left Column: Information Editorial */}
-              <div className="lg:col-span-7 flex flex-col items-start rtl:items-end text-left rtl:text-right">
+            <div className="flex flex-col items-center text-center relative z-10 max-w-4xl mx-auto">
+              <div className="flex flex-col items-center rtl:items-center text-center rtl:text-center w-full">
                 <div className="inline-flex items-center gap-2 bg-brand-blue/10 border border-brand-blue/25 text-[#60a5fa] text-[11px] font-bold px-3 py-1.5 rounded-full mb-6 tracking-wide shadow-sm uppercase font-sans">
                   <span className="flex h-2 w-2 rounded-full bg-brand-blue animate-pulse"></span>
                   {text.heroBadge}
@@ -440,11 +447,11 @@ export default function Landing() {
                   </span>
                 </h1>
                 
-                <p className="text-[15px] sm:text-[17px] text-slate-400 max-w-[620px] mb-8 leading-relaxed font-sans font-normal">
+                <p className="text-[15px] sm:text-[17px] text-slate-400 max-w-[620px] mb-8 leading-relaxed font-sans font-normal mx-auto">
                   {text.heroDesc}
                 </p>
                 
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full sm:w-auto">
                   <button
                     onClick={() => {
                       const el = document.getElementById('theory-categories');
@@ -466,61 +473,8 @@ export default function Landing() {
                   </button>
                 </div>
                 
-                <div className="text-[12px] text-slate-500 mt-3 pl-1">
+                <div className="text-[12px] text-slate-500 mt-3">
                   🔒 {text.ctaHelp} · Statens vegvesen Læreplaner
-                </div>
-              </div>
-
-              {/* Right Column: Interactive Quick Card / Summary */}
-              <div className="lg:col-span-5">
-                <div className="bg-brand-dark-2/90 border-[1.5px] border-brand-border rounded-3xl p-6 shadow-2xl relative">
-                  <div className="absolute top-0 right-0 h-28 w-28 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.1),transparent)] pointer-events-none rounded-tr-3xl"></div>
-                  
-                  <div className="flex items-center gap-3 mb-6">
-                    <img 
-                      src="/logo.png" 
-                      alt="Teorigo.no" 
-                      className="h-12 w-auto object-contain mix-blend-screen brightness-125 shrink-0" 
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        const nextSibling = e.currentTarget.nextElementSibling as HTMLElement;
-                        if (nextSibling) nextSibling.classList.remove('hidden');
-                      }}
-                    />
-                    <div className="hidden w-10 h-10 rounded-xl bg-brand-blue/10 border border-brand-blue/25 flex items-center justify-center text-lg text-brand-blue-lt font-bold shrink-0">
-                      🇳🇴
-                    </div>
-                    <div className="flex-1">
-                      <div className="text-[11px] text-slate-400 font-sans font-medium uppercase tracking-wide">Multi-language</div>
-                      <div className="text-xs text-brand-blue-lt font-sans">Transport academy</div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="flex gap-3 items-start p-3 bg-white/[0.02] border border-brand-border/40 rounded-xl">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-[13px] font-bold text-white">4 Integrerte Språk</div>
-                        <div className="text-xs text-slate-500 font-sans leading-snug">Bytt umiddelbart mellom Norsk, Engelsk, Arabisk (RTL) og Polsk.</div>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-3 items-start p-3 bg-white/[0.02] border border-brand-border/40 rounded-xl">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-[13px] font-bold text-white">Ekte Eksamensimulator</div>
-                        <div className="text-xs text-slate-500 font-sans leading-snug">Våre tester følger nøyaktig kravene til tid og bestått-grense hos Vegvesenet.</div>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-3 items-start p-3 bg-white/[0.02] border border-brand-border/40 rounded-xl">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                      <div>
-                        <div className="text-[13px] font-bold text-white">Premium Spørsmålsbank</div>
-                        <div className="text-xs text-slate-500 font-sans leading-snug">Hundrevis av kildebaserte spørsmål med dype, pedagogiske forklaringer.</div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
