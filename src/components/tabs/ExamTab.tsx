@@ -229,9 +229,9 @@ export default function ExamTab() {
   const pctProgress = Math.round((qIdx / qPool.length) * 100);
 
   return (
-    <div className="animate-in fade-in flex flex-col h-full -mx-4 -mt-4 space-y-4">
+    <div className="animate-in fade-in flex flex-col -mx-3.5 -mt-3.5 relative">
       {/* Premium timing header bar */}
-      <div className="bg-brand-dark-2 border-b border-brand-border p-4 flex items-center justify-between shrink-0">
+      <div className="bg-brand-dark-2 border-b border-brand-border p-4 flex items-center justify-between shrink-0 sticky top-0 z-20 shadow-md">
         <div className="flex items-center gap-3">
           <div className={cn("h-11 px-3.5 rounded-xl border-[1.5px] flex items-center gap-2 transition-all font-mono text-base font-extrabold text-white tabular-nums", timerBorderClass)}>
             <Clock className="w-4 h-4 shrink-0 text-slate-400" />
@@ -265,7 +265,7 @@ export default function ExamTab() {
       </div>
 
       {/* Progress timeline */}
-      <div className="px-4 shrink-0">
+      <div className="px-4 shrink-0 mt-4">
         <div className="space-y-1">
           <div className="flex justify-between items-center text-[10px] text-slate-500 font-bold px-0.5">
             <span>{lang === 'no' ? 'progresjon' : lang === 'en' ? 'progression' : lang === 'ar' ? 'التقدم مجملاً' : 'progres'}</span>
@@ -277,7 +277,7 @@ export default function ExamTab() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-4">
+      <div className="px-4 mt-4 pb-8 space-y-4">
         {/* Question Panel */}
         <div className="bg-brand-dark-2 border border-brand-border border-t-[4px] rounded-2xl p-4.5 shadow-md" style={{ borderTopColor: 'var(--cat-c)' }}>
           <div className="text-[10px] text-slate-400 mb-2.5 font-bold uppercase tracking-wider bg-brand-dark px-2 py-0.5 rounded inline-block">

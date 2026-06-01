@@ -893,6 +893,18 @@ export default function Landing() {
             </div>
 
           </div>
+
+          <div className="mt-16 pt-12 border-t border-brand-border/40 w-full">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <h2 className="font-display text-xl sm:text-2xl font-extrabold text-white mb-2">
+                {text.faqSectionTitle}
+              </h2>
+              <p className="text-slate-400 text-xs sm:text-sm">
+                {text.faqSectionDesc}
+              </p>
+            </div>
+            <KnowledgePortal />
+          </div>
         </div>
       )}
 

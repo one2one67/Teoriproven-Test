@@ -1,55 +1,2300 @@
 export const varebilData = {
-  themes:{
-    no:{"T001: Yrkestransportloven":"#1d6feb","T002: Vegtrafikkloven":"#0891b2","T003: Arbeidsmiljø og ferie":"#7c3aed","T004: Opplæring og kjøring":"#dc2626","T005: Internkontroll/HMS":"#059669","T006: Foretaksformer":"#d97706","T007: Økonomiforståelse":"#4f46e5","T008: Skatter":"#be123c","T009: Avgifter":"#0d9488"},
-    en:{"T001: Transport Law":"#1d6feb","T002: Road Traffic Act":"#0891b2","T003: Labour & Holiday Law":"#7c3aed","T004: Training & Driving":"#dc2626","T005: Internal Control/HSE":"#059669","T006: Business Forms":"#d97706","T007: Financial Understanding":"#4f46e5","T008: Taxes":"#be123c","T009: VAT & Fees":"#0d9488"},
-    ar:{"T001: قانون النقل":"#1d6feb","T002: قانون السير":"#0891b2","T003: قانون العمل والإجازات":"#7c3aed","T004: التدريب والقيادة":"#dc2626","T005: الرقابة الداخلية والسلامة":"#059669","T006: أشكال الشركات":"#d97706","T007: الفهم المالي":"#4f46e5","T008: الضرائب":"#be123c","T009: الرسوم وضريبة القيمة المضافة":"#0d9488"},
-    pl:{"T001: Prawo transportowe":"#1d6feb","T002: Prawo o ruchu drogowym":"#0891b2","T003: Prawo pracy i urlopy":"#7c3aed","T004: Szkolenie i jazda":"#dc2626","T005: Kontrola wewnętrzna/BHP":"#059669","T006: Formy przedsiębiorstwa":"#d97706","T007: Wiedza ekonomiczna":"#4f46e5","T008: Podatki":"#be123c","T009: Opłaty i VAT":"#0d9488"}
+  "themes": {
+    "no": {
+      "T001: Yrkestransportloven": "#1d6feb",
+      "T002: Vegtrafikkloven": "#0891b2",
+      "T003: Arbeidsmiljø og ferie": "#7c3aed",
+      "T004: Opplæring og kjøring": "#dc2626",
+      "T005: Internkontroll/HMS": "#059669",
+      "T006: Foretaksformer": "#d97706",
+      "T007: Økonomiforståelse": "#4f46e5",
+      "T008: Skatter": "#be123c",
+      "T009: Avgifter": "#0d9488"
+    },
+    "en": {
+      "T001: Transport Law": "#1d6feb",
+      "T002: Road Traffic Act": "#0891b2",
+      "T003: Labour & Holiday Law": "#7c3aed",
+      "T004: Training & Driving": "#dc2626",
+      "T005: Internal Control/HSE": "#059669",
+      "T006: Business Forms": "#d97706",
+      "T007: Financial Understanding": "#4f46e5",
+      "T008: Taxes": "#be123c",
+      "T009: VAT & Fees": "#0d9488"
+    },
+    "ar": {
+      "T001: قانون النقل": "#1d6feb",
+      "T002: قانون السير": "#0891b2",
+      "T003: قانون العمل والإجازات": "#7c3aed",
+      "T004: التدريب والقيادة": "#dc2626",
+      "T005: الرقابة الداخلية والسلامة": "#059669",
+      "T006: أشكال الشركات": "#d97706",
+      "T007: الفهم المالي": "#4f46e5",
+      "T008: الضرائب": "#be123c",
+      "T009: الرسوم وضريبة القيمة المضافة": "#0d9488"
+    },
+    "pl": {
+      "T001: Prawo transportowe": "#1d6feb",
+      "T002: Prawo o ruchu drogowym": "#0891b2",
+      "T003: Prawo pracy i urlopy": "#7c3aed",
+      "T004: Szkolenie i jazda": "#dc2626",
+      "T005: Kontrola wewnętrzna/BHP": "#059669",
+      "T006: Formy przedsiębiorstwa": "#d97706",
+      "T007: Wiedza ekonomiczna": "#4f46e5",
+      "T008: Podatki": "#be123c",
+      "T009: Opłaty i VAT": "#0d9488"
+    }
   },
-  q:[
-    {no:{t:"T001: Yrkestransportloven",q:"Hvilke kjøretøy gjelder nasjonalt varebilløyve for?",o:["Varebiler under 2500 kg","Varebiler 2500–3500 kg totalvekt","Lastebiler over 3500 kg","Alle kjøretøy i godstransport"],c:1,e:"Nasjonalt varebilløyve gjelder for godstransport mot vederlag med varebil mellom 2500 og 3500 kg tillatt totalvekt, jf. yrkestransportlova § 4."},en:{t:"T001: Transport Law",q:"Which vehicles require a national van licence?",o:["Vans under 2500 kg","Vans 2500–3500 kg gross weight","Lorries over 3500 kg","All goods vehicles"],c:1,e:"A national van licence applies to goods transport for reward with a van of 2500–3500 kg permitted total weight."},ar:{t:"T001: قانون النقل",q:"ما المركبات التي تستلزم رخصة الشاحنة الخفيفة الوطنية؟",o:["شاحنات أقل من 2500 كغ","شاحنات 2500–3500 كغ حمولة إجمالية","شاحنات فوق 3500 كغ","جميع مركبات البضائع"],c:1,e:"تنطبق رخصة الشاحنة الخفيفة الوطنية على نقل البضائع بأجر بشاحنة بين 2500 و3500 كغ حمولة إجمالية مسموح بها."}},
-    {no:{t:"T001: Yrkestransportloven",q:"Hva er minstealderen for å søke om varebilløyve?",o:["18 år","20 år","21 år","25 år"],c:2,e:"Søkeren må være minst 21 år for å søke om varebilløyve."},en:{t:"T001: Transport Law",q:"What is the minimum age to apply for a van licence?",o:["18 years","20 years","21 years","25 years"],c:2,e:"The applicant must be at least 21 years old to apply for a van licence."},ar:{t:"T001: قانون النقل",q:"ما الحد الأدنى للسن للتقدم بطلب رخصة الشاحنة الخفيفة؟",o:["18 عاماً","20 عاماً","21 عاماً","25 عاماً"],c:2,e:"يجب أن يكون المتقدم بالغاً 21 عاماً على الأقل لطلب رخصة الشاحنة الخفيفة."}},
-    {no:{t:"T001: Yrkestransportloven",q:"Er det krav om faglig kompetanse for nasjonalt varebilløyve (2500–3500 kg)?",o:["Ja, bestått fagprøve kreves","Nei – faglig kompetanse er ikke krevd for varebilløyve","Ja, men kun internasjonalt","Kun 2 års praksis er nok"],c:1,e:"For nasjonalt varebilløyve (2500–3500 kg) er det IKKE krav om faglig kompetanse. Dette skiller seg fra tyngre godstransportløyve."},en:{t:"T001: Transport Law",q:"Is professional competence required for a national van licence (2500–3500 kg)?",o:["Yes, a passed exam is required","No – professional competence is NOT required for a van licence","Yes, but only international","2 years practice is enough"],c:1,e:"For a national van licence (2500–3500 kg) professional competence is NOT required. This differs from heavier goods licences."},ar:{t:"T001: قانون النقل",q:"هل تُشترط الكفاءة المهنية لرخصة الشاحنة الخفيفة الوطنية (2500–3500 كغ)؟",o:["نعم، يُشترط اجتياز امتحان","لا – الكفاءة المهنية غير مشترطة لرخصة الشاحنة الخفيفة","نعم، للدولي فقط","يكفي سنتان من الخبرة"],c:1,e:"لا تُشترط الكفاءة المهنية لرخصة الشاحنة الخفيفة الوطنية (2500–3500 كغ). يختلف هذا عن رخص النقل الثقيل."}},
-    {no:{t:"T001: Yrkestransportloven",q:"Hvem er løyvemyndighet for varebilløyve i Norge?",o:["Samferdselsdepartementet","Politiet","Statens vegvesen","Statsforvalteren"],c:2,e:"Statens vegvesen er løyvemyndighet og behandler alle søknader om varebilløyve."},en:{t:"T001: Transport Law",q:"Who is the licensing authority for van licences in Norway?",o:["Ministry of Transport","The Police","Norwegian Public Roads Administration","County Governor"],c:2,e:"The Norwegian Public Roads Administration (Statens vegvesen) is the licensing authority and processes all van licence applications."},ar:{t:"T001: قانون النقل",q:"من هي جهة الترخيص لرخص الشاحنات الخفيفة في النرويج؟",o:["وزارة النقل","الشرطة","إدارة الطرق العامة النرويجية","الحاكم الإقليمي"],c:2,e:"إدارة الطرق العامة النرويجية هي جهة الترخيص وتعالج جميع طلبات رخص الشاحنات الخفيفة."}},
-    {no:{t:"T002: Vegtrafikkloven",q:"Hva innebærer pliktmessig avhold etter vtrl. § 22?",o:["Forbud mot mobiltelefon under kjøring","Forbudt å kjøre etter inntak av alkohol/rusmidler de siste 8 timene; grense 0,2 ‰","Forbudt å overskride fartsgrensen","Gjelder kun bussjåfører og taxisjåfører"],c:1,e:"Vtrl. § 22: alkohol eller rusmidler må ikke inntas i de siste 8 timene før kjøring. Den lovlige promillegrensen er 0,2 ‰."},en:{t:"T002: Road Traffic Act",q:"What does mandatory abstinence under §22 Road Traffic Act mean?",o:["Prohibition on mobile phone while driving","Prohibited to drive after consuming alcohol/drugs in the last 8 hours; BAC limit 0.2 ‰","Prohibited from exceeding speed limit","Applies only to bus and taxi drivers"],c:1,e:"§22 Road Traffic Act: alcohol or drugs must not be consumed in the 8 hours before driving. The legal BAC limit is 0.2 ‰."},ar:{t:"T002: قانون السير",q:"ما معنى واجب الامتناع بموجب المادة 22 من قانون السير؟",o:["حظر الهاتف المحمول أثناء القيادة","حظر القيادة بعد تناول الكحول/المخدرات في آخر 8 ساعات؛ الحد 0.2 ‰","حظر تجاوز حد السرعة","ينطبق على سائقي الحافلات والتاكسي فقط"],c:1,e:"المادة 22: لا يجوز تناول الكحول أو المخدرات في الثماني ساعات السابقة للقيادة. الحد القانوني 0.2 ‰."}},
-    {no:{t:"T003: Arbeidsmiljø og ferie",q:"Hva er alminnelig arbeidstid etter arbeidsmiljøloven § 10-4?",o:["Maks 7,5 t/dag og 37,5 t/uke","Maks 9 t/dag og 40 t/uke","Maks 8 t/dag og 40 t/uke","Maks 10 t/dag og 48 t/uke"],c:1,e:"Aml. § 10-4: alminnelig arbeidstid er maks 9 timer per dag og 40 timer per uke."},en:{t:"T003: Labour & Holiday Law",q:"What is ordinary working time under the Working Environment Act §10-4?",o:["Max 7.5 hrs/day and 37.5 hrs/week","Max 9 hrs/day and 40 hrs/week","Max 8 hrs/day and 40 hrs/week","Max 10 hrs/day and 48 hrs/week"],c:1,e:"§10-4: ordinary working time is max 9 hours per day and 40 hours per week."},ar:{t:"T003: قانون العمل والإجازات",q:"ما ساعات العمل العادية وفق المادة 10-4 من قانون بيئة العمل؟",o:["حد أقصى 7.5 ساعة/يوم و37.5 ساعة/أسبوع","حد أقصى 9 ساعات/يوم و40 ساعة/أسبوع","حد أقصى 8 ساعات/يوم و40 ساعة/أسبوع","حد أقصى 10 ساعات/يوم و48 ساعة/أسبوع"],c:1,e:"المادة 10-4: ساعات العمل العادية حد أقصى 9 ساعات يومياً و40 ساعة أسبوعياً."}},
-    {no:{t:"T004: Opplæring og kjøring",q:"Gjelder EU-forordning 561/2006 om kjøre- og hviletid for varebiler under 3500 kg?",o:["Ja – alle motorvogner","Nei – kun for kjøretøy over 3500 kg","Ja – kun internasjonal transport","Kun farlig gods"],c:1,e:"EU-forordning 561/2006 gjelder kun kjøretøy over 3500 kg. Varebiler til 3500 kg er unntatt."},en:{t:"T004: Training & Driving",q:"Does EU Regulation 561/2006 on driving and rest times apply to vans under 3500 kg?",o:["Yes – all motor vehicles","No – only vehicles over 3500 kg","Yes – international only","Dangerous goods only"],c:1,e:"EU Regulation 561/2006 applies only to vehicles over 3500 kg. Vans up to 3500 kg are exempt."},ar:{t:"T004: التدريب والقيادة",q:"هل تنطبق لائحة الاتحاد الأوروبي 561/2006 على الشاحنات الخفيفة دون 3500 كغ؟",o:["نعم – جميع المركبات الآلية","لا – للمركبات فوق 3500 كغ فقط","نعم – الدولية فقط","البضائع الخطرة فقط"],c:1,e:"تنطبق لائحة 561/2006 فقط على المركبات التي تتجاوز 3500 كغ. الشاحنات الخفيفة معفاة."}},
-    {no:{t:"T006: Foretaksformer",q:"Hva kjennetegner et aksjeselskap (AS)?",o:["Ubegrenset personlig ansvar","Begrenset ansvar – eierne risikerer kun innskutt kapital","Krever minst 10 aksjonærer","Skattefritt overskudd"],c:1,e:"I et AS er eiernes ansvar begrenset til innskutt kapital. Minimum aksjekapital er 30 000 NOK."},en:{t:"T006: Business Forms",q:"What characterises a limited company (AS)?",o:["Unlimited personal liability","Limited liability – owners risk only invested capital","Requires 10+ shareholders","Tax-free profits"],c:1,e:"In an AS, owners' liability is limited to invested capital. Minimum share capital is NOK 30,000."},ar:{t:"T006: أشكال الشركات",q:"ما الذي يميز الشركة المساهمة المحدودة؟",o:["مسؤولية شخصية غير محدودة","مسؤولية محدودة – المالكون يخاطرون برأس مالهم فقط","تستلزم 10 مساهمين+","أرباح معفاة من الضريبة"],c:1,e:"في الشركة المساهمة، مسؤولية المالكين محدودة برأس مال الأسهم المستثمَر. الحد الأدنى 30,000 كرونة."}},
-    {no:{t:"T008: Skatter",q:"Hva er forskuddstrekk og hvem er ansvarlig for å gjennomføre det?",o:["Frivillig pensjonsordning","Skattetrekk arbeidsgiver lovpålagt trekker fra ansattes lønn og innbetaler til Skatteetaten","MVA trukket fra fakturaer","Skatt arbeidsgiver betaler av eget overskudd"],c:1,e:"Forskuddstrekk er skatten arbeidsgiver lovpålagt trekker fra arbeidstakers lønn og innbetaler til Skatteetaten."},en:{t:"T008: Taxes",q:"What is advance tax withholding and who is responsible?",o:["A voluntary pension scheme","Tax employers must deduct from employees' wages and pay to the Tax Administration","VAT on invoices","Tax on the employer's own profits"],c:1,e:"Advance tax withholding is the tax employers must legally deduct from employees' wages and pay to the Tax Administration."},ar:{t:"T008: الضرائب",q:"ما الاستقطاع الضريبي المسبق ومن المسؤول عنه؟",o:["نظام تقاعد طوعي","ضريبة يُلزَم صاحب العمل بخصمها من رواتب الموظفين وتحويلها للإدارة الضريبية","ضريبة القيمة المضافة على الفواتير","ضريبة أرباح صاحب العمل الخاصة"],c:1,e:"الاستقطاع المسبق هو الضريبة التي يُلزَم صاحب العمل بخصمها من رواتب الموظفين وتحويلها للإدارة الضريبية."}},
-    {no:{t:"T009: Avgifter",q:"Hva er den alminnelige MVA-satsen i Norge, og hvilken sats gjelder for persontransport?",o:["20 % standard; 12 % persontransport","25 % standard; 12 % persontransport","25 % for begge","Persontransport er MVA-fritatt"],c:1,e:"Alminnelig MVA-sats er 25 %. Persontransport (taxi, drosje) har redusert sats 12 %."},en:{t:"T009: VAT & Fees",q:"What is the standard VAT rate in Norway and what rate applies to passenger transport?",o:["20% standard; 12% passenger","25% standard; 12% passenger","25% for both","Passenger transport is VAT-exempt"],c:1,e:"Standard VAT rate is 25%. Passenger transport (taxi, minicab) has a reduced rate of 12%."},ar:{t:"T009: الرسوم وضريبة القيمة المضافة",q:"ما معدل ضريبة القيمة المضافة القياسي في النرويج وما المعدل المنطبق على نقل الركاب؟",o:["20٪ قياسي؛ 12٪ نقل الركاب","25٪ قياسي؛ 12٪ نقل الركاب","25٪ للاثنين","نقل الركاب معفى من ضريبة القيمة المضافة"],c:1,e:"معدل ضريبة القيمة المضافة القياسي 25٪. نقل الركاب (التاكسي) له معدل مخفض 12٪."}},
-    {no:{t:"T001: Yrkestransportloven",q:"Hva skjer dersom en virksomhet driver godstransport mot vederlag uten løyve?",o:["Ingenting – det er uproblematisk","Det kan medføre bøter, inndragning av kjøretøy og straffeansvar etter yrkestransportlova","Kun en advarsel fra Statens vegvesen","Løyvekravet gjelder bare for utenlandske transportører"],c:1,e:"Ulovlig godstransport uten løyve er straffbart etter yrkestransportlova § 35 og kan medføre bøter og inndragning av kjøretøy."},en:{t:"T001: Transport Law",q:"What happens if a business carries goods for reward without a licence?",o:["Nothing – it is unproblematic","It can result in fines, vehicle confiscation and criminal liability under the Transport Act","Only a warning from the Roads Administration","The licence requirement only applies to foreign carriers"],c:1,e:"Illegal goods transport without a licence is a criminal offence under the Transport Act §35 and can result in fines and vehicle confiscation."},ar:{t:"T001: قانون النقل",q:"ماذا يحدث إذا مارست شركة نقل البضائع بأجر دون رخصة؟",o:["لا شيء – لا مشكلة","قد يترتب عليه غرامات ومصادرة المركبة ومسؤولية جنائية بموجب قانون النقل","تحذير فقط من إدارة الطرق","اشتراط الرخصة ينطبق على الناقلين الأجانب فقط"],c:1,e:"نقل البضائع غير القانوني دون رخصة يُعدّ جريمة جنائية بموجب المادة 35 من قانون النقل ويمكن أن يؤدي إلى غرامات ومصادرة المركبة."}},
-    {no:{t:"T001: Yrkestransportloven",q:"Hva er et løyvekort, og hva må sjåføren gjøre med det under kjøring?",o:["Det er sjåfør-ID og kan ligge hjemme","Det er en bekreftet kopi av løyvet som skal medbringes i kjøretøyet og fremvises på forespørsel under veikontroll","Det er kun relevant ved grensepassering","Det er det samme som sjåførens førerkort"],c:1,e:"Løyvekortet er en bekreftet kopi av løyvet som skal medbringes i kjøretøyet og fremvises for kontrollmyndigheter på forespørsel, jf. yrkestransportforskriften § 4b."},en:{t:"T001: Transport Law",q:"What is a licence card and what must the driver do with it during a journey?",o:["It is driver ID and can be left at home","It is a certified copy of the licence that must be carried in the vehicle and produced on request during roadside checks","It is only relevant at border crossings","It is the same as the driver's driving licence"],c:1,e:"The licence card is a certified copy of the licence that must be carried in the vehicle and produced for inspection authorities on request, per the Transport Regulations §4b."},ar:{t:"T001: قانون النقل",q:"ما هي بطاقة الرخصة وما الذي يجب على السائق فعله بها أثناء القيادة؟",o:["هي هوية السائق ويمكن تركها في المنزل","هي نسخة مصدقة من الرخصة يجب حملها في المركبة وتقديمها عند الطلب أثناء نقاط التفتيش","ذات صلة عند عبور الحدود فقط","هي نفس رخصة قيادة السائق"],c:1,e:"بطاقة الرخصة هي نسخة مصدقة من الرخصة يجب حملها في المركبة وتقديمها لجهات الرقابة عند الطلب وفق اللوائح التنفيذية."}},
-    {no:{t:"T001: Yrkestransportloven",q:"Hva innebærer vandelskravet for løyvehavere?",o:["Løyvehaver må ha minst 5 år uten straffedommer","Løyvehaver og transportleder skal ikke ha alvorlige brudd på transportregelverket, arbeidsmiljølovgivningen, skattelovgivningen eller straffeloven","Kun at løyvehaver har norsk statsborgerskap","Vandelskravet gjelder kun ved søknad om internasjonalt løyve"],c:1,e:"Vandelskravet i yrkestransportlova § 4 og forordning 1071/2009 art. 6 innebærer at løyvehaver og transportleder ikke har alvorlige brudd på disse lovområdene. Brudd kan føre til tilbakekall av løyvet."},en:{t:"T001: Transport Law",q:"What does the good repute requirement mean for licence holders?",o:["Licence holder must have at least 5 years without criminal convictions","Licence holder and transport manager must not have serious violations of transport rules, labour law, tax law or criminal law","Only that the licence holder has Norwegian citizenship","The good repute requirement only applies when applying for an international licence"],c:1,e:"The good repute requirement in the Transport Act §4 and Regulation 1071/2009 Art.6 means licence holders and transport managers must not have serious violations in these legal areas. Violations can lead to revocation."},ar:{t:"T001: قانون النقل",q:"ما معنى اشتراط السمعة الطيبة لأصحاب الرخص؟",o:["يجب أن يمر 5 سنوات على الأقل بدون إدانات جنائية","يجب ألا يكون صاحب الرخصة ومدير النقل قد ارتكبا مخالفات جسيمة لقواعد النقل وقانون العمل والضرائب والقانون الجنائي","الاشتراط هو الجنسية النرويجية فقط","ينطبق الاشتراط عند التقدم للرخص الدولية فقط"],c:1,e:"يعني اشتراط السمعة الطيبة وفق المادة 4 من قانون النقل ولائحة 1071/2009 المادة 6 ألا يكون صاحب الرخصة ومدير النقل قد ارتكبا مخالفات جسيمة في هذه المجالات القانونية. المخالفات قد تؤدي إلى سحب الرخصة."}},
-    {no:{t:"T002: Vegtrafikkloven",q:"Hva er fartsgrensen i tettbygd strøk dersom ingen annen grense er skiltet?",o:["60 km/t","50 km/t","30 km/t","70 km/t"],c:1,e:"Etter vtrl. § 6 og skiltforskriften er den generelle fartsgrensen 50 km/t i tettbygd strøk når annen grense ikke er fastsatt ved skilt."},en:{t:"T002: Road Traffic Act",q:"What is the speed limit in built-up areas where no other limit is signed?",o:["60 km/h","50 km/h","30 km/h","70 km/h"],c:1,e:"Under the Road Traffic Act §6 and sign regulations, the general speed limit is 50 km/h in built-up areas when no other limit is indicated by a sign."},ar:{t:"T002: قانون السير",q:"ما حد السرعة في المناطق العمرانية عندما لا تُحدد أي سرعة أخرى؟",o:["60 كم/ساعة","50 كم/ساعة","30 كم/ساعة","70 كم/ساعة"],c:1,e:"بموجب المادة 6 من قانون السير ولوائح اللافتات، يكون حد السرعة العام 50 كم/ساعة في المناطق العمرانية عند عدم تحديد حد آخر بلافتة."}},
-    {no:{t:"T002: Vegtrafikkloven",q:"Hvem har vikeplikt i et veikryss uten skilt eller signal, etter vegtrafikkloven § 7?",o:["Den som kommer fra venstre","Den som kommer fra høyre","Den som kjører på minst trafikkert vei","Den som kjører saktere"],c:0,e:"Etter vtrl. § 7 (høyreregelen) har den som kommer fra venstre vikeplikt overfor kjøretøy som kommer fra høyre, i kryss uten skilt eller signal."},en:{t:"T002: Road Traffic Act",q:"Who must give way at an unmarked intersection with no signs or signals, under Road Traffic Act §7?",o:["The driver coming from the left","The driver coming from the right","The driver on the less busy road","The driver going more slowly"],c:0,e:"Under §7 (the give-way-to-the-right rule), the driver approaching from the left must give way to vehicles approaching from the right at an unmarked intersection."},ar:{t:"T002: قانون السير",q:"من له الأولوية في تقاطع غير مُعلّم بدون إشارات، وفق المادة 7 من قانون السير؟",o:["السائق القادم من اليسار","السائق القادم من اليمين","السائق على الطريق الأقل ازدحاماً","السائق الأبطأ"],c:0,e:"بموجب المادة 7 (قاعدة الأولوية لليمين)، يجب على السائق القادم من اليسار إعطاء الأولوية للمركبات القادمة من اليمين عند التقاطع غير المُعلّم."}},
-    {no:{t:"T002: Vegtrafikkloven",q:"Hva er strafferammen for kjøring i ruspåvirket tilstand (over 1,5 ‰) etter vegtrafikkloven?",o:["Kun forenklet forelegg","Betinget fengsel inntil 1 år","Ubetinget fengsel inntil 1 år eller fengsel inntil 2 år ved skjerpende omstendigheter","Kun inndragning av kjøretøy"],c:2,e:"Vtrl. § 31 og § 22: promillekjøring over 1,5 ‰ kan medføre ubetinget fengsel. Ved skjerpende omstendigheter (ulykke, skade) kan straffen gå opp til 2 år."},en:{t:"T002: Road Traffic Act",q:"What is the maximum sentence for driving under the influence of alcohol (over 1.5 ‰) under the Road Traffic Act?",o:["Only a fixed penalty notice","Suspended imprisonment up to 1 year","Unconditional imprisonment up to 1 year or up to 2 years in aggravated circumstances","Only vehicle confiscation"],c:2,e:"§31 and §22: drink driving above 1.5 ‰ can lead to unconditional imprisonment. With aggravating circumstances (accident, injury) the sentence can reach 2 years."},ar:{t:"T002: قانون السير",q:"ما الحد الأقصى للعقوبة على القيادة تحت تأثير الكحول (أكثر من 1.5 ‰) وفق قانون السير؟",o:["غرامة مبسطة فقط","سجن موقوف التنفيذ لمدة سنة","سجن فعلي لمدة سنة أو سنتين في ظروف مشددة","مصادرة المركبة فقط"],c:2,e:"المادتان 31 و22: قيادة السيارة بنسبة كحول تتجاوز 1.5 ‰ قد تؤدي إلى السجن الفعلي. مع ظروف مشددة (حادث، إصابة) قد تصل العقوبة إلى سنتين."}},
-    {no:{t:"T002: Vegtrafikkloven",q:"Hva er den generelle fartsgrensen utenfor tettbygd strøk i Norge?",o:["90 km/t","80 km/t","70 km/t","100 km/t"],c:1,e:"Etter vtrl. § 6 er den alminnelige fartsgrensen 80 km/t utenfor tettbygd strøk når annen grense ikke er skiltet."},en:{t:"T002: Road Traffic Act",q:"What is the general speed limit outside built-up areas in Norway?",o:["90 km/h","80 km/h","70 km/h","100 km/h"],c:1,e:"Under Road Traffic Act §6, the general speed limit is 80 km/h outside built-up areas when no other limit is indicated."},ar:{t:"T002: قانون السير",q:"ما حد السرعة العام خارج المناطق العمرانية في النرويج؟",o:["90 كم/ساعة","80 كم/ساعة","70 كم/ساعة","100 كم/ساعة"],c:1,e:"بموجب المادة 6 من قانون السير، حد السرعة العام 80 كم/ساعة خارج المناطق العمرانية عند عدم تحديد حد آخر."}},
-    {no:{t:"T003: Arbeidsmiljø og ferie",q:"Hvor mange feriedager har arbeidstakere i Norge lovfestet rett til?",o:["21 virkedager (3 uker)","25 virkedager (5 uker)","20 virkedager","28 virkedager"],c:1,e:"Ferieloven § 5 gir alle arbeidstakere rett til 25 virkedager ferie per år (5 uker). Lørdag regnes som virkedag i ferieloven."},en:{t:"T003: Labour & Holiday Law",q:"How many days of annual leave are employees in Norway legally entitled to?",o:["21 working days (3 weeks)","25 working days (5 weeks)","20 working days","28 working days"],c:1,e:"The Holiday Act §5 gives all employees the right to 25 working days of holiday per year (5 weeks). Saturday counts as a working day under the Holiday Act."},ar:{t:"T003: قانون العمل والإجازات",q:"كم يوم إجازة سنوية مكفولة قانونياً للموظفين في النرويج؟",o:["21 يوم عمل (3 أسابيع)","25 يوم عمل (5 أسابيع)","20 يوم عمل","28 يوم عمل"],c:1,e:"المادة 5 من قانون الإجازات تمنح جميع الموظفين الحق في 25 يوم عمل إجازة سنوياً (5 أسابيع). يُحتسب يوم السبت يوم عمل في قانون الإجازات."}},
-    {no:{t:"T003: Arbeidsmiljø og ferie",q:"Hva er den øvre grensen for samlet arbeidstid inkludert overtid per uke etter arbeidsmiljøloven?",o:["48 timer per uke","60 timer per uke","45 timer per uke","50 timer per uke"],c:1,e:"Aml. § 10-6: Samlet arbeidstid inkludert overtid skal ikke overstige 60 timer per uke. Overtid er kun tillatt i særlige situasjoner og med arbeidstakers samtykke."},en:{t:"T003: Labour & Holiday Law",q:"What is the maximum total working time including overtime per week under the Working Environment Act?",o:["48 hours per week","60 hours per week","45 hours per week","50 hours per week"],c:1,e:"§10-6: Total working time including overtime must not exceed 60 hours per week. Overtime is only permitted in special circumstances and with the employee's consent."},ar:{t:"T003: قانون العمل والإجازات",q:"ما الحد الأقصى لإجمالي ساعات العمل بما في ذلك العمل الإضافي في الأسبوع وفق قانون بيئة العمل؟",o:["48 ساعة في الأسبوع","60 ساعة في الأسبوع","45 ساعة في الأسبوع","50 ساعة في الأسبوع"],c:1,e:"المادة 10-6: يجب ألا يتجاوز إجمالي ساعات العمل بما فيها العمل الإضافي 60 ساعة في الأسبوع. يُسمح بالعمل الإضافي فقط في ظروف خاصة وبموافقة الموظف."}},
-    {no:{t:"T003: Arbeidsmiljø og ferie",q:"Hva er kravet til skriftlig arbeidsavtale i Norge?",o:["Bare nødvendig ved ansettelse over 6 måneder","Alle arbeidstakere har rett på skriftlig arbeidsavtale fra første dag, jf. aml. § 14-5","Kun krav ved ansettelse av utenlandske arbeidstakere","Skriftlig avtale er valgfritt – muntlig er tilstrekkelig"],c:1,e:"Aml. § 14-5: Alle arbeidstakere har rett til skriftlig arbeidsavtale. Avtalen skal foreligge senest innen en måned etter arbeidsforholdets start for ansettelsesforhold over en måned."},en:{t:"T003: Labour & Holiday Law",q:"What is the requirement for a written employment contract in Norway?",o:["Only necessary for employment exceeding 6 months","All employees have the right to a written employment contract from the first day, per §14-5","Only required when employing foreign workers","Written contract is optional – verbal is sufficient"],c:1,e:"§14-5: All employees have the right to a written employment contract. The contract must be in place no later than one month after the start of employment for contracts lasting more than one month."},ar:{t:"T003: قانون العمل والإجازات",q:"ما اشتراط عقد العمل المكتوب في النرويج؟",o:["ضروري فقط للتوظيف الذي يتجاوز 6 أشهر","لجميع الموظفين الحق في عقد عمل مكتوب من اليوم الأول وفق المادة 14-5","مطلوب فقط عند توظيف عمال أجانب","العقد المكتوب اختياري – الشفهي كافٍ"],c:1,e:"المادة 14-5: لجميع الموظفين الحق في عقد عمل مكتوب. يجب توفر العقد في موعد أقصاه شهر من بداية علاقة العمل للعقود التي تتجاوز شهراً."}},
-    {no:{t:"T003: Arbeidsmiljø og ferie",q:"Hva er oppsigelsesvern ved sykdom etter arbeidsmiljøloven?",o:["Ingen særskilt vern ved sykdom","Arbeidstaker kan ikke sies opp de første 12 månedene ved sykefravær forårsaket av arbeidet, jf. aml. § 15-8","Sykdom gir aldri oppsigelsesrett til arbeidsgiver","Kun 3 måneders oppsigelsesvern"],c:1,e:"Aml. § 15-8: Arbeidstaker som er borte fra arbeidet pga. ulykke eller sykdom, kan ikke sies opp de første 12 månedene etter at arbeidsuførheten inntrådte."},en:{t:"T003: Labour & Holiday Law",q:"What protection from dismissal applies during sick leave under the Working Environment Act?",o:["No special protection during illness","An employee cannot be dismissed during the first 12 months of sick leave caused by the job, per §15-8","Illness never gives the employer the right to dismiss","Only 3 months of dismissal protection"],c:1,e:"§15-8: An employee absent from work due to accident or illness cannot be dismissed during the first 12 months after the incapacity began."},ar:{t:"T003: قانون العمل والإجازات",q:"ما الحماية من الفصل أثناء الإجازة المرضية وفق قانون بيئة العمل؟",o:["لا حماية خاصة أثناء المرض","لا يمكن فصل الموظف خلال أول 12 شهراً من الإجازة المرضية الناجمة عن العمل وفق المادة 15-8","المرض لا يمنح صاحب العمل حق الفصل أبداً","3 أشهر فقط من الحماية من الفصل"],c:1,e:"المادة 15-8: لا يمكن فصل الموظف الغائب عن العمل بسبب حادث أو مرض خلال أول 12 شهراً من بداية العجز."}},
-    {no:{t:"T004: Opplæring og kjøring",q:"Hva er de viktigste kravene for at gods skal anses som forsvarlig sikret på et kjøretøy?",o:["Godset behøver ikke sikres hvis turen er kort","Godset skal sikres slik at det ikke forskyver seg, faller av eller forårsaker farlig situasjon, jf. vegtrl. og lasteforskriften","Kun kjøretøyets eier er ansvarlig for lastsikring","Stropper er frivillig ved kjøring under 50 km/t"],c:1,e:"Forskrift om bruk av kjøretøy og vtrl. § 3 stiller krav om at gods skal sikres slik at det ikke kan forflytte seg, falle av eller forårsake fare. Sjåfør og eier er medansvarlige."},en:{t:"T004: Training & Driving",q:"What are the main requirements for cargo to be considered properly secured on a vehicle?",o:["Cargo doesn't need securing if the journey is short","Cargo must be secured so it cannot shift, fall off or cause a dangerous situation, per load-securing regulations","Only the vehicle owner is responsible for load securing","Straps are optional when driving under 50 km/h"],c:1,e:"Vehicle use regulations and Road Traffic Act §3 require that cargo must be secured so it cannot shift, fall off or cause danger. Both driver and owner share responsibility."},ar:{t:"T004: التدريب والقيادة",q:"ما الاشتراطات الرئيسية لاعتبار البضائع مؤمنة بشكل صحيح على المركبة؟",o:["البضائع لا تحتاج تأميناً إذا كانت الرحلة قصيرة","يجب تأمين البضائع بحيث لا تتزحزح أو تسقط أو تسبب وضعاً خطيراً","المالك فقط مسؤول عن تأمين الحمولة","الأحزمة اختيارية عند القيادة بأقل من 50 كم/ساعة"],c:1,e:"تشترط لوائح استخدام المركبات والمادة 3 من قانون السير تأمين البضائع بحيث لا تتحرك أو تسقط أو تسبب خطراً. السائق والمالك مسؤولان مشتركان."}},
-    {no:{t:"T004: Opplæring og kjøring",q:"Hva er alderskravet og helsekravet for å inneha gyldig førerkort klasse B?",o:["18 år, ingen helsekrav","Minimum 18 år og tilfredsstillende helse (syn, kognisjon mv.) etter forskrift om førerkort","17 år med ledsager, 18 år alene; ingen helsekrav","16 år for lett varebil"],c:1,e:"Forskrift om førerkort: Klasse B krever minimum 18 år (17 for øvelseskjøring) og tilfredsstillende helse etter helsekravforskriften, inkludert synsstyrke og kognitive funksjoner."},en:{t:"T004: Training & Driving",q:"What are the age and health requirements for a valid class B driving licence?",o:["18 years, no health requirements","Minimum 18 years and satisfactory health (vision, cognition etc.) per driving licence regulations","17 years with supervisor, 18 alone; no health requirements","16 years for a light van"],c:1,e:"Driving Licence Regulations: Class B requires a minimum of 18 years (17 for supervised driving) and satisfactory health per health requirements regulations, including vision and cognitive functions."},ar:{t:"T004: التدريب والقيادة",q:"ما اشتراطات السن والصحة للحصول على رخصة قيادة صالحة من الفئة B؟",o:["18 عاماً، لا اشتراطات صحية","الحد الأدنى 18 عاماً وصحة مرضية (بصر وإدراك وما إلى ذلك) وفق لوائح رخصة القيادة","17 عاماً مع مرافق، 18 عاماً منفرداً؛ لا اشتراطات صحية","16 عاماً للشاحنة الخفيفة"],c:1,e:"لوائح رخصة القيادة: تستلزم الفئة B الحد الأدنى 18 عاماً (17 للقيادة تحت الإشراف) وصحة مرضية وفق لوائح الاشتراطات الصحية، بما في ذلك البصر والوظائف المعرفية."}},
-    {no:{t:"T005: Internkontroll/HMS",q:"Hva er de viktigste elementene i et internkontrollsystem etter internkontrollforskriften?",o:["Kun en brannøvelse per år","Mål og ansvar, risikovurdering, prosedyrer og rutiner, opplæring og dokumentasjon, avviksbehandling og revisjon","Kun skriftlig ansettelseskontrakt og verneutstyr","HMS-arbeid er bare nødvendig for bedrifter med over 10 ansatte"],c:1,e:"Internkontrollforskriften § 5 krever at virksomheter systematisk dokumenterer mål, risikovurdering, prosedyrer, opplæring og avviksbehandling. Dette er selve kjernen i et forsvarlig HMS-system."},en:{t:"T005: Internal Control/HSE",q:"What are the key elements of an internal control system under the Internal Control Regulation?",o:["Only one fire drill per year","Goals and responsibilities, risk assessment, procedures and routines, training and documentation, incident handling and review","Only written employment contracts and protective equipment","HSE work is only required for businesses with more than 10 employees"],c:1,e:"Internal Control Regulation §5 requires businesses to systematically document goals, risk assessment, procedures, training and incident handling. This is the core of a proper HSE system."},ar:{t:"T005: الرقابة الداخلية والسلامة",q:"ما العناصر الرئيسية لنظام الرقابة الداخلية وفق لائحة الرقابة الداخلية؟",o:["تدريب إطفاء واحد فقط في السنة","الأهداف والمسؤوليات وتقييم المخاطر والإجراءات والتدريب والتوثيق ومعالجة الانحرافات والمراجعة","عقود عمل مكتوبة ومعدات وقاية فقط","عمل السلامة مطلوب فقط للشركات التي تضم أكثر من 10 موظفين"],c:1,e:"المادة 5 من لائحة الرقابة الداخلية تستلزم من الشركات توثيق منهجي للأهداف وتقييم المخاطر والإجراءات والتدريب ومعالجة الانحرافات. هذا هو جوهر نظام السلامة السليم."}},
-    {no:{t:"T005: Internkontroll/HMS",q:"Hvem har det overordnede ansvaret for HMS-arbeidet i en virksomhet?",o:["Verneombudet","Den øverste ledelsen (daglig leder/eier)","Arbeidstakerne i fellesskap","Arbeidstilsynet"],c:1,e:"Internkontrollforskriften og aml. § 2-1: Arbeidsgiver har det overordnede ansvaret for HMS-arbeidet. Daglig leder/eier kan ikke delegere bort dette grunnleggende ansvaret."},en:{t:"T005: Internal Control/HSE",q:"Who has overall responsibility for HSE work in a business?",o:["The safety delegate","Senior management (general manager/owner)","The employees collectively","The Labour Inspection Authority"],c:1,e:"The Internal Control Regulation and §2-1: The employer has overall responsibility for HSE work. The general manager/owner cannot delegate away this fundamental responsibility."},ar:{t:"T005: الرقابة الداخلية والسلامة",q:"من يتحمل المسؤولية العليا عن عمل السلامة والصحة المهنية في الشركة؟",o:["مندوب السلامة","الإدارة العليا (المدير العام/المالك)","الموظفون بشكل جماعي","هيئة تفتيش العمل"],c:1,e:"لائحة الرقابة الداخلية والمادة 2-1: صاحب العمل يتحمل المسؤولية العليا عن عمل السلامة. لا يمكن للمدير العام/المالك التنصل من هذه المسؤولية الأساسية."}},
-    {no:{t:"T006: Foretaksformer",q:"Hva er en stille deltaker i et kommandittselskap (KS)?",o:["En ansatt uten lederstilling","En deltaker med begrenset ansvar som ikke tar del i den daglige ledelsen, og risikerer kun innskutt kapital","En aksjonær i et aksjeselskap","En person som arbeider uten lønn i virksomheten"],c:1,e:"I et kommandittselskap (KS) er stille deltakere (kommandittister) ansvarlige kun for innskutt kapital. Komplementar har derimot ubegrenset personlig ansvar og styrer virksomheten."},en:{t:"T006: Business Forms",q:"What is a silent partner (stille deltaker) in a limited partnership (KS)?",o:["An employee without a management position","A partner with limited liability who does not participate in daily management and risks only their invested capital","A shareholder in a limited company","A person who works without pay in the business"],c:1,e:"In a limited partnership (KS), silent partners (kommandittister) are only liable for their invested capital. The general partner (komplementar) has unlimited personal liability and manages the business."},ar:{t:"T006: أشكال الشركات",q:"ما هو الشريك الصامت في شراكة محدودة (KS)؟",o:["موظف بدون منصب إداري","شريك بمسؤولية محدودة لا يشارك في الإدارة اليومية ويخاطر برأس ماله المستثمر فقط","مساهم في شركة مساهمة","شخص يعمل بدون راتب في الشركة"],c:1,e:"في الشراكة المحدودة (KS)، يكون الشركاء الصامتون مسؤولين فقط عن رأس مالهم المستثمر. أما الشريك العام (komplementar) فلديه مسؤولية شخصية غير محدودة ويدير الشركة."}},
-    {no:{t:"T006: Foretaksformer",q:"Hva er krav om daglig leder i norske aksjeselskaper?",o:["Alle AS må alltid ha en daglig leder","AS med over 3 millioner i aksjekapital plikter å ha daglig leder; andre AS kan velge dette","Daglig leder er kun et krav for børsnoterte selskaper","Styret overtar daglig leders funksjoner automatisk"],c:1,e:"Aksjeloven § 6-2: AS med aksjekapital på 3 millioner kroner eller mer plikter å ha daglig leder. Mindre AS kan velge å ha daglig leder, men styret kan da utøve rollen."},en:{t:"T006: Business Forms",q:"What is the requirement for a general manager (daglig leder) in Norwegian limited companies?",o:["All AS must always have a general manager","AS with share capital over 3 million must have a general manager; other AS may choose to have one","A general manager is only required for listed companies","The board automatically assumes the general manager's functions"],c:1,e:"Companies Act §6-2: AS with share capital of NOK 3 million or more must have a general manager. Smaller AS may choose to have one, and the board can then exercise the role."},ar:{t:"T006: أشكال الشركات",q:"ما اشتراط وجود مدير عام في الشركات المساهمة النرويجية؟",o:["يجب على جميع الشركات المساهمة دائماً الحصول على مدير عام","الشركات المساهمة برأس مال يتجاوز 3 ملايين ملزمة بمدير عام؛ وغيرها يمكنها اختيار ذلك","المدير العام مطلوب فقط للشركات المدرجة في البورصة","يتولى مجلس الإدارة تلقائياً مهام المدير العام"],c:1,e:"قانون الشركات المادة 6-2: الشركات المساهمة برأس مال 3 ملايين كرونة أو أكثر ملزمة بمدير عام. الشركات الأصغر يمكنها الاختيار، ويمكن لمجلس الإدارة حينها تولي الدور."}},
-    {no:{t:"T007: Økonomiforståelse",q:"Hva er likviditet og hva betyr en likviditetskrise?",o:["Likviditet er total formue; en krise betyr at formuen er lav","Likviditet er bedriftens evne til å betale forpliktelser ved forfall; en krise betyr at betalingsevnen svikter selv om egenkapitalen er positiv","Likviditet og soliditet er det samme begrepet","Likviditetskrise betyr alltid at selskapet er konkurs"],c:1,e:"Likviditet handler om betalingsevne her og nå – ikke totalformue. En bedrift kan ha positiv egenkapital men gå konkurs pga. likviditetsproblemer (inntekter kommer ikke inn i tide til å dekke utgifter)."},en:{t:"T007: Financial Understanding",q:"What is liquidity and what does a liquidity crisis mean?",o:["Liquidity is total assets; a crisis means assets are low","Liquidity is the business's ability to pay its obligations when due; a crisis means payment capacity fails even though equity is positive","Liquidity and solvency are the same concept","A liquidity crisis always means the company is bankrupt"],c:1,e:"Liquidity is about payment capacity right now – not total assets. A business can have positive equity but go bankrupt due to liquidity problems (income doesn't arrive in time to cover expenses)."},ar:{t:"T007: الفهم المالي",q:"ما هي السيولة وما معنى أزمة السيولة؟",o:["السيولة هي إجمالي الأصول؛ الأزمة تعني أن الأصول منخفضة","السيولة هي قدرة الشركة على سداد التزاماتها عند الاستحقاق؛ الأزمة تعني فشل القدرة على السداد حتى لو كانت حقوق الملكية إيجابية","السيولة والملاءة المالية هما نفس المفهوم","أزمة السيولة دائماً تعني إفلاس الشركة"],c:1,e:"السيولة تتعلق بالقدرة على الدفع الآن – وليس بإجمالي الأصول. يمكن للشركة أن تكون لديها حقوق ملكية إيجابية لكنها تفلس بسبب مشاكل السيولة (الإيرادات لا تصل في الوقت المناسب لتغطية النفقات)."}},
-    {no:{t:"T007: Økonomiforståelse",q:"Hva er dekningsbidrag i en virksomhet?",o:["Overskudd etter alle kostnader","Salgsinntekt minus variable kostnader; viser hva som er igjen til å dekke faste kostnader","Total omsetning i perioden","Summen av alle faste kostnader"],c:1,e:"Dekningsbidrag (DB) = Salgsinntekter − Variable kostnader. Det forteller om det er lønnsomt å produsere/selge enheten og om bidraget dekker de faste kostnadene (husleie, lønn til fast ansatte mv.)."},en:{t:"T007: Financial Understanding",q:"What is a contribution margin in a business?",o:["Profit after all costs","Sales revenue minus variable costs; shows what is left to cover fixed costs","Total turnover in the period","The sum of all fixed costs"],c:1,e:"Contribution margin = Sales revenue − Variable costs. It shows whether it is profitable to produce/sell the unit and whether the contribution covers fixed costs (rent, permanent staff wages etc.)."},ar:{t:"T007: الفهم المالي",q:"ما هو هامش المساهمة في الشركة؟",o:["الربح بعد جميع التكاليف","إيرادات المبيعات ناقص التكاليف المتغيرة؛ يُظهر ما تبقى لتغطية التكاليف الثابتة","إجمالي المبيعات في الفترة","مجموع جميع التكاليف الثابتة"],c:1,e:"هامش المساهمة = إيرادات المبيعات − التكاليف المتغيرة. يُظهر ما إذا كان من المربح إنتاج/بيع الوحدة وما إذا كان الهامش يغطي التكاليف الثابتة (الإيجار ورواتب الموظفين الدائمين وما إلى ذلك)."}},
-    {no:{t:"T008: Skatter",q:"Hva er skattepliktig inntekt for næringsdrivende?",o:["Kun lønn og kapitalgevinst","All inntekt fra næringsvirksomhet, lønnsinntekt og kapitalinntekt etter fradrag for tillatte kostnader, jf. skatteloven § 5-1","Kun overskudd i aksjeselskapet","Næringsdrivende betaler ikke skatt før etter 3 år"],c:1,e:"Skatteloven § 5-1: Skattepliktig inntekt er alle fordeler vunnet ved arbeid, kapital og virksomhet. Næringsdrivende kan trekke fra legitimerte driftskostnader som drivstoff, vedlikehold og forsikring."},en:{t:"T008: Taxes",q:"What is taxable income for the self-employed?",o:["Only wages and capital gains","All income from business activity, employment income and capital income after deduction of permitted costs, per the Tax Act §5-1","Only profits in the limited company","Self-employed do not pay tax until after 3 years"],c:1,e:"Tax Act §5-1: Taxable income includes all benefits gained through work, capital and business activity. Self-employed persons can deduct legitimate operating costs such as fuel, maintenance and insurance."},ar:{t:"T008: الضرائب",q:"ما هو الدخل الخاضع للضريبة للعاملين لحسابهم الخاص؟",o:["الرواتب ومكاسب رأس المال فقط","جميع الدخل من النشاط التجاري ودخل التوظيف ودخل رأس المال بعد خصم التكاليف المسموح بها وفق قانون الضرائب المادة 5-1","الأرباح في الشركة المساهمة فقط","العاملون لحسابهم الخاص لا يدفعون ضريبة حتى بعد 3 سنوات"],c:1,e:"قانون الضرائب المادة 5-1: يشمل الدخل الخاضع للضريبة جميع المزايا المكتسبة من خلال العمل ورأس المال والنشاط التجاري. يمكن للعاملين لحسابهم الخاص خصم تكاليف التشغيل المشروعة كالوقود والصيانة والتأمين."}},
-    {no:{t:"T008: Skatter",q:"Hva er meldingsfristen for a-meldingen?",o:["Én gang per år – innen 31. januar","Den 5. i måneden etter utbetalingsmåneden","Kvartalsvis – 4 ganger per år","Kun ved ansettelse og oppsigelse"],c:1,e:"A-opplysningsloven § 4: A-meldingen skal sendes innen den 5. i måneden etter at lønnen er utbetalt. Alle arbeidsgivere plikter å rapportere lønn og skattetrekk månedlig."},en:{t:"T008: Taxes",q:"What is the deadline for the a-report (a-melding)?",o:["Once a year – by 31 January","The 5th of the month after the payment month","Quarterly – 4 times per year","Only when employing or terminating staff"],c:1,e:"The A-information Act §4: The a-report must be submitted by the 5th of the month after wages are paid. All employers must report wages and tax deductions monthly."},ar:{t:"T008: الضرائب",q:"ما الموعد النهائي للتقرير الشهري (a-melding)؟",o:["مرة واحدة في السنة – بحلول 31 يناير","اليوم الخامس من الشهر التالي لشهر الدفع","ربع سنوي – 4 مرات في السنة","فقط عند التوظيف والإنهاء"],c:1,e:"المادة 4 من قانون المعلومات A: يجب تقديم التقرير الشهري بحلول اليوم الخامس من الشهر التالي لدفع الرواتب. يجب على جميع أصحاب العمل الإبلاغ عن الرواتب والاستقطاعات الضريبية شهرياً."}},
-    {no:{t:"T009: Avgifter",q:"Hva er arbeidsgiveravgiftens formål og hvem betaler den?",o:["Den betales av arbeidstaker for å finansiere syketrygd","Arbeidsgiver betaler avgift av lønn og godtgjørelser for å finansiere folketrygden","Det er en frivillig avgift som betales til kommunen","Kun foretak med over 5 ansatte betaler arbeidsgiveravgift"],c:1,e:"Arbeidsgiver betaler arbeidsgiveravgift (AGA) av lønn og godtgjørelser til ansatte. Satsen varierer etter geografisk sone (0 % i nordligste soner, 14,1 % i sentrale strøk). Inntektene finansierer folketrygden."},en:{t:"T009: VAT & Fees",q:"What is the purpose of employer's national insurance contributions and who pays them?",o:["Paid by employees to fund sick benefit","Employers pay contributions on wages and remuneration to fund the national insurance scheme","A voluntary contribution paid to the municipality","Only businesses with more than 5 employees pay employer contributions"],c:1,e:"Employers pay national insurance contributions (AGA) on wages and remuneration paid to employees. The rate varies by geographic zone (0% in the northernmost zones, 14.1% in central areas). The revenue funds the national insurance scheme."},ar:{t:"T009: الرسوم وضريبة القيمة المضافة",q:"ما الغرض من مساهمات صاحب العمل في التأمين الوطني ومن يدفعها؟",o:["يدفعها الموظفون لتمويل مزايا المرض","يدفع أصحاب العمل مساهمات على الرواتب والمكافآت لتمويل نظام التأمين الوطني","مساهمة طوعية تُدفع للبلدية","الشركات التي تضم أكثر من 5 موظفين فقط تدفع مساهمات صاحب العمل"],c:1,e:"يدفع أصحاب العمل مساهمات التأمين الوطني (AGA) على الرواتب والمكافآت المدفوعة للموظفين. يتفاوت المعدل حسب المنطقة الجغرافية (0٪ في المناطق الشمالية، 14.1٪ في المناطق المركزية). العائدات تمول نظام التأمين الوطني."}},
-    {no:{t:"T009: Avgifter",q:"Hva er omregistreringsavgift og hvem betaler den?",o:["En avgift betalt av produsenten ved ny bil","En avgift som betales ved eierskifte av brukt motorvogn, betalt av ny eier","En årsavgift for alle kjøretøy","Kun relevant for næringskjøretøy"],c:1,e:"Omregistreringsavgiften betales ved eierskifte av brukt motorvogn. Avgiftens størrelse avhenger av kjøretøyets vekt og alder. Ny eier er ansvarlig for å betale avgiften."},en:{t:"T009: VAT & Fees",q:"What is the re-registration fee (omregistreringsavgift) and who pays it?",o:["A fee paid by the manufacturer for a new car","A fee paid when ownership of a used motor vehicle changes hands, paid by the new owner","An annual fee for all vehicles","Only relevant for commercial vehicles"],c:1,e:"The re-registration fee is paid when a used motor vehicle changes ownership. The fee amount depends on the vehicle's weight and age. The new owner is responsible for paying the fee."},ar:{t:"T009: الرسوم وضريبة القيمة المضافة",q:"ما هي رسوم إعادة التسجيل ومن يدفعها؟",o:["رسوم يدفعها المنتج للسيارة الجديدة","رسوم تُدفع عند نقل ملكية مركبة مستعملة، يدفعها المالك الجديد","رسوم سنوية لجميع المركبات","ذات صلة بالمركبات التجارية فقط"],c:1,e:"تُدفع رسوم إعادة التسجيل عند نقل ملكية مركبة مستعملة. يعتمد مبلغ الرسوم على وزن المركبة وعمرها. المالك الجديد مسؤول عن دفع الرسوم."}},
-    {no:{t:"T001: Yrkestransportloven",q:"Kan et varebilløyve overføres til en annen person eller virksomhet?",o:["Ja, ved salg av kjøretøyet følger løyvet med","Nei – løyvet er personlig/virksomhetsbundet og kan ikke overdras; ny søknad må sendes inn","Ja, men kun innen samme familie","Ja, ved betaling av overføringsgebyr til Statens vegvesen"],c:1,e:"Yrkestransportlova § 12: Løyvet er knyttet til den juridiske personen som fikk det tildelt og kan ikke overdras. Ved virksomhetsoverdragelse må ny søknad sendes."},en:{t:"T001: Transport Law",q:"Can a van licence be transferred to another person or business?",o:["Yes, when the vehicle is sold the licence goes with it","No – the licence is personal/business-specific and cannot be transferred; a new application must be submitted","Yes, but only within the same family","Yes, by paying a transfer fee to the Roads Administration"],c:1,e:"Transport Act §12: The licence is tied to the legal entity that was granted it and cannot be transferred. A new application must be submitted in case of business transfer."},ar:{t:"T001: قانون النقل",q:"هل يمكن نقل رخصة الشاحنة الخفيفة إلى شخص أو شركة أخرى؟",o:["نعم، عند بيع المركبة تنتقل الرخصة معها","لا – الرخصة مرتبطة بالشخص/الشركة ولا يمكن نقلها؛ يجب تقديم طلب جديد","نعم، لكن داخل العائلة فقط","نعم، بدفع رسوم النقل لإدارة الطرق"],c:1,e:"قانون النقل المادة 12: الرخصة مرتبطة بالكيان القانوني الذي مُنح إياه ولا يمكن نقلها. يجب تقديم طلب جديد في حالة نقل الشركة."},pl:{t:"T001: Prawo transportowe",q:"Czy licencja na transport busem może być przeniesiona na inną osobę lub firmę?",o:["Tak, przy sprzedaży pojazdu licencja przechodzi razem z nim","Nie – licencja jest przypisana do osoby/firmy i nie może być przeniesiona; należy złożyć nowy wniosek","Tak, ale tylko w obrębie tej samej rodziny","Tak, po uiszczeniu opłaty transferowej"],c:1,e:"Ustawa o transporcie §12: Licencja jest powiązana z podmiotem prawnym, któremu została przyznana i nie może być przeniesiona. W przypadku przekazania firmy należy złożyć nowy wniosek."}},
-    {no:{t:"T001: Yrkestransportloven",q:"Hva er forskjellen mellom lokalt og nasjonalt varebilløyve?",o:["Det er ingen forskjell – de er identiske","Lokalt løyve gjelder kun i ett fylke; nasjonalt løyve gjelder i hele Norge","Nasjonalt løyve er dyrere men raskere å få","Lokalt løyve gjelder for tyngre biler"],c:1,e:"Det finnes kun nasjonalt varebilløyve i dagens system – det gjelder i hele Norge. Tidligere fantes regionale begrensninger, men disse er avviklet med gjeldende regelverk."},en:{t:"T001: Transport Law",q:"What is the difference between a local and a national van licence?",o:["There is no difference – they are identical","A local licence is valid only in one county; a national licence is valid throughout Norway","A national licence is more expensive but faster to obtain","A local licence applies to heavier vehicles"],c:1,e:"Only a national van licence exists in the current system – it is valid throughout Norway. Regional restrictions previously existed but have been abolished under current regulations."},ar:{t:"T001: قانون النقل",q:"ما الفرق بين رخصة الشاحنة الخفيفة المحلية والوطنية؟",o:["لا فرق – كلتاهما متطابقتان","الرخصة المحلية صالحة في مقاطعة واحدة فقط؛ الوطنية صالحة في جميع أنحاء النرويج","الرخصة الوطنية أغلى لكن أسرع في الحصول","الرخصة المحلية للمركبات الثقيلة"],c:1,e:"يوجد فقط رخصة شاحنة خفيفة وطنية في النظام الحالي – صالحة في جميع أنحاء النرويج. كانت توجد قيود إقليمية سابقاً لكنها أُلغيت وفق الأنظمة الحالية."},pl:{t:"T001: Prawo transportowe",q:"Jaka jest różnica między lokalną a krajową licencją na transport busem?",o:["Nie ma różnicy – są identyczne","Licencja lokalna obowiązuje tylko w jednym województwie; krajowa obowiązuje w całej Norwegii","Licencja krajowa jest droższa, ale szybciej można ją uzyskać","Licencja lokalna dotyczy cięższych pojazdów"],c:1,e:"W obecnym systemie istnieje tylko krajowa licencja na transport busem – obowiązuje w całej Norwegii. Wcześniej istniały ograniczenia regionalne, ale zostały zniesione na mocy obowiązujących przepisów."}},
-    {no:{t:"T002: Vegtrafikkloven",q:"Hva er plikten til å melde fra ved trafikkuhell etter vtrl. § 12?",o:["Kun politiet har meldeplikt","Alle som er innblandet i eller vitne til ulykke der person er skadet, plikter å varsle politiet (112) og yte nødvendig hjelp","Kun sjåfører med yrkesbil har meldeplikt","Meldeplikten gjelder kun ved ulykker med over 3 involverte kjøretøy"],c:1,e:"Vtrl. § 12: Alle involverte og vitner til ulykker med personskade har plikt til å stanse, varsle politiet og yte hjelp. Unnlatelse kan gi straffeansvar etter vtrl. § 31."},en:{t:"T002: Road Traffic Act",q:"What is the obligation to report a traffic accident under Road Traffic Act §12?",o:["Only the police have a reporting obligation","Everyone involved in or witnessing an accident where a person is injured must notify the police (112) and provide necessary assistance","Only professional vehicle drivers have a reporting obligation","The obligation only applies to accidents involving more than 3 vehicles"],c:1,e:"§12: Everyone involved in or witnessing accidents with personal injury must stop, notify the police and provide assistance. Failure to do so can result in criminal liability under §31."},ar:{t:"T002: قانون السير",q:"ما التزام الإبلاغ عن حادث مروري بموجب المادة 12 من قانون السير؟",o:["الشرطة فقط لديها التزام الإبلاغ","يجب على كل من يشارك في حادث أو يشهده يتسبب في إصابة شخص الإبلاغ للشرطة (112) وتقديم المساعدة","سائقو المركبات المهنية فقط ملزمون بالإبلاغ","الالتزام ينطبق فقط على الحوادث التي تتجاوز 3 مركبات"],c:1,e:"المادة 12: يجب على جميع المتورطين والشهود في حوادث تسبب إصابات الوقوف وإبلاغ الشرطة وتقديم المساعدة. الإهمال قد يؤدي إلى مسؤولية جنائية وفق المادة 31."},pl:{t:"T002: Prawo o ruchu drogowym",q:"Jaki jest obowiązek zgłaszania wypadku drogowego zgodnie z §12 Ustawy o ruchu drogowym?",o:["Tylko policja ma obowiązek zgłoszenia","Wszyscy zaangażowani lub świadkowie wypadku, w którym osoba jest ranna, muszą powiadomić policję (112) i udzielić niezbędnej pomocy","Tylko kierowcy pojazdów zawodowych mają obowiązek zgłoszenia","Obowiązek dotyczy tylko wypadków z więcej niż 3 pojazdami"],c:1,e:"§12: Wszyscy zaangażowani i świadkowie wypadków z obrażeniami ciała muszą się zatrzymać, powiadomić policję i udzielić pomocy. Zaniedbanie może skutkować odpowiedzialnością karną na mocy §31."}},
-    {no:{t:"T002: Vegtrafikkloven",q:"Hva er reglene for bruk av mobiltelefon under kjøring?",o:["Tillatt ved bruk av høyttaler","Håndholdt telefon er forbudt; håndfri (headset, Bluetooth) er tillatt men anbefales med forsiktighet","Tillatt ved kort samtale under 30 sekunder","Mobiltelefon er alltid tillatt i varebil"],c:1,e:"Vtrl. § 3 og skiltforskriften: Bruk av håndholdt mobiltelefon under kjøring er forbudt. Håndfri kommunikasjon er tillatt, men sjåfør plikter fortsatt å ha full oppmerksomhet på trafikken."},en:{t:"T002: Road Traffic Act",q:"What are the rules on using a mobile phone while driving?",o:["Permitted when using a loudspeaker","Handheld phone is prohibited; hands-free (headset, Bluetooth) is permitted but use with caution is recommended","Permitted for short calls under 30 seconds","Mobile phone is always permitted in a van"],c:1,e:"§3 and sign regulations: Using a handheld mobile phone while driving is prohibited. Hands-free communication is permitted, but the driver is still obliged to maintain full attention to traffic."},ar:{t:"T002: قانون السير",q:"ما قواعد استخدام الهاتف المحمول أثناء القيادة؟",o:["مسموح عند استخدام مكبر الصوت","الهاتف باليد محظور؛ حرّ اليدين (سماعة، بلوتوث) مسموح لكن يُوصى بالحذر","مسموح للمكالمات القصيرة أقل من 30 ثانية","الهاتف المحمول مسموح دائماً في الشاحنة الخفيفة"],c:1,e:"المادة 3 ولوائح اللافتات: استخدام الهاتف المحمول باليد أثناء القيادة محظور. التواصل بحرّ اليدين مسموح لكن السائق ملزم بالتركيز الكامل على السير."},pl:{t:"T002: Prawo o ruchu drogowym",q:"Jakie są zasady dotyczące korzystania z telefonu komórkowego podczas jazdy?",o:["Dozwolone przy użyciu głośnika","Telefon trzymany w ręku jest zabroniony; zestaw głośnomówiący (słuchawki, Bluetooth) jest dozwolony, ale zaleca się ostrożność","Dozwolone podczas krótkich rozmów poniżej 30 sekund","Telefon komórkowy jest zawsze dozwolony w busie"],c:1,e:"§3 i przepisy o znakach drogowych: Używanie telefonu trzymanego w ręku podczas jazdy jest zabronione. Komunikacja zestawem głośnomówiącym jest dozwolona, ale kierowca nadal musi zachować pełną uwagę na ruch drogowy."}},
-    {no:{t:"T003: Arbeidsmiljø og ferie",q:"Hva er reglene for nattarbeid etter arbeidsmiljøloven?",o:["Nattarbeid er alltid tillatt uten begrensninger","Nattarbeid (kl. 21–06) er kun tillatt dersom arbeidets art gjør det nødvendig, jf. aml. § 10-11; krever drøfting med verneombud","Nattarbeid gjelder kun fabrikker","Nattarbeid er kun forbudt for sjåfører"],c:1,e:"Aml. § 10-11: Nattarbeid (mellom kl. 21 og 06) er kun tillatt der arbeidets art nødvendiggjør det, f.eks. transport. Arbeidsgiver skal drøfte ordningen med tillitsvalgte/verneombud. Arbeidstaker skal ha helsekontroll ved regelmessig nattarbeid."},en:{t:"T003: Labour & Holiday Law",q:"What are the rules on night work under the Working Environment Act?",o:["Night work is always permitted without restrictions","Night work (9 pm–6 am) is only permitted where the nature of the work makes it necessary, per §10-11; requires consultation with the safety delegate","Night work only applies to factories","Night work is only prohibited for drivers"],c:1,e:"§10-11: Night work (between 9 pm and 6 am) is only permitted where the nature of the work necessitates it, e.g. transport. The employer must consult with employee representatives/safety delegates. Employees must have health monitoring for regular night work."},ar:{t:"T003: قانون العمل والإجازات",q:"ما قواعد العمل الليلي وفق قانون بيئة العمل؟",o:["العمل الليلي مسموح دائماً بدون قيود","العمل الليلي (21:00–06:00) مسموح فقط عندما تستوجب طبيعة العمل ذلك وفق المادة 10-11؛ يتطلب التشاور مع مندوب السلامة","العمل الليلي ينطبق على المصانع فقط","العمل الليلي محظور على السائقين فقط"],c:1,e:"المادة 10-11: العمل الليلي (بين 21:00 و06:00) مسموح فقط عندما تستوجب طبيعة العمل ذلك، مثل النقل. يجب على صاحب العمل التشاور مع ممثلي الموظفين/مندوب السلامة. يجب أن يخضع الموظفون لمراقبة صحية عند العمل الليلي المنتظم."},pl:{t:"T003: Prawo pracy i urlopy",q:"Jakie są zasady dotyczące pracy nocnej zgodnie z Ustawą o środowisku pracy?",o:["Praca nocna jest zawsze dozwolona bez ograniczeń","Praca nocna (21:00–06:00) jest dozwolona tylko tam, gdzie charakter pracy tego wymaga, zgodnie z §10-11; wymaga konsultacji z przedstawicielem BHP","Praca nocna dotyczy tylko fabryk","Praca nocna jest dozwolona tylko dla kierowców"],c:1,e:"§10-11: Praca nocna (między 21:00 a 06:00) jest dozwolona tylko tam, gdzie charakter pracy tego wymaga, np. transport. Pracodawca musi skonsultować się z przedstawicielami pracowników/BHP. Pracownicy muszą mieć monitoring zdrowia przy regularnej pracy nocnej."}},
-    {no:{t:"T003: Arbeidsmiljø og ferie",q:"Hva er krav om verneombud i virksomheter?",o:["Kun påkrevd i industribedrifter med over 50 ansatte","Virksomheter med minst 10 ansatte skal ha verneombud, jf. aml. § 6-1; ved under 10 kan det avtales annen ordning","Verneombud er alltid frivillig","Kun krav ved produksjonsbedrifter"],c:1,e:"Aml. § 6-1: Virksomheter med 10 eller flere ansatte plikter å ha verneombud valgt av og blant arbeidstakerne. Verneombudet skal ivareta arbeidstakernes interests i HMS-spørsmål og har rett til å stanse farlig arbeid."},en:{t:"T003: Labour & Holiday Law",q:"What is the requirement for safety delegates in businesses?",o:["Only required in industrial businesses with more than 50 employees","Businesses with at least 10 employees must have a safety delegate, per §6-1; with fewer than 10 another arrangement can be agreed","A safety delegate is always voluntary","Only required in production businesses"],c:1,e:"§6-1: Businesses with 10 or more employees must have a safety delegate elected by and from the employees. The safety delegate looks after employees' interests in HSE matters and has the right to stop dangerous work."},ar:{t:"T003: قانون العمل والإجازات",q:"ما اشتراط وجود مندوب السلامة في الشركات؟",o:["مطلوب فقط في الشركات الصناعية التي تضم أكثر من 50 موظفاً","يجب أن يكون لدى الشركات التي تضم 10 موظفين على الأقل مندوب سلامة وفق المادة 6-1؛ مع أقل من 10 يمكن الاتفاق على ترتيب آخر","مندوب السلامة اختياري دائماً","مطلوب فقط في شركات الإنتاج"],c:1,e:"المادة 6-1: يجب أن يكون لدى الشركات التي تضم 10 موظفين أو أكثر مندوب سلامة منتخب من الموظفين. يرعى مندوب السلامة مصالح الموظفين في شؤون السلامة وله الحق في إيقاف العمل الخطير."},pl:{t:"T003: Prawo pracy i urlopy",q:"Jakie są wymagania dotyczące przedstawicieli BHP w firmach?",o:["Wymagany tylko w firmach przemysłowych z ponad 50 pracownikami","Firmy z co najmniej 10 pracownikami muszą mieć przedstawiciela BHP, zgodnie z §6-1; przy mniej niż 10 można uzgodnić inne rozwiązanie","Przedstawiciel BHP jest zawsze dobrowolny","Wymagany tylko w firmach produkcyjnych"],c:1,e:"§6-1: Firmy z 10 lub więcej pracownikami muszą mieć przedstawiciela BHP wybranego przez pracowników i spośród nich. Przedstawiciel BHP reprezentuje interesy pracowników w sprawach BHP i ma prawo zatrzymać niebezpieczną pracę."}},
-    {no:{t:"T004: Opplæring og kjøring",q:"Hva er kravene til fartsskriver for varebiler mellom 2500 og 3500 kg?",o:["Alltid obligatorisk med digital fartsskriver","Varebiler under 3500 kg er unntatt fra kravet om fartsskriver etter forordning 165/2014","Kun analog fartsskriver er påkrevd","Fartsskriver kreves kun ved nattarbeid"],c:1,e:"EU-forordning 165/2014 og 561/2006 gjelder kun kjøretøy over 3500 kg. Varebiler opp til 3500 kg er unntatt fra krav om fartsskriver. Derimot gjelder arbeidsmiljølovens arbeidstidsbestemmelser."},en:{t:"T004: Training & Driving",q:"What are the tachograph requirements for vans between 2500 and 3500 kg?",o:["Always mandatory with a digital tachograph","Vans under 3500 kg are exempt from the tachograph requirement under Regulation 165/2014","Only an analogue tachograph is required","A tachograph is only required for night work"],c:1,e:"EU Regulations 165/2014 and 561/2006 only apply to vehicles over 3500 kg. Vans up to 3500 kg are exempt from tachograph requirements. However, the Working Environment Act's working time provisions still apply."},ar:{t:"T004: التدريب والقيادة",q:"ما متطلبات التاكوغراف للشاحنات الخفيفة بين 2500 و3500 كغ؟",o:["إلزامي دائماً مع تاكوغراف رقمي","الشاحنات الخفيفة دون 3500 كغ معفاة من اشتراط التاكوغراف بموجب لائحة 165/2014","التاكوغراف التناظري فقط مطلوب","التاكوغراف مطلوب للعمل الليلي فقط"],c:1,e:"لوائح الاتحاد الأوروبي 165/2014 و561/2006 تنطبق فقط على المركبات التي تتجاوز 3500 كغ. الشاحنات الخفيفة حتى 3500 كغ معفاة من اشتراطات التاكوغراف. ومع ذلك تنطبق أحكام ساعات العمل في قانون بيئة العمل."},pl:{t:"T004: Szkolenie i jazda",q:"Jakie są wymagania dotyczące tachografu dla busów o masie od 2500 do 3500 kg?",o:["Zawsze obowiązkowy cyfrowy tachograf","Busy poniżej 3500 kg są zwolnione z wymogu tachografu na mocy Rozporządzenia 165/2014","Wymagany tylko analogowy tachograf","Tachograf jest wymagany tylko przy pracy nocnej"],c:1,e:"Rozporządzenia UE 165/2014 i 561/2006 mają zastosowanie tylko do pojazdów powyżej 3500 kg. Busy do 3500 kg są zwolnione z wymogu tachografu. Jednak przepisy dotyczące czasu pracy z Ustawy o środowisku pracy nadal obowiązują."}},
-    {no:{t:"T005: Internkontroll/HMS",q:"Hva er risikovurdering og hvorfor er det sentralt i HMS-arbeidet?",o:["En forsikringsvurdering av kjøretøyet","En systematisk gjennomgang av hva som kan gå galt i virksomheten, sannsynligheten for det, og tiltak for å redusere risiko","Kun relevant ved arbeidsskader","Et frivillig hjelpemiddel for store bedrifter"],c:1,e:"Internkontrollforskriften § 5 nr. 6: Risikovurdering er obligatorisk og skal identifisere farer, vurdere risiko og iverksette tiltak. For transportvirksomhet: trafikksikkerhetsrisiko, ergonomi, vold/trusler, kjemikalier."},en:{t:"T005: Internal Control/HSE",q:"What is risk assessment and why is it central to HSE work?",o:["An insurance valuation of the vehicle","A systematic review of what can go wrong in the business, the probability of it occurring, and measures to reduce risk","Only relevant for workplace injuries","A voluntary tool for large businesses"],c:1,e:"Internal Control Regulation §5 no.6: Risk assessment is mandatory and must identify hazards, assess risk and implement measures. For transport: traffic safety risks, ergonomics, violence/threats, chemicals."},ar:{t:"T005: الرقابة الداخلية والسلامة",q:"ما تقييم المخاطر ولماذا هو محوري في عمل السلامة والصحة المهنية؟",o:["تقييم تأميني للمركبة","مراجعة منهجية لما قد يسوء في الشركة واحتمالية حدوثه والتدابير للحد من المخاطر","ذو صلة بإصابات العمل فقط","أداة طوعية للشركات الكبيرة"],c:1,e:"لائحة الرقابة الداخلية المادة 5 رقم 6: تقييم المخاطر إلزامي ويجب أن يحدد المخاطر ويقيّم الخطر ويُنفّذ التدابير. للنقل: مخاطر السلامة المرورية والإرغونوميا والعنف/التهديدات والمواد الكيميائية."},pl:{t:"T005: Kontrola wewnętrzna/BHP",q:"Co to jest ocena ryzyka i dlaczego jest kluczowa w pracy BHP?",o:["Wycena ubezpieczeniowa pojazdu","Systematyczny przegląd tego, co może pójść nie tak w firmie, prawdopodobieństwo tego i środki zmniejszające ryzyko","Dotyczy tylko wypadków przy pracy","Dobrowolne narzędzie dla dużych firm"],c:1,e:"Rozporządzenie o Kontroli Wewnętrznej §5 nr 6: Ocena ryzyka jest obowiązkowa i musi identyfikować zagrożenia, oceniać ryzyko i wdrażać środki zaradcze. Dla transportu: ryzyko bezpieczeństwa ruchu drogowego, ergonomia, przemoc/groźby, chemikalia."}},
-    {no:{t:"T006: Foretaksformer",q:"Hva er revisjonsplikten for aksjeselskaper?",o:["Alle AS plikter alltid ekstern revisjon","AS med omsetning under 7 mill. NOK, balanse under 27 mill. og under 10 ansatte er unntatt fra revisjonsplikt; kan velge det bort","Revisjon er kun for børsnoterte AS","Revisjon kreves kun ved underskudd"],c:1,e:"Aksjeloven § 7-6: Små AS (omsetning < 7 millioner, balansesum < 27 millioner, < 10 ansatte) kan velge bort revisjonsplikten. Beslutningen fattes av generalforsamlingen og skal registreres i Brønnøysund."},en:{t:"T006: Business Forms",q:"What is the audit obligation for limited companies?",o:["All AS always require external audit","AS with turnover under NOK 7 million, balance under NOK 27 million and fewer than 10 employees are exempt from the audit obligation; they can opt out","Audit is only for listed AS","Audit is only required when operating at a loss"],c:1,e:"Companies Act §7-6: Small AS (turnover < NOK 7 million, total assets < NOK 27 million, < 10 employees) can opt out of the audit obligation. The decision is made by the general meeting and must be registered with the Business Register."},ar:{t:"T006: أشكال الشركات",q:"ما التزام التدقيق للشركات المساهمة؟",o:["يجب على جميع الشركات المساهمة دائماً إجراء تدقيق خارجي","الشركات المساهمة بمبيعات أقل من 7 مليون كرونة وميزانية أقل من 27 مليون وأقل من 10 موظفين معفاة من التدقيق؛ يمكنها الاختيار","التدقيق للشركات المدرجة في البورصة فقط","التدقيق مطلوب فقط عند الخسارة"],c:1,e:"قانون الشركات المادة 7-6: يمكن للشركات المساهمة الصغيرة (مبيعات < 7 ملايين، إجمالي الأصول < 27 مليون، < 10 موظفين) الاختيار من خارج التزام التدقيق. يُتخذ القرار في الاجتماع العام ويجب تسجيله في سجل الأعمال."},pl:{t:"T006: Formy przedsiębiorstwa",q:"Jaki jest obowiązek audytu dla spółek z ograniczoną odpowiedzialnością?",o:["Wszystkie AS zawsze wymagają zewnętrznego audytu","AS z obrotem poniżej 7 mln NOK, bilansem poniżej 27 mln i mniej niż 10 pracownikami są zwolnione z obowiązku audytu; mogą zrezygnować","Audyt jest tylko dla notowanych spółek","Audyt wymagany tylko przy stratach"],c:1,e:"Ustawa o spółkach §7-6: Małe AS (obrót < 7 mln NOK, suma bilansowa < 27 mln NOK, < 10 pracowników) mogą zrezygnować z obowiązku audytu. Decyzję podejmuje walne zgromadzenie i musi być zarejestrowana w rejestrze przedsiębiorstw."}},
-    {no:{t:"T007: Økonomiforståelse",q:"Hva er balanseregnskapet og hva viser det?",o:["En oversikt over månedlige utgifter","Et øyeblikksbilde av virksomhetens eiendeler, gjeld og egenkapital på et gitt tidspunkt (balansedagen)","Kun relevant for AS, ikke ENK","En rapport over driftsresultatet"],c:1,e:"Balansen (balanseregnskapet) viser: Eiendeler (anleggsmidler + omløpsmidler) = Gjeld (langsiktig + kortsiktig) + Egenkapital. Den er lovpålagt del av årsregnskapet, jf. regnskapsloven § 6-2."},en:{t:"T007: Financial Understanding",q:"What is the balance sheet and what does it show?",o:["An overview of monthly expenses","A snapshot of the business's assets, liabilities and equity at a given point in time (the balance sheet date)","Only relevant for AS, not ENK","A report on operating profit"],c:1,e:"The balance sheet shows: Assets (fixed + current) = Liabilities (long-term + short-term) + Equity. It is a legally required part of the annual accounts under the Accounting Act §6-2."},ar:{t:"T007: الفهم المالي",q:"ما الميزانية العمومية وماذا تُظهر؟",o:["نظرة عامة على النفقات الشهرية","لقطة آنية لأصول الشركة والتزاماتها وحقوق ملكيتها في وقت محدد (تاريخ الميزانية)","ذات صلة بالشركات المساهمة فقط وليس ملكية الفرد","تقرير عن الربح التشغيلي"],c:1,e:"تُظهر الميزانية العمومية: الأصول (ثابتة + متداولة) = الالتزامات (طويلة + قصيرة الأجل) + حقوق الملكية. هي جزء إلزامي من الحسابات السنوية وفق قانون المحاسبة المادة 6-2."},pl:{t:"T007: Wiedza ekonomiczna",q:"Co to jest bilans i co pokazuje?",o:["Przegląd miesięcznych wydatków","Migawka aktywów, zobowiązań i kapitału własnego firmy w danym momencie (dzień bilansowy)","Dotyczy tylko AS, nie ENK","Raport o zysku operacyjnym"],c:1,e:"Bilans pokazuje: Aktywa (trwałe + obrotowe) = Zobowiązania (długo + krótkoterminowe) + Kapitał własny. Jest to prawnie wymagana część rocznych sprawozdań finansowych zgodnie z Ustawą o rachunkowości §6-2."}},
-    {no:{t:"T008: Skatter",q:"Hva er fristen for innlevering av skattemeldingen (selvangivelsen) for næringsdrivende?",o:["31. januar hvert år","31. mai hvert år (næringsdrivende med regnskapsfører kan ha utsatt frist)","31. mars hvert år","15. april hvert år"],c:1,e:"Skattemeldingen for næringsdrivende (med næringsinntekt) skal normalt leveres innen 31. mai. For lønnstakere er fristen 30. april. Regnskapsførere kan ha utvidet frist til 31. mai for sine klienter."},en:{t:"T008: Taxes",q:"What is the deadline for submitting the tax return for the self-employed?",o:["31 January each year","31 May each year (self-employed with an accountant may have an extended deadline)","31 March each year","15 April each year"],c:1,e:"The tax return for the self-employed (with business income) must normally be submitted by 31 May. For employees the deadline is 30 April. Accountants may have an extended deadline of 31 May for their clients."},ar:{t:"T008: الضرائب",q:"ما الموعد النهائي لتقديم الإقرار الضريبي للعاملين لحسابهم الخاص؟",o:["31 يناير من كل عام","31 مايو من كل عام (العاملون لحسابهم الخاص مع محاسب قد يحصلون على موعد ممتد)","31 مارس من كل عام","15 أبريل من كل عام"],c:1,e:"يجب تقديم الإقرار الضريبي للعاملين لحسابهم الخاص (بدخل تجاري) عادةً بحلول 31 مايو. للموظفين الموعد 30 أبريل. يمكن للمحاسبين الحصول على موعد ممتد حتى 31 مايو لعملائهم."},pl:{t:"T008: Podatki",q:"Jaki jest termin składania zeznania podatkowego dla samozatrudnionych?",o:["31 stycznia każdego roku","31 maja każdego roku (samozatrudnieni z księgowym mogą mieć przedłużony termin)","31 marca każdego roku","15 kwietnia każdego roku"],c:1,e:"Zeznanie podatkowe dla samozatrudnionych (z dochodem z działalności) musi być złożone normalnie do 31 maja. Dla pracowników termin to 30 kwietnia. Księgowi mogą mieć przedłużony termin do 31 maja dla swoich klientów."}},
-    {no:{t:"T009: Avgifter",q:"Hva er tollavgift og når er den aktuell for varebilnæringen?",o:["En avgift for kjøring over kommunegrenser","En avgift som betales ved import av varer fra land utenfor EØS/tollunionen; relevant ved import av reservedeler, utstyr mv.","En lokal avgift for tunge kjøretøy","Tollavgift er avskaffet i Norge"],c:1,e:"Tollavgift betales ved innførsel av varer fra land utenfor EØS (f.eks. fra USA, Kina). Satsen varierer etter varetype. Varer fra EØS er tollfrie. Relevant ved import av varebiler, reservedeler og utstyr fra tredjeland."},en:{t:"T009: VAT & Fees",q:"What is customs duty and when is it relevant for the van transport industry?",o:["A fee for driving across municipal boundaries","A duty paid on imports from countries outside the EEA/customs union; relevant when importing spare parts, equipment etc.","A local fee for heavy vehicles","Customs duty has been abolished in Norway"],c:1,e:"Customs duty is paid on imports from countries outside the EEA (e.g. from the USA, China). The rate varies by type of goods. Goods from the EEA are duty-free. Relevant when importing vans, spare parts and equipment from third countries."},ar:{t:"T009: الرسوم وضريبة القيمة المضافة",q:"ما الرسوم الجمركية وما أهميتها لصناعة نقل الشاحنات الخفيفة؟",o:["رسوم للقيادة عبر حدود البلديات","رسوم تُدفع عند استيراد البضائع من دول خارج المنطقة الاقتصادية الأوروبية/الاتحاد الجمركي؛ ذات صلة عند استيراد قطع الغيار والمعدات","رسوم محلية للمركبات الثقيلة","الرسوم الجمركية أُلغيت في النرويج"],c:1,e:"تُدفع الرسوم الجمركية عند الاستيراد من دول خارج المنطقة الاقتصادية الأوروبية (مثل الولايات المتحدة والصين). يتفاوت المعدل حسب نوع البضائع. بضائع المنطقة الاقتصادية الأوروبية معفاة من الرسوم. ذات صلة عند استيراد الشاحنات الخفيفة وقطع الغيار من دول ثالثة."},pl:{t:"T009: Opłaty i VAT",q:"Co to jest cło i kiedy ma znaczenie dla branży transportu busami?",o:["Opłata za jazdę przez granice gminne","Cło płacone przy imporcie towarów z krajów spoza EOG/unii celnej; istotne przy imporcie części zamiennych, sprzętu itp.","Lokalna opłata dla ciężkich pojazdów","Cło zostało zniesione w Norwegii"],c:1,e:"Cło jest płacone przy imporcie towarów z krajów spoza EOG (np. USA, Chiny). Stawka różni się w zależności od rodzaju towaru. Towary z EOG są wolne od cła. Istotne przy imporcie busów, części zamiennych i sprzętu z krajów trzecich."}}
+  "q": [
+    {
+      "no": {
+        "t": "T001: Yrkestransportloven",
+        "q": "Hvilke kjøretøy gjelder nasjonalt varebilløyve for?",
+        "o": [
+          "Varebiler under 2500 kg",
+          "Varebiler 2500–3500 kg totalvekt",
+          "Lastebiler over 3500 kg",
+          "Alle kjøretøy i godstransport"
+        ],
+        "c": 1,
+        "e": "Nasjonalt varebilløyve gjelder for godstransport mot vederlag med varebil mellom 2500 og 3500 kg tillatt totalvekt, jf. yrkestransportlova § 4."
+      },
+      "en": {
+        "t": "T001: Transport Law",
+        "q": "Which vehicles require a national van licence?",
+        "o": [
+          "Vans under 2500 kg",
+          "Vans 2500–3500 kg gross weight",
+          "Lorries over 3500 kg",
+          "All goods vehicles"
+        ],
+        "c": 1,
+        "e": "A national van licence applies to goods transport for reward with a van of 2500–3500 kg permitted total weight."
+      },
+      "ar": {
+        "t": "T001: قانون النقل",
+        "q": "ما المركبات التي تستلزم رخصة الشاحنة الخفيفة الوطنية؟",
+        "o": [
+          "شاحنات أقل من 2500 كغ",
+          "شاحنات 2500–3500 كغ حمولة إجمالية",
+          "شاحنات فوق 3500 كغ",
+          "جميع مركبات البضائع"
+        ],
+        "c": 1,
+        "e": "تنطبق رخصة الشاحنة الخفيفة الوطنية على نقل البضائع بأجر بشاحنة بين 2500 و3500 كغ حمولة إجمالية مسموح بها."
+      },
+      "pl": {
+        "t": "T001: Prawo transportowe",
+        "q": "Które pojazdy wymagają krajowego prawa jazdy na van?",
+        "o": [
+          "Samochody dostawcze poniżej 2500 kg",
+          "Samochody dostawcze o masie całkowitej 2500–3500 kg",
+          "Samochody ciężarowe powyżej 3500 kg",
+          "Wszystkie pojazdy ciężarowe"
+        ],
+        "c": 1,
+        "e": "Krajowa licencja na samochód dostawczy dotyczy zarobkowego transportu towarów samochodem dostawczym o dopuszczalnej masie całkowitej 2500–3500 kg."
+      }
+    },
+    {
+      "no": {
+        "t": "T001: Yrkestransportloven",
+        "q": "Hva er minstealderen for å søke om varebilløyve?",
+        "o": [
+          "18 år",
+          "20 år",
+          "21 år",
+          "25 år"
+        ],
+        "c": 2,
+        "e": "Søkeren må være minst 21 år for å søke om varebilløyve."
+      },
+      "en": {
+        "t": "T001: Transport Law",
+        "q": "What is the minimum age to apply for a van licence?",
+        "o": [
+          "18 years",
+          "20 years",
+          "21 years",
+          "25 years"
+        ],
+        "c": 2,
+        "e": "The applicant must be at least 21 years old to apply for a van licence."
+      },
+      "ar": {
+        "t": "T001: قانون النقل",
+        "q": "ما الحد الأدنى للسن للتقدم بطلب رخصة الشاحنة الخفيفة؟",
+        "o": [
+          "18 عاماً",
+          "20 عاماً",
+          "21 عاماً",
+          "25 عاماً"
+        ],
+        "c": 2,
+        "e": "يجب أن يكون المتقدم بالغاً 21 عاماً على الأقل لطلب رخصة الشاحنة الخفيفة."
+      },
+      "pl": {
+        "t": "T001: Prawo transportowe",
+        "q": "Jaki jest minimalny wiek, aby ubiegać się o prawo jazdy na van?",
+        "o": [
+          "18 lat",
+          "20 lat",
+          "21 lat",
+          "25 lat"
+        ],
+        "c": 2,
+        "e": "Aby ubiegać się o prawo jazdy na samochód dostawczy, osoba ubiegająca się o prawo jazdy na van musi mieć ukończone 21 lat."
+      }
+    },
+    {
+      "no": {
+        "t": "T001: Yrkestransportloven",
+        "q": "Er det krav om faglig kompetanse for nasjonalt varebilløyve (2500–3500 kg)?",
+        "o": [
+          "Ja, bestått fagprøve kreves",
+          "Nei – faglig kompetanse er ikke krevd for varebilløyve",
+          "Ja, men kun internasjonalt",
+          "Kun 2 års praksis er nok"
+        ],
+        "c": 1,
+        "e": "For nasjonalt varebilløyve (2500–3500 kg) er det IKKE krav om faglig kompetanse. Dette skiller seg fra tyngre godstransportløyve."
+      },
+      "en": {
+        "t": "T001: Transport Law",
+        "q": "Is professional competence required for a national van licence (2500–3500 kg)?",
+        "o": [
+          "Yes, a passed exam is required",
+          "No – professional competence is NOT required for a van licence",
+          "Yes, but only international",
+          "2 years practice is enough"
+        ],
+        "c": 1,
+        "e": "For a national van licence (2500–3500 kg) professional competence is NOT required. This differs from heavier goods licences."
+      },
+      "ar": {
+        "t": "T001: قانون النقل",
+        "q": "هل تُشترط الكفاءة المهنية لرخصة الشاحنة الخفيفة الوطنية (2500–3500 كغ)؟",
+        "o": [
+          "نعم، يُشترط اجتياز امتحان",
+          "لا – الكفاءة المهنية غير مشترطة لرخصة الشاحنة الخفيفة",
+          "نعم، للدولي فقط",
+          "يكفي سنتان من الخبرة"
+        ],
+        "c": 1,
+        "e": "لا تُشترط الكفاءة المهنية لرخصة الشاحنة الخفيفة الوطنية (2500–3500 كغ). يختلف هذا عن رخص النقل الثقيل."
+      },
+      "pl": {
+        "t": "T001: Prawo transportowe",
+        "q": "Czy do uzyskania krajowego prawa jazdy na samochód dostawczy (2500–3500 kg) wymagane są kompetencje zawodowe?",
+        "o": [
+          "Tak, wymagane jest zdanie egzaminu",
+          "Nie – do posiadania licencji na samochód dostawczy NIE są wymagane kompetencje zawodowe",
+          "Tak, ale tylko międzynarodowe",
+          "Wystarczy 2 lata praktyki"
+        ],
+        "c": 1,
+        "e": "W przypadku krajowego prawa jazdy na samochód dostawczy (2500–3500 kg) NIE są wymagane kompetencje zawodowe. Różni się to od zezwoleń na towary cięższe."
+      }
+    },
+    {
+      "no": {
+        "t": "T001: Yrkestransportloven",
+        "q": "Hvem er løyvemyndighet for varebilløyve i Norge?",
+        "o": [
+          "Samferdselsdepartementet",
+          "Politiet",
+          "Statens vegvesen",
+          "Statsforvalteren"
+        ],
+        "c": 2,
+        "e": "Statens vegvesen er løyvemyndighet og behandler alle søknader om varebilløyve."
+      },
+      "en": {
+        "t": "T001: Transport Law",
+        "q": "Who is the licensing authority for van licences in Norway?",
+        "o": [
+          "Ministry of Transport",
+          "The Police",
+          "Norwegian Public Roads Administration",
+          "County Governor"
+        ],
+        "c": 2,
+        "e": "The Norwegian Public Roads Administration (Statens vegvesen) is the licensing authority and processes all van licence applications."
+      },
+      "ar": {
+        "t": "T001: قانون النقل",
+        "q": "من هي جهة الترخيص لرخص الشاحنات الخفيفة في النرويج؟",
+        "o": [
+          "وزارة النقل",
+          "الشرطة",
+          "إدارة الطرق العامة النرويجية",
+          "الحاكم الإقليمي"
+        ],
+        "c": 2,
+        "e": "إدارة الطرق العامة النرويجية هي جهة الترخيص وتعالج جميع طلبات رخص الشاحنات الخفيفة."
+      },
+      "pl": {
+        "t": "T001: Prawo transportowe",
+        "q": "Kto jest organem wydającym licencje na samochody dostawcze w Norwegii?",
+        "o": [
+          "Ministerstwo Transportu",
+          "Policja",
+          "Norweski Zarząd Dróg Publicznych",
+          "Gubernator hrabstwa"
+        ],
+        "c": 2,
+        "e": "Norweski Zarząd Dróg Publicznych (Statens vegvesen) jest organem wydającym licencje i rozpatruje wszystkie wnioski o wydanie licencji na samochody dostawcze."
+      }
+    },
+    {
+      "no": {
+        "t": "T002: Vegtrafikkloven",
+        "q": "Hva innebærer pliktmessig avhold etter vtrl. § 22?",
+        "o": [
+          "Forbud mot mobiltelefon under kjøring",
+          "Forbudt å kjøre etter inntak av alkohol/rusmidler de siste 8 timene; grense 0,2 ‰",
+          "Forbudt å overskride fartsgrensen",
+          "Gjelder kun bussjåfører og taxisjåfører"
+        ],
+        "c": 1,
+        "e": "Vtrl. § 22: alkohol eller rusmidler må ikke inntas i de siste 8 timene før kjøring. Den lovlige promillegrensen er 0,2 ‰."
+      },
+      "en": {
+        "t": "T002: Road Traffic Act",
+        "q": "What does mandatory abstinence under §22 Road Traffic Act mean?",
+        "o": [
+          "Prohibition on mobile phone while driving",
+          "Prohibited to drive after consuming alcohol/drugs in the last 8 hours; BAC limit 0.2 ‰",
+          "Prohibited from exceeding speed limit",
+          "Applies only to bus and taxi drivers"
+        ],
+        "c": 1,
+        "e": "§22 Road Traffic Act: alcohol or drugs must not be consumed in the 8 hours before driving. The legal BAC limit is 0.2 ‰."
+      },
+      "ar": {
+        "t": "T002: قانون السير",
+        "q": "ما معنى واجب الامتناع بموجب المادة 22 من قانون السير؟",
+        "o": [
+          "حظر الهاتف المحمول أثناء القيادة",
+          "حظر القيادة بعد تناول الكحول/المخدرات في آخر 8 ساعات؛ الحد 0.2 ‰",
+          "حظر تجاوز حد السرعة",
+          "ينطبق على سائقي الحافلات والتاكسي فقط"
+        ],
+        "c": 1,
+        "e": "المادة 22: لا يجوز تناول الكحول أو المخدرات في الثماني ساعات السابقة للقيادة. الحد القانوني 0.2 ‰."
+      },
+      "pl": {
+        "t": "T002: Prawo o ruchu drogowym",
+        "q": "Co oznacza obowiązkowa abstynencja zgodnie z §22 ustawy o ruchu drogowym?",
+        "o": [
+          "Zakaz korzystania z telefonu komórkowego podczas jazdy",
+          "Zakaz prowadzenia pojazdów po spożyciu alkoholu/narkotyków w ciągu ostatnich 8 godzin; Limit stężenia alkoholu we krwi 0,2 ‰",
+          "Zakaz przekraczania prędkości",
+          "Dotyczy wyłącznie kierowców autobusów i taksówek"
+        ],
+        "c": 1,
+        "e": "§22 Ustawa o ruchu drogowym: w ciągu 8 godzin przed jazdą nie wolno spożywać alkoholu ani narkotyków. Dopuszczalny dopuszczalny poziom alkoholu we krwi wynosi 0,2 ‰."
+      }
+    },
+    {
+      "no": {
+        "t": "T003: Arbeidsmiljø og ferie",
+        "q": "Hva er alminnelig arbeidstid etter arbeidsmiljøloven § 10-4?",
+        "o": [
+          "Maks 7,5 t/dag og 37,5 t/uke",
+          "Maks 9 t/dag og 40 t/uke",
+          "Maks 8 t/dag og 40 t/uke",
+          "Maks 10 t/dag og 48 t/uke"
+        ],
+        "c": 1,
+        "e": "Aml. § 10-4: alminnelig arbeidstid er maks 9 timer per dag og 40 timer per uke."
+      },
+      "en": {
+        "t": "T003: Labour & Holiday Law",
+        "q": "What is ordinary working time under the Working Environment Act §10-4?",
+        "o": [
+          "Max 7.5 hrs/day and 37.5 hrs/week",
+          "Max 9 hrs/day and 40 hrs/week",
+          "Max 8 hrs/day and 40 hrs/week",
+          "Max 10 hrs/day and 48 hrs/week"
+        ],
+        "c": 1,
+        "e": "§10-4: ordinary working time is max 9 hours per day and 40 hours per week."
+      },
+      "ar": {
+        "t": "T003: قانون العمل والإجازات",
+        "q": "ما ساعات العمل العادية وفق المادة 10-4 من قانون بيئة العمل؟",
+        "o": [
+          "حد أقصى 7.5 ساعة/يوم و37.5 ساعة/أسبوع",
+          "حد أقصى 9 ساعات/يوم و40 ساعة/أسبوع",
+          "حد أقصى 8 ساعات/يوم و40 ساعة/أسبوع",
+          "حد أقصى 10 ساعات/يوم و48 ساعة/أسبوع"
+        ],
+        "c": 1,
+        "e": "المادة 10-4: ساعات العمل العادية حد أقصى 9 ساعات يومياً و40 ساعة أسبوعياً."
+      },
+      "pl": {
+        "t": "T003: Prawo pracy i urlopy",
+        "q": "Czym jest normalny czas pracy w rozumieniu ustawy o środowisku pracy §10-4?",
+        "o": [
+          "Maks. 7,5 godz./dzień i 37,5 godz./tydz",
+          "Maksymalnie 9 godzin dziennie i 40 godzin tygodniowo",
+          "Maksymalnie 8 godzin dziennie i 40 godzin tygodniowo",
+          "Maksymalnie 10 godzin dziennie i 48 godzin tygodniowo"
+        ],
+        "c": 1,
+        "e": "§10-4: Zwykły czas pracy wynosi maksymalnie 9 godzin na dobę i 40 godzin tygodniowo."
+      }
+    },
+    {
+      "no": {
+        "t": "T004: Opplæring og kjøring",
+        "q": "Gjelder EU-forordning 561/2006 om kjøre- og hviletid for varebiler under 3500 kg?",
+        "o": [
+          "Ja – alle motorvogner",
+          "Nei – kun for kjøretøy over 3500 kg",
+          "Ja – kun internasjonal transport",
+          "Kun farlig gods"
+        ],
+        "c": 1,
+        "e": "EU-forordning 561/2006 gjelder kun kjøretøy over 3500 kg. Varebiler til 3500 kg er unntatt."
+      },
+      "en": {
+        "t": "T004: Training & Driving",
+        "q": "Does EU Regulation 561/2006 on driving and rest times apply to vans under 3500 kg?",
+        "o": [
+          "Yes – all motor vehicles",
+          "No – only vehicles over 3500 kg",
+          "Yes – international only",
+          "Dangerous goods only"
+        ],
+        "c": 1,
+        "e": "EU Regulation 561/2006 applies only to vehicles over 3500 kg. Vans up to 3500 kg are exempt."
+      },
+      "ar": {
+        "t": "T004: التدريب والقيادة",
+        "q": "هل تنطبق لائحة الاتحاد الأوروبي 561/2006 على الشاحنات الخفيفة دون 3500 كغ؟",
+        "o": [
+          "نعم – جميع المركبات الآلية",
+          "لا – للمركبات فوق 3500 كغ فقط",
+          "نعم – الدولية فقط",
+          "البضائع الخطرة فقط"
+        ],
+        "c": 1,
+        "e": "تنطبق لائحة 561/2006 فقط على المركبات التي تتجاوز 3500 كغ. الشاحنات الخفيفة معفاة."
+      },
+      "pl": {
+        "t": "T004: Szkolenie i jazda",
+        "q": "Czy rozporządzenie UE 561/2006 w sprawie czasu jazdy i odpoczynku ma zastosowanie do samochodów dostawczych o masie poniżej 3500 kg?",
+        "o": [
+          "Tak – wszystkie pojazdy mechaniczne",
+          "Nie – tylko pojazdy powyżej 3500 kg",
+          "Tak – tylko międzynarodowe",
+          "Tylko towary niebezpieczne"
+        ],
+        "c": 1,
+        "e": "Rozporządzenie UE 561/2006 dotyczy wyłącznie pojazdów o masie powyżej 3500 kg. Zwolnione są samochody dostawcze do 3500 kg."
+      }
+    },
+    {
+      "no": {
+        "t": "T006: Foretaksformer",
+        "q": "Hva kjennetegner et aksjeselskap (AS)?",
+        "o": [
+          "Ubegrenset personlig ansvar",
+          "Begrenset ansvar – eierne risikerer kun innskutt kapital",
+          "Krever minst 10 aksjonærer",
+          "Skattefritt overskudd"
+        ],
+        "c": 1,
+        "e": "I et AS er eiernes ansvar begrenset til innskutt kapital. Minimum aksjekapital er 30 000 NOK."
+      },
+      "en": {
+        "t": "T006: Business Forms",
+        "q": "What characterises a limited company (AS)?",
+        "o": [
+          "Unlimited personal liability",
+          "Limited liability – owners risk only invested capital",
+          "Requires 10+ shareholders",
+          "Tax-free profits"
+        ],
+        "c": 1,
+        "e": "In an AS, owners' liability is limited to invested capital. Minimum share capital is NOK 30,000."
+      },
+      "ar": {
+        "t": "T006: أشكال الشركات",
+        "q": "ما الذي يميز الشركة المساهمة المحدودة؟",
+        "o": [
+          "مسؤولية شخصية غير محدودة",
+          "مسؤولية محدودة – المالكون يخاطرون برأس مالهم فقط",
+          "تستلزم 10 مساهمين+",
+          "أرباح معفاة من الضريبة"
+        ],
+        "c": 1,
+        "e": "في الشركة المساهمة، مسؤولية المالكين محدودة برأس مال الأسهم المستثمَر. الحد الأدنى 30,000 كرونة."
+      },
+      "pl": {
+        "t": "T006: Formy przedsiębiorstwa",
+        "q": "Co charakteryzuje spółkę z ograniczoną odpowiedzialnością (AS)?",
+        "o": [
+          "Nieograniczona odpowiedzialność osobista",
+          "Ograniczona odpowiedzialność – właściciele ryzykują jedynie zainwestowany kapitał",
+          "Wymaga 10+ akcjonariuszy",
+          "Zyski wolne od podatku"
+        ],
+        "c": 1,
+        "e": "W AS odpowiedzialność właścicieli ogranicza się do zainwestowanego kapitału. Minimalny kapitał zakładowy wynosi 30 000 NOK."
+      }
+    },
+    {
+      "no": {
+        "t": "T008: Skatter",
+        "q": "Hva er forskuddstrekk og hvem er ansvarlig for å gjennomføre det?",
+        "o": [
+          "Frivillig pensjonsordning",
+          "Skattetrekk arbeidsgiver lovpålagt trekker fra ansattes lønn og innbetaler til Skatteetaten",
+          "MVA trukket fra fakturaer",
+          "Skatt arbeidsgiver betaler av eget overskudd"
+        ],
+        "c": 1,
+        "e": "Forskuddstrekk er skatten arbeidsgiver lovpålagt trekker fra arbeidstakers lønn og innbetaler til Skatteetaten."
+      },
+      "en": {
+        "t": "T008: Taxes",
+        "q": "What is advance tax withholding and who is responsible?",
+        "o": [
+          "A voluntary pension scheme",
+          "Tax employers must deduct from employees' wages and pay to the Tax Administration",
+          "VAT on invoices",
+          "Tax on the employer's own profits"
+        ],
+        "c": 1,
+        "e": "Advance tax withholding is the tax employers must legally deduct from employees' wages and pay to the Tax Administration."
+      },
+      "ar": {
+        "t": "T008: الضرائب",
+        "q": "ما الاستقطاع الضريبي المسبق ومن المسؤول عنه؟",
+        "o": [
+          "نظام تقاعد طوعي",
+          "ضريبة يُلزَم صاحب العمل بخصمها من رواتب الموظفين وتحويلها للإدارة الضريبية",
+          "ضريبة القيمة المضافة على الفواتير",
+          "ضريبة أرباح صاحب العمل الخاصة"
+        ],
+        "c": 1,
+        "e": "الاستقطاع المسبق هو الضريبة التي يُلزَم صاحب العمل بخصمها من رواتب الموظفين وتحويلها للإدارة الضريبية."
+      },
+      "pl": {
+        "t": "T008: Podatki",
+        "q": "Co to jest zaliczka na podatek u źródła i kto jest za nią odpowiedzialny?",
+        "o": [
+          "Dobrowolny program emerytalny",
+          "Pracodawcy podatkowi mają obowiązek potrącać składki z wynagrodzeń pracowników i odprowadzać je do urzędu skarbowego",
+          "VAT na fakturach",
+          "Podatek od zysków własnych pracodawcy"
+        ],
+        "c": 1,
+        "e": "Zaliczka na podatek u źródła to podatek, który pracodawcy muszą zgodnie z prawem potrącać z wynagrodzeń pracowników i płacić organom podatkowym."
+      }
+    },
+    {
+      "no": {
+        "t": "T009: Avgifter",
+        "q": "Hva er den alminnelige MVA-satsen i Norge, og hvilken sats gjelder for persontransport?",
+        "o": [
+          "20 % standard; 12 % persontransport",
+          "25 % standard; 12 % persontransport",
+          "25 % for begge",
+          "Persontransport er MVA-fritatt"
+        ],
+        "c": 1,
+        "e": "Alminnelig MVA-sats er 25 %. Persontransport (taxi, drosje) har redusert sats 12 %."
+      },
+      "en": {
+        "t": "T009: VAT & Fees",
+        "q": "What is the standard VAT rate in Norway and what rate applies to passenger transport?",
+        "o": [
+          "20% standard; 12% passenger",
+          "25% standard; 12% passenger",
+          "25% for both",
+          "Passenger transport is VAT-exempt"
+        ],
+        "c": 1,
+        "e": "Standard VAT rate is 25%. Passenger transport (taxi, minicab) has a reduced rate of 12%."
+      },
+      "ar": {
+        "t": "T009: الرسوم وضريبة القيمة المضافة",
+        "q": "ما معدل ضريبة القيمة المضافة القياسي في النرويج وما المعدل المنطبق على نقل الركاب؟",
+        "o": [
+          "20٪ قياسي؛ 12٪ نقل الركاب",
+          "25٪ قياسي؛ 12٪ نقل الركاب",
+          "25٪ للاثنين",
+          "نقل الركاب معفى من ضريبة القيمة المضافة"
+        ],
+        "c": 1,
+        "e": "معدل ضريبة القيمة المضافة القياسي 25٪. نقل الركاب (التاكسي) له معدل مخفض 12٪."
+      },
+      "pl": {
+        "t": "T009: Opłaty i VAT",
+        "q": "Jaka jest podstawowa stawka VAT w Norwegii i jaka stawka obowiązuje w transporcie pasażerskim?",
+        "o": [
+          "20% standardowo; 12% pasażerów",
+          "25% standardowo; 12% pasażerów",
+          "25% dla obu",
+          "Przewóz osób jest zwolniony z podatku VAT"
+        ],
+        "c": 1,
+        "e": "Standardowa stawka podatku VAT wynosi 25%. W przypadku transportu pasażerskiego (taksówka, minicab) obowiązuje stawka obniżona w wysokości 12%."
+      }
+    },
+    {
+      "no": {
+        "t": "T001: Yrkestransportloven",
+        "q": "Hva skjer dersom en virksomhet driver godstransport mot vederlag uten løyve?",
+        "o": [
+          "Ingenting – det er uproblematisk",
+          "Det kan medføre bøter, inndragning av kjøretøy og straffeansvar etter yrkestransportlova",
+          "Kun en advarsel fra Statens vegvesen",
+          "Løyvekravet gjelder bare for utenlandske transportører"
+        ],
+        "c": 1,
+        "e": "Ulovlig godstransport uten løyve er straffbart etter yrkestransportlova § 35 og kan medføre bøter og inndragning av kjøretøy."
+      },
+      "en": {
+        "t": "T001: Transport Law",
+        "q": "What happens if a business carries goods for reward without a licence?",
+        "o": [
+          "Nothing – it is unproblematic",
+          "It can result in fines, vehicle confiscation and criminal liability under the Transport Act",
+          "Only a warning from the Roads Administration",
+          "The licence requirement only applies to foreign carriers"
+        ],
+        "c": 1,
+        "e": "Illegal goods transport without a licence is a criminal offence under the Transport Act §35 and can result in fines and vehicle confiscation."
+      },
+      "ar": {
+        "t": "T001: قانون النقل",
+        "q": "ماذا يحدث إذا مارست شركة نقل البضائع بأجر دون رخصة؟",
+        "o": [
+          "لا شيء – لا مشكلة",
+          "قد يترتب عليه غرامات ومصادرة المركبة ومسؤولية جنائية بموجب قانون النقل",
+          "تحذير فقط من إدارة الطرق",
+          "اشتراط الرخصة ينطبق على الناقلين الأجانب فقط"
+        ],
+        "c": 1,
+        "e": "نقل البضائع غير القانوني دون رخصة يُعدّ جريمة جنائية بموجب المادة 35 من قانون النقل ويمكن أن يؤدي إلى غرامات ومصادرة المركبة."
+      },
+      "pl": {
+        "t": "T001: Prawo transportowe",
+        "q": "Co się stanie, jeśli firma przewozi towary za wynagrodzeniem bez licencji?",
+        "o": [
+          "Nic – jest to bezproblemowe",
+          "Może skutkować karami finansowymi, konfiskatą pojazdu i odpowiedzialnością karną na mocy ustawy o transporcie",
+          "Jedynie ostrzeżenie Zarządu Dróg",
+          "Wymóg licencji dotyczy wyłącznie przewoźników zagranicznych"
+        ],
+        "c": 1,
+        "e": "Nielegalny przewóz towarów bez licencji stanowi przestępstwo w rozumieniu ustawy o transporcie §35 i może skutkować karami finansowymi oraz konfiskatą pojazdu."
+      }
+    },
+    {
+      "no": {
+        "t": "T001: Yrkestransportloven",
+        "q": "Hva er et løyvekort, og hva må sjåføren gjøre med det under kjøring?",
+        "o": [
+          "Det er sjåfør-ID og kan ligge hjemme",
+          "Det er en bekreftet kopi av løyvet som skal medbringes i kjøretøyet og fremvises på forespørsel under veikontroll",
+          "Det er kun relevant ved grensepassering",
+          "Det er det samme som sjåførens førerkort"
+        ],
+        "c": 1,
+        "e": "Løyvekortet er en bekreftet kopi av løyvet som skal medbringes i kjøretøyet og fremvises for kontrollmyndigheter på forespørsel, jf. yrkestransportforskriften § 4b."
+      },
+      "en": {
+        "t": "T001: Transport Law",
+        "q": "What is a licence card and what must the driver do with it during a journey?",
+        "o": [
+          "It is driver ID and can be left at home",
+          "It is a certified copy of the licence that must be carried in the vehicle and produced on request during roadside checks",
+          "It is only relevant at border crossings",
+          "It is the same as the driver's driving licence"
+        ],
+        "c": 1,
+        "e": "The licence card is a certified copy of the licence that must be carried in the vehicle and produced for inspection authorities on request, per the Transport Regulations §4b."
+      },
+      "ar": {
+        "t": "T001: قانون النقل",
+        "q": "ما هي بطاقة الرخصة وما الذي يجب على السائق فعله بها أثناء القيادة؟",
+        "o": [
+          "هي هوية السائق ويمكن تركها في المنزل",
+          "هي نسخة مصدقة من الرخصة يجب حملها في المركبة وتقديمها عند الطلب أثناء نقاط التفتيش",
+          "ذات صلة عند عبور الحدود فقط",
+          "هي نفس رخصة قيادة السائق"
+        ],
+        "c": 1,
+        "e": "بطاقة الرخصة هي نسخة مصدقة من الرخصة يجب حملها في المركبة وتقديمها لجهات الرقابة عند الطلب وفق اللوائح التنفيذية."
+      },
+      "pl": {
+        "t": "T001: Prawo transportowe",
+        "q": "Co to jest karta licencyjna i co kierowca musi z nią zrobić podczas podróży?",
+        "o": [
+          "Jest to identyfikator kierowcy i można go zostawić w domu",
+          "Jest to uwierzytelniony odpis prawa jazdy, który należy mieć przy sobie w pojeździe i okazywać na żądanie podczas kontroli drogowej",
+          "Ma to znaczenie tylko na przejściach granicznych",
+          "To to samo, co prawo jazdy"
+        ],
+        "c": 1,
+        "e": "Karta rejestracyjna jest poświadczoną kopią prawa jazdy, którą należy przewozić w pojeździe i okazywać na żądanie organom kontrolnym, zgodnie z Regulaminem Transportu §4b."
+      }
+    },
+    {
+      "no": {
+        "t": "T001: Yrkestransportloven",
+        "q": "Hva innebærer vandelskravet for løyvehavere?",
+        "o": [
+          "Løyvehaver må ha minst 5 år uten straffedommer",
+          "Løyvehaver og transportleder skal ikke ha alvorlige brudd på transportregelverket, arbeidsmiljølovgivningen, skattelovgivningen eller straffeloven",
+          "Kun at løyvehaver har norsk statsborgerskap",
+          "Vandelskravet gjelder kun ved søknad om internasjonalt løyve"
+        ],
+        "c": 1,
+        "e": "Vandelskravet i yrkestransportlova § 4 og forordning 1071/2009 art. 6 innebærer at løyvehaver og transportleder ikke har alvorlige brudd på disse lovområdene. Brudd kan føre til tilbakekall av løyvet."
+      },
+      "en": {
+        "t": "T001: Transport Law",
+        "q": "What does the good repute requirement mean for licence holders?",
+        "o": [
+          "Licence holder must have at least 5 years without criminal convictions",
+          "Licence holder and transport manager must not have serious violations of transport rules, labour law, tax law or criminal law",
+          "Only that the licence holder has Norwegian citizenship",
+          "The good repute requirement only applies when applying for an international licence"
+        ],
+        "c": 1,
+        "e": "The good repute requirement in the Transport Act §4 and Regulation 1071/2009 Art.6 means licence holders and transport managers must not have serious violations in these legal areas. Violations can lead to revocation."
+      },
+      "ar": {
+        "t": "T001: قانون النقل",
+        "q": "ما معنى اشتراط السمعة الطيبة لأصحاب الرخص؟",
+        "o": [
+          "يجب أن يمر 5 سنوات على الأقل بدون إدانات جنائية",
+          "يجب ألا يكون صاحب الرخصة ومدير النقل قد ارتكبا مخالفات جسيمة لقواعد النقل وقانون العمل والضرائب والقانون الجنائي",
+          "الاشتراط هو الجنسية النرويجية فقط",
+          "ينطبق الاشتراط عند التقدم للرخص الدولية فقط"
+        ],
+        "c": 1,
+        "e": "يعني اشتراط السمعة الطيبة وفق المادة 4 من قانون النقل ولائحة 1071/2009 المادة 6 ألا يكون صاحب الرخصة ومدير النقل قد ارتكبا مخالفات جسيمة في هذه المجالات القانونية. المخالفات قد تؤدي إلى سحب الرخصة."
+      },
+      "pl": {
+        "t": "T001: Prawo transportowe",
+        "q": "Co wymóg dobrej reputacji oznacza dla posiadaczy licencji?",
+        "o": [
+          "Posiadacz licencji musi mieć co najmniej 5 lat bez wyroków skazujących",
+          "Posiadacz licencji i zarządzający transportem nie mogą dopuścić się poważnych naruszeń przepisów transportowych, prawa pracy, prawa podatkowego ani prawa karnego",
+          "Tyle, że posiadacz licencji ma obywatelstwo norweskie",
+          "Wymóg dobrej reputacji ma zastosowanie wyłącznie w przypadku ubiegania się o licencję międzynarodową"
+        ],
+        "c": 1,
+        "e": "Wymóg dobrej reputacji zawarty w ustawie o transporcie §4 i rozporządzeniu nr 1071/2009 art.6 oznacza, że ​​posiadacze licencji i zarządzający transportem nie mogą dopuścić się poważnych naruszeń w tych obszarach prawnych. Naruszenia mogą skutkować unieważnieniem."
+      }
+    },
+    {
+      "no": {
+        "t": "T002: Vegtrafikkloven",
+        "q": "Hva er fartsgrensen i tettbygd strøk dersom ingen annen grense er skiltet?",
+        "o": [
+          "60 km/t",
+          "50 km/t",
+          "30 km/t",
+          "70 km/t"
+        ],
+        "c": 1,
+        "e": "Etter vtrl. § 6 og skiltforskriften er den generelle fartsgrensen 50 km/t i tettbygd strøk når annen grense ikke er fastsatt ved skilt."
+      },
+      "en": {
+        "t": "T002: Road Traffic Act",
+        "q": "What is the speed limit in built-up areas where no other limit is signed?",
+        "o": [
+          "60 km/h",
+          "50 km/h",
+          "30 km/h",
+          "70 km/h"
+        ],
+        "c": 1,
+        "e": "Under the Road Traffic Act §6 and sign regulations, the general speed limit is 50 km/h in built-up areas when no other limit is indicated by a sign."
+      },
+      "ar": {
+        "t": "T002: قانون السير",
+        "q": "ما حد السرعة في المناطق العمرانية عندما لا تُحدد أي سرعة أخرى؟",
+        "o": [
+          "60 كم/ساعة",
+          "50 كم/ساعة",
+          "30 كم/ساعة",
+          "70 كم/ساعة"
+        ],
+        "c": 1,
+        "e": "بموجب المادة 6 من قانون السير ولوائح اللافتات، يكون حد السرعة العام 50 كم/ساعة في المناطق العمرانية عند عدم تحديد حد آخر بلافتة."
+      },
+      "pl": {
+        "t": "T002: Prawo o ruchu drogowym",
+        "q": "Jaka jest dopuszczalna prędkość w terenie zabudowanym, gdzie nie ma innego ograniczenia?",
+        "o": [
+          "60 kilometrów na godzinę",
+          "50 km/godz",
+          "30 km/godz",
+          "70 kilometrów na godzinę"
+        ],
+        "c": 1,
+        "e": "Zgodnie z §6 ustawy o ruchu drogowym oraz przepisami o znakach, ogólne ograniczenie prędkości w terenie zabudowanym wynosi 50 km/h, jeżeli znak nie wskazuje innego ograniczenia."
+      }
+    },
+    {
+      "no": {
+        "t": "T002: Vegtrafikkloven",
+        "q": "Hvem har vikeplikt i et veikryss uten skilt eller signal, etter vegtrafikkloven § 7?",
+        "o": [
+          "Den som kommer fra venstre",
+          "Den som kommer fra høyre",
+          "Den som kjører på minst trafikkert vei",
+          "Den som kjører saktere"
+        ],
+        "c": 0,
+        "e": "Etter vtrl. § 7 (høyreregelen) har den som kommer fra venstre vikeplikt overfor kjøretøy som kommer fra høyre, i kryss uten skilt eller signal."
+      },
+      "en": {
+        "t": "T002: Road Traffic Act",
+        "q": "Who must give way at an unmarked intersection with no signs or signals, under Road Traffic Act §7?",
+        "o": [
+          "The driver coming from the left",
+          "The driver coming from the right",
+          "The driver on the less busy road",
+          "The driver going more slowly"
+        ],
+        "c": 0,
+        "e": "Under §7 (the give-way-to-the-right rule), the driver approaching from the left must give way to vehicles approaching from the right at an unmarked intersection."
+      },
+      "ar": {
+        "t": "T002: قانون السير",
+        "q": "من له الأولوية في تقاطع غير مُعلّم بدون إشارات، وفق المادة 7 من قانون السير؟",
+        "o": [
+          "السائق القادم من اليسار",
+          "السائق القادم من اليمين",
+          "السائق على الطريق الأقل ازدحاماً",
+          "السائق الأبطأ"
+        ],
+        "c": 0,
+        "e": "بموجب المادة 7 (قاعدة الأولوية لليمين)، يجب على السائق القادم من اليسار إعطاء الأولوية للمركبات القادمة من اليمين عند التقاطع غير المُعلّم."
+      },
+      "pl": {
+        "t": "T002: Prawo o ruchu drogowym",
+        "q": "[Tłumaczenie] Hvem har vikeplikt i et veikryss uten skilt eller signal, etter vegtrafikkloven § 7?",
+        "o": [
+          "[Tłumaczenie] Den som kommer fra venstre",
+          "[Tłumaczenie] Den som kommer fra høyre",
+          "[Tłumaczenie] Den som kjører på minst trafikkert vei",
+          "[Tłumaczenie] Den som kjører saktere"
+        ],
+        "c": 0,
+        "e": "[Tłumaczenie] Etter vtrl. § 7 (høyreregelen) har den som kommer fra venstre vikeplikt overfor kjøretøy som kommer fra høyre, i kryss uten skilt eller signal."
+      }
+    },
+    {
+      "no": {
+        "t": "T002: Vegtrafikkloven",
+        "q": "Hva er strafferammen for kjøring i ruspåvirket tilstand (over 1,5 ‰) etter vegtrafikkloven?",
+        "o": [
+          "Kun forenklet forelegg",
+          "Betinget fengsel inntil 1 år",
+          "Ubetinget fengsel inntil 1 år eller fengsel inntil 2 år ved skjerpende omstendigheter",
+          "Kun inndragning av kjøretøy"
+        ],
+        "c": 2,
+        "e": "Vtrl. § 31 og § 22: promillekjøring over 1,5 ‰ kan medføre ubetinget fengsel. Ved skjerpende omstendigheter (ulykke, skade) kan straffen gå opp til 2 år."
+      },
+      "en": {
+        "t": "T002: Road Traffic Act",
+        "q": "What is the maximum sentence for driving under the influence of alcohol (over 1.5 ‰) under the Road Traffic Act?",
+        "o": [
+          "Only a fixed penalty notice",
+          "Suspended imprisonment up to 1 year",
+          "Unconditional imprisonment up to 1 year or up to 2 years in aggravated circumstances",
+          "Only vehicle confiscation"
+        ],
+        "c": 2,
+        "e": "§31 and §22: drink driving above 1.5 ‰ can lead to unconditional imprisonment. With aggravating circumstances (accident, injury) the sentence can reach 2 years."
+      },
+      "ar": {
+        "t": "T002: قانون السير",
+        "q": "ما الحد الأقصى للعقوبة على القيادة تحت تأثير الكحول (أكثر من 1.5 ‰) وفق قانون السير؟",
+        "o": [
+          "غرامة مبسطة فقط",
+          "سجن موقوف التنفيذ لمدة سنة",
+          "سجن فعلي لمدة سنة أو سنتين في ظروف مشددة",
+          "مصادرة المركبة فقط"
+        ],
+        "c": 2,
+        "e": "المادتان 31 و22: قيادة السيارة بنسبة كحول تتجاوز 1.5 ‰ قد تؤدي إلى السجن الفعلي. مع ظروف مشددة (حادث، إصابة) قد تصل العقوبة إلى سنتين."
+      },
+      "pl": {
+        "t": "T002: Prawo o ruchu drogowym",
+        "q": "[Tłumaczenie] Hva er strafferammen for kjøring i ruspåvirket tilstand (over 1,5 ‰) etter vegtrafikkloven?",
+        "o": [
+          "[Tłumaczenie] Kun forenklet forelegg",
+          "[Tłumaczenie] Betinget fengsel inntil 1 år",
+          "[Tłumaczenie] Ubetinget fengsel inntil 1 år eller fengsel inntil 2 år ved skjerpende omstendigheter",
+          "[Tłumaczenie] Kun inndragning av kjøretøy"
+        ],
+        "c": 2,
+        "e": "[Tłumaczenie] Vtrl. § 31 og § 22: promillekjøring over 1,5 ‰ kan medføre ubetinget fengsel. Ved skjerpende omstendigheter (ulykke, skade) kan straffen gå opp til 2 år."
+      }
+    },
+    {
+      "no": {
+        "t": "T002: Vegtrafikkloven",
+        "q": "Hva er den generelle fartsgrensen utenfor tettbygd strøk i Norge?",
+        "o": [
+          "90 km/t",
+          "80 km/t",
+          "70 km/t",
+          "100 km/t"
+        ],
+        "c": 1,
+        "e": "Etter vtrl. § 6 er den alminnelige fartsgrensen 80 km/t utenfor tettbygd strøk når annen grense ikke er skiltet."
+      },
+      "en": {
+        "t": "T002: Road Traffic Act",
+        "q": "What is the general speed limit outside built-up areas in Norway?",
+        "o": [
+          "90 km/h",
+          "80 km/h",
+          "70 km/h",
+          "100 km/h"
+        ],
+        "c": 1,
+        "e": "Under Road Traffic Act §6, the general speed limit is 80 km/h outside built-up areas when no other limit is indicated."
+      },
+      "ar": {
+        "t": "T002: قانون السير",
+        "q": "ما حد السرعة العام خارج المناطق العمرانية في النرويج؟",
+        "o": [
+          "90 كم/ساعة",
+          "80 كم/ساعة",
+          "70 كم/ساعة",
+          "100 كم/ساعة"
+        ],
+        "c": 1,
+        "e": "بموجب المادة 6 من قانون السير، حد السرعة العام 80 كم/ساعة خارج المناطق العمرانية عند عدم تحديد حد آخر."
+      },
+      "pl": {
+        "t": "T002: Prawo o ruchu drogowym",
+        "q": "[Tłumaczenie] Hva er den generelle fartsgrensen utenfor tettbygd strøk i Norge?",
+        "o": [
+          "[Tłumaczenie] 90 km/t",
+          "[Tłumaczenie] 80 km/t",
+          "[Tłumaczenie] 70 km/t",
+          "[Tłumaczenie] 100 km/t"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Etter vtrl. § 6 er den alminnelige fartsgrensen 80 km/t utenfor tettbygd strøk når annen grense ikke er skiltet."
+      }
+    },
+    {
+      "no": {
+        "t": "T003: Arbeidsmiljø og ferie",
+        "q": "Hvor mange feriedager har arbeidstakere i Norge lovfestet rett til?",
+        "o": [
+          "21 virkedager (3 uker)",
+          "25 virkedager (5 uker)",
+          "20 virkedager",
+          "28 virkedager"
+        ],
+        "c": 1,
+        "e": "Ferieloven § 5 gir alle arbeidstakere rett til 25 virkedager ferie per år (5 uker). Lørdag regnes som virkedag i ferieloven."
+      },
+      "en": {
+        "t": "T003: Labour & Holiday Law",
+        "q": "How many days of annual leave are employees in Norway legally entitled to?",
+        "o": [
+          "21 working days (3 weeks)",
+          "25 working days (5 weeks)",
+          "20 working days",
+          "28 working days"
+        ],
+        "c": 1,
+        "e": "The Holiday Act §5 gives all employees the right to 25 working days of holiday per year (5 weeks). Saturday counts as a working day under the Holiday Act."
+      },
+      "ar": {
+        "t": "T003: قانون العمل والإجازات",
+        "q": "كم يوم إجازة سنوية مكفولة قانونياً للموظفين في النرويج؟",
+        "o": [
+          "21 يوم عمل (3 أسابيع)",
+          "25 يوم عمل (5 أسابيع)",
+          "20 يوم عمل",
+          "28 يوم عمل"
+        ],
+        "c": 1,
+        "e": "المادة 5 من قانون الإجازات تمنح جميع الموظفين الحق في 25 يوم عمل إجازة سنوياً (5 أسابيع). يُحتسب يوم السبت يوم عمل في قانون الإجازات."
+      },
+      "pl": {
+        "t": "T003: Prawo pracy i urlopy",
+        "q": "[Tłumaczenie] Hvor mange feriedager har arbeidstakere i Norge lovfestet rett til?",
+        "o": [
+          "[Tłumaczenie] 21 virkedager (3 uker)",
+          "[Tłumaczenie] 25 virkedager (5 uker)",
+          "[Tłumaczenie] 20 virkedager",
+          "[Tłumaczenie] 28 virkedager"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Ferieloven § 5 gir alle arbeidstakere rett til 25 virkedager ferie per år (5 uker). Lørdag regnes som virkedag i ferieloven."
+      }
+    },
+    {
+      "no": {
+        "t": "T003: Arbeidsmiljø og ferie",
+        "q": "Hva er den øvre grensen for samlet arbeidstid inkludert overtid per uke etter arbeidsmiljøloven?",
+        "o": [
+          "48 timer per uke",
+          "60 timer per uke",
+          "45 timer per uke",
+          "50 timer per uke"
+        ],
+        "c": 1,
+        "e": "Aml. § 10-6: Samlet arbeidstid inkludert overtid skal ikke overstige 60 timer per uke. Overtid er kun tillatt i særlige situasjoner og med arbeidstakers samtykke."
+      },
+      "en": {
+        "t": "T003: Labour & Holiday Law",
+        "q": "What is the maximum total working time including overtime per week under the Working Environment Act?",
+        "o": [
+          "48 hours per week",
+          "60 hours per week",
+          "45 hours per week",
+          "50 hours per week"
+        ],
+        "c": 1,
+        "e": "§10-6: Total working time including overtime must not exceed 60 hours per week. Overtime is only permitted in special circumstances and with the employee's consent."
+      },
+      "ar": {
+        "t": "T003: قانون العمل والإجازات",
+        "q": "ما الحد الأقصى لإجمالي ساعات العمل بما في ذلك العمل الإضافي في الأسبوع وفق قانون بيئة العمل؟",
+        "o": [
+          "48 ساعة في الأسبوع",
+          "60 ساعة في الأسبوع",
+          "45 ساعة في الأسبوع",
+          "50 ساعة في الأسبوع"
+        ],
+        "c": 1,
+        "e": "المادة 10-6: يجب ألا يتجاوز إجمالي ساعات العمل بما فيها العمل الإضافي 60 ساعة في الأسبوع. يُسمح بالعمل الإضافي فقط في ظروف خاصة وبموافقة الموظف."
+      },
+      "pl": {
+        "t": "T003: Prawo pracy i urlopy",
+        "q": "[Tłumaczenie] Hva er den øvre grensen for samlet arbeidstid inkludert overtid per uke etter arbeidsmiljøloven?",
+        "o": [
+          "[Tłumaczenie] 48 timer per uke",
+          "[Tłumaczenie] 60 timer per uke",
+          "[Tłumaczenie] 45 timer per uke",
+          "[Tłumaczenie] 50 timer per uke"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Aml. § 10-6: Samlet arbeidstid inkludert overtid skal ikke overstige 60 timer per uke. Overtid er kun tillatt i særlige situasjoner og med arbeidstakers samtykke."
+      }
+    },
+    {
+      "no": {
+        "t": "T003: Arbeidsmiljø og ferie",
+        "q": "Hva er kravet til skriftlig arbeidsavtale i Norge?",
+        "o": [
+          "Bare nødvendig ved ansettelse over 6 måneder",
+          "Alle arbeidstakere har rett på skriftlig arbeidsavtale fra første dag, jf. aml. § 14-5",
+          "Kun krav ved ansettelse av utenlandske arbeidstakere",
+          "Skriftlig avtale er valgfritt – muntlig er tilstrekkelig"
+        ],
+        "c": 1,
+        "e": "Aml. § 14-5: Alle arbeidstakere har rett til skriftlig arbeidsavtale. Avtalen skal foreligge senest innen en måned etter arbeidsforholdets start for ansettelsesforhold over en måned."
+      },
+      "en": {
+        "t": "T003: Labour & Holiday Law",
+        "q": "What is the requirement for a written employment contract in Norway?",
+        "o": [
+          "Only necessary for employment exceeding 6 months",
+          "All employees have the right to a written employment contract from the first day, per §14-5",
+          "Only required when employing foreign workers",
+          "Written contract is optional – verbal is sufficient"
+        ],
+        "c": 1,
+        "e": "§14-5: All employees have the right to a written employment contract. The contract must be in place no later than one month after the start of employment for contracts lasting more than one month."
+      },
+      "ar": {
+        "t": "T003: قانون العمل والإجازات",
+        "q": "ما اشتراط عقد العمل المكتوب في النرويج؟",
+        "o": [
+          "ضروري فقط للتوظيف الذي يتجاوز 6 أشهر",
+          "لجميع الموظفين الحق في عقد عمل مكتوب من اليوم الأول وفق المادة 14-5",
+          "مطلوب فقط عند توظيف عمال أجانب",
+          "العقد المكتوب اختياري – الشفهي كافٍ"
+        ],
+        "c": 1,
+        "e": "المادة 14-5: لجميع الموظفين الحق في عقد عمل مكتوب. يجب توفر العقد في موعد أقصاه شهر من بداية علاقة العمل للعقود التي تتجاوز شهراً."
+      },
+      "pl": {
+        "t": "T003: Prawo pracy i urlopy",
+        "q": "[Tłumaczenie] Hva er kravet til skriftlig arbeidsavtale i Norge?",
+        "o": [
+          "[Tłumaczenie] Bare nødvendig ved ansettelse over 6 måneder",
+          "[Tłumaczenie] Alle arbeidstakere har rett på skriftlig arbeidsavtale fra første dag, jf. aml. § 14-5",
+          "[Tłumaczenie] Kun krav ved ansettelse av utenlandske arbeidstakere",
+          "[Tłumaczenie] Skriftlig avtale er valgfritt – muntlig er tilstrekkelig"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Aml. § 14-5: Alle arbeidstakere har rett til skriftlig arbeidsavtale. Avtalen skal foreligge senest innen en måned etter arbeidsforholdets start for ansettelsesforhold over en måned."
+      }
+    },
+    {
+      "no": {
+        "t": "T003: Arbeidsmiljø og ferie",
+        "q": "Hva er oppsigelsesvern ved sykdom etter arbeidsmiljøloven?",
+        "o": [
+          "Ingen særskilt vern ved sykdom",
+          "Arbeidstaker kan ikke sies opp de første 12 månedene ved sykefravær forårsaket av arbeidet, jf. aml. § 15-8",
+          "Sykdom gir aldri oppsigelsesrett til arbeidsgiver",
+          "Kun 3 måneders oppsigelsesvern"
+        ],
+        "c": 1,
+        "e": "Aml. § 15-8: Arbeidstaker som er borte fra arbeidet pga. ulykke eller sykdom, kan ikke sies opp de første 12 månedene etter at arbeidsuførheten inntrådte."
+      },
+      "en": {
+        "t": "T003: Labour & Holiday Law",
+        "q": "What protection from dismissal applies during sick leave under the Working Environment Act?",
+        "o": [
+          "No special protection during illness",
+          "An employee cannot be dismissed during the first 12 months of sick leave caused by the job, per §15-8",
+          "Illness never gives the employer the right to dismiss",
+          "Only 3 months of dismissal protection"
+        ],
+        "c": 1,
+        "e": "§15-8: An employee absent from work due to accident or illness cannot be dismissed during the first 12 months after the incapacity began."
+      },
+      "ar": {
+        "t": "T003: قانون العمل والإجازات",
+        "q": "ما الحماية من الفصل أثناء الإجازة المرضية وفق قانون بيئة العمل؟",
+        "o": [
+          "لا حماية خاصة أثناء المرض",
+          "لا يمكن فصل الموظف خلال أول 12 شهراً من الإجازة المرضية الناجمة عن العمل وفق المادة 15-8",
+          "المرض لا يمنح صاحب العمل حق الفصل أبداً",
+          "3 أشهر فقط من الحماية من الفصل"
+        ],
+        "c": 1,
+        "e": "المادة 15-8: لا يمكن فصل الموظف الغائب عن العمل بسبب حادث أو مرض خلال أول 12 شهراً من بداية العجز."
+      },
+      "pl": {
+        "t": "T003: Prawo pracy i urlopy",
+        "q": "[Tłumaczenie] Hva er oppsigelsesvern ved sykdom etter arbeidsmiljøloven?",
+        "o": [
+          "[Tłumaczenie] Ingen særskilt vern ved sykdom",
+          "[Tłumaczenie] Arbeidstaker kan ikke sies opp de første 12 månedene ved sykefravær forårsaket av arbeidet, jf. aml. § 15-8",
+          "[Tłumaczenie] Sykdom gir aldri oppsigelsesrett til arbeidsgiver",
+          "[Tłumaczenie] Kun 3 måneders oppsigelsesvern"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Aml. § 15-8: Arbeidstaker som er borte fra arbeidet pga. ulykke eller sykdom, kan ikke sies opp de første 12 månedene etter at arbeidsuførheten inntrådte."
+      }
+    },
+    {
+      "no": {
+        "t": "T004: Opplæring og kjøring",
+        "q": "Hva er de viktigste kravene for at gods skal anses som forsvarlig sikret på et kjøretøy?",
+        "o": [
+          "Godset behøver ikke sikres hvis turen er kort",
+          "Godset skal sikres slik at det ikke forskyver seg, faller av eller forårsaker farlig situasjon, jf. vegtrl. og lasteforskriften",
+          "Kun kjøretøyets eier er ansvarlig for lastsikring",
+          "Stropper er frivillig ved kjøring under 50 km/t"
+        ],
+        "c": 1,
+        "e": "Forskrift om bruk av kjøretøy og vtrl. § 3 stiller krav om at gods skal sikres slik at det ikke kan forflytte seg, falle av eller forårsake fare. Sjåfør og eier er medansvarlige."
+      },
+      "en": {
+        "t": "T004: Training & Driving",
+        "q": "What are the main requirements for cargo to be considered properly secured on a vehicle?",
+        "o": [
+          "Cargo doesn't need securing if the journey is short",
+          "Cargo must be secured so it cannot shift, fall off or cause a dangerous situation, per load-securing regulations",
+          "Only the vehicle owner is responsible for load securing",
+          "Straps are optional when driving under 50 km/h"
+        ],
+        "c": 1,
+        "e": "Vehicle use regulations and Road Traffic Act §3 require that cargo must be secured so it cannot shift, fall off or cause danger. Both driver and owner share responsibility."
+      },
+      "ar": {
+        "t": "T004: التدريب والقيادة",
+        "q": "ما الاشتراطات الرئيسية لاعتبار البضائع مؤمنة بشكل صحيح على المركبة؟",
+        "o": [
+          "البضائع لا تحتاج تأميناً إذا كانت الرحلة قصيرة",
+          "يجب تأمين البضائع بحيث لا تتزحزح أو تسقط أو تسبب وضعاً خطيراً",
+          "المالك فقط مسؤول عن تأمين الحمولة",
+          "الأحزمة اختيارية عند القيادة بأقل من 50 كم/ساعة"
+        ],
+        "c": 1,
+        "e": "تشترط لوائح استخدام المركبات والمادة 3 من قانون السير تأمين البضائع بحيث لا تتحرك أو تسقط أو تسبب خطراً. السائق والمالك مسؤولان مشتركان."
+      },
+      "pl": {
+        "t": "T004: Szkolenie i jazda",
+        "q": "[Tłumaczenie] Hva er de viktigste kravene for at gods skal anses som forsvarlig sikret på et kjøretøy?",
+        "o": [
+          "[Tłumaczenie] Godset behøver ikke sikres hvis turen er kort",
+          "[Tłumaczenie] Godset skal sikres slik at det ikke forskyver seg, faller av eller forårsaker farlig situasjon, jf. vegtrl. og lasteforskriften",
+          "[Tłumaczenie] Kun kjøretøyets eier er ansvarlig for lastsikring",
+          "[Tłumaczenie] Stropper er frivillig ved kjøring under 50 km/t"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Forskrift om bruk av kjøretøy og vtrl. § 3 stiller krav om at gods skal sikres slik at det ikke kan forflytte seg, falle av eller forårsake fare. Sjåfør og eier er medansvarlige."
+      }
+    },
+    {
+      "no": {
+        "t": "T004: Opplæring og kjøring",
+        "q": "Hva er alderskravet og helsekravet for å inneha gyldig førerkort klasse B?",
+        "o": [
+          "18 år, ingen helsekrav",
+          "Minimum 18 år og tilfredsstillende helse (syn, kognisjon mv.) etter forskrift om førerkort",
+          "17 år med ledsager, 18 år alene; ingen helsekrav",
+          "16 år for lett varebil"
+        ],
+        "c": 1,
+        "e": "Forskrift om førerkort: Klasse B krever minimum 18 år (17 for øvelseskjøring) og tilfredsstillende helse etter helsekravforskriften, inkludert synsstyrke og kognitive funksjoner."
+      },
+      "en": {
+        "t": "T004: Training & Driving",
+        "q": "What are the age and health requirements for a valid class B driving licence?",
+        "o": [
+          "18 years, no health requirements",
+          "Minimum 18 years and satisfactory health (vision, cognition etc.) per driving licence regulations",
+          "17 years with supervisor, 18 alone; no health requirements",
+          "16 years for a light van"
+        ],
+        "c": 1,
+        "e": "Driving Licence Regulations: Class B requires a minimum of 18 years (17 for supervised driving) and satisfactory health per health requirements regulations, including vision and cognitive functions."
+      },
+      "ar": {
+        "t": "T004: التدريب والقيادة",
+        "q": "ما اشتراطات السن والصحة للحصول على رخصة قيادة صالحة من الفئة B؟",
+        "o": [
+          "18 عاماً، لا اشتراطات صحية",
+          "الحد الأدنى 18 عاماً وصحة مرضية (بصر وإدراك وما إلى ذلك) وفق لوائح رخصة القيادة",
+          "17 عاماً مع مرافق، 18 عاماً منفرداً؛ لا اشتراطات صحية",
+          "16 عاماً للشاحنة الخفيفة"
+        ],
+        "c": 1,
+        "e": "لوائح رخصة القيادة: تستلزم الفئة B الحد الأدنى 18 عاماً (17 للقيادة تحت الإشراف) وصحة مرضية وفق لوائح الاشتراطات الصحية، بما في ذلك البصر والوظائف المعرفية."
+      },
+      "pl": {
+        "t": "T004: Szkolenie i jazda",
+        "q": "[Tłumaczenie] Hva er alderskravet og helsekravet for å inneha gyldig førerkort klasse B?",
+        "o": [
+          "[Tłumaczenie] 18 år, ingen helsekrav",
+          "[Tłumaczenie] Minimum 18 år og tilfredsstillende helse (syn, kognisjon mv.) etter forskrift om førerkort",
+          "[Tłumaczenie] 17 år med ledsager, 18 år alene; ingen helsekrav",
+          "[Tłumaczenie] 16 år for lett varebil"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Forskrift om førerkort: Klasse B krever minimum 18 år (17 for øvelseskjøring) og tilfredsstillende helse etter helsekravforskriften, inkludert synsstyrke og kognitive funksjoner."
+      }
+    },
+    {
+      "no": {
+        "t": "T005: Internkontroll/HMS",
+        "q": "Hva er de viktigste elementene i et internkontrollsystem etter internkontrollforskriften?",
+        "o": [
+          "Kun en brannøvelse per år",
+          "Mål og ansvar, risikovurdering, prosedyrer og rutiner, opplæring og dokumentasjon, avviksbehandling og revisjon",
+          "Kun skriftlig ansettelseskontrakt og verneutstyr",
+          "HMS-arbeid er bare nødvendig for bedrifter med over 10 ansatte"
+        ],
+        "c": 1,
+        "e": "Internkontrollforskriften § 5 krever at virksomheter systematisk dokumenterer mål, risikovurdering, prosedyrer, opplæring og avviksbehandling. Dette er selve kjernen i et forsvarlig HMS-system."
+      },
+      "en": {
+        "t": "T005: Internal Control/HSE",
+        "q": "What are the key elements of an internal control system under the Internal Control Regulation?",
+        "o": [
+          "Only one fire drill per year",
+          "Goals and responsibilities, risk assessment, procedures and routines, training and documentation, incident handling and review",
+          "Only written employment contracts and protective equipment",
+          "HSE work is only required for businesses with more than 10 employees"
+        ],
+        "c": 1,
+        "e": "Internal Control Regulation §5 requires businesses to systematically document goals, risk assessment, procedures, training and incident handling. This is the core of a proper HSE system."
+      },
+      "ar": {
+        "t": "T005: الرقابة الداخلية والسلامة",
+        "q": "ما العناصر الرئيسية لنظام الرقابة الداخلية وفق لائحة الرقابة الداخلية؟",
+        "o": [
+          "تدريب إطفاء واحد فقط في السنة",
+          "الأهداف والمسؤوليات وتقييم المخاطر والإجراءات والتدريب والتوثيق ومعالجة الانحرافات والمراجعة",
+          "عقود عمل مكتوبة ومعدات وقاية فقط",
+          "عمل السلامة مطلوب فقط للشركات التي تضم أكثر من 10 موظفين"
+        ],
+        "c": 1,
+        "e": "المادة 5 من لائحة الرقابة الداخلية تستلزم من الشركات توثيق منهجي للأهداف وتقييم المخاطر والإجراءات والتدريب ومعالجة الانحرافات. هذا هو جوهر نظام السلامة السليم."
+      },
+      "pl": {
+        "t": "T005: Kontrola wewnętrzna/BHP",
+        "q": "[Tłumaczenie] Hva er de viktigste elementene i et internkontrollsystem etter internkontrollforskriften?",
+        "o": [
+          "[Tłumaczenie] Kun en brannøvelse per år",
+          "[Tłumaczenie] Mål og ansvar, risikovurdering, prosedyrer og rutiner, opplæring og dokumentasjon, avviksbehandling og revisjon",
+          "[Tłumaczenie] Kun skriftlig ansettelseskontrakt og verneutstyr",
+          "[Tłumaczenie] HMS-arbeid er bare nødvendig for bedrifter med over 10 ansatte"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Internkontrollforskriften § 5 krever at virksomheter systematisk dokumenterer mål, risikovurdering, prosedyrer, opplæring og avviksbehandling. Dette er selve kjernen i et forsvarlig HMS-system."
+      }
+    },
+    {
+      "no": {
+        "t": "T005: Internkontroll/HMS",
+        "q": "Hvem har det overordnede ansvaret for HMS-arbeidet i en virksomhet?",
+        "o": [
+          "Verneombudet",
+          "Den øverste ledelsen (daglig leder/eier)",
+          "Arbeidstakerne i fellesskap",
+          "Arbeidstilsynet"
+        ],
+        "c": 1,
+        "e": "Internkontrollforskriften og aml. § 2-1: Arbeidsgiver har det overordnede ansvaret for HMS-arbeidet. Daglig leder/eier kan ikke delegere bort dette grunnleggende ansvaret."
+      },
+      "en": {
+        "t": "T005: Internal Control/HSE",
+        "q": "Who has overall responsibility for HSE work in a business?",
+        "o": [
+          "The safety delegate",
+          "Senior management (general manager/owner)",
+          "The employees collectively",
+          "The Labour Inspection Authority"
+        ],
+        "c": 1,
+        "e": "The Internal Control Regulation and §2-1: The employer has overall responsibility for HSE work. The general manager/owner cannot delegate away this fundamental responsibility."
+      },
+      "ar": {
+        "t": "T005: الرقابة الداخلية والسلامة",
+        "q": "من يتحمل المسؤولية العليا عن عمل السلامة والصحة المهنية في الشركة؟",
+        "o": [
+          "مندوب السلامة",
+          "الإدارة العليا (المدير العام/المالك)",
+          "الموظفون بشكل جماعي",
+          "هيئة تفتيش العمل"
+        ],
+        "c": 1,
+        "e": "لائحة الرقابة الداخلية والمادة 2-1: صاحب العمل يتحمل المسؤولية العليا عن عمل السلامة. لا يمكن للمدير العام/المالك التنصل من هذه المسؤولية الأساسية."
+      },
+      "pl": {
+        "t": "T005: Kontrola wewnętrzna/BHP",
+        "q": "[Tłumaczenie] Hvem har det overordnede ansvaret for HMS-arbeidet i en virksomhet?",
+        "o": [
+          "[Tłumaczenie] Verneombudet",
+          "[Tłumaczenie] Den øverste ledelsen (daglig leder/eier)",
+          "[Tłumaczenie] Arbeidstakerne i fellesskap",
+          "[Tłumaczenie] Arbeidstilsynet"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Internkontrollforskriften og aml. § 2-1: Arbeidsgiver har det overordnede ansvaret for HMS-arbeidet. Daglig leder/eier kan ikke delegere bort dette grunnleggende ansvaret."
+      }
+    },
+    {
+      "no": {
+        "t": "T006: Foretaksformer",
+        "q": "Hva er en stille deltaker i et kommandittselskap (KS)?",
+        "o": [
+          "En ansatt uten lederstilling",
+          "En deltaker med begrenset ansvar som ikke tar del i den daglige ledelsen, og risikerer kun innskutt kapital",
+          "En aksjonær i et aksjeselskap",
+          "En person som arbeider uten lønn i virksomheten"
+        ],
+        "c": 1,
+        "e": "I et kommandittselskap (KS) er stille deltakere (kommandittister) ansvarlige kun for innskutt kapital. Komplementar har derimot ubegrenset personlig ansvar og styrer virksomheten."
+      },
+      "en": {
+        "t": "T006: Business Forms",
+        "q": "What is a silent partner (stille deltaker) in a limited partnership (KS)?",
+        "o": [
+          "An employee without a management position",
+          "A partner with limited liability who does not participate in daily management and risks only their invested capital",
+          "A shareholder in a limited company",
+          "A person who works without pay in the business"
+        ],
+        "c": 1,
+        "e": "In a limited partnership (KS), silent partners (kommandittister) are only liable for their invested capital. The general partner (komplementar) has unlimited personal liability and manages the business."
+      },
+      "ar": {
+        "t": "T006: أشكال الشركات",
+        "q": "ما هو الشريك الصامت في شراكة محدودة (KS)؟",
+        "o": [
+          "موظف بدون منصب إداري",
+          "شريك بمسؤولية محدودة لا يشارك في الإدارة اليومية ويخاطر برأس ماله المستثمر فقط",
+          "مساهم في شركة مساهمة",
+          "شخص يعمل بدون راتب في الشركة"
+        ],
+        "c": 1,
+        "e": "في الشراكة المحدودة (KS)، يكون الشركاء الصامتون مسؤولين فقط عن رأس مالهم المستثمر. أما الشريك العام (komplementar) فلديه مسؤولية شخصية غير محدودة ويدير الشركة."
+      },
+      "pl": {
+        "t": "T006: Formy przedsiębiorstwa",
+        "q": "[Tłumaczenie] Hva er en stille deltaker i et kommandittselskap (KS)?",
+        "o": [
+          "[Tłumaczenie] En ansatt uten lederstilling",
+          "[Tłumaczenie] En deltaker med begrenset ansvar som ikke tar del i den daglige ledelsen, og risikerer kun innskutt kapital",
+          "[Tłumaczenie] En aksjonær i et aksjeselskap",
+          "[Tłumaczenie] En person som arbeider uten lønn i virksomheten"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] I et kommandittselskap (KS) er stille deltakere (kommandittister) ansvarlige kun for innskutt kapital. Komplementar har derimot ubegrenset personlig ansvar og styrer virksomheten."
+      }
+    },
+    {
+      "no": {
+        "t": "T006: Foretaksformer",
+        "q": "Hva er krav om daglig leder i norske aksjeselskaper?",
+        "o": [
+          "Alle AS må alltid ha en daglig leder",
+          "AS med over 3 millioner i aksjekapital plikter å ha daglig leder; andre AS kan velge dette",
+          "Daglig leder er kun et krav for børsnoterte selskaper",
+          "Styret overtar daglig leders funksjoner automatisk"
+        ],
+        "c": 1,
+        "e": "Aksjeloven § 6-2: AS med aksjekapital på 3 millioner kroner eller mer plikter å ha daglig leder. Mindre AS kan velge å ha daglig leder, men styret kan da utøve rollen."
+      },
+      "en": {
+        "t": "T006: Business Forms",
+        "q": "What is the requirement for a general manager (daglig leder) in Norwegian limited companies?",
+        "o": [
+          "All AS must always have a general manager",
+          "AS with share capital over 3 million must have a general manager; other AS may choose to have one",
+          "A general manager is only required for listed companies",
+          "The board automatically assumes the general manager's functions"
+        ],
+        "c": 1,
+        "e": "Companies Act §6-2: AS with share capital of NOK 3 million or more must have a general manager. Smaller AS may choose to have one, and the board can then exercise the role."
+      },
+      "ar": {
+        "t": "T006: أشكال الشركات",
+        "q": "ما اشتراط وجود مدير عام في الشركات المساهمة النرويجية؟",
+        "o": [
+          "يجب على جميع الشركات المساهمة دائماً الحصول على مدير عام",
+          "الشركات المساهمة برأس مال يتجاوز 3 ملايين ملزمة بمدير عام؛ وغيرها يمكنها اختيار ذلك",
+          "المدير العام مطلوب فقط للشركات المدرجة في البورصة",
+          "يتولى مجلس الإدارة تلقائياً مهام المدير العام"
+        ],
+        "c": 1,
+        "e": "قانون الشركات المادة 6-2: الشركات المساهمة برأس مال 3 ملايين كرونة أو أكثر ملزمة بمدير عام. الشركات الأصغر يمكنها الاختيار، ويمكن لمجلس الإدارة حينها تولي الدور."
+      },
+      "pl": {
+        "t": "T006: Formy przedsiębiorstwa",
+        "q": "[Tłumaczenie] Hva er krav om daglig leder i norske aksjeselskaper?",
+        "o": [
+          "[Tłumaczenie] Alle AS må alltid ha en daglig leder",
+          "[Tłumaczenie] AS med over 3 millioner i aksjekapital plikter å ha daglig leder; andre AS kan velge dette",
+          "[Tłumaczenie] Daglig leder er kun et krav for børsnoterte selskaper",
+          "[Tłumaczenie] Styret overtar daglig leders funksjoner automatisk"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Aksjeloven § 6-2: AS med aksjekapital på 3 millioner kroner eller mer plikter å ha daglig leder. Mindre AS kan velge å ha daglig leder, men styret kan da utøve rollen."
+      }
+    },
+    {
+      "no": {
+        "t": "T007: Økonomiforståelse",
+        "q": "Hva er likviditet og hva betyr en likviditetskrise?",
+        "o": [
+          "Likviditet er total formue; en krise betyr at formuen er lav",
+          "Likviditet er bedriftens evne til å betale forpliktelser ved forfall; en krise betyr at betalingsevnen svikter selv om egenkapitalen er positiv",
+          "Likviditet og soliditet er det samme begrepet",
+          "Likviditetskrise betyr alltid at selskapet er konkurs"
+        ],
+        "c": 1,
+        "e": "Likviditet handler om betalingsevne her og nå – ikke totalformue. En bedrift kan ha positiv egenkapital men gå konkurs pga. likviditetsproblemer (inntekter kommer ikke inn i tide til å dekke utgifter)."
+      },
+      "en": {
+        "t": "T007: Financial Understanding",
+        "q": "What is liquidity and what does a liquidity crisis mean?",
+        "o": [
+          "Liquidity is total assets; a crisis means assets are low",
+          "Liquidity is the business's ability to pay its obligations when due; a crisis means payment capacity fails even though equity is positive",
+          "Liquidity and solvency are the same concept",
+          "A liquidity crisis always means the company is bankrupt"
+        ],
+        "c": 1,
+        "e": "Liquidity is about payment capacity right now – not total assets. A business can have positive equity but go bankrupt due to liquidity problems (income doesn't arrive in time to cover expenses)."
+      },
+      "ar": {
+        "t": "T007: الفهم المالي",
+        "q": "ما هي السيولة وما معنى أزمة السيولة؟",
+        "o": [
+          "السيولة هي إجمالي الأصول؛ الأزمة تعني أن الأصول منخفضة",
+          "السيولة هي قدرة الشركة على سداد التزاماتها عند الاستحقاق؛ الأزمة تعني فشل القدرة على السداد حتى لو كانت حقوق الملكية إيجابية",
+          "السيولة والملاءة المالية هما نفس المفهوم",
+          "أزمة السيولة دائماً تعني إفلاس الشركة"
+        ],
+        "c": 1,
+        "e": "السيولة تتعلق بالقدرة على الدفع الآن – وليس بإجمالي الأصول. يمكن للشركة أن تكون لديها حقوق ملكية إيجابية لكنها تفلس بسبب مشاكل السيولة (الإيرادات لا تصل في الوقت المناسب لتغطية النفقات)."
+      },
+      "pl": {
+        "t": "T007: Wiedza ekonomiczna",
+        "q": "[Tłumaczenie] Hva er likviditet og hva betyr en likviditetskrise?",
+        "o": [
+          "[Tłumaczenie] Likviditet er total formue; en krise betyr at formuen er lav",
+          "[Tłumaczenie] Likviditet er bedriftens evne til å betale forpliktelser ved forfall; en krise betyr at betalingsevnen svikter selv om egenkapitalen er positiv",
+          "[Tłumaczenie] Likviditet og soliditet er det samme begrepet",
+          "[Tłumaczenie] Likviditetskrise betyr alltid at selskapet er konkurs"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Likviditet handler om betalingsevne her og nå – ikke totalformue. En bedrift kan ha positiv egenkapital men gå konkurs pga. likviditetsproblemer (inntekter kommer ikke inn i tide til å dekke utgifter)."
+      }
+    },
+    {
+      "no": {
+        "t": "T007: Økonomiforståelse",
+        "q": "Hva er dekningsbidrag i en virksomhet?",
+        "o": [
+          "Overskudd etter alle kostnader",
+          "Salgsinntekt minus variable kostnader; viser hva som er igjen til å dekke faste kostnader",
+          "Total omsetning i perioden",
+          "Summen av alle faste kostnader"
+        ],
+        "c": 1,
+        "e": "Dekningsbidrag (DB) = Salgsinntekter − Variable kostnader. Det forteller om det er lønnsomt å produsere/selge enheten og om bidraget dekker de faste kostnadene (husleie, lønn til fast ansatte mv.)."
+      },
+      "en": {
+        "t": "T007: Financial Understanding",
+        "q": "What is a contribution margin in a business?",
+        "o": [
+          "Profit after all costs",
+          "Sales revenue minus variable costs; shows what is left to cover fixed costs",
+          "Total turnover in the period",
+          "The sum of all fixed costs"
+        ],
+        "c": 1,
+        "e": "Contribution margin = Sales revenue − Variable costs. It shows whether it is profitable to produce/sell the unit and whether the contribution covers fixed costs (rent, permanent staff wages etc.)."
+      },
+      "ar": {
+        "t": "T007: الفهم المالي",
+        "q": "ما هو هامش المساهمة في الشركة؟",
+        "o": [
+          "الربح بعد جميع التكاليف",
+          "إيرادات المبيعات ناقص التكاليف المتغيرة؛ يُظهر ما تبقى لتغطية التكاليف الثابتة",
+          "إجمالي المبيعات في الفترة",
+          "مجموع جميع التكاليف الثابتة"
+        ],
+        "c": 1,
+        "e": "هامش المساهمة = إيرادات المبيعات − التكاليف المتغيرة. يُظهر ما إذا كان من المربح إنتاج/بيع الوحدة وما إذا كان الهامش يغطي التكاليف الثابتة (الإيجار ورواتب الموظفين الدائمين وما إلى ذلك)."
+      },
+      "pl": {
+        "t": "T007: Wiedza ekonomiczna",
+        "q": "[Tłumaczenie] Hva er dekningsbidrag i en virksomhet?",
+        "o": [
+          "[Tłumaczenie] Overskudd etter alle kostnader",
+          "[Tłumaczenie] Salgsinntekt minus variable kostnader; viser hva som er igjen til å dekke faste kostnader",
+          "[Tłumaczenie] Total omsetning i perioden",
+          "[Tłumaczenie] Summen av alle faste kostnader"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Dekningsbidrag (DB) = Salgsinntekter − Variable kostnader. Det forteller om det er lønnsomt å produsere/selge enheten og om bidraget dekker de faste kostnadene (husleie, lønn til fast ansatte mv.)."
+      }
+    },
+    {
+      "no": {
+        "t": "T008: Skatter",
+        "q": "Hva er skattepliktig inntekt for næringsdrivende?",
+        "o": [
+          "Kun lønn og kapitalgevinst",
+          "All inntekt fra næringsvirksomhet, lønnsinntekt og kapitalinntekt etter fradrag for tillatte kostnader, jf. skatteloven § 5-1",
+          "Kun overskudd i aksjeselskapet",
+          "Næringsdrivende betaler ikke skatt før etter 3 år"
+        ],
+        "c": 1,
+        "e": "Skatteloven § 5-1: Skattepliktig inntekt er alle fordeler vunnet ved arbeid, kapital og virksomhet. Næringsdrivende kan trekke fra legitimerte driftskostnader som drivstoff, vedlikehold og forsikring."
+      },
+      "en": {
+        "t": "T008: Taxes",
+        "q": "What is taxable income for the self-employed?",
+        "o": [
+          "Only wages and capital gains",
+          "All income from business activity, employment income and capital income after deduction of permitted costs, per the Tax Act §5-1",
+          "Only profits in the limited company",
+          "Self-employed do not pay tax until after 3 years"
+        ],
+        "c": 1,
+        "e": "Tax Act §5-1: Taxable income includes all benefits gained through work, capital and business activity. Self-employed persons can deduct legitimate operating costs such as fuel, maintenance and insurance."
+      },
+      "ar": {
+        "t": "T008: الضرائب",
+        "q": "ما هو الدخل الخاضع للضريبة للعاملين لحسابهم الخاص؟",
+        "o": [
+          "الرواتب ومكاسب رأس المال فقط",
+          "جميع الدخل من النشاط التجاري ودخل التوظيف ودخل رأس المال بعد خصم التكاليف المسموح بها وفق قانون الضرائب المادة 5-1",
+          "الأرباح في الشركة المساهمة فقط",
+          "العاملون لحسابهم الخاص لا يدفعون ضريبة حتى بعد 3 سنوات"
+        ],
+        "c": 1,
+        "e": "قانون الضرائب المادة 5-1: يشمل الدخل الخاضع للضريبة جميع المزايا المكتسبة من خلال العمل ورأس المال والنشاط التجاري. يمكن للعاملين لحسابهم الخاص خصم تكاليف التشغيل المشروعة كالوقود والصيانة والتأمين."
+      },
+      "pl": {
+        "t": "T008: Podatki",
+        "q": "[Tłumaczenie] Hva er skattepliktig inntekt for næringsdrivende?",
+        "o": [
+          "[Tłumaczenie] Kun lønn og kapitalgevinst",
+          "[Tłumaczenie] All inntekt fra næringsvirksomhet, lønnsinntekt og kapitalinntekt etter fradrag for tillatte kostnader, jf. skatteloven § 5-1",
+          "[Tłumaczenie] Kun overskudd i aksjeselskapet",
+          "[Tłumaczenie] Næringsdrivende betaler ikke skatt før etter 3 år"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Skatteloven § 5-1: Skattepliktig inntekt er alle fordeler vunnet ved arbeid, kapital og virksomhet. Næringsdrivende kan trekke fra legitimerte driftskostnader som drivstoff, vedlikehold og forsikring."
+      }
+    },
+    {
+      "no": {
+        "t": "T008: Skatter",
+        "q": "Hva er meldingsfristen for a-meldingen?",
+        "o": [
+          "Én gang per år – innen 31. januar",
+          "Den 5. i måneden etter utbetalingsmåneden",
+          "Kvartalsvis – 4 ganger per år",
+          "Kun ved ansettelse og oppsigelse"
+        ],
+        "c": 1,
+        "e": "A-opplysningsloven § 4: A-meldingen skal sendes innen den 5. i måneden etter at lønnen er utbetalt. Alle arbeidsgivere plikter å rapportere lønn og skattetrekk månedlig."
+      },
+      "en": {
+        "t": "T008: Taxes",
+        "q": "What is the deadline for the a-report (a-melding)?",
+        "o": [
+          "Once a year – by 31 January",
+          "The 5th of the month after the payment month",
+          "Quarterly – 4 times per year",
+          "Only when employing or terminating staff"
+        ],
+        "c": 1,
+        "e": "The A-information Act §4: The a-report must be submitted by the 5th of the month after wages are paid. All employers must report wages and tax deductions monthly."
+      },
+      "ar": {
+        "t": "T008: الضرائب",
+        "q": "ما الموعد النهائي للتقرير الشهري (a-melding)؟",
+        "o": [
+          "مرة واحدة في السنة – بحلول 31 يناير",
+          "اليوم الخامس من الشهر التالي لشهر الدفع",
+          "ربع سنوي – 4 مرات في السنة",
+          "فقط عند التوظيف والإنهاء"
+        ],
+        "c": 1,
+        "e": "المادة 4 من قانون المعلومات A: يجب تقديم التقرير الشهري بحلول اليوم الخامس من الشهر التالي لدفع الرواتب. يجب على جميع أصحاب العمل الإبلاغ عن الرواتب والاستقطاعات الضريبية شهرياً."
+      },
+      "pl": {
+        "t": "T008: Podatki",
+        "q": "[Tłumaczenie] Hva er meldingsfristen for a-meldingen?",
+        "o": [
+          "[Tłumaczenie] Én gang per år – innen 31. januar",
+          "[Tłumaczenie] Den 5. i måneden etter utbetalingsmåneden",
+          "[Tłumaczenie] Kvartalsvis – 4 ganger per år",
+          "[Tłumaczenie] Kun ved ansettelse og oppsigelse"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] A-opplysningsloven § 4: A-meldingen skal sendes innen den 5. i måneden etter at lønnen er utbetalt. Alle arbeidsgivere plikter å rapportere lønn og skattetrekk månedlig."
+      }
+    },
+    {
+      "no": {
+        "t": "T009: Avgifter",
+        "q": "Hva er arbeidsgiveravgiftens formål og hvem betaler den?",
+        "o": [
+          "Den betales av arbeidstaker for å finansiere syketrygd",
+          "Arbeidsgiver betaler avgift av lønn og godtgjørelser for å finansiere folketrygden",
+          "Det er en frivillig avgift som betales til kommunen",
+          "Kun foretak med over 5 ansatte betaler arbeidsgiveravgift"
+        ],
+        "c": 1,
+        "e": "Arbeidsgiver betaler arbeidsgiveravgift (AGA) av lønn og godtgjørelser til ansatte. Satsen varierer etter geografisk sone (0 % i nordligste soner, 14,1 % i sentrale strøk). Inntektene finansierer folketrygden."
+      },
+      "en": {
+        "t": "T009: VAT & Fees",
+        "q": "What is the purpose of employer's national insurance contributions and who pays them?",
+        "o": [
+          "Paid by employees to fund sick benefit",
+          "Employers pay contributions on wages and remuneration to fund the national insurance scheme",
+          "A voluntary contribution paid to the municipality",
+          "Only businesses with more than 5 employees pay employer contributions"
+        ],
+        "c": 1,
+        "e": "Employers pay national insurance contributions (AGA) on wages and remuneration paid to employees. The rate varies by geographic zone (0% in the northernmost zones, 14.1% in central areas). The revenue funds the national insurance scheme."
+      },
+      "ar": {
+        "t": "T009: الرسوم وضريبة القيمة المضافة",
+        "q": "ما الغرض من مساهمات صاحب العمل في التأمين الوطني ومن يدفعها؟",
+        "o": [
+          "يدفعها الموظفون لتمويل مزايا المرض",
+          "يدفع أصحاب العمل مساهمات على الرواتب والمكافآت لتمويل نظام التأمين الوطني",
+          "مساهمة طوعية تُدفع للبلدية",
+          "الشركات التي تضم أكثر من 5 موظفين فقط تدفع مساهمات صاحب العمل"
+        ],
+        "c": 1,
+        "e": "يدفع أصحاب العمل مساهمات التأمين الوطني (AGA) على الرواتب والمكافآت المدفوعة للموظفين. يتفاوت المعدل حسب المنطقة الجغرافية (0٪ في المناطق الشمالية، 14.1٪ في المناطق المركزية). العائدات تمول نظام التأمين الوطني."
+      },
+      "pl": {
+        "t": "T009: Opłaty i VAT",
+        "q": "[Tłumaczenie] Hva er arbeidsgiveravgiftens formål og hvem betaler den?",
+        "o": [
+          "[Tłumaczenie] Den betales av arbeidstaker for å finansiere syketrygd",
+          "[Tłumaczenie] Arbeidsgiver betaler avgift av lønn og godtgjørelser for å finansiere folketrygden",
+          "[Tłumaczenie] Det er en frivillig avgift som betales til kommunen",
+          "[Tłumaczenie] Kun foretak med over 5 ansatte betaler arbeidsgiveravgift"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Arbeidsgiver betaler arbeidsgiveravgift (AGA) av lønn og godtgjørelser til ansatte. Satsen varierer etter geografisk sone (0 % i nordligste soner, 14,1 % i sentrale strøk). Inntektene finansierer folketrygden."
+      }
+    },
+    {
+      "no": {
+        "t": "T009: Avgifter",
+        "q": "Hva er omregistreringsavgift og hvem betaler den?",
+        "o": [
+          "En avgift betalt av produsenten ved ny bil",
+          "En avgift som betales ved eierskifte av brukt motorvogn, betalt av ny eier",
+          "En årsavgift for alle kjøretøy",
+          "Kun relevant for næringskjøretøy"
+        ],
+        "c": 1,
+        "e": "Omregistreringsavgiften betales ved eierskifte av brukt motorvogn. Avgiftens størrelse avhenger av kjøretøyets vekt og alder. Ny eier er ansvarlig for å betale avgiften."
+      },
+      "en": {
+        "t": "T009: VAT & Fees",
+        "q": "What is the re-registration fee (omregistreringsavgift) and who pays it?",
+        "o": [
+          "A fee paid by the manufacturer for a new car",
+          "A fee paid when ownership of a used motor vehicle changes hands, paid by the new owner",
+          "An annual fee for all vehicles",
+          "Only relevant for commercial vehicles"
+        ],
+        "c": 1,
+        "e": "The re-registration fee is paid when a used motor vehicle changes ownership. The fee amount depends on the vehicle's weight and age. The new owner is responsible for paying the fee."
+      },
+      "ar": {
+        "t": "T009: الرسوم وضريبة القيمة المضافة",
+        "q": "ما هي رسوم إعادة التسجيل ومن يدفعها؟",
+        "o": [
+          "رسوم يدفعها المنتج للسيارة الجديدة",
+          "رسوم تُدفع عند نقل ملكية مركبة مستعملة، يدفعها المالك الجديد",
+          "رسوم سنوية لجميع المركبات",
+          "ذات صلة بالمركبات التجارية فقط"
+        ],
+        "c": 1,
+        "e": "تُدفع رسوم إعادة التسجيل عند نقل ملكية مركبة مستعملة. يعتمد مبلغ الرسوم على وزن المركبة وعمرها. المالك الجديد مسؤول عن دفع الرسوم."
+      },
+      "pl": {
+        "t": "T009: Opłaty i VAT",
+        "q": "[Tłumaczenie] Hva er omregistreringsavgift og hvem betaler den?",
+        "o": [
+          "[Tłumaczenie] En avgift betalt av produsenten ved ny bil",
+          "[Tłumaczenie] En avgift som betales ved eierskifte av brukt motorvogn, betalt av ny eier",
+          "[Tłumaczenie] En årsavgift for alle kjøretøy",
+          "[Tłumaczenie] Kun relevant for næringskjøretøy"
+        ],
+        "c": 1,
+        "e": "[Tłumaczenie] Omregistreringsavgiften betales ved eierskifte av brukt motorvogn. Avgiftens størrelse avhenger av kjøretøyets vekt og alder. Ny eier er ansvarlig for å betale avgiften."
+      }
+    },
+    {
+      "no": {
+        "t": "T001: Yrkestransportloven",
+        "q": "Kan et varebilløyve overføres til en annen person eller virksomhet?",
+        "o": [
+          "Ja, ved salg av kjøretøyet følger løyvet med",
+          "Nei – løyvet er personlig/virksomhetsbundet og kan ikke overdras; ny søknad må sendes inn",
+          "Ja, men kun innen samme familie",
+          "Ja, ved betaling av overføringsgebyr til Statens vegvesen"
+        ],
+        "c": 1,
+        "e": "Yrkestransportlova § 12: Løyvet er knyttet til den juridiske personen som fikk det tildelt og kan ikke overdras. Ved virksomhetsoverdragelse må ny søknad sendes."
+      },
+      "en": {
+        "t": "T001: Transport Law",
+        "q": "Can a van licence be transferred to another person or business?",
+        "o": [
+          "Yes, when the vehicle is sold the licence goes with it",
+          "No – the licence is personal/business-specific and cannot be transferred; a new application must be submitted",
+          "Yes, but only within the same family",
+          "Yes, by paying a transfer fee to the Roads Administration"
+        ],
+        "c": 1,
+        "e": "Transport Act §12: The licence is tied to the legal entity that was granted it and cannot be transferred. A new application must be submitted in case of business transfer."
+      },
+      "ar": {
+        "t": "T001: قانون النقل",
+        "q": "هل يمكن نقل رخصة الشاحنة الخفيفة إلى شخص أو شركة أخرى؟",
+        "o": [
+          "نعم، عند بيع المركبة تنتقل الرخصة معها",
+          "لا – الرخصة مرتبطة بالشخص/الشركة ولا يمكن نقلها؛ يجب تقديم طلب جديد",
+          "نعم، لكن داخل العائلة فقط",
+          "نعم، بدفع رسوم النقل لإدارة الطرق"
+        ],
+        "c": 1,
+        "e": "قانون النقل المادة 12: الرخصة مرتبطة بالكيان القانوني الذي مُنح إياه ولا يمكن نقلها. يجب تقديم طلب جديد في حالة نقل الشركة."
+      },
+      "pl": {
+        "t": "T001: Prawo transportowe",
+        "q": "Czy licencja na transport busem może być przeniesiona na inną osobę lub firmę?",
+        "o": [
+          "Tak, przy sprzedaży pojazdu licencja przechodzi razem z nim",
+          "Nie – licencja jest przypisana do osoby/firmy i nie może być przeniesiona; należy złożyć nowy wniosek",
+          "Tak, ale tylko w obrębie tej samej rodziny",
+          "Tak, po uiszczeniu opłaty transferowej"
+        ],
+        "c": 1,
+        "e": "Ustawa o transporcie §12: Licencja jest powiązana z podmiotem prawnym, któremu została przyznana i nie może być przeniesiona. W przypadku przekazania firmy należy złożyć nowy wniosek."
+      }
+    },
+    {
+      "no": {
+        "t": "T001: Yrkestransportloven",
+        "q": "Hva er forskjellen mellom lokalt og nasjonalt varebilløyve?",
+        "o": [
+          "Det er ingen forskjell – de er identiske",
+          "Lokalt løyve gjelder kun i ett fylke; nasjonalt løyve gjelder i hele Norge",
+          "Nasjonalt løyve er dyrere men raskere å få",
+          "Lokalt løyve gjelder for tyngre biler"
+        ],
+        "c": 1,
+        "e": "Det finnes kun nasjonalt varebilløyve i dagens system – det gjelder i hele Norge. Tidligere fantes regionale begrensninger, men disse er avviklet med gjeldende regelverk."
+      },
+      "en": {
+        "t": "T001: Transport Law",
+        "q": "What is the difference between a local and a national van licence?",
+        "o": [
+          "There is no difference – they are identical",
+          "A local licence is valid only in one county; a national licence is valid throughout Norway",
+          "A national licence is more expensive but faster to obtain",
+          "A local licence applies to heavier vehicles"
+        ],
+        "c": 1,
+        "e": "Only a national van licence exists in the current system – it is valid throughout Norway. Regional restrictions previously existed but have been abolished under current regulations."
+      },
+      "ar": {
+        "t": "T001: قانون النقل",
+        "q": "ما الفرق بين رخصة الشاحنة الخفيفة المحلية والوطنية؟",
+        "o": [
+          "لا فرق – كلتاهما متطابقتان",
+          "الرخصة المحلية صالحة في مقاطعة واحدة فقط؛ الوطنية صالحة في جميع أنحاء النرويج",
+          "الرخصة الوطنية أغلى لكن أسرع في الحصول",
+          "الرخصة المحلية للمركبات الثقيلة"
+        ],
+        "c": 1,
+        "e": "يوجد فقط رخصة شاحنة خفيفة وطنية في النظام الحالي – صالحة في جميع أنحاء النرويج. كانت توجد قيود إقليمية سابقاً لكنها أُلغيت وفق الأنظمة الحالية."
+      },
+      "pl": {
+        "t": "T001: Prawo transportowe",
+        "q": "Jaka jest różnica między lokalną a krajową licencją na transport busem?",
+        "o": [
+          "Nie ma różnicy – są identyczne",
+          "Licencja lokalna obowiązuje tylko w jednym województwie; krajowa obowiązuje w całej Norwegii",
+          "Licencja krajowa jest droższa, ale szybciej można ją uzyskać",
+          "Licencja lokalna dotyczy cięższych pojazdów"
+        ],
+        "c": 1,
+        "e": "W obecnym systemie istnieje tylko krajowa licencja na transport busem – obowiązuje w całej Norwegii. Wcześniej istniały ograniczenia regionalne, ale zostały zniesione na mocy obowiązujących przepisów."
+      }
+    },
+    {
+      "no": {
+        "t": "T002: Vegtrafikkloven",
+        "q": "Hva er plikten til å melde fra ved trafikkuhell etter vtrl. § 12?",
+        "o": [
+          "Kun politiet har meldeplikt",
+          "Alle som er innblandet i eller vitne til ulykke der person er skadet, plikter å varsle politiet (112) og yte nødvendig hjelp",
+          "Kun sjåfører med yrkesbil har meldeplikt",
+          "Meldeplikten gjelder kun ved ulykker med over 3 involverte kjøretøy"
+        ],
+        "c": 1,
+        "e": "Vtrl. § 12: Alle involverte og vitner til ulykker med personskade har plikt til å stanse, varsle politiet og yte hjelp. Unnlatelse kan gi straffeansvar etter vtrl. § 31."
+      },
+      "en": {
+        "t": "T002: Road Traffic Act",
+        "q": "What is the obligation to report a traffic accident under Road Traffic Act §12?",
+        "o": [
+          "Only the police have a reporting obligation",
+          "Everyone involved in or witnessing an accident where a person is injured must notify the police (112) and provide necessary assistance",
+          "Only professional vehicle drivers have a reporting obligation",
+          "The obligation only applies to accidents involving more than 3 vehicles"
+        ],
+        "c": 1,
+        "e": "§12: Everyone involved in or witnessing accidents with personal injury must stop, notify the police and provide assistance. Failure to do so can result in criminal liability under §31."
+      },
+      "ar": {
+        "t": "T002: قانون السير",
+        "q": "ما التزام الإبلاغ عن حادث مروري بموجب المادة 12 من قانون السير؟",
+        "o": [
+          "الشرطة فقط لديها التزام الإبلاغ",
+          "يجب على كل من يشارك في حادث أو يشهده يتسبب في إصابة شخص الإبلاغ للشرطة (112) وتقديم المساعدة",
+          "سائقو المركبات المهنية فقط ملزمون بالإبلاغ",
+          "الالتزام ينطبق فقط على الحوادث التي تتجاوز 3 مركبات"
+        ],
+        "c": 1,
+        "e": "المادة 12: يجب على جميع المتورطين والشهود في حوادث تسبب إصابات الوقوف وإبلاغ الشرطة وتقديم المساعدة. الإهمال قد يؤدي إلى مسؤولية جنائية وفق المادة 31."
+      },
+      "pl": {
+        "t": "T002: Prawo o ruchu drogowym",
+        "q": "Jaki jest obowiązek zgłaszania wypadku drogowego zgodnie z §12 Ustawy o ruchu drogowym?",
+        "o": [
+          "Tylko policja ma obowiązek zgłoszenia",
+          "Wszyscy zaangażowani lub świadkowie wypadku, w którym osoba jest ranna, muszą powiadomić policję (112) i udzielić niezbędnej pomocy",
+          "Tylko kierowcy pojazdów zawodowych mają obowiązek zgłoszenia",
+          "Obowiązek dotyczy tylko wypadków z więcej niż 3 pojazdami"
+        ],
+        "c": 1,
+        "e": "§12: Wszyscy zaangażowani i świadkowie wypadków z obrażeniami ciała muszą się zatrzymać, powiadomić policję i udzielić pomocy. Zaniedbanie może skutkować odpowiedzialnością karną na mocy §31."
+      }
+    },
+    {
+      "no": {
+        "t": "T002: Vegtrafikkloven",
+        "q": "Hva er reglene for bruk av mobiltelefon under kjøring?",
+        "o": [
+          "Tillatt ved bruk av høyttaler",
+          "Håndholdt telefon er forbudt; håndfri (headset, Bluetooth) er tillatt men anbefales med forsiktighet",
+          "Tillatt ved kort samtale under 30 sekunder",
+          "Mobiltelefon er alltid tillatt i varebil"
+        ],
+        "c": 1,
+        "e": "Vtrl. § 3 og skiltforskriften: Bruk av håndholdt mobiltelefon under kjøring er forbudt. Håndfri kommunikasjon er tillatt, men sjåfør plikter fortsatt å ha full oppmerksomhet på trafikken."
+      },
+      "en": {
+        "t": "T002: Road Traffic Act",
+        "q": "What are the rules on using a mobile phone while driving?",
+        "o": [
+          "Permitted when using a loudspeaker",
+          "Handheld phone is prohibited; hands-free (headset, Bluetooth) is permitted but use with caution is recommended",
+          "Permitted for short calls under 30 seconds",
+          "Mobile phone is always permitted in a van"
+        ],
+        "c": 1,
+        "e": "§3 and sign regulations: Using a handheld mobile phone while driving is prohibited. Hands-free communication is permitted, but the driver is still obliged to maintain full attention to traffic."
+      },
+      "ar": {
+        "t": "T002: قانون السير",
+        "q": "ما قواعد استخدام الهاتف المحمول أثناء القيادة؟",
+        "o": [
+          "مسموح عند استخدام مكبر الصوت",
+          "الهاتف باليد محظور؛ حرّ اليدين (سماعة، بلوتوث) مسموح لكن يُوصى بالحذر",
+          "مسموح للمكالمات القصيرة أقل من 30 ثانية",
+          "الهاتف المحمول مسموح دائماً في الشاحنة الخفيفة"
+        ],
+        "c": 1,
+        "e": "المادة 3 ولوائح اللافتات: استخدام الهاتف المحمول باليد أثناء القيادة محظور. التواصل بحرّ اليدين مسموح لكن السائق ملزم بالتركيز الكامل على السير."
+      },
+      "pl": {
+        "t": "T002: Prawo o ruchu drogowym",
+        "q": "Jakie są zasady dotyczące korzystania z telefonu komórkowego podczas jazdy?",
+        "o": [
+          "Dozwolone przy użyciu głośnika",
+          "Telefon trzymany w ręku jest zabroniony; zestaw głośnomówiący (słuchawki, Bluetooth) jest dozwolony, ale zaleca się ostrożność",
+          "Dozwolone podczas krótkich rozmów poniżej 30 sekund",
+          "Telefon komórkowy jest zawsze dozwolony w busie"
+        ],
+        "c": 1,
+        "e": "§3 i przepisy o znakach drogowych: Używanie telefonu trzymanego w ręku podczas jazdy jest zabronione. Komunikacja zestawem głośnomówiącym jest dozwolona, ale kierowca nadal musi zachować pełną uwagę na ruch drogowy."
+      }
+    },
+    {
+      "no": {
+        "t": "T003: Arbeidsmiljø og ferie",
+        "q": "Hva er reglene for nattarbeid etter arbeidsmiljøloven?",
+        "o": [
+          "Nattarbeid er alltid tillatt uten begrensninger",
+          "Nattarbeid (kl. 21–06) er kun tillatt dersom arbeidets art gjør det nødvendig, jf. aml. § 10-11; krever drøfting med verneombud",
+          "Nattarbeid gjelder kun fabrikker",
+          "Nattarbeid er kun forbudt for sjåfører"
+        ],
+        "c": 1,
+        "e": "Aml. § 10-11: Nattarbeid (mellom kl. 21 og 06) er kun tillatt der arbeidets art nødvendiggjør det, f.eks. transport. Arbeidsgiver skal drøfte ordningen med tillitsvalgte/verneombud. Arbeidstaker skal ha helsekontroll ved regelmessig nattarbeid."
+      },
+      "en": {
+        "t": "T003: Labour & Holiday Law",
+        "q": "What are the rules on night work under the Working Environment Act?",
+        "o": [
+          "Night work is always permitted without restrictions",
+          "Night work (9 pm–6 am) is only permitted where the nature of the work makes it necessary, per §10-11; requires consultation with the safety delegate",
+          "Night work only applies to factories",
+          "Night work is only prohibited for drivers"
+        ],
+        "c": 1,
+        "e": "§10-11: Night work (between 9 pm and 6 am) is only permitted where the nature of the work necessitates it, e.g. transport. The employer must consult with employee representatives/safety delegates. Employees must have health monitoring for regular night work."
+      },
+      "ar": {
+        "t": "T003: قانون العمل والإجازات",
+        "q": "ما قواعد العمل الليلي وفق قانون بيئة العمل؟",
+        "o": [
+          "العمل الليلي مسموح دائماً بدون قيود",
+          "العمل الليلي (21:00–06:00) مسموح فقط عندما تستوجب طبيعة العمل ذلك وفق المادة 10-11؛ يتطلب التشاور مع مندوب السلامة",
+          "العمل الليلي ينطبق على المصانع فقط",
+          "العمل الليلي محظور على السائقين فقط"
+        ],
+        "c": 1,
+        "e": "المادة 10-11: العمل الليلي (بين 21:00 و06:00) مسموح فقط عندما تستوجب طبيعة العمل ذلك، مثل النقل. يجب على صاحب العمل التشاور مع ممثلي الموظفين/مندوب السلامة. يجب أن يخضع الموظفون لمراقبة صحية عند العمل الليلي المنتظم."
+      },
+      "pl": {
+        "t": "T003: Prawo pracy i urlopy",
+        "q": "Jakie są zasady dotyczące pracy nocnej zgodnie z Ustawą o środowisku pracy?",
+        "o": [
+          "Praca nocna jest zawsze dozwolona bez ograniczeń",
+          "Praca nocna (21:00–06:00) jest dozwolona tylko tam, gdzie charakter pracy tego wymaga, zgodnie z §10-11; wymaga konsultacji z przedstawicielem BHP",
+          "Praca nocna dotyczy tylko fabryk",
+          "Praca nocna jest dozwolona tylko dla kierowców"
+        ],
+        "c": 1,
+        "e": "§10-11: Praca nocna (między 21:00 a 06:00) jest dozwolona tylko tam, gdzie charakter pracy tego wymaga, np. transport. Pracodawca musi skonsultować się z przedstawicielami pracowników/BHP. Pracownicy muszą mieć monitoring zdrowia przy regularnej pracy nocnej."
+      }
+    },
+    {
+      "no": {
+        "t": "T003: Arbeidsmiljø og ferie",
+        "q": "Hva er krav om verneombud i virksomheter?",
+        "o": [
+          "Kun påkrevd i industribedrifter med over 50 ansatte",
+          "Virksomheter med minst 10 ansatte skal ha verneombud, jf. aml. § 6-1; ved under 10 kan det avtales annen ordning",
+          "Verneombud er alltid frivillig",
+          "Kun krav ved produksjonsbedrifter"
+        ],
+        "c": 1,
+        "e": "Aml. § 6-1: Virksomheter med 10 eller flere ansatte plikter å ha verneombud valgt av og blant arbeidstakerne. Verneombudet skal ivareta arbeidstakernes interests i HMS-spørsmål og har rett til å stanse farlig arbeid."
+      },
+      "en": {
+        "t": "T003: Labour & Holiday Law",
+        "q": "What is the requirement for safety delegates in businesses?",
+        "o": [
+          "Only required in industrial businesses with more than 50 employees",
+          "Businesses with at least 10 employees must have a safety delegate, per §6-1; with fewer than 10 another arrangement can be agreed",
+          "A safety delegate is always voluntary",
+          "Only required in production businesses"
+        ],
+        "c": 1,
+        "e": "§6-1: Businesses with 10 or more employees must have a safety delegate elected by and from the employees. The safety delegate looks after employees' interests in HSE matters and has the right to stop dangerous work."
+      },
+      "ar": {
+        "t": "T003: قانون العمل والإجازات",
+        "q": "ما اشتراط وجود مندوب السلامة في الشركات؟",
+        "o": [
+          "مطلوب فقط في الشركات الصناعية التي تضم أكثر من 50 موظفاً",
+          "يجب أن يكون لدى الشركات التي تضم 10 موظفين على الأقل مندوب سلامة وفق المادة 6-1؛ مع أقل من 10 يمكن الاتفاق على ترتيب آخر",
+          "مندوب السلامة اختياري دائماً",
+          "مطلوب فقط في شركات الإنتاج"
+        ],
+        "c": 1,
+        "e": "المادة 6-1: يجب أن يكون لدى الشركات التي تضم 10 موظفين أو أكثر مندوب سلامة منتخب من الموظفين. يرعى مندوب السلامة مصالح الموظفين في شؤون السلامة وله الحق في إيقاف العمل الخطير."
+      },
+      "pl": {
+        "t": "T003: Prawo pracy i urlopy",
+        "q": "Jakie są wymagania dotyczące przedstawicieli BHP w firmach?",
+        "o": [
+          "Wymagany tylko w firmach przemysłowych z ponad 50 pracownikami",
+          "Firmy z co najmniej 10 pracownikami muszą mieć przedstawiciela BHP, zgodnie z §6-1; przy mniej niż 10 można uzgodnić inne rozwiązanie",
+          "Przedstawiciel BHP jest zawsze dobrowolny",
+          "Wymagany tylko w firmach produkcyjnych"
+        ],
+        "c": 1,
+        "e": "§6-1: Firmy z 10 lub więcej pracownikami muszą mieć przedstawiciela BHP wybranego przez pracowników i spośród nich. Przedstawiciel BHP reprezentuje interesy pracowników w sprawach BHP i ma prawo zatrzymać niebezpieczną pracę."
+      }
+    },
+    {
+      "no": {
+        "t": "T004: Opplæring og kjøring",
+        "q": "Hva er kravene til fartsskriver for varebiler mellom 2500 og 3500 kg?",
+        "o": [
+          "Alltid obligatorisk med digital fartsskriver",
+          "Varebiler under 3500 kg er unntatt fra kravet om fartsskriver etter forordning 165/2014",
+          "Kun analog fartsskriver er påkrevd",
+          "Fartsskriver kreves kun ved nattarbeid"
+        ],
+        "c": 1,
+        "e": "EU-forordning 165/2014 og 561/2006 gjelder kun kjøretøy over 3500 kg. Varebiler opp til 3500 kg er unntatt fra krav om fartsskriver. Derimot gjelder arbeidsmiljølovens arbeidstidsbestemmelser."
+      },
+      "en": {
+        "t": "T004: Training & Driving",
+        "q": "What are the tachograph requirements for vans between 2500 and 3500 kg?",
+        "o": [
+          "Always mandatory with a digital tachograph",
+          "Vans under 3500 kg are exempt from the tachograph requirement under Regulation 165/2014",
+          "Only an analogue tachograph is required",
+          "A tachograph is only required for night work"
+        ],
+        "c": 1,
+        "e": "EU Regulations 165/2014 and 561/2006 only apply to vehicles over 3500 kg. Vans up to 3500 kg are exempt from tachograph requirements. However, the Working Environment Act's working time provisions still apply."
+      },
+      "ar": {
+        "t": "T004: التدريب والقيادة",
+        "q": "ما متطلبات التاكوغراف للشاحنات الخفيفة بين 2500 و3500 كغ؟",
+        "o": [
+          "إلزامي دائماً مع تاكوغراف رقمي",
+          "الشاحنات الخفيفة دون 3500 كغ معفاة من اشتراط التاكوغراف بموجب لائحة 165/2014",
+          "التاكوغراف التناظري فقط مطلوب",
+          "التاكوغراف مطلوب للعمل الليلي فقط"
+        ],
+        "c": 1,
+        "e": "لوائح الاتحاد الأوروبي 165/2014 و561/2006 تنطبق فقط على المركبات التي تتجاوز 3500 كغ. الشاحنات الخفيفة حتى 3500 كغ معفاة من اشتراطات التاكوغراف. ومع ذلك تنطبق أحكام ساعات العمل في قانون بيئة العمل."
+      },
+      "pl": {
+        "t": "T004: Szkolenie i jazda",
+        "q": "Jakie są wymagania dotyczące tachografu dla busów o masie od 2500 do 3500 kg?",
+        "o": [
+          "Zawsze obowiązkowy cyfrowy tachograf",
+          "Busy poniżej 3500 kg są zwolnione z wymogu tachografu na mocy Rozporządzenia 165/2014",
+          "Wymagany tylko analogowy tachograf",
+          "Tachograf jest wymagany tylko przy pracy nocnej"
+        ],
+        "c": 1,
+        "e": "Rozporządzenia UE 165/2014 i 561/2006 mają zastosowanie tylko do pojazdów powyżej 3500 kg. Busy do 3500 kg są zwolnione z wymogu tachografu. Jednak przepisy dotyczące czasu pracy z Ustawy o środowisku pracy nadal obowiązują."
+      }
+    },
+    {
+      "no": {
+        "t": "T005: Internkontroll/HMS",
+        "q": "Hva er risikovurdering og hvorfor er det sentralt i HMS-arbeidet?",
+        "o": [
+          "En forsikringsvurdering av kjøretøyet",
+          "En systematisk gjennomgang av hva som kan gå galt i virksomheten, sannsynligheten for det, og tiltak for å redusere risiko",
+          "Kun relevant ved arbeidsskader",
+          "Et frivillig hjelpemiddel for store bedrifter"
+        ],
+        "c": 1,
+        "e": "Internkontrollforskriften § 5 nr. 6: Risikovurdering er obligatorisk og skal identifisere farer, vurdere risiko og iverksette tiltak. For transportvirksomhet: trafikksikkerhetsrisiko, ergonomi, vold/trusler, kjemikalier."
+      },
+      "en": {
+        "t": "T005: Internal Control/HSE",
+        "q": "What is risk assessment and why is it central to HSE work?",
+        "o": [
+          "An insurance valuation of the vehicle",
+          "A systematic review of what can go wrong in the business, the probability of it occurring, and measures to reduce risk",
+          "Only relevant for workplace injuries",
+          "A voluntary tool for large businesses"
+        ],
+        "c": 1,
+        "e": "Internal Control Regulation §5 no.6: Risk assessment is mandatory and must identify hazards, assess risk and implement measures. For transport: traffic safety risks, ergonomics, violence/threats, chemicals."
+      },
+      "ar": {
+        "t": "T005: الرقابة الداخلية والسلامة",
+        "q": "ما تقييم المخاطر ولماذا هو محوري في عمل السلامة والصحة المهنية؟",
+        "o": [
+          "تقييم تأميني للمركبة",
+          "مراجعة منهجية لما قد يسوء في الشركة واحتمالية حدوثه والتدابير للحد من المخاطر",
+          "ذو صلة بإصابات العمل فقط",
+          "أداة طوعية للشركات الكبيرة"
+        ],
+        "c": 1,
+        "e": "لائحة الرقابة الداخلية المادة 5 رقم 6: تقييم المخاطر إلزامي ويجب أن يحدد المخاطر ويقيّم الخطر ويُنفّذ التدابير. للنقل: مخاطر السلامة المرورية والإرغونوميا والعنف/التهديدات والمواد الكيميائية."
+      },
+      "pl": {
+        "t": "T005: Kontrola wewnętrzna/BHP",
+        "q": "Co to jest ocena ryzyka i dlaczego jest kluczowa w pracy BHP?",
+        "o": [
+          "Wycena ubezpieczeniowa pojazdu",
+          "Systematyczny przegląd tego, co może pójść nie tak w firmie, prawdopodobieństwo tego i środki zmniejszające ryzyko",
+          "Dotyczy tylko wypadków przy pracy",
+          "Dobrowolne narzędzie dla dużych firm"
+        ],
+        "c": 1,
+        "e": "Rozporządzenie o Kontroli Wewnętrznej §5 nr 6: Ocena ryzyka jest obowiązkowa i musi identyfikować zagrożenia, oceniać ryzyko i wdrażać środki zaradcze. Dla transportu: ryzyko bezpieczeństwa ruchu drogowego, ergonomia, przemoc/groźby, chemikalia."
+      }
+    },
+    {
+      "no": {
+        "t": "T006: Foretaksformer",
+        "q": "Hva er revisjonsplikten for aksjeselskaper?",
+        "o": [
+          "Alle AS plikter alltid ekstern revisjon",
+          "AS med omsetning under 7 mill. NOK, balanse under 27 mill. og under 10 ansatte er unntatt fra revisjonsplikt; kan velge det bort",
+          "Revisjon er kun for børsnoterte AS",
+          "Revisjon kreves kun ved underskudd"
+        ],
+        "c": 1,
+        "e": "Aksjeloven § 7-6: Små AS (omsetning < 7 millioner, balansesum < 27 millioner, < 10 ansatte) kan velge bort revisjonsplikten. Beslutningen fattes av generalforsamlingen og skal registreres i Brønnøysund."
+      },
+      "en": {
+        "t": "T006: Business Forms",
+        "q": "What is the audit obligation for limited companies?",
+        "o": [
+          "All AS always require external audit",
+          "AS with turnover under NOK 7 million, balance under NOK 27 million and fewer than 10 employees are exempt from the audit obligation; they can opt out",
+          "Audit is only for listed AS",
+          "Audit is only required when operating at a loss"
+        ],
+        "c": 1,
+        "e": "Companies Act §7-6: Small AS (turnover < NOK 7 million, total assets < NOK 27 million, < 10 employees) can opt out of the audit obligation. The decision is made by the general meeting and must be registered with the Business Register."
+      },
+      "ar": {
+        "t": "T006: أشكال الشركات",
+        "q": "ما التزام التدقيق للشركات المساهمة؟",
+        "o": [
+          "يجب على جميع الشركات المساهمة دائماً إجراء تدقيق خارجي",
+          "الشركات المساهمة بمبيعات أقل من 7 مليون كرونة وميزانية أقل من 27 مليون وأقل من 10 موظفين معفاة من التدقيق؛ يمكنها الاختيار",
+          "التدقيق للشركات المدرجة في البورصة فقط",
+          "التدقيق مطلوب فقط عند الخسارة"
+        ],
+        "c": 1,
+        "e": "قانون الشركات المادة 7-6: يمكن للشركات المساهمة الصغيرة (مبيعات < 7 ملايين، إجمالي الأصول < 27 مليون، < 10 موظفين) الاختيار من خارج التزام التدقيق. يُتخذ القرار في الاجتماع العام ويجب تسجيله في سجل الأعمال."
+      },
+      "pl": {
+        "t": "T006: Formy przedsiębiorstwa",
+        "q": "Jaki jest obowiązek audytu dla spółek z ograniczoną odpowiedzialnością?",
+        "o": [
+          "Wszystkie AS zawsze wymagają zewnętrznego audytu",
+          "AS z obrotem poniżej 7 mln NOK, bilansem poniżej 27 mln i mniej niż 10 pracownikami są zwolnione z obowiązku audytu; mogą zrezygnować",
+          "Audyt jest tylko dla notowanych spółek",
+          "Audyt wymagany tylko przy stratach"
+        ],
+        "c": 1,
+        "e": "Ustawa o spółkach §7-6: Małe AS (obrót < 7 mln NOK, suma bilansowa < 27 mln NOK, < 10 pracowników) mogą zrezygnować z obowiązku audytu. Decyzję podejmuje walne zgromadzenie i musi być zarejestrowana w rejestrze przedsiębiorstw."
+      }
+    },
+    {
+      "no": {
+        "t": "T007: Økonomiforståelse",
+        "q": "Hva er balanseregnskapet og hva viser det?",
+        "o": [
+          "En oversikt over månedlige utgifter",
+          "Et øyeblikksbilde av virksomhetens eiendeler, gjeld og egenkapital på et gitt tidspunkt (balansedagen)",
+          "Kun relevant for AS, ikke ENK",
+          "En rapport over driftsresultatet"
+        ],
+        "c": 1,
+        "e": "Balansen (balanseregnskapet) viser: Eiendeler (anleggsmidler + omløpsmidler) = Gjeld (langsiktig + kortsiktig) + Egenkapital. Den er lovpålagt del av årsregnskapet, jf. regnskapsloven § 6-2."
+      },
+      "en": {
+        "t": "T007: Financial Understanding",
+        "q": "What is the balance sheet and what does it show?",
+        "o": [
+          "An overview of monthly expenses",
+          "A snapshot of the business's assets, liabilities and equity at a given point in time (the balance sheet date)",
+          "Only relevant for AS, not ENK",
+          "A report on operating profit"
+        ],
+        "c": 1,
+        "e": "The balance sheet shows: Assets (fixed + current) = Liabilities (long-term + short-term) + Equity. It is a legally required part of the annual accounts under the Accounting Act §6-2."
+      },
+      "ar": {
+        "t": "T007: الفهم المالي",
+        "q": "ما الميزانية العمومية وماذا تُظهر؟",
+        "o": [
+          "نظرة عامة على النفقات الشهرية",
+          "لقطة آنية لأصول الشركة والتزاماتها وحقوق ملكيتها في وقت محدد (تاريخ الميزانية)",
+          "ذات صلة بالشركات المساهمة فقط وليس ملكية الفرد",
+          "تقرير عن الربح التشغيلي"
+        ],
+        "c": 1,
+        "e": "تُظهر الميزانية العمومية: الأصول (ثابتة + متداولة) = الالتزامات (طويلة + قصيرة الأجل) + حقوق الملكية. هي جزء إلزامي من الحسابات السنوية وفق قانون المحاسبة المادة 6-2."
+      },
+      "pl": {
+        "t": "T007: Wiedza ekonomiczna",
+        "q": "Co to jest bilans i co pokazuje?",
+        "o": [
+          "Przegląd miesięcznych wydatków",
+          "Migawka aktywów, zobowiązań i kapitału własnego firmy w danym momencie (dzień bilansowy)",
+          "Dotyczy tylko AS, nie ENK",
+          "Raport o zysku operacyjnym"
+        ],
+        "c": 1,
+        "e": "Bilans pokazuje: Aktywa (trwałe + obrotowe) = Zobowiązania (długo + krótkoterminowe) + Kapitał własny. Jest to prawnie wymagana część rocznych sprawozdań finansowych zgodnie z Ustawą o rachunkowości §6-2."
+      }
+    },
+    {
+      "no": {
+        "t": "T008: Skatter",
+        "q": "Hva er fristen for innlevering av skattemeldingen (selvangivelsen) for næringsdrivende?",
+        "o": [
+          "31. januar hvert år",
+          "31. mai hvert år (næringsdrivende med regnskapsfører kan ha utsatt frist)",
+          "31. mars hvert år",
+          "15. april hvert år"
+        ],
+        "c": 1,
+        "e": "Skattemeldingen for næringsdrivende (med næringsinntekt) skal normalt leveres innen 31. mai. For lønnstakere er fristen 30. april. Regnskapsførere kan ha utvidet frist til 31. mai for sine klienter."
+      },
+      "en": {
+        "t": "T008: Taxes",
+        "q": "What is the deadline for submitting the tax return for the self-employed?",
+        "o": [
+          "31 January each year",
+          "31 May each year (self-employed with an accountant may have an extended deadline)",
+          "31 March each year",
+          "15 April each year"
+        ],
+        "c": 1,
+        "e": "The tax return for the self-employed (with business income) must normally be submitted by 31 May. For employees the deadline is 30 April. Accountants may have an extended deadline of 31 May for their clients."
+      },
+      "ar": {
+        "t": "T008: الضرائب",
+        "q": "ما الموعد النهائي لتقديم الإقرار الضريبي للعاملين لحسابهم الخاص؟",
+        "o": [
+          "31 يناير من كل عام",
+          "31 مايو من كل عام (العاملون لحسابهم الخاص مع محاسب قد يحصلون على موعد ممتد)",
+          "31 مارس من كل عام",
+          "15 أبريل من كل عام"
+        ],
+        "c": 1,
+        "e": "يجب تقديم الإقرار الضريبي للعاملين لحسابهم الخاص (بدخل تجاري) عادةً بحلول 31 مايو. للموظفين الموعد 30 أبريل. يمكن للمحاسبين الحصول على موعد ممتد حتى 31 مايو لعملائهم."
+      },
+      "pl": {
+        "t": "T008: Podatki",
+        "q": "Jaki jest termin składania zeznania podatkowego dla samozatrudnionych?",
+        "o": [
+          "31 stycznia każdego roku",
+          "31 maja każdego roku (samozatrudnieni z księgowym mogą mieć przedłużony termin)",
+          "31 marca każdego roku",
+          "15 kwietnia każdego roku"
+        ],
+        "c": 1,
+        "e": "Zeznanie podatkowe dla samozatrudnionych (z dochodem z działalności) musi być złożone normalnie do 31 maja. Dla pracowników termin to 30 kwietnia. Księgowi mogą mieć przedłużony termin do 31 maja dla swoich klientów."
+      }
+    },
+    {
+      "no": {
+        "t": "T009: Avgifter",
+        "q": "Hva er tollavgift og når er den aktuell for varebilnæringen?",
+        "o": [
+          "En avgift for kjøring over kommunegrenser",
+          "En avgift som betales ved import av varer fra land utenfor EØS/tollunionen; relevant ved import av reservedeler, utstyr mv.",
+          "En lokal avgift for tunge kjøretøy",
+          "Tollavgift er avskaffet i Norge"
+        ],
+        "c": 1,
+        "e": "Tollavgift betales ved innførsel av varer fra land utenfor EØS (f.eks. fra USA, Kina). Satsen varierer etter varetype. Varer fra EØS er tollfrie. Relevant ved import av varebiler, reservedeler og utstyr fra tredjeland."
+      },
+      "en": {
+        "t": "T009: VAT & Fees",
+        "q": "What is customs duty and when is it relevant for the van transport industry?",
+        "o": [
+          "A fee for driving across municipal boundaries",
+          "A duty paid on imports from countries outside the EEA/customs union; relevant when importing spare parts, equipment etc.",
+          "A local fee for heavy vehicles",
+          "Customs duty has been abolished in Norway"
+        ],
+        "c": 1,
+        "e": "Customs duty is paid on imports from countries outside the EEA (e.g. from the USA, China). The rate varies by type of goods. Goods from the EEA are duty-free. Relevant when importing vans, spare parts and equipment from third countries."
+      },
+      "ar": {
+        "t": "T009: الرسوم وضريبة القيمة المضافة",
+        "q": "ما الرسوم الجمركية وما أهميتها لصناعة نقل الشاحنات الخفيفة؟",
+        "o": [
+          "رسوم للقيادة عبر حدود البلديات",
+          "رسوم تُدفع عند استيراد البضائع من دول خارج المنطقة الاقتصادية الأوروبية/الاتحاد الجمركي؛ ذات صلة عند استيراد قطع الغيار والمعدات",
+          "رسوم محلية للمركبات الثقيلة",
+          "الرسوم الجمركية أُلغيت في النرويج"
+        ],
+        "c": 1,
+        "e": "تُدفع الرسوم الجمركية عند الاستيراد من دول خارج المنطقة الاقتصادية الأوروبية (مثل الولايات المتحدة والصين). يتفاوت المعدل حسب نوع البضائع. بضائع المنطقة الاقتصادية الأوروبية معفاة من الرسوم. ذات صلة عند استيراد الشاحنات الخفيفة وقطع الغيار من دول ثالثة."
+      },
+      "pl": {
+        "t": "T009: Opłaty i VAT",
+        "q": "Co to jest cło i kiedy ma znaczenie dla branży transportu busami?",
+        "o": [
+          "Opłata za jazdę przez granice gminne",
+          "Cło płacone przy imporcie towarów z krajów spoza EOG/unii celnej; istotne przy imporcie części zamiennych, sprzętu itp.",
+          "Lokalna opłata dla ciężkich pojazdów",
+          "Cło zostało zniesione w Norwegii"
+        ],
+        "c": 1,
+        "e": "Cło jest płacone przy imporcie towarów z krajów spoza EOG (np. USA, Chiny). Stawka różni się w zależności od rodzaju towaru. Towary z EOG są wolne od cła. Istotne przy imporcie busów, części zamiennych i sprzętu z krajów trzecich."
+      }
+    }
   ]
 };
