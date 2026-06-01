@@ -70,7 +70,7 @@ function MainAppContent() {
     // 3. Forhindre snarveier (Copy, Print, Save, Developer tools)
     const handleKeyDown = (e: KeyboardEvent) => {
       const isMeta = e.ctrlKey || e.metaKey;
-      const key = e.key ? e.key.toLowerCase() : '';
+      const key = e.key.toLowerCase();
 
       if (isMeta && key === 'c') e.preventDefault();
       if (isMeta && key === 'p') e.preventDefault();
