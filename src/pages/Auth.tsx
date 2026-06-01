@@ -195,7 +195,7 @@ export default function Auth() {
     setLoading(true);
     try {
       const { error: resetErr } = await supabase.auth.resetPasswordForEmail(trimmedEmail, {
-        redirectTo: window.location.origin + '/auth?type=recovery',
+        redirectTo: window.location.origin + '/auth',
       });
       if (resetErr) throw resetErr;
       setSuccessMsg(labels.resetSent);

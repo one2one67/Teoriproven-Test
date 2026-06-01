@@ -646,22 +646,6 @@ export default function Landing() {
               </div>
             </div>
           </section>
-
-          {/* Interactive FAQs & Search Portal */}
-          <section id="faqs-anchor" className="w-full bg-brand-dark-2/20 border-t border-brand-border py-20">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-2xl mx-auto mb-12">
-                <h2 className="font-display text-xl sm:text-2xl font-extrabold text-white mb-2">
-                  {text.faqSectionTitle}
-                </h2>
-                <p className="text-slate-400 text-xs sm:text-sm">
-                  {text.faqSectionDesc}
-                </p>
-              </div>
-
-              <KnowledgePortal />
-            </div>
-          </section>
         </div>
       ) : (
         /* LAYER 2: AUTHENTICATED LEARNER DASHBOARD HUB */
@@ -895,6 +879,22 @@ export default function Landing() {
           </div>
         </div>
       )}
+
+      {/* Interactive FAQs & Search Portal */}
+      <section id="faqs-anchor" className="w-full bg-brand-dark-2/20 border-t border-brand-border py-20 mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="font-display text-xl sm:text-2xl font-extrabold text-white mb-2">
+              {text.faqSectionTitle}
+            </h2>
+            <p className="text-slate-400 text-xs sm:text-sm">
+              {text.faqSectionDesc}
+            </p>
+          </div>
+
+          <KnowledgePortal />
+        </div>
+      </section>
 
     </div>
   );
