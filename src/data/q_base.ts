@@ -1,5 +1,5 @@
 export type Language = 'no' | 'en' | 'ar' | 'pl';
-export type CategoryId = 'varebil' | 'taxi' | 'drosje' | 'lastebil';
+export type CategoryId = 'varebil' | 'taxi' | 'drosje' | 'lastebil' | 'personbil_b' | 'personbil_b96' | 'personbil_be';
 
 export const CATS = [
   {id:'varebil',icon:'🚐',color:'#1d6feb',
@@ -22,6 +22,70 @@ export const CATS = [
    en:{name:'Truck Licence',sub:'Goods transport · Over 3500 kg'},
    ar:{name:'رخصة الشاحنة الثقيلة',sub:'نقل البضائع · فوق 3500 كغ'},
    pl:{name:'Licencja na ciężarówkę',sub:'Transport towarowy · Ponad 3500 kg'}},
+  {id:'personbil_b',icon:'🚗',color:'#3b82f6',
+   no:{name:'Personbil',sub:'Klasse B · Vanlig personbil'},
+   en:{name:'Passenger Car',sub:'Class B · Regular passenger car'},
+   ar:{name:'سيارة ركاب',sub:'فئة B · سيارة ركاب عادية'},
+   pl:{name:'Samochód osobowy',sub:'Klasa B · Zwykły samochód osobowy'}},
+  {id:'personbil_b96',icon:'🚙',color:'#8b5cf6',
+   no:{name:'Personbil med tilhenger',sub:'B96 · Samlet totalvekt opptil 4250 kg'},
+   en:{name:'Car with trailer',sub:'B96 · Total weight up to 4250 kg'},
+   ar:{name:'سيارة مع مقطورة',sub:'B96 · وزن إجمالي حتى 4250 كغ'},
+   pl:{name:'Samochód z przyczepą',sub:'B96 · Całkowita waga do 4250 kg'}},
+  {id:'personbil_be',icon:'🚙',color:'#6366f1',
+   no:{name:'Personbil med tilhenger',sub:'BE · Tyngre tilhenger · Oppkjøring'},
+   en:{name:'Car with trailer',sub:'BE · Heavier trailer · Practical test'},
+   ar:{name:'سيارة مع مقطورة',sub:'BE · مقطورة أثقل · اختبار عملي'},
+   pl:{name:'Samochód z przyczepą',sub:'BE · Cięższa przyczepa · Egzamin praktyczny'}},
+];
+
+export interface CourseGroup {
+  id: string;
+  order: number;
+  no: { name: string; sub?: string };
+  en: { name: string; sub?: string };
+  ar: { name: string; sub?: string };
+  pl: { name: string; sub?: string };
+  items: CategoryId[];
+}
+
+export const COURSE_GROUPS: CourseGroup[] = [
+  {
+    id: 'personbil',
+    order: 1,
+    no: { name: 'Personbil og tilhenger' },
+    en: { name: 'Passenger Car and Trailer' },
+    ar: { name: 'سيارة الركاب والمقطورة' },
+    pl: { name: 'Samochód osobowy i przyczepa' },
+    items: ['personbil_b', 'personbil_b96', 'personbil_be']
+  },
+  {
+    id: 'godstransport',
+    order: 2,
+    no: { name: 'Godstransport' },
+    en: { name: 'Goods Transport' },
+    ar: { name: 'نقل البضائع' },
+    pl: { name: 'Transport towarowy' },
+    items: ['lastebil']
+  },
+  {
+    id: 'persontransport',
+    order: 3,
+    no: { name: 'Persontransport' },
+    en: { name: 'Passenger Transport' },
+    ar: { name: 'نقل الركاب' },
+    pl: { name: 'Transport osób' },
+    items: ['taxi', 'drosje']
+  },
+  {
+    id: 'loyver',
+    order: 4,
+    no: { name: 'Løyver og tillatelser' },
+    en: { name: 'Licences and Permits' },
+    ar: { name: 'التراخيص والتصاريح' },
+    pl: { name: 'Licencje i zezwolenia' },
+    items: ['varebil']
+  }
 ];
 
 export const UI: Record<Language, any> = {

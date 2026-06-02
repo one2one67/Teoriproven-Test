@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Home, BookOpen, PenSquare, ClipboardList, Clock } from 'lucide-react';
+import { ArrowLeft, Home, BookOpen, PenSquare, ClipboardList, Clock, Sparkles } from 'lucide-react';
 import { useStore } from '../lib/store';
-import { CATS, UI } from '../data/questions';
+import { CATS, UI, QDATA } from '../data/questions';
 import { cn } from '../lib/utils';
 import { useUser } from '../lib/AuthContext';
 import { supabase } from '../lib/supabase';
@@ -10,6 +10,8 @@ import HomeTab from './tabs/HomeTab';
 import FlashcardsTab from './tabs/FlashcardsTab';
 import QuizTab from './tabs/QuizTab';
 import ExamTab from './tabs/ExamTab';
+import { getQuestionsForCategory } from '../lib/question_engine';
+import { CourseOverviewTemplate } from './tabs/CourseOverviewTemplate';
 
 export default function AppShell() {
   const { lang, catId, setCatId, expiration } = useStore();
@@ -21,9 +23,9 @@ export default function AppShell() {
   useEffect(() => {
     if (!expiration) return;
     
-    // Admin evig tilgang
+    // Admin
     if (expiration.getFullYear() > 2050) {
-      setTimeLeft('Evig');
+      setTimeLeft(lang === 'no' ? 'Evig' : lang === 'en' ? 'Lifetime' : lang === 'ar' ? 'مدى الحياة' : 'Dożywotnio');
       return;
     }
 
@@ -32,7 +34,7 @@ export default function AppShell() {
       const diff = expiration.getTime() - now.getTime();
       
       if (diff <= 0) {
-        setTimeLeft('Utløpt');
+        setTimeLeft(lang === 'no' ? 'Utløpt' : lang === 'en' ? 'Expired' : lang === 'ar' ? 'منتهي' : 'Wygasło');
         window.location.reload(); 
         return;
       }
@@ -40,12 +42,22 @@ export default function AppShell() {
       const h = Math.floor(diff / (1000 * 60 * 60));
       const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       
-      if (h > 48) {
-        const d = Math.floor(h / 24);
-        setTimeLeft(`${d} dager igjen`);
-      } else {
-        setTimeLeft(`${h}t ${m}m igjen`);
-      }
+      const formatTime = (h: number, m: number) => {
+        if (h > 48) {
+          const d = Math.floor(h / 24);
+          if (lang === 'no') return `${d} dager igjen`;
+          if (lang === 'en') return `${d} days left`;
+          if (lang === 'ar') return `متبقي ${d} أيام`;
+          return `${d} dni pozostało`;
+        } else {
+          if (lang === 'no') return `${h}t ${m}m igjen`;
+          if (lang === 'en') return `${h}h ${m}m left`;
+          if (lang === 'ar') return `متبقي ${h}س ${m}د`;
+          return `${h}g ${m}m pozostało`;
+        }
+      };
+
+      setTimeLeft(formatTime(h, m));
     }, 1000);
     
     // Trigger initially
@@ -53,11 +65,21 @@ export default function AppShell() {
     if (initDiff > 0) {
        const h = Math.floor(initDiff / (1000 * 60 * 60));
        const m = Math.floor((initDiff % (1000 * 60 * 60)) / (1000 * 60));
-       if (h > 48) {
-         setTimeLeft(`${Math.floor(h / 24)} dager igjen`);
-       } else {
-         setTimeLeft(`${h}t ${m}m igjen`);
-       }
+       const formatTime = (h: number, m: number) => {
+        if (h > 48) {
+          const d = Math.floor(h / 24);
+          if (lang === 'no') return `${d} dager igjen`;
+          if (lang === 'en') return `${d} days left`;
+          if (lang === 'ar') return `متبقي ${d} أيام`;
+          return `${d} dni pozostało`;
+        } else {
+          if (lang === 'no') return `${h}t ${m}m igjen`;
+          if (lang === 'en') return `${h}h ${m}m left`;
+          if (lang === 'ar') return `متبقي ${h}س ${m}د`;
+          return `${h}g ${m}m pozostało`;
+        }
+      };
+      setTimeLeft(formatTime(h, m));
     }
 
     return () => clearInterval(interval);
@@ -68,7 +90,12 @@ export default function AppShell() {
     return null;
   }
 
-  const cat = CATS.find(c => c.id === catId)!;
+  const cat = CATS.find(c => c.id === catId);
+  if (!cat) {
+    navigate('/');
+    return null;
+  }
+
   const ui = UI[lang] || UI['no'];
   
   const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
@@ -78,6 +105,8 @@ export default function AppShell() {
     await supabase.auth.signOut();
     navigate('/');
   };
+
+  const isPlaceholder = !QDATA[catId] || getQuestionsForCategory(catId as any, 'no').length === 0;
 
   return (
     <div className="flex flex-col h-full bg-brand-dark overflow-hidden fixed inset-0 z-50">
@@ -96,7 +125,7 @@ export default function AppShell() {
           </span>
         </div>
         <div className="flex flex-row gap-2 items-center">
-          {timeLeft && timeLeft !== 'Evig' && (
+          {timeLeft && !['Evig', 'Lifetime', 'مدى الحياة', 'Dożywotnio'].includes(timeLeft) && (
             <div className="hidden sm:flex items-center justify-center gap-1.5 px-3 h-8 rounded border border-brand-border bg-white/5 text-[11px] font-bold text-slate-300">
               <Clock className="w-3.5 h-3.5 text-brand-blue" />
               {timeLeft}
@@ -120,27 +149,33 @@ export default function AppShell() {
         </div>
       </div>
 
-      <div className="flex bg-brand-dark-2 border-b border-brand-border shrink-0">
-        <button onClick={() => setActiveTab('home')} className={cn("flex-1 p-2 text-center text-[10px] font-semibold cursor-pointer border-b-[2.5px] transition-all flex flex-col items-center gap-0.5", activeTab === 'home' ? "text-brand-blue border-brand-blue" : "text-[#4a5f73] border-transparent hover:text-slate-300")}>
-          <Home className="w-[18px] h-[18px]" /> {ui.tHome}
-        </button>
-        <button onClick={() => setActiveTab('fc')} className={cn("flex-1 p-2 text-center text-[10px] font-semibold cursor-pointer border-b-[2.5px] transition-all flex flex-col items-center gap-0.5", activeTab === 'fc' ? "text-brand-blue border-brand-blue" : "text-[#4a5f73] border-transparent hover:text-slate-300")}>
-          <BookOpen className="w-[18px] h-[18px]" /> {ui.tFC}
-        </button>
-        <button onClick={() => setActiveTab('quiz')} className={cn("flex-1 p-2 text-center text-[10px] font-semibold cursor-pointer border-b-[2.5px] transition-all flex flex-col items-center gap-0.5", activeTab === 'quiz' ? "text-brand-blue border-brand-blue" : "text-[#4a5f73] border-transparent hover:text-slate-300")}>
-          <PenSquare className="w-[18px] h-[18px]" /> {ui.tQuiz}
-        </button>
-        <button onClick={() => setActiveTab('exam')} className={cn("flex-1 p-2 text-center text-[10px] font-semibold cursor-pointer border-b-[2.5px] transition-all flex flex-col items-center gap-0.5", activeTab === 'exam' ? "text-brand-blue border-brand-blue" : "text-[#4a5f73] border-transparent hover:text-slate-300")}>
-          <ClipboardList className="w-[18px] h-[18px]" /> {ui.tExam}
-        </button>
-      </div>
+      {!isPlaceholder ? (
+        <>
+          <div className="flex bg-brand-dark-2 border-b border-brand-border shrink-0">
+            <button onClick={() => setActiveTab('home')} className={cn("flex-1 p-2 text-center text-[10px] font-semibold cursor-pointer border-b-[2.5px] transition-all flex flex-col items-center gap-0.5", activeTab === 'home' ? "text-brand-blue border-brand-blue" : "text-[#4a5f73] border-transparent hover:text-slate-300")}>
+              <Home className="w-[18px] h-[18px]" /> {ui.tHome}
+            </button>
+            <button onClick={() => setActiveTab('fc')} className={cn("flex-1 p-2 text-center text-[10px] font-semibold cursor-pointer border-b-[2.5px] transition-all flex flex-col items-center gap-0.5", activeTab === 'fc' ? "text-brand-blue border-brand-blue" : "text-[#4a5f73] border-transparent hover:text-slate-300")}>
+              <BookOpen className="w-[18px] h-[18px]" /> {ui.tFC}
+            </button>
+            <button onClick={() => setActiveTab('quiz')} className={cn("flex-1 p-2 text-center text-[10px] font-semibold cursor-pointer border-b-[2.5px] transition-all flex flex-col items-center gap-0.5", activeTab === 'quiz' ? "text-brand-blue border-brand-blue" : "text-[#4a5f73] border-transparent hover:text-slate-300")}>
+              <PenSquare className="w-[18px] h-[18px]" /> {ui.tQuiz}
+            </button>
+            <button onClick={() => setActiveTab('exam')} className={cn("flex-1 p-2 text-center text-[10px] font-semibold cursor-pointer border-b-[2.5px] transition-all flex flex-col items-center gap-0.5", activeTab === 'exam' ? "text-brand-blue border-brand-blue" : "text-[#4a5f73] border-transparent hover:text-slate-300")}>
+              <ClipboardList className="w-[18px] h-[18px]" /> {ui.tExam}
+            </button>
+          </div>
 
-      <div className="flex-1 overflow-y-auto overscroll-contain p-3.5 block relative" style={{'--cat-c': cat.color} as any}>
-        {activeTab === 'home' && <HomeTab onNavigate={setActiveTab} />}
-        {activeTab === 'fc' && <FlashcardsTab />}
-        {activeTab === 'quiz' && <QuizTab />}
-        {activeTab === 'exam' && <ExamTab />}
-      </div>
+          <div className="flex-1 overflow-y-auto overscroll-contain p-3.5 block relative" style={{'--cat-c': cat.color} as any}>
+            {activeTab === 'home' && <HomeTab onNavigate={setActiveTab} />}
+            {activeTab === 'fc' && <FlashcardsTab />}
+            {activeTab === 'quiz' && <QuizTab />}
+            {activeTab === 'exam' && <ExamTab />}
+          </div>
+        </>
+      ) : (
+        <CourseOverviewTemplate catId={catId} onGoBack={() => { setCatId(null); navigate('/'); }} />
+      )}
     </div>
   );
 }

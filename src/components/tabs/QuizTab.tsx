@@ -4,6 +4,9 @@ import { UI, QDATA } from '../../data/questions';
 import { Play, ArrowRight, Home, CheckCircle2, AlertCircle, HelpCircle, RefreshCw, Sparkles, BookOpen } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
+import { QuestionImage } from '../QuestionImage';
+
+import { getQuestionsForCategory } from '../../lib/question_engine';
 
 export default function QuizTab() {
   const { lang, catId, hist, addHist } = useStore();
@@ -16,12 +19,12 @@ export default function QuizTab() {
 
   const ui = UI[lang] || UI['no'];
   if (!catId) return null;
-  const allQs = QDATA[catId].q;
+  
   const th = QDATA[catId].themes[lang] || QDATA[catId].themes['no'];
   const recentHist = hist.filter(h => h.ty === 'q' && h.cat === catId).slice(-4).reverse();
 
   const start = () => {
-    let pool = allQs.map((q, i) => ({ ...(q[lang] || q['no']), gi: i, _no_t: (q['no'] || {}).t }));
+    let pool = getQuestionsForCategory(catId as any, lang);
     if (topic !== 'all' && topic !== ui.allTopics) {
       pool = pool.filter(q => q.t === topic || q._no_t === topic);
     }
@@ -242,6 +245,11 @@ export default function QuizTab() {
             {q.t.replace(/T\d+[^:]*:\s*/, '')}
           </span>
         </div>
+        {q.image && (
+          <div className="mb-3 mt-1">
+            <QuestionImage src={q.image} alt={q.imageAlt || 'Illustration for question'} />
+          </div>
+        )}
         <h4 className="font-display text-sm sm:text-base font-bold text-white leading-relaxed mt-1">
           {q.q}
         </h4>

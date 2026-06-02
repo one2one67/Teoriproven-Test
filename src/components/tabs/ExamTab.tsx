@@ -4,6 +4,9 @@ import { UI, QDATA } from '../../data/questions';
 import { ClipboardList, Play, Home, ArrowRight, Ban, Clock, CheckCircle2, AlertCircle, ArrowLeft, ArrowRightLeft, BookOpen, UserCheck } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
+import { QuestionImage } from '../QuestionImage';
+
+import { getQuestionsForCategory } from '../../lib/question_engine';
 
 export default function ExamTab() {
   const { lang, catId, addHist } = useStore();
@@ -16,7 +19,7 @@ export default function ExamTab() {
 
   const ui = UI[lang] || UI['no'];
   if (!catId) return null;
-  const allQs = QDATA[catId].q;
+  
 
   useEffect(() => {
     let timer: any;
@@ -38,7 +41,7 @@ export default function ExamTab() {
     const isSpecial = catId === 'drosje' || catId === 'lastebil';
     const limit = isSpecial ? 27 : 30;
     
-    let pool = allQs.map((q, i) => ({ ...(q[lang] || q['no']), gi: i }));
+    let pool = getQuestionsForCategory(catId as any, lang);
     pool = pool.sort(() => Math.random() - 0.5).slice(0, Math.min(limit, pool.length));
     setQPool(pool);
     setQIdx(0);
@@ -280,10 +283,17 @@ export default function ExamTab() {
       <div className="px-4 mt-4 pb-8 space-y-4">
         {/* Question Panel */}
         <div className="bg-brand-dark-2 border border-brand-border border-t-[4px] rounded-2xl p-4.5 shadow-md" style={{ borderTopColor: 'var(--cat-c)' }}>
-          <div className="text-[10px] text-slate-400 mb-2.5 font-bold uppercase tracking-wider bg-brand-dark px-2 py-0.5 rounded inline-block">
-            {lang === 'no' ? 'Spørsmål' : lang === 'en' ? 'Question' : lang === 'ar' ? 'سؤال' : 'Pytanie'} {qIdx + 1}
+          <div className="flex items-center justify-between mb-2.5">
+            <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider bg-brand-dark px-2 py-0.5 rounded inline-block">
+              {lang === 'no' ? 'Spørsmål' : lang === 'en' ? 'Question' : lang === 'ar' ? 'سؤال' : 'Pytanie'} {qIdx + 1}
+            </div>
           </div>
-          <h4 className="font-display text-sm sm:text-base font-bold text-white leading-relaxed">
+          {q.image && (
+            <div className="mb-3 mt-1">
+              <QuestionImage src={q.image} alt={q.imageAlt || 'Exam illustration'} />
+            </div>
+          )}
+          <h4 className="font-display text-sm sm:text-base font-bold text-white leading-relaxed mt-1">
             {q.q}
           </h4>
         </div>

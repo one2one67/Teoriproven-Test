@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { cn } from '../lib/utils';
 import { useUser } from '../lib/AuthContext';
 import { getSupabase } from '../lib/supabase';
+import { checkUserAccess } from '../lib/access';
 
 export default function Bank() {
   const { lang, catId, expiration, setExpiration } = useStore();
@@ -29,18 +30,9 @@ export default function Bank() {
             return;
           }
 
-          const supabaseObj = getSupabase();
-          const { data, error } = await supabaseObj
-            .from('access_codes')
-            .select('expires_at')
-            .eq('redeemed_by', userId)
-            .eq('is_used', true)
-            .gte('expires_at', new Date().toISOString())
-            .order('expires_at', { ascending: false })
-            .limit(1);
-
-          if (!error && data && data.length > 0 && data[0].expires_at) {
-            setExpiration(new Date(data[0].expires_at));
+          if (userId) {
+            const expDate = await checkUserAccess(userId);
+            if (expDate) setExpiration(expDate);
           }
         } catch (e) {
           console.error('Error verifying active permission inside query bank:', e);

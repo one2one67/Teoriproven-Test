@@ -242,12 +242,16 @@ export default function Auth() {
       }
     } catch (err: any) {
       console.error('Supabase Auth error:', err);
-      let msg = err?.message || 'Det oppstod en feil under verifiseringen.';
+      let msg = err?.message || (lang === 'no' ? 'Det oppstod en feil under verifiseringen.' : lang === 'en' ? 'An error occurred during verification.' : lang === 'ar' ? 'حدث خطأ أثناء التحقق.' : 'Wystąpił błąd podczas weryfikacji.');
       const lower = String(msg).toLowerCase();
       if (lower.includes('rate limit') || lower.includes('rate_limit') || lower.includes('limit exceeded') || lower.includes('excessive')) {
         msg = lang === 'no'
           ? 'E-postgrensen til Supabase er overskredet (2 e-poster/time på gratisnivået). Vennligst unngå denne feilen ved å slå av "Confirm email" i Supabase-konsollen under Authentication -> Email Templates, eller prøv igjen senere.'
-          : 'Supabase email rate limit exceeded. Disable "Confirm email" in your Supabase Auth templates directory or try again later.';
+          : lang === 'en'
+          ? 'Supabase email rate limit exceeded. Disable "Confirm email" in your Supabase Auth templates directory or try again later.'
+          : lang === 'ar'
+          ? 'تم تجاوز حد البريد الإلكتروني. حاول مرة أخرى لاحقًا.'
+          : 'Przekroczono limit e-maili. Spróbuj ponownie później.';
       }
       setError(msg);
     } finally {

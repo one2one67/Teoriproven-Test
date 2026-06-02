@@ -7,6 +7,7 @@ import AppShell from '../components/AppShell';
 import { useStore } from '../lib/store';
 import { CATS } from '../data/questions';
 import { Lock, Unlock, Globe, HelpCircle, ArrowLeft, Ticket, AlertCircle } from 'lucide-react';
+import { checkUserAccess, redeemAccessCode } from '../lib/access';
 
 export default function Teori() {
   const { user } = useUser();
@@ -34,19 +35,10 @@ export default function Teori() {
         return;
       }
 
-      const supabase = getSupabase();
-
-      const { data, error } = await supabase
-        .from('access_codes')
-        .select('expires_at')
-        .eq('redeemed_by', userId)
-        .eq('is_used', true)
-        .gte('expires_at', new Date().toISOString())
-        .order('expires_at', { ascending: false })
-        .limit(1);
-
-      if (!error && data && data.length > 0 && data[0].expires_at) {
-        setExpiration(new Date(data[0].expires_at));
+      if (!userId) return;
+      const exp = await checkUserAccess(userId);
+      if (exp) {
+        setExpiration(exp);
       }
     } catch (e) {
       console.error(e);
@@ -161,59 +153,17 @@ export default function Teori() {
     const userId = user.primaryEmailAddress?.emailAddress || user.id;
 
     try {
-      const supabase = getSupabase();
-      
-      const { data: codeData, error: fetchError } = await supabase
-        .from('access_codes')
-        .select('*')
-        .eq('code', inputCode)
-        .single();
-
-      if (fetchError || !codeData) {
-        throw new Error(t.invalid);
-      }
-
-      if (codeData.is_used) {
-        if (codeData.redeemed_by === userId && codeData.expires_at) {
-          const exp = new Date(codeData.expires_at);
-          if (exp > new Date()) {
-            setExpiration(exp);
-            setCode('');
-            return;
-          } else {
-            throw new Error(t.expired);
-          }
-        }
-        throw new Error(t.already_used);
-      }
-
-      let days = codeData.plan_days;
-      let hours = 0;
-      if (inputCode.startsWith('T24-')) { days = 0; hours = 24; }
-      else if (inputCode.startsWith('D3-')) { days = 3; }
-      else if (inputCode.startsWith('D7-')) { days = 7; }
-
-      const expDate = new Date();
-      expDate.setDate(expDate.getDate() + days);
-      expDate.setHours(expDate.getHours() + hours);
-
-      const { error: updateError } = await supabase
-        .from('access_codes')
-        .update({
-          is_used: true,
-          redeemed_by: userId,
-          expires_at: expDate.toISOString()
-        })
-        .eq('code', inputCode);
-
-      if (updateError) {
-        throw new Error('Kunne ikke aktivere koden.');
-      }
-
-      setExpiration(expDate);
+      if (!userId) throw new Error('Not authenticated');
+      const newExp = await redeemAccessCode(userId, code);
+      setExpiration(newExp);
       setCode('');
     } catch (err: any) {
-      setCodeError(err.message || 'Kunne ikke aktivere kode.');
+      let msg = err.message || 'Kunne ikke aktivere kode.';
+      if (err.message === 'invalid_code') msg = t.invalid;
+      if (err.message === 'already_used') msg = t.already_used;
+      if (err.message === 'code_expired') msg = t.expired;
+      if (err.message === 'activation_failed') msg = 'Kunne ikke aktivere koden.';
+      setCodeError(msg);
     } finally {
       setCodeLoading(false);
     }

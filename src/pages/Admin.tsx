@@ -23,16 +23,28 @@ import {
   Check,
   AlertTriangle,
   Clock,
-  Briefcase
+  Briefcase,
+  Database
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import type { AccessCode } from '../types';
+import DataManagement from '../components/admin/DataManagement';
+import ContentLaunchChecklist from '../components/admin/ContentLaunchChecklist';
 
 export default function Admin() {
   const { user } = useUser();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'amjmah87@gmail.com';
+  const isAdmin = user?.primaryEmailAddress?.emailAddress === adminEmail;
+
+  useEffect(() => {
+    if (user && !isAdmin) {
+      navigate('/');
+    }
+  }, [user, isAdmin, navigate]);
   
   // Dashboard overall statistics
   const [stats, setStats] = useState({
@@ -43,17 +55,23 @@ export default function Admin() {
   });
   
   const [codes, setCodes] = useState<AccessCode[]>([]);
-  const [activeTab, setActiveTab] = useState<'gen' | 'list'>('list');
+  const [activeTab, setActiveTab] = useState<'gen' | 'list' | 'data' | 'launch'>('list');
+
+  // Bulk Selection State
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [bulkActionLoading, setBulkActionLoading] = useState(false);
 
   // Filters and search states for list tab
   const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState<'all' | 'available' | 'used'>('all');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'available' | 'used' | 'revoked'>('all');
   const [tierFilter, setTierFilter] = useState<'all' | '1' | '3' | '7'>('all');
 
   // Multi / Bulk Gen Form state
   const [genLoading, setGenLoading] = useState(false);
   const [planDays, setPlanDays] = useState<1 | 3 | 7>(7);
   const [quantity, setQuantity] = useState<number>(5);
+  const [maxUses, setMaxUses] = useState<number>(1);
+  const [internalNote, setInternalNote] = useState<string>('');
   const [lastCodes, setLastCodes] = useState<string[]>([]);
   const [activeCopiedIndex, setActiveCopiedIndex] = useState<number | null>(null);
   const [copiedAll, setCopiedAll] = useState(false);
@@ -150,7 +168,10 @@ export default function Admin() {
           code: token,
           plan_days: planDays,
           created_by: creatorEmail,
-          is_used: false
+          is_used: false,
+          status: 'active',
+          max_uses: maxUses,
+          internal_note: internalNote.trim() || null
         });
       }
 
@@ -196,7 +217,7 @@ export default function Admin() {
   // CSV Export utility for offline bookkeeping and secure external audits
   const exportFilteredToCSV = () => {
     const csvRows = [
-      ['ID', 'Lisenskode', 'Varighet Dager', 'Redemptions STATUS', 'Opprettet av', 'Opprettet dato', 'Innløst av', 'Innløst tidspunkt', 'Utløpsdato']
+      ['ID', 'Lisenskode', 'Varighet Dager', 'Status', 'Opprettet av', 'Opprettet dato', 'Innløst av', 'Innløst tidspunkt', 'Utløpsdato', 'Intern Notat']
     ];
 
     filteredCodes.forEach(c => {
@@ -204,12 +225,13 @@ export default function Admin() {
         c.id,
         c.code,
         String(c.plan_days),
-        c.is_used ? 'BRUKT' : 'LEDIG',
+        c.status || (c.is_used ? 'used' : 'active'),
         c.created_by,
         new Date(c.created_at).toISOString(),
         c.redeemed_by || '',
         c.redeemed_at || '',
-        c.expires_at || ''
+        c.expires_at || '',
+        c.internal_note || ''
       ]);
     });
 
@@ -225,11 +247,44 @@ export default function Admin() {
     document.body.removeChild(link);
   };
 
+  const handleBulkRevoke = async () => {
+    if (selectedIds.length === 0) return;
+    if (!window.confirm(`Er du sikker på at du vil tilbakekalle (revoke) ${selectedIds.length} valgte koder? Dette vil deaktivere dem umiddelbart.`)) {
+      return;
+    }
+
+    setBulkActionLoading(true);
+    setError(null);
+    try {
+      const supabase = getSupabase();
+      const { error: revokeErr } = await supabase
+        .from('access_codes')
+        .update({ 
+          status: 'revoked',
+          is_used: true 
+        })
+        .in('id', selectedIds);
+      
+      if (revokeErr) throw revokeErr;
+
+      setSelectedIds([]);
+      await Promise.all([loadStats(), loadCodes()]);
+    } catch (e: any) {
+      console.error('Failed to revoke codes:', e);
+      setError('Klarte ikke tilbakekalle koder: ' + (e.message || e));
+    } finally {
+      setBulkActionLoading(false);
+    }
+  };
+
   // Advanced Filtering and Searching operations (Computed state)
   const filteredCodes = codes.filter(c => {
     // Status filter
-    if (statusFilter === 'available' && c.is_used) return false;
-    if (statusFilter === 'used' && !c.is_used) return false;
+    const logicalStatus = c.status || (c.is_used ? 'used' : 'active');
+    
+    if (statusFilter === 'available' && logicalStatus !== 'active') return false;
+    if (statusFilter === 'used' && logicalStatus !== 'used' && logicalStatus !== 'partially_used') return false;
+    if (statusFilter === 'revoked' && logicalStatus !== 'revoked') return false;
 
     // Plans tier filter
     if (tierFilter !== 'all' && String(c.plan_days) !== tierFilter) return false;
@@ -344,6 +399,28 @@ export default function Admin() {
             <Plus className="w-3.5 h-3.5" />
             Bulk-opprett lisenser
           </button>
+
+          <button
+            onClick={() => setActiveTab('data')}
+            className={cn(
+              "px-5 py-2 rounded-lg text-xs font-bold font-display transition-all flex items-center gap-1.5 cursor-pointer",
+              activeTab === 'data' ? "bg-brand-dark-2 text-white shadow" : "text-slate-500 hover:text-slate-300"
+            )}
+          >
+            <Database className="w-3.5 h-3.5" />
+            Data & Eksport
+          </button>
+
+          <button
+            onClick={() => setActiveTab('launch')}
+            className={cn(
+              "px-5 py-2 rounded-lg text-xs font-bold font-display transition-all flex items-center gap-1.5 cursor-pointer",
+              activeTab === 'launch' ? "bg-brand-dark-2 text-white shadow" : "text-slate-500 hover:text-slate-300"
+            )}
+          >
+            <Check className="w-3.5 h-3.5" />
+            Lansering / Content
+          </button>
         </div>
 
         {/* Global refreshing action */}
@@ -421,12 +498,23 @@ export default function Admin() {
                 </select>
               </div>
 
-              {/* Bulk Export to Excel / CSV */}
-              <div className="md:col-span-1 justify-self-stretch sm:justify-self-end w-full">
+              {/* Bulk Export & Revoke */}
+              <div className="md:col-span-1 justify-self-stretch sm:justify-self-end w-full flex items-center gap-2">
+                {selectedIds.length > 0 && (
+                  <button
+                    onClick={handleBulkRevoke}
+                    disabled={bulkActionLoading}
+                    className="p-2.5 rounded-xl border border-red-500/30 bg-red-500/10 text-red-400 hover:text-white hover:bg-red-500/20 disabled:opacity-40 disabled:cursor-not-allowed transition-all text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                    title="Tilbakekall valgte koder"
+                  >
+                    <AlertTriangle className="w-4 h-4" />
+                    <span className="hidden xl:inline">Revoke ({selectedIds.length})</span>
+                  </button>
+                )}
                 <button
                   onClick={exportFilteredToCSV}
                   disabled={filteredCodes.length === 0}
-                  className="w-full p-2.5 rounded-xl border border-brand-border bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition-all text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="w-full sm:w-auto p-2.5 rounded-xl border border-brand-border bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition-all text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
                   title="Eksporter søkeresultat til CSV"
                 >
                   <FileDown className="w-4 h-4 text-brand-blue-lt" />
@@ -457,7 +545,21 @@ export default function Admin() {
                   <table className="w-full text-left border-collapse hidden md:table">
                     <thead>
                       <tr className="border-b border-brand-border bg-brand-dark/50 text-slate-400">
-                        <th className="p-4 text-[10px] font-black uppercase tracking-wider pl-6">Kode</th>
+                        <th className="p-4 pl-6 w-10">
+                          <input 
+                            type="checkbox"
+                            checked={filteredCodes.length > 0 && selectedIds.length === filteredCodes.length}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setSelectedIds(filteredCodes.map(c => c.id));
+                              } else {
+                                setSelectedIds([]);
+                              }
+                            }}
+                            className="rounded border-brand-border bg-brand-dark text-brand-blue cursor-pointer" 
+                          />
+                        </th>
+                        <th className="p-4 text-[10px] font-black uppercase tracking-wider">Kode</th>
                         <th className="p-4 text-[10px] font-black uppercase tracking-wider">Plan / Tier</th>
                         <th className="p-4 text-[10px] font-black uppercase tracking-wider">Status</th>
                         <th className="p-4 text-[10px] font-black uppercase tracking-wider">Aktivert Av (Bruker)</th>
@@ -473,19 +575,39 @@ export default function Admin() {
 
                         // Calculate activation timestamp backwards from expiration of used codes
                         let activatedStr = '–';
-                        if (c.is_used && c.expires_at) {
+                        if ((c.status === 'used' || c.is_used || c.status === 'partially_used') && c.expires_at) {
                           const exp = new Date(c.expires_at);
                           let hours = c.plan_days * 24;
                           if (c.code.startsWith('T24-')) hours = 24;
                           const act = new Date(exp.getTime() - hours * 60 * 60 * 1000);
                           activatedStr = act.toLocaleString('no-NO', { dateStyle: 'short', timeStyle: 'short' });
                         }
+                        
+                        const isUsed = c.status === 'used' || (c.is_used && c.status !== 'revoked');
+                        const isPartiallyUsed = c.status === 'partially_used';
+                        const isRevoked = c.status === 'revoked';
+                        const isMulti = c.max_uses > 1;
+                        
+                        const isSelected = selectedIds.includes(c.id);
 
                         return (
-                          <tr key={c.id} className="hover:bg-white/[0.01] transition-colors group">
+                          <tr key={c.id} className={cn("transition-colors group", isSelected ? "bg-brand-blue/5" : "hover:bg-white/[0.01]")}>
                             
-                            {/* Copyable code field */}
+                            {/* Checkbox */}
                             <td className="p-4 pl-6">
+                              <input 
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={(e) => {
+                                  if (e.target.checked) setSelectedIds(prev => [...prev, c.id]);
+                                  else setSelectedIds(prev => prev.filter(id => id !== c.id));
+                                }}
+                                className="rounded border-brand-border bg-brand-dark text-brand-blue cursor-pointer"
+                              />
+                            </td>
+
+                            {/* Copyable code field */}
+                            <td className="p-4">
                               <button
                                 onClick={() => copyTableCode(c.code, c.id)}
                                 className={cn(
@@ -513,13 +635,25 @@ export default function Admin() {
                             <td className="p-4">
                               <span className={cn(
                                 "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider border leading-none",
-                                c.is_used 
-                                  ? "bg-red-500/10 text-red-400 border-red-500/20" 
-                                  : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                                isRevoked 
+                                  ? "bg-slate-500/10 text-slate-400 border-slate-500/20"
+                                  : isUsed
+                                    ? "bg-red-500/10 text-red-400 border-red-500/20" 
+                                    : isPartiallyUsed 
+                                      ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                                      : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
                               )}>
-                                {c.is_used ? (
+                                {isRevoked ? (
+                                  <>
+                                    <XCircle className="w-2.5 h-2.5 shrink-0" /> Revoked
+                                  </>
+                                ) : isUsed ? (
                                   <>
                                     <XCircle className="w-2.5 h-2.5 shrink-0" /> Brukt
+                                  </>
+                                ) : isPartiallyUsed ? (
+                                  <>
+                                    <Clock className="w-2.5 h-2.5 shrink-0" /> Delvis
                                   </>
                                 ) : (
                                   <>
@@ -527,6 +661,12 @@ export default function Admin() {
                                   </>
                                 )}
                               </span>
+                              {isMulti && (
+                                <div className="text-[8px] text-slate-500 mt-1 uppercase font-bold tracking-widest">{c.used_count || 0}/{c.max_uses} Bruk</div>
+                              )}
+                              {c.internal_note && (
+                                <div className="text-[9px] text-brand-blue-lt mt-1 truncate max-w-[100px]">{c.internal_note}</div>
+                              )}
                             </td>
 
                             {/* Redeemer details */}
@@ -745,6 +885,49 @@ export default function Admin() {
                   </div>
                 </div>
 
+                {/* Additional Settings */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider block pl-0.5">
+                      Bruk per kode
+                    </label>
+                    <select
+                      value={maxUses}
+                      onChange={(e) => setMaxUses(parseInt(e.target.value) || 1)}
+                      className="w-full bg-brand-dark border border-brand-border focus:border-brand-blue text-xs text-white rounded-xl px-3 py-3 outline-none font-bold cursor-pointer transition-colors"
+                    >
+                      <option value="1">Engangsbruk (Standard)</option>
+                      <option value="5">5 ganger</option>
+                      <option value="10">10 ganger</option>
+                      <option value="999">Ubegrenset (Multi-use)</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider block pl-0.5">
+                      Intern notat (Valgfritt)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="F.eks. Sommerkampanje"
+                      value={internalNote}
+                      onChange={(e) => setInternalNote(e.target.value)}
+                      className="w-full bg-brand-dark border border-brand-border focus:border-brand-blue text-xs rounded-xl px-3 py-2.5 text-white placeholder-slate-600 font-sans outline-none h-[42px]"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider block pl-0.5" title="Settes til spesifikke moduler hvis koden ikke er for alt.">
+                      Moduler/Grupper (Valgfritt)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="La stå tom for full tilgang"
+                      disabled
+                      className="w-full bg-brand-dark/50 border border-brand-border/50 text-xs rounded-xl px-3 py-2.5 text-slate-500 font-sans outline-none h-[42px] cursor-not-allowed"
+                      title="All modultilgang er standard inntil modulbasert begrensning aktiveres."
+                    />
+                  </div>
+                </div>
+
                 <button
                   type="submit"
                   disabled={genLoading || !quantity}
@@ -847,6 +1030,32 @@ export default function Admin() {
                 </div>
               )}
             </div>
+          </motion.div>
+        )}
+
+        {/* TAB 3: DATA HANDLING (IMPORT/EXPORT) */}
+        {activeTab === 'data' && (
+          <motion.div
+            key="data"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.2 }}
+          >
+            <DataManagement />
+          </motion.div>
+        )}
+
+        {/* TAB 4: LAUNCH & CONTENT CHECKLIST */}
+        {activeTab === 'launch' && (
+          <motion.div
+            key="launch"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ContentLaunchChecklist />
           </motion.div>
         )}
 

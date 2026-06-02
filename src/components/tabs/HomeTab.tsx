@@ -4,14 +4,16 @@ import { UI, QDATA, CATS } from '../../data/questions';
 import { Flame, BookOpen, PenSquare, ClipboardList, ChevronRight, Library } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+import { getQuestionsForCategory } from '../../lib/question_engine';
+
 export default function HomeTab({ onNavigate }: { onNavigate: (tab: 'fc'|'quiz'|'exam') => void }) {
   const { lang, catId, streak, hist, mastered } = useStore();
   const navigate = useNavigate();
   const ui = UI[lang] || UI['no'];
   
   if (!catId) return null;
-  const qs = QDATA[catId].q;
-  const doneCount = qs.filter((_, i) => mastered.has(catId + '_' + i)).length;
+  const qs = getQuestionsForCategory(catId as any, lang);
+  const doneCount = qs.filter(q => mastered.has(catId + '_' + q.gi)).length;
   
   const hQs = hist.filter(h => h.ty === 'q' && h.cat === catId).length;
   const hEx = hist.filter(h => h.ty === 'e' && h.cat === catId && h.passed).length;

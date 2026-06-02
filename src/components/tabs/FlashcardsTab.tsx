@@ -4,6 +4,9 @@ import { UI, QDATA } from '../../data/questions';
 import { Play, X, RotateCcw, Hand, Check, ArrowLeft, RefreshCw, Layers, ShieldCheck, Heart } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { motion } from 'motion/react';
+import { QuestionImage } from '../QuestionImage';
+
+import { getQuestionsForCategory } from '../../lib/question_engine';
 
 export default function FlashcardsTab() {
   const { lang, catId, mastered, toggleMastered, clearMastered } = useStore();
@@ -17,11 +20,11 @@ export default function FlashcardsTab() {
 
   const ui = UI[lang] || UI['no'];
   if (!catId) return null;
-  const allQs = QDATA[catId].q;
+  
   const th = QDATA[catId].themes[lang] || QDATA[catId].themes['no'];
 
   const start = () => {
-    let pool = allQs.map((q, i) => ({ ...(q[lang] || q['no']), gi: i, _no_t: (q['no'] || {}).t }));
+    let pool = getQuestionsForCategory(catId as any, lang);
     if (topic !== 'all' && topic !== ui.allTopics) {
       pool = pool.filter(q => q.t === topic || q._no_t === topic);
     }
@@ -265,17 +268,22 @@ export default function FlashcardsTab() {
             className="absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] bg-brand-dark-2 border-[1.5px] border-brand-border border-t-[4px] rounded-2xl p-5 sm:p-7 flex flex-col justify-between shadow-xl" 
             style={{ borderTopColor: color }}
           >
-            <div className="text-[10px] sm:text-[11px] text-slate-500 text-center flex items-center justify-center gap-1.5 font-bold uppercase tracking-widest py-1 bg-brand-dark/40 border border-brand-border/40 rounded-lg">
+            <div className="text-[10px] sm:text-[11px] text-slate-500 text-center flex items-center justify-center gap-1.5 font-bold uppercase tracking-widest py-1 bg-brand-dark/40 border border-brand-border/40 rounded-lg shrink-0">
               <Hand className="w-3.5 h-3.5 text-amber-500 animate-bounce" /> {ui.fcHint}
             </div>
             
-            <div className="flex-1 flex items-center justify-center py-4">
+            <div className="flex-1 flex flex-col items-center justify-center py-4 overflow-y-auto custom-scrollbar">
+              {q.image && (
+                <div className="mb-4 w-full shrink-0">
+                  <QuestionImage src={q.image} alt={q.imageAlt || 'Flashcard illustration'} className="max-h-[140px]" />
+                </div>
+              )}
               <p className="font-display text-sm sm:text-base md:text-lg font-bold text-white leading-relaxed text-center rtl:text-right w-full">
                 {q.q}
               </p>
             </div>
 
-            <div className="text-[9px] text-[#4a5f73] font-mono text-center tracking-wide uppercase">
+            <div className="text-[9px] text-[#4a5f73] font-mono text-center tracking-wide uppercase shrink-0">
               ID: {q.gi + 1}
             </div>
           </div>

@@ -1787,6 +1787,58 @@ export const lastebilData = {
         "c": 1,
         "e": "§4-4 i wytyczne Państwowej Inspekcji Pracy: Pracodawca musi ograniczyć obciążenie ergonomiczne. Dla kierowców: regulacja siedzenia, kierownicy i lusterek, stosowanie właściwej techniki podnoszenia, robienie przerw. Długotrwałe wibracje pojazdu mogą powodować bóle pleców – istotna choroba zawodowa."
       }
+    },
+    {
+      "difficulty": "hard",
+      "status": "ready",
+      "no": {
+        "t": "T1: Løyveplikt og markedsadgang",
+        "q": "Gjelder det krav om fellesskapsløyve for internasjonal godstransport med lastebil over 3500 kg totalvekt innenfor EØS?",
+        "o": [
+          "Nei, det kreves kun nasjonalt løyve",
+          "Ja, alle kjøretøy over 3500 kg som driver internasjonal godstransport innenfor EØS mot vederlag krever fellesskapsløyve",
+          "Nei, fellesskapsløyve gjelder kun for persontransport",
+          "Ja, men kun for biler over 7500 kg"
+        ],
+        "c": 1,
+        "e": "I henhold til forordning 1072/2009 kreves det fellesskapsløyve for internasjonal godstransport på vei innenfor EØS for en annen parts regning (mot vederlag), for kjøretøy over 3500 kg."
+      },
+      "en": {
+        "t": "T1: Licensing and Market Access",
+        "q": "Is a Community licence required for international carriage of goods by vehicles over 3500 kg gross weight within the EEA?",
+        "o": [
+          "No, only a national licence is required",
+          "Yes, all vehicles over 3500 kg performing international goods transport for hire or reward within the EEA require a Community licence",
+          "No, a Community licence is only for passenger transport",
+          "Yes, but only for vehicles over 7500 kg"
+        ],
+        "c": 1,
+        "e": "According to Regulation 1072/2009, a Community licence is required for the international carriage of goods by road for hire or reward within the EEA using vehicles over 3500 kg."
+      },
+      "ar": {
+        "t": "T1: متطلبات الترخيص والوصول إلى السوق",
+        "q": "هل يُشترط الحصول على رخصة مجتمعية للنقل الدولي للبضائع باستخدام مركبات يزيد وزنها الإجمالي عن 3500 كجم داخل المنطقة الاقتصادية الأوروبية؟",
+        "o": [
+          "لا، يشترط فقط رخصة وطنية",
+          "نعم، جميع المركبات فوق 3500 كجم في النقل الدولي للبضائع بأجر داخل المنطقة تحتاج لرخصة مجتمعية",
+          "لا، الرخصة المجتمعية لنقل الركاب فقط",
+          "نعم، لكن فقط للمركبات فوق 7500 كجم"
+        ],
+        "c": 1,
+        "e": "وفقًا للائحة 1072/2009، يُطلب رخصة مجتمعية للنقل الدولي للبضائع على الطرق بأجر داخل المنطقة الاقتصادية الأوروبية للمركبات التي يزيد وزنها عن 3500 كجم."
+      },
+      "pl": {
+        "t": "T1: Wymogi licencyjne i dostęp do rynku",
+        "q": "Czy wymagana jest licencja wspólnotowa na międzynarodowy przewóz towarów pojazdami o masie całkowitej przekraczającej 3500 kg na terytorium EOG?",
+        "o": [
+          "Nie, wymagana jest tylko licencja krajowa",
+          "Tak, wszystkie pojazdy powyżej 3500 kg wykonujące zarobkowy międzynarodowy transport towarów na terenie EOG wymagają licencji wspólnotowej",
+          "Nie, licencja wspólnotowa dotyczy tylko transportu pasażerskiego",
+          "Tak, ale tylko dla pojazdów powyżej 7500 kg"
+        ],
+        "c": 1,
+        "e": "Zgodnie z rozporządzeniem 1072/2009, licencja wspólnotowa jest wymagana w zarobkowym międzynarodowym transporcie drogowym towarów na terenie EOG pojazdami o dopuszczalnej masie całkowitej powyżej 3500 kg."
+      }
     }
   ]
 };

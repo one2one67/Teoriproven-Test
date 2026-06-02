@@ -22,8 +22,11 @@ import { CATS, UI, CategoryId } from '../data/questions';
 import { useStore } from '../lib/store';
 import { useUser } from '../lib/AuthContext';
 import { getSupabase } from '../lib/supabase';
+import { checkUserAccess, redeemAccessCode } from '../lib/access';
 import { cn } from '../lib/utils';
 import KnowledgePortal from '../components/KnowledgePortal';
+import { CourseGroupGrid } from '../components/CourseGroupGrid';
+import { LandingHero, LearningModesSection, PremiumAccessSection } from '../components/LandingSections';
 
 const L = {
   no: {
@@ -297,18 +300,9 @@ export default function Landing() {
             return;
           }
 
-          const supabaseObj = getSupabase();
-          const { data, error } = await supabaseObj
-            .from('access_codes')
-            .select('expires_at')
-            .eq('redeemed_by', userId)
-            .eq('is_used', true)
-            .gte('expires_at', new Date().toISOString())
-            .order('expires_at', { ascending: false })
-            .limit(1);
-
-          if (!error && data && data.length > 0 && data[0].expires_at) {
-            setExpiration(new Date(data[0].expires_at));
+          if (userId) {
+            const expDate = await checkUserAccess(userId);
+            if (expDate) setExpiration(expDate);
           }
         } catch (e) {
           console.error('Error fetching active access on landing mount:', e);
@@ -335,79 +329,41 @@ export default function Landing() {
     setCodeError('');
     setCodeSuccess('');
 
-    const inputCode = code.trim().toUpperCase();
     const userId = user.primaryEmailAddress?.emailAddress || user.id;
 
     try {
-      const supabase = getSupabase();
+      if (!userId) throw new Error('Not authenticated');
+      const newExp = await redeemAccessCode(userId, code);
       
-      const { data: codeData, error: fetchError } = await supabase
-        .from('access_codes')
-        .select('*')
-        .eq('code', inputCode)
-        .single();
-
-      if (fetchError || !codeData) {
-        throw new Error(lang === 'no' ? 'Koden finnes ikke eller er ugyldig.' : 'Verification code is invalid or does not exist.');
-      }
-
-      if (codeData.is_used) {
-        if (codeData.redeemed_by === userId && codeData.expires_at) {
-          const exp = new Date(codeData.expires_at);
-          if (exp > new Date()) {
-            setExpiration(exp);
-            setCode('');
-            setCodeSuccess(lang === 'no' ? 'Koden er allerede aktiv på din konto!' : 'Code is already active on this account!');
-            return;
-          } else {
-            throw new Error(lang === 'no' ? 'Denne koden har utløpt.' : 'This access token has expired.');
-          }
-        }
-        throw new Error(lang === 'no' ? 'Denne koden er allerede benyttet.' : 'This access token has already been used.');
-      }
-
-      let days = codeData.plan_days;
-      let hours = 0;
-      if (inputCode.startsWith('T24-')) { days = 0; hours = 24; }
-      else if (inputCode.startsWith('D3-')) { days = 3; }
-      else if (inputCode.startsWith('D7-')) { days = 7; }
-
-      const expDate = new Date();
-      expDate.setDate(expDate.getDate() + days);
-      expDate.setHours(expDate.getHours() + hours);
-
-      const { error: updateError } = await supabase
-        .from('access_codes')
-        .update({
-          is_used: true,
-          redeemed_by: userId,
-          expires_at: expDate.toISOString()
-        })
-        .eq('code', inputCode);
-
-      if (updateError) {
-        throw new Error(lang === 'no' ? 'Kunne ikke oppdatere koden.' : 'Could not upgrade access code credentials.');
-      }
-
-      setExpiration(expDate);
+      setExpiration(newExp);
       setCode('');
-      
+
+      const inputCode = code.trim().toUpperCase();
       let tierDetails = '';
       if (inputCode.startsWith('T24-')) {
-        tierDetails = lang === 'no' ? '24 timer (1 dag)' : '24 hours (1 day)';
+        tierDetails = lang === 'no' ? '24 timer (1 dag)' : lang === 'en' ? '24 hours (1 day)' : lang === 'ar' ? '24 ساعة (يوم واحد)' : '24 godziny (1 dzień)';
       } else if (inputCode.startsWith('D3-')) {
-        tierDetails = lang === 'no' ? '3 dagers fulltilgang' : '3 days full access';
+        tierDetails = lang === 'no' ? '3 dagers fulltilgang' : lang === 'en' ? '3 days full access' : lang === 'ar' ? '3 أيام وصول كامل' : '3 dni pełnego dostępu';
       } else if (inputCode.startsWith('D7-')) {
-        tierDetails = lang === 'no' ? '7 dagers fulltilgang (Beståttgaranti)' : '7 days full access';
+        tierDetails = lang === 'no' ? '7 dagers fulltilgang (Beståttgaranti)' : lang === 'en' ? '7 days full access' : lang === 'ar' ? '7 أيام وصول كامل' : '7 dni pełnego dostępu';
       } else {
-        tierDetails = `${codeData.plan_days} ${lang === 'no' ? 'dager' : 'days'}`;
+        tierDetails = lang === 'no' ? 'Tilgang aktivert' : lang === 'en' ? 'Access activated' : 'Aktywowano';
       }
 
       setCodeSuccess(lang === 'no' 
         ? `Lykkes! Koden din (${tierDetails}) er aktivert. Teoriprøvene dine er nå helt låst opp!` 
+        : lang === 'ar'
+        ? `تم بنجاح! تم تفعيل كودك (${tierDetails}). اختباراتك النظرية مفتوحة بالكامل الآن!`
+        : lang === 'pl'
+        ? `Sukces! Twój kod (${tierDetails}) został aktywowany. Opcje premium są teraz odblokowane!`
         : `Success! Your access pass (${tierDetails}) is online. Premium features are fully unlocked!`);
     } catch (err: any) {
-      setCodeError(err.message || 'Error activating code');
+      let msg = err.message || 'Error activating code';
+      if (err.message === 'invalid_code') msg = lang === 'no' ? 'Koden finnes ikke eller er ugyldig.' : 'Verification code is invalid or does not exist.';
+      if (err.message === 'already_used') msg = lang === 'no' ? 'Denne koden er allerede benyttet eller oppbrukt.' : 'This code has already been fully used.';
+      if (err.message === 'code_expired') msg = lang === 'no' ? 'Denne koden har utløpt.' : 'This token has expired.';
+      if (err.message === 'activation_failed') msg = lang === 'no' ? 'Kunne ikke oppdatere koden.' : 'Could not upgrade access code credentials.';
+      setCodeError(msg);
     } finally {
       setCodeLoading(false);
     }
@@ -430,55 +386,18 @@ export default function Landing() {
         /* LAYER 1: PUBLIC EXPLANATORY & MARKETING PORTAL */
         <div className="w-full">
           {/* Hero Section */}
-          <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-48 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.15),transparent_70%)] pointer-events-none"></div>
-            
-            <div className="flex flex-col items-center text-center relative z-10 max-w-4xl mx-auto">
-              <div className="flex flex-col items-center rtl:items-center text-center rtl:text-center w-full">
-                <div className="inline-flex items-center gap-2 bg-brand-blue/10 border border-brand-blue/25 text-[#60a5fa] text-[11px] font-bold px-3 py-1.5 rounded-full mb-6 tracking-wide shadow-sm uppercase font-sans">
-                  <span className="flex h-2 w-2 rounded-full bg-brand-blue animate-pulse"></span>
-                  {text.heroBadge}
-                </div>
-                
-                <h1 className="font-display text-[clamp(32px,5vw,56px)] font-extrabold tracking-[-1.5px] leading-[1.05] mb-5 text-white">
-                  {text.heroTitle} <br />
-                  <span className="bg-gradient-to-r from-brand-blue-lt to-cyan-400 bg-clip-text text-transparent">
-                    {text.heroSpan}
-                  </span>
-                </h1>
-                
-                <p className="text-[15px] sm:text-[17px] text-slate-400 max-w-[620px] mb-8 leading-relaxed font-sans font-normal mx-auto">
-                  {text.heroDesc}
-                </p>
-                
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full sm:w-auto">
-                  <button
-                    onClick={() => {
-                      const el = document.getElementById('theory-categories');
-                      el?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="bg-brand-blue hover:bg-brand-blue/90 text-white font-display font-bold py-3.5 px-7 rounded-xl text-sm transition-all shadow-xl hover:shadow-brand-blue/10 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    {text.ctaStart}
-                    <ArrowRight className="w-4 h-4 ml-0.5" />
-                  </button>
-                  <button
-                    onClick={() => {
-                      const el = document.getElementById('faqs-anchor');
-                      el?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="bg-transparent hover:bg-white/5 border-[1.5px] border-brand-border text-slate-300 font-display font-bold py-3.5 px-6 rounded-xl text-sm transition-all flex items-center justify-center cursor-pointer"
-                  >
-                    {text.learnMore}
-                  </button>
-                </div>
-                
-                <div className="text-[12px] text-slate-500 mt-3">
-                  🔒 {text.ctaHelp} · Statens vegvesen Læreplaner
-                </div>
-              </div>
-            </div>
-          </section>
+          <LandingHero 
+            text={text} 
+            lang={lang}
+            onStartClick={() => {
+              const el = document.getElementById('theory-categories');
+              el?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            onLearnMoreClick={() => {
+              const el = document.getElementById('faqs-anchor');
+              el?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          />
 
           {/* Core Trust / Verification Value Prop */}
           <section className="w-full bg-brand-dark-2 border-y border-brand-border py-8">
@@ -513,139 +432,14 @@ export default function Landing() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {CATS.map((cat, i) => {
-                const cd = (cat as any)[lang] || (cat as any)['no'];
-                return (
-                  <div
-                    key={cat.id}
-                    onClick={() => handleCategoryClick(cat.id as CategoryId)}
-                    className="group bg-brand-dark-2 border-[1.5px] border-brand-border border-t-[3px] rounded-2xl pb-5 cursor-pointer overflow-hidden relative transition-all hover:-translate-y-1 hover:border-brand-blue/40 shadow-xl hover:shadow-black/50"
-                    style={{ borderTopColor: cat.color }}
-                  >
-                    <div 
-                      className="h-20 flex items-center justify-center text-4xl mb-4 relative overflow-hidden"
-                      style={{ background: `linear-gradient(135deg, ${cat.color}08, ${cat.color}15)` }}
-                    >
-                      <span className="transform group-hover:scale-110 transition-transform duration-300">{cat.icon}</span>
-                      <div className="absolute bottom-0 left-0 right-0 h-[1.5px]" style={{ background: `linear-gradient(90deg, transparent, ${cat.color} 50%, transparent)` }}></div>
-                    </div>
-                    <div className="px-4">
-                      <div className="font-display text-sm font-bold text-white mb-1.5 leading-snug group-hover:text-brand-blue-lt transition-colors">{cd.name}</div>
-                      <div className="text-[11px] text-slate-400 leading-snug mb-4">{cd.sub}</div>
-                    </div>
-                    
-                    <div className="px-4 mt-auto">
-                      <div className="inline-flex items-center gap-1.5 font-display text-[11px] font-bold text-brand-blue-lt group-hover:text-white transition-colors">
-                        {(lang === 'no' ? 'Åpne test' : lang === 'en' ? 'Start study' : lang === 'ar' ? 'ابدأ الدراسة' : 'Rozpocznij')}
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                      </div>
-                    </div>
-                    <div className="absolute top-2 right-2 w-3 h-3 rounded-full opacity-30" style={{ background: cat.color }}></div>
-                  </div>
-                );
-              })}
-            </div>
+            <CourseGroupGrid layoutType="marketing" onCategoryClick={handleCategoryClick} />
           </section>
 
           {/* Exploded Learning Modes Showcase */}
-          <section className="w-full bg-brand-dark-2/40 border-y border-brand-border py-20">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-2xl mx-auto mb-16">
-                <span className="text-[10px] font-bold text-brand-blue bg-brand-blue/10 border border-brand-blue/20 uppercase tracking-widest px-2.5 py-1 rounded inline-block mb-3">
-                  {lang === 'no' ? 'Målrettet læring' : 'Targeted Retention'}
-                </span>
-                <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight mb-3">
-                  {text.modesHeader}
-                </h2>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  {text.modesDesc}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Mode 1 */}
-                <div className="bg-brand-dark-2 border border-brand-border p-6 rounded-2xl">
-                  <div className="w-12 h-12 bg-amber-500/10 text-amber-500 border border-amber-500/20 rounded-xl flex items-center justify-center text-xl mb-5">
-                    <BookOpen className="w-5.5 h-5.5" />
-                  </div>
-                  <h3 className="font-display text-base font-bold text-white mb-2">{text.modeFcTitle}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed font-sans">{text.modeFcDesc}</p>
-                </div>
-
-                {/* Mode 2 */}
-                <div className="bg-brand-dark-2 border border-brand-border p-6 rounded-2xl">
-                  <div className="w-12 h-12 bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 rounded-xl flex items-center justify-center text-xl mb-5">
-                    <PenSquare className="w-5.5 h-5.5" />
-                  </div>
-                  <h3 className="font-display text-base font-bold text-white mb-2">{text.modeQuizTitle}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed font-sans">{text.modeQuizDesc}</p>
-                </div>
-
-                {/* Mode 3 */}
-                <div className="bg-brand-dark-2 border border-brand-border p-6 rounded-2xl">
-                  <div className="w-12 h-12 bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 rounded-xl flex items-center justify-center text-xl mb-5">
-                    <ClipboardList className="w-5.5 h-5.5" />
-                  </div>
-                  <h3 className="font-display text-base font-bold text-white mb-2">{text.modeExamTitle}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed font-sans">{text.modeExamDesc}</p>
-                </div>
-              </div>
-            </div>
-          </section>
+          <LearningModesSection text={text} />
 
           {/* Premium & Access Pricing Cards */}
-          <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-[10px] font-bold text-brand-blue bg-brand-blue/10 border border-brand-blue/20 uppercase tracking-widest px-2.5 py-1 rounded inline-block mb-3">
-                {lang === 'no' ? 'Monetisering og tilgang' : 'Access tiers'}
-              </span>
-              <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight mb-3">
-                {text.premiumHeader}
-              </h2>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                {text.premiumDesc}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Plan 1 */}
-              <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-6 relative">
-                <div className="text-xs font-bold text-slate-500 tracking-wider mb-2 font-mono uppercase">TIER 1</div>
-                <h3 className="font-display text-lg font-bold text-white mb-3">{text.premiumCard1}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed min-h-[44px] mb-5">{text.premiumCard1Sub}</p>
-                <div className="border-t border-brand-border pt-4">
-                  <div className="text-2xl font-extrabold text-white tracking-tight font-display">T24-KODE</div>
-                  <div className="text-[10px] text-slate-500 mt-1 leading-snug">Aktiveres enkelt via e-post biletter.</div>
-                </div>
-              </div>
-
-              {/* Plan 2 - Featured */}
-              <div className="bg-brand-dark-2 border-2 border-brand-blue rounded-2xl p-6 relative">
-                <div className="absolute top-0 right-6 -translate-y-1/2 bg-brand-blue text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full">
-                  MOST POPULAR
-                </div>
-                <div className="text-xs font-bold text-brand-blue tracking-wider mb-2 font-mono uppercase">TIER 2</div>
-                <h3 className="font-display text-lg font-bold text-white mb-3">{text.premiumCard2}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed min-h-[44px] mb-5">{text.premiumCard2Sub}</p>
-                <div className="border-t border-brand-border pt-4">
-                  <div className="text-2xl font-extrabold text-white tracking-tight font-display">D3-KODE</div>
-                  <div className="text-[10px] text-slate-500 mt-1 leading-snug font-sans">Full tilgang i 72 sammenhengende timer.</div>
-                </div>
-              </div>
-
-              {/* Plan 3 */}
-              <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-6 relative">
-                <div className="text-xs font-bold text-slate-500 tracking-wider mb-2 font-mono uppercase">TIER 3</div>
-                <h3 className="font-display text-lg font-bold text-white mb-3">{text.premiumCard3}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed min-h-[44px] mb-5">{text.premiumCard3Sub}</p>
-                <div className="border-t border-brand-border pt-4">
-                  <div className="text-2xl font-extrabold text-white tracking-tight font-display">D7-KODE</div>
-                  <div className="text-[10px] text-slate-500 mt-1 leading-snug">Beståttgaranti. Full ukespass.</div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <PremiumAccessSection text={text} />
 
           {/* Interactive FAQs & Search Portal */}
           <section id="faqs-anchor" className="w-full bg-brand-dark-2/20 border-t border-brand-border py-20">
@@ -749,7 +543,7 @@ export default function Landing() {
                 <div className="absolute top-0 right-0 h-12 w-12 bg-gradient-to-bl from-brand-blue/5 to-transparent pointer-events-none" />
                 
                 <h3 className="text-xs font-black font-display text-white uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  🎟️ {lang === 'no' ? 'Aktiver Lisenskode' : 'Redeem Access Pass'}
+                  🎟️ {lang === 'no' ? 'Aktiver Lisenskode' : lang === 'en' ? 'Redeem Access Pass' : lang === 'ar' ? 'تفعيل كود الوصول' : 'Aktywuj kod dostępu'}
                 </h3>
                 <p className="text-[11px] text-slate-400 leading-relaxed mb-4">
                   {text.hasCodePrompt}
@@ -825,70 +619,7 @@ export default function Landing() {
                   {lang === 'no' ? 'Tilgjengelige teorikurs' : 'Available Theory Classes'}
                 </h2>
  
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {CATS.map((cat) => {
-                    const cd = (cat as any)[lang] || (cat as any)['no'];
-                    return (
-                      <div
-                        key={cat.id}
-                        onClick={() => handleCategoryClick(cat.id as CategoryId)}
-                        className={cn(
-                          "group bg-brand-dark border-[1.5px] rounded-xl p-4.5 cursor-pointer transition-all hover:-translate-y-0.5 flex flex-col justify-between min-h-[110px]",
-                          expiration 
-                            ? "border-emerald-500/10 hover:border-emerald-500/30 hover:bg-emerald-500/[0.01]" 
-                            : "border-brand-border hover:border-brand-blue/30"
-                        )}
-                      >
-                        <div className="flex gap-4 items-start w-full">
-                          <div 
-                            className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0 transition-transform group-hover:scale-105 duration-300 shadow-sm"
-                            style={{ background: `${cat.color}12`, border: `1px solid ${cat.color}25` }}
-                          >
-                            {cat.icon}
-                          </div>
-                          
-                          <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-center gap-1.5 mb-1">
-                              <h4 className="font-display font-bold text-sm text-white group-hover:text-brand-blue-lt transition-colors leading-tight truncate max-w-[150px]">
-                                {cd.name}
-                              </h4>
-                              {expiration ? (
-                                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 leading-none">
-                                  <Unlock className="w-2.5 h-2.5 shrink-0" />
-                                  {lang === 'no' ? 'Låst opp' : lang === 'en' ? 'Unlocked' : lang === 'ar' ? 'مفتوح' : 'Aktywny'}
-                                </span>
-                              ) : (
-                                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-slate-800 text-slate-400 border border-brand-border/80 leading-none">
-                                  <Lock className="w-2.5 h-2.5 shrink-0" />
-                                  {lang === 'no' ? 'Låst' : lang === 'en' ? 'Locked' : lang === 'ar' ? 'مغلق' : 'Zablokwany'}
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-slate-400 text-[11px] leading-snug font-sans line-clamp-2">
-                              {cd.sub}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="mt-3.5 pt-2.5 border-t border-brand-border/40 flex justify-between items-center w-full">
-                          <span className="text-[10px] font-mono text-slate-500 tracking-wider">
-                            ID: {cat.id}
-                          </span>
-                          <span className={cn(
-                            "inline-flex items-center gap-1 text-[11px] font-bold font-display cursor-pointer",
-                            expiration ? "text-emerald-400 group-hover:text-white" : "text-brand-blue-lt group-hover:text-white"
-                          )}>
-                            {expiration 
-                              ? (lang === 'no' ? 'Start øving' : lang === 'en' ? 'Practice' : lang === 'ar' ? 'ابدأ المذاكرة' : 'Ucz się')
-                              : (lang === 'no' ? 'Lås opp' : lang === 'en' ? 'Unlock class' : lang === 'ar' ? 'فتح القفل' : 'Odblokuj')
-                            }
-                            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 duration-200" />
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                <CourseGroupGrid layoutType="dashboard" onCategoryClick={handleCategoryClick} />
               </div>
             </div>
 

@@ -2295,6 +2295,58 @@ export const varebilData = {
         "c": 1,
         "e": "Cło jest płacone przy imporcie towarów z krajów spoza EOG (np. USA, Chiny). Stawka różni się w zależności od rodzaju towaru. Towary z EOG są wolne od cła. Istotne przy imporcie busów, części zamiennych i sprzętu z krajów trzecich."
       }
+    },
+    {
+      "difficulty": "medium",
+      "status": "ready",
+      "no": {
+        "t": "T004: Opplæring og kjøring",
+        "q": "Hva er den maksimale tillatte vekten for varebil som kan kjøres med vanlig klasse B førerkort?",
+        "o": [
+          "2500 kg",
+          "3500 kg",
+          "4250 kg",
+          "7500 kg"
+        ],
+        "c": 1,
+        "e": "Med førerkort klasse B kan du i utgangspunktet kjøre motorvogn med maks tillatt totalvekt på 3500 kg."
+      },
+      "en": {
+        "t": "T004: Training & Driving",
+        "q": "What is the maximum permitted weight for a van that can be driven with a standard class B license?",
+        "o": [
+          "2500 kg",
+          "3500 kg",
+          "4250 kg",
+          "7500 kg"
+        ],
+        "c": 1,
+        "e": "With class B license, you can generally drive motor vehicles with a maximum permitted total weight of 3500 kg."
+      },
+      "ar": {
+        "t": "T004: التدريب والقيادة",
+        "q": "ما هو الحد الأقصى للوزن المسموح به لشاحنة خفيفة يمكن قيادتها برخصة قيادة عادية من الفئة B؟",
+        "o": [
+          "2500 كجم",
+          "3500 كجم",
+          "4250 كجم",
+          "7500 كجم"
+        ],
+        "c": 1,
+        "e": "مع رخصة الفئة B، يمكنك بشكل عام قيادة المركبات ذات الوزن الإجمالي الأقصى المسموح به 3500 كجم."
+      },
+      "pl": {
+        "t": "T004: Szkolenie i jazda",
+        "q": "Jaka jest maksymalna dozwolona masa dostawczaka, którym można kierować ze zwykłym prawem jazdy kategorii B?",
+        "o": [
+          "2500 kg",
+          "3500 kg",
+          "4250 kg",
+          "7500 kg"
+        ],
+        "c": 1,
+        "e": "Za prawem jazdy kategorii B generalnie możesz prowadzić pojazdy o maksymalnej dopuszczalnej masie całkowitej 3500 kg."
+      }
     }
   ]
 };

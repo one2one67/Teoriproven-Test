@@ -54,4 +54,12 @@
   text-align: right;
 }
 
+/* Hide host platform watermarks on user-facing pages if any */
+.gmat-watermark,
+.gmat-badge,
+#aistudio-badge,
+[class*="aistudio-badge"] {
+  display: none !important;
+}
+
 

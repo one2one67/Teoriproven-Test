@@ -1595,6 +1595,58 @@ export const taxiData = {
         "c": 1,
         "e": "Stawki zwrotu za km Urzędu Skarbowego: Stawka państwowa (2024: ok. 3,50-5,00 NOK/km w zależności od odległości) jest wolna od podatku. Płatności powyżej stawki są opodatkowane. Kierowcy taksówek z własnym pojazdem mogą odliczać koszty jazdy bezpośrednio jako koszty operacyjne."
       }
+    },
+    {
+      "difficulty": "medium",
+      "status": "ready",
+      "no": {
+        "t": "T002: Taxiregelverk",
+        "q": "Hva er hovedformålet med kravet om kjentmannsprøve for drosjesjåfører der dette kreves?",
+        "o": [
+          "Å øke kommunens inntekter",
+          "At passasjerer skal få den mest effektive og direkte ruten",
+          "Å teste sjåførens evne til å bruke GPS",
+          "Forhindre bruk av forurensende kjøretøy"
+        ],
+        "c": 1,
+        "e": "Sjåføren bør ha god kjennskap til veinettet for å kunne velge korteste eller raskeste vei og dermed yte best mulig service til passasjeren."
+      },
+      "en": {
+        "t": "T002: Taxi regulations",
+        "q": "What is the main purpose of the local knowledge test requirement for taxi drivers where applicable?",
+        "o": [
+          "To increase municipal revenues",
+          "That passengers should get the most efficient and direct route",
+          "To test the driver's ability to use GPS",
+          "To prevent the use of polluting vehicles"
+        ],
+        "c": 1,
+        "e": "The driver should have good knowledge of the road network to choose the shortest or fastest route and thus provide the best possible service."
+      },
+      "ar": {
+        "t": "T002: قواعد التاكسي",
+        "q": "ما هو الغرض الرئيسي من متطلب اختبار المعرفة المحلية لسائقي سيارات الأجرة حيثما ينطبق ذلك؟",
+        "o": [
+          "زيادة إيرادات البلدية",
+          "حصول الركاب على الطريق الأكثر كفاءة ومباشرة",
+          "لاختبار قدرة السائق على استخدام نظام تحديد المواقع",
+          "لمنع استخدام المركبات الملوثة"
+        ],
+        "c": 1,
+        "e": "يجب أن يتمتع السائق بمعرفة جيدة بشبكة الطرق لاختيار أقصر أو أسرع طريق وبالتالي تقديم أفضل خدمة ممكنة."
+      },
+      "pl": {
+        "t": "T002: Przepisy dotyczące taksówek",
+        "q": "Jaki jest główny cel wymogu testu wiedzy lokalnej dla taksówkarzy, o ile ma on zastosowanie?",
+        "o": [
+          "Zwiększenie dochodów gmin",
+          "Aby pasażerowie otrzymali najbardziej wydajną i bezpośrednią trasę",
+          "Aby sprawdzić umiejętność korzystania z GPS przez kierowcę",
+          "Zapobieganie używaniu pojazdów zanieczyszczających środowisko"
+        ],
+        "c": 1,
+        "e": "Kierowca powinien dobrze znać sieć drogową, aby wybrać najkrótszą lub najszybszą trasę i tym samym zapewnić najlepszą możliwą obsługę."
+      }
     }
   ]
 };
