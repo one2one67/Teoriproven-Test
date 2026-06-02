@@ -1,7 +1,7 @@
 import { QDATA } from '../data/questions';
 import { CategoryId, Language } from '../data/q_base';
 
-export type ReviewStatus = 'draft' | 'review' | 'approved' | 'ready_for_launch' | 'archived';
+export type ReviewStatus = 'draft' | 'review' | 'approved' | 'ready_for_launch' | 'archived' | 'ready';
 
 export interface QuestionReviewMeta {
   reviewed_by?: string;

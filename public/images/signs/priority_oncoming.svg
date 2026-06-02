@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect x="5" y="5" width="90" height="90" rx="10" fill="#1c7ed6" stroke="#ffffff" stroke-width="4" />
+  <!-- White arrow pointing up (your priority) -->
+  <g fill="#ffffff">
+    <rect x="30" y="35" width="10" height="40" rx="1" />
+    <polygon points="20,40 35,15 50,40" />
+  </g>
+  <!-- Red arrow pointing down (oncoming yields) -->
+  <g fill="#f03e3e">
+    <rect x="60" y="25" width="8" height="35" rx="1" />
+    <polygon points="52,50 64,72 76,50" />
+  </g>
+</svg>

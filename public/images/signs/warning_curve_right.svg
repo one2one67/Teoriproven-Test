@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Outer red triangle -->
+  <polygon points="50,5 95,85 5,85" fill="#f03e3e" stroke="#f03e3e" stroke-width="6" stroke-linejoin="round"/>
+  <!-- Inner white triangle -->
+  <polygon points="50,15 85,80 15,80" fill="#ffffff" />
+  <!-- Curved arrow pointing right -->
+  <path d="M 40,70 L 40,55 A 15,15 0 0 1 55,40 L 65,40" fill="none" stroke="#212529" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="62,32 75,40 62,48" fill="#212529" />
+</svg>

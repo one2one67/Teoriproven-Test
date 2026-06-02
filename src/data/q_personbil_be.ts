@@ -1,3 +1,5 @@
+import { beExpansionQuestions } from "./be_questions";
+
 export const personbilBEData = {
   themes: {
     no: {
@@ -287,6 +289,7 @@ export const personbilBEData = {
         c: 0,
         e: "Zbyt dalekie załadowanie ciężaru w tył powoduje ujemny nacisk na hak (podnosi tył samochodu), zmniejszając przyczepność kierownicy i potencjalnie wywołując niekontrolowane wężykowanie."
       }
-    }
+    },
+    ...beExpansionQuestions
   ]
 };

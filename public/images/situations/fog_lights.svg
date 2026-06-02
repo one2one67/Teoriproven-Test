@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <rect width="120" height="120" fill="#1a1d24" rx="10" />
+  
+  <!-- Road ground line -->
+  <line x1="5" y1="100" x2="115" y2="100" stroke="#495057" stroke-width="4" />
+  
+  <!-- Front view/Side view silhouette of a Car -->
+  <g transform="translate(15, 60)" fill="#495057">
+    <!-- bumper -->
+    <rect x="0" y="25" width="25" height="12" rx="2" />
+    <!-- cabin -->
+    <path d="M 4,25 L 8,10 L 20,10 L 23,25 Z" />
+    <!-- wheel -->
+    <circle cx="5" cy="38" r="4" fill="#000" />
+    <circle cx="20" cy="38" r="4" fill="#000" />
+    <!-- Headlight bulb (shining) -->
+    <circle cx="23" cy="28" r="3" fill="#ffec99" />
+  </g>
+
+  <!-- Ground-level Fog Light beams (Shining down and wide, short range) -->
+  <path d="M 38,88 L 75,98 L 38,98" fill="rgba(252, 196, 25, 0.4)" />
+  
+  <!-- Headlight beam (Longer, aiming higher and straight) -->
+  <path d="M 38,88 L 105,92 L 105,82 Z" fill="rgba(241, 243, 245, 0.3)" />
+
+  <text x="45" y="30" fill="#f1f3f5" font-size="8" font-family="sans-serif">Fog + Low Beams</text>
+  <text x="45" y="42" fill="#fa5252" font-size="7" font-weight="bold" font-family="sans-serif">FORBUDT / ILLEGAL</text>
+</svg>

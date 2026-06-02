@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <rect width="120" height="120" fill="#2d3748" rx="10" />
+  
+  <!-- Large road asphalt -->
+  <rect x="15" y="0" width="90" height="120" fill="#495057" />
+  
+  <!-- Lane divider lines -->
+  <line x1="45" y1="0" x2="45" y2="120" stroke="#ffffff" stroke-width="2" stroke-dasharray="8,8" />
+  <line x1="75" y1="0" x2="75" y2="120" stroke="#ffffff" stroke-width="2" stroke-dasharray="8,8" />
+  
+  <!-- Curb edges -->
+  <line x1="15" y1="0" x2="15" y2="120" stroke="#adb5bd" stroke-width="3" />
+  <line x1="105" y1="0" x2="105" y2="120" stroke="#adb5bd" stroke-width="3" />
+
+  <!-- Lane 1 (Left): Lane indicator 1 -->
+  <!-- Arrow Left -->
+  <g stroke="#ffffff" stroke-width="2" fill="none" transform="translate(30, 45)">
+    <path d="M 0,20 L 0,-2 C 0,-5 -5,-10 -15,-10" />
+    <polygon points="-11,-15 -21,-10 -11,-5" fill="#ffffff" stroke="none" />
+    <text x="-5" y="32" fill="#e9ecef" font-size="10" font-weight="extrabold" stroke="none">1</text>
+  </g>
+  
+  <!-- Lane 2 (Middle): Lane indicator 2 -->
+  <!-- Arrow Straigh -->
+  <g stroke="#ffffff" stroke-width="2" fill="none" transform="translate(60, 45)">
+    <path d="M 0,20 L 0,-10" />
+    <polygon points="-5,-4 0,-16 5,-4" fill="#ffffff" stroke="none" />
+    <text x="-4" y="32" fill="#e9ecef" font-size="10" font-weight="extrabold" stroke="none">2</text>
+  </g>
+
+  <!-- Lane 3 (Right): Lane indicator 3 -->
+  <!-- Arrow Right -->
+  <g stroke="#ffffff" stroke-width="2" fill="none" transform="translate(90, 45)">
+    <path d="M 0,20 L 0,-2 C 0,-5 5,-10 15,-10" />
+    <polygon points="11,-15 21,-10 11,-5" fill="#ffffff" stroke="none" />
+    <text x="-4" y="32" fill="#e9ecef" font-size="10" font-weight="extrabold" stroke="none">3</text>
+  </g>
+</svg>

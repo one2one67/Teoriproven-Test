@@ -1,3 +1,5 @@
+import { b96ExpansionQuestions } from "./b96_questions";
+
 export const personbilB96Data = {
   themes: {
     no: {
@@ -342,6 +344,7 @@ export const personbilB96Data = {
         c: 0,
         e: "Strzałka wskazuje na linkę zrywakową. Pociąga ona hamulec awaryjny przyczepy, jeśli odłączy się ona od pojazdu."
       }
-    }
+    },
+    ...b96ExpansionQuestions
   ]
 };

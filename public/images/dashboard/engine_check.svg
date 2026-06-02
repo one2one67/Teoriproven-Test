@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#000000" rx="10" />
+  <!-- Amber Engine Block -->
+  <g fill="#fcc419" stroke="#fcc419" stroke-width="2" stroke-linejoin="round">
+    <!-- Left loop / fan block -->
+    <rect x="22" y="44" width="6" height="14" rx="1" />
+    <!-- Main engine block -->
+    <path d="M 28,34 L 54,34 L 54,42 L 72,42 L 72,48 L 78,48 L 78,64 L 64,64 L 64,68 L 54,68 L 54,64 L 28,64 Z" />
+    <!-- Little cap on top -->
+    <rect x="36" y="27" width="10" height="7" rx="1" />
+    <!-- Lightning bolt or blank screen details -->
+    <polygon points="46,42 41,52 48,52 43,62" fill="#000000" />
+  </g>
+</svg>

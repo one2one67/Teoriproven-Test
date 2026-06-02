@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Grass background -->
+  <rect width="120" height="120" fill="#2d3748" rx="10" />
+  <!-- Road (Crossroad) -->
+  <rect x="40" y="0" width="40" height="120" fill="#495057" />
+  <rect x="0" y="40" width="120" height="40" fill="#495057" />
+  
+  <!-- Dashed center lines -->
+  <line x1="60" y1="0" x2="60" y2="35" stroke="#ffffff" stroke-dasharray="4,4" stroke-width="2" />
+  <line x1="60" y1="85" x2="60" y2="120" stroke="#ffffff" stroke-dasharray="4,4" stroke-width="2" />
+  <line x1="0" y1="60" x2="35" y2="60" stroke="#ffffff" stroke-dasharray="4,4" stroke-width="2" />
+  <line x1="85" y1="60" x2="120" y2="60" stroke="#ffffff" stroke-dasharray="4,4" stroke-width="2" />
+
+  <!-- Blue Car (Car B) driving East-bound (going straight) -->
+  <g transform="translate(15, 65) rotate(0)">
+    <rect x="0" y="0" width="16" height="10" fill="#1c7ed6" rx="2" />
+    <rect x="10" y="2" width="4" height="6" fill="#adb5bd" />
+    <!-- Yellow headlights -->
+    <rect x="15" y="1" width="2" height="2" fill="#ffec99" />
+    <rect x="15" y="7" width="2" height="2" fill="#ffec99" />
+    <text x="-12" y="8" fill="#ffffff" font-size="8" font-family="sans-serif" font-weight="bold">B</text>
+  </g>
+  <path d="M 33,70 L 45,70" fill="none" stroke="#1c7ed6" stroke-width="2" stroke-dasharray="2,2" />
+
+  <!-- Red Car (Car A) driving North-bound (going straight) -->
+  <g transform="translate(65, 85) rotate(-90)">
+    <rect x="0" y="0" width="16" height="10" fill="#f03e3e" rx="2" />
+    <rect x="10" y="2" width="4" height="6" fill="#adb5bd" />
+    <!-- headlights -->
+    <rect x="15" y="1" width="2" height="2" fill="#ffec99" />
+    <rect x="15" y="7" width="2" height="2" fill="#ffec99" />
+    <text x="-12" y="8" fill="#ffffff" font-size="8" font-family="sans-serif" font-weight="bold">A</text>
+  </g>
+  <path d="M 70,83 L 70,71" fill="none" stroke="#f03e3e" stroke-width="2" stroke-dasharray="2,2" />
+</svg>

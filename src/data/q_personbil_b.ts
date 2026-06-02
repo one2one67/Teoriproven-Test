@@ -1,24 +1,59 @@
+import { bTrafficRulesQuestions } from "./b_traffic_rules";
+import { bDrivingDynamicsQuestions } from "./b_driving_dynamics";
+import { bResponsibilitySafetyQuestions } from "./b_responsibility_safety";
+import { bExpandedRulesSignsQuestions } from "./b_expanded_rules_signs";
+import { bExpandedSafetyRiskQuestions } from "./b_expanded_safety_risk";
+import { bVisualQuestions } from "./b_visual_expansion";
+
 export const personbilBData = {
   themes: {
     no: {
       'Trafikkregler': 'Trafikkregler og vikeplikt',
       'Skilt': 'Trafikkskilt',
-      'Sikkerhet': 'Sikkerhet',
+      'Sikkerhet': 'Sikkerhet og føreransvar',
+      'Fart og plassering': 'Fart og plassering',
+      'Lys og sikt': 'Lys og sikt',
+      'Sikkerhetskontroll': 'Sikkerhetskontroll',
+      'Føreransvar': 'Føreransvar',
+      'Risiko og oppmerksomhet': 'Risiko og oppmerksomhet',
+      'Førstehjelp': 'Førstehjelp',
+      'Vikeplikt': 'Vikeplikt'
     },
     en: {
       'Trafikkregler': 'Traffic rules',
       'Skilt': 'Traffic signs',
-      'Sikkerhet': 'Safety',
+      'Sikkerhet': 'Safety and Responsibility',
+      'Fart og plassering': 'Speed and Positioning',
+      'Lys og sikt': 'Lights and Visibility',
+      'Sikkerhetskontroll': 'Safety Control',
+      'Føreransvar': 'Driver Responsibility',
+      'Risiko og oppmerksomhet': 'Risk and Attention',
+      'Førstehjelp': 'First Aid',
+      'Vikeplikt': 'Right of Way'
     },
     ar: {
       'Trafikkregler': 'قواعد المرور',
       'Skilt': 'علامات المرور',
-      'Sikkerhet': 'سلامة',
+      'Sikkerhet': 'سلامة ومسؤولية',
+      'Fart og plassering': 'السرعة والموضع',
+      'Lys og sikt': 'الأضواء والرؤية',
+      'Sikkerhetskontroll': 'فحص السلامة',
+      'Føreransvar': 'مسؤولية السائق',
+      'Risiko og oppmerksomhet': 'المخاطر والانتباه',
+      'Førstehjelp': 'الإسعافات الأولية',
+      'Vikeplikt': 'أولوية المرور'
     },
     pl: {
       'Trafikkregler': 'Zasady ruchu drogowego',
       'Skilt': 'Znaki drogowe',
-      'Sikkerhet': 'Bezpieczeństwo',
+      'Sikkerhet': 'Bezpieczeństwo i odpowiedzialność',
+      'Fart og plassering': 'Prędkość i pozycjonowanie',
+      'Lys og sikt': 'Światła i widoczność',
+      'Sikkerhetskontroll': 'Kontrola bezpieczeństwa',
+      'Føreransvar': 'Odpowiedzialność kierowcy',
+      'Risiko og oppmerksomhet': 'Ryzyko i uwaga',
+      'Førstehjelp': 'Pierwsza pomoc',
+      'Vikeplikt': 'Pierwszeństwo przejazdu'
     }
   },
   q: [
@@ -609,6 +644,12 @@ export const personbilBData = {
         c: 0,
         e: "Na skrzyżowaniu równorzędnym obowiązuje zasada prawej ręki. Czerwony samochód musi ustąpić."
       }
-    }
+    },
+    ...bTrafficRulesQuestions,
+    ...bDrivingDynamicsQuestions,
+    ...bResponsibilitySafetyQuestions,
+    ...bExpandedRulesSignsQuestions,
+    ...bExpandedSafetyRiskQuestions,
+    ...bVisualQuestions
   ]
 };

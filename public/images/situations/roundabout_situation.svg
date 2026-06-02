@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <rect width="120" height="120" fill="#2d3748" rx="10" />
+  <!-- Outer road asphalt circle -->
+  <circle cx="60" cy="60" r="45" fill="#495057" />
+  <!-- Center island (grass/concrete) -->
+  <circle cx="60" cy="60" r="23" fill="#2f3e2e" stroke="#343a40" stroke-width="3" />
+  
+  <!-- Approaching roads -->
+  <rect x="50" y="0" width="20" height="120" fill="#495057" />
+  <rect x="0" y="50" width="120" height="20" fill="#495057" />
+  <!-- Block center block in intersecting cross area -->
+  <circle cx="60" cy="60" r="23" fill="#2f3e2e" />
+
+  <!-- Yield Triangle (Shark teeth) paint at bottom entrance -->
+  <polygon points="52,90 56,90 54,86" fill="#ffffff" />
+  <polygon points="56,90 60,90 58,86" fill="#ffffff" />
+  <polygon points="60,90 64,90 62,86" fill="#ffffff" />
+  <polygon points="64,90 68,90 66,86" fill="#ffffff" />
+
+  <!-- Car A: Red Car already in the roundabout, moving counter-clockwise -->
+  <g transform="translate(68, 30) rotate(145)">
+    <rect x="0" y="0" width="14" height="8" fill="#f03e3e" rx="2" />
+    <rect x="8" y="1.5" width="4" height="5" fill="#adb5bd" />
+    <text x="-10" y="7" fill="#ffffff" font-size="7" font-weight="bold">A</text>
+  </g>
+  <!-- Movement arrow A -->
+  <path d="M 55,27 A 33,33 0 0 0 85,45" fill="none" stroke="#f03e3e" stroke-width="2" />
+
+  <!-- Car B: Blue Car approaching from the South (bottom) -->
+  <g transform="translate(62, 100) rotate(-90)">
+    <rect x="0" y="0" width="14" height="8" fill="#1c7ed6" rx="2" />
+    <rect x="8" y="1.5" width="4" height="5" fill="#adb5bd" />
+    <text x="-10" y="7" fill="#ffffff" font-size="7" font-weight="bold">B</text>
+  </g>
+  <!-- Movement arrow B -->
+  <path d="M 66,98 L 66,88" fill="none" stroke="#1c7ed6" stroke-width="2" />
+</svg>
