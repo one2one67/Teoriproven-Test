@@ -67,6 +67,15 @@ export default function Navbar() {
                 >
                   {lang === 'no' ? 'Hjem' : lang === 'en' ? 'Home' : lang === 'ar' ? 'الرئيسية' : 'Strona główna'}
                 </Link>
+                <Link
+                  to="/min-side"
+                  className={cn(
+                    "hidden sm:block text-sm font-medium transition-colors hover:text-white",
+                    location.pathname === '/min-side' ? "text-white" : "text-slate-400"
+                  )}
+                >
+                  {lang === 'no' ? 'Min side' : lang === 'en' ? 'My Page' : lang === 'ar' ? 'صفحتي' : 'Moja Strona'}
+                </Link>
                 {isAdmin && (
                   <Link
                     to="/admin"
@@ -146,12 +155,13 @@ export default function Navbar() {
                 </span>
                 
                 {/* Beautiful Custom Avatar Badge */}
-                <div 
-                  className="w-8 h-8 rounded-full bg-brand-blue/20 border border-brand-blue text-brand-blue-lt flex items-center justify-center text-xs font-bold font-display uppercase tracking-wider select-none shrink-0" 
-                  title={user?.email}
+                <Link 
+                  to="/min-side"
+                  className="w-8 h-8 rounded-full bg-brand-blue/20 border border-brand-blue text-brand-blue-lt flex items-center justify-center text-xs font-bold font-display uppercase tracking-wider select-none shrink-0 cursor-pointer hover:bg-brand-blue/30 transition-colors tooltip-trigger" 
+                  title={lang === 'no' ? 'Gå til Min side' : 'Go to My Page'}
                 >
                   {(user?.email?.[0] || 'U')}
-                </div>
+                </Link>
 
                 <button 
                   onClick={handleSignOut}

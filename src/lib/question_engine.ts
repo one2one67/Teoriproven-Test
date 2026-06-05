@@ -47,13 +47,31 @@ export function getQuestionsForCategory(catId: CategoryId, lang: Language): Univ
     if (localizedData && typeof localizedData.q === 'string') {
       // Old Schema (Mapped per language directly)
       const fallbackNo = qObj['no'] || {};
+      
+      const rawOptions = [...(localizedData.o || [])];
+      let correctIndex = localizedData.c !== undefined ? localizedData.c : -1;
+      
+      // Shuffle options and update correctIndex
+      if (rawOptions.length > 0 && correctIndex >= 0 && correctIndex < rawOptions.length) {
+        const mapped = rawOptions.map((opt, i) => ({ text: opt, isCorrect: i === correctIndex }));
+        for (let i = mapped.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [mapped[i], mapped[j]] = [mapped[j], mapped[i]];
+        }
+        rawOptions.length = 0;
+        mapped.forEach((item, i) => {
+          rawOptions.push(item.text);
+          if (item.isCorrect) correctIndex = i;
+        });
+      }
+      
       return {
         gi: index,
         _no_t: fallbackNo.t,
         t: localizedData.t || fallbackNo.t || 'Unknown Topic',
         q: localizedData.q || '',
-        o: localizedData.o || [],
-        c: localizedData.c !== undefined ? localizedData.c : -1,
+        o: rawOptions,
+        c: correctIndex,
         e: localizedData.e || '',
         
         // Pick up any outer metadata if provided
@@ -70,13 +88,31 @@ export function getQuestionsForCategory(catId: CategoryId, lang: Language): Univ
     } else {
       // New Schema (If we want a flat schema like { t: '...', q: '...', ...})
       // Allows embedding full single-language mock data easily.
+      
+      const rawOptions = [...(qObj.o || [])];
+      let correctIndex = qObj.c !== undefined ? qObj.c : -1;
+      
+      // Shuffle options and update correctIndex
+      if (rawOptions.length > 0 && correctIndex >= 0 && correctIndex < rawOptions.length) {
+        const mapped = rawOptions.map((opt, i) => ({ text: opt, isCorrect: i === correctIndex }));
+        for (let i = mapped.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [mapped[i], mapped[j]] = [mapped[j], mapped[i]];
+        }
+        rawOptions.length = 0;
+        mapped.forEach((item, i) => {
+          rawOptions.push(item.text);
+          if (item.isCorrect) correctIndex = i;
+        });
+      }
+      
       return {
         gi: index,
         _no_t: qObj.topicId || qObj.t,
         t: qObj.t || '',
         q: qObj.q || '',
-        o: qObj.o || [],
-        c: qObj.c !== undefined ? qObj.c : -1,
+        o: rawOptions,
+        c: correctIndex,
         e: qObj.e || '',
         ...qObj
       } as UniversalQuestion;
