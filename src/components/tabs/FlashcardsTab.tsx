@@ -19,9 +19,9 @@ export default function FlashcardsTab() {
   const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   const ui = UI[lang] || UI['no'];
-  if (!catId) return null;
+  if (!catId || !QDATA[catId]) return null;
   
-  const th = QDATA[catId].themes[lang] || QDATA[catId].themes['no'];
+  const th = QDATA[catId].themes?.[lang] || QDATA[catId].themes?.['no'] || {};
 
   const start = () => {
     let pool = getQuestionsForCategory(catId as any, lang);
@@ -218,9 +218,25 @@ export default function FlashcardsTab() {
     );
   }
 
+  if (playing && fcPool.length === 0) {
+    return (
+      <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-6 text-center space-y-4">
+        <p className="text-sm text-slate-300">
+          {lang === 'no' ? 'Ingen flashcards tilgjengelig for dette filteret.' : 'No flashcards available for this filter.'}
+        </p>
+        <button 
+          onClick={() => setPlaying(false)} 
+          className="mx-auto px-4 py-2 bg-brand-blue text-white rounded-xl text-xs font-semibold cursor-pointer"
+        >
+          {ui.fcBack || 'Back'}
+        </button>
+      </div>
+    );
+  }
+
   const q = fcPool[fcIdx];
   const color = th[q.t] || 'var(--color-brand-blue)';
-  const pctFinished = Math.round((fcIdx / fcPool.length) * 100);
+  const pctFinished = fcPool.length > 0 ? Math.round((fcIdx / fcPool.length) * 100) : 0;
 
   return (
     <div className="animate-in fade-in duration-300 space-y-4">
@@ -273,11 +289,9 @@ export default function FlashcardsTab() {
             </div>
             
             <div className="flex-1 flex flex-col items-center justify-center py-4 overflow-y-auto custom-scrollbar">
-              {q.image && (
-                <div className="mb-4 w-full shrink-0">
-                  <QuestionImage src={q.image} alt={q.imageAlt || 'Flashcard illustration'} className="max-h-[140px]" />
-                </div>
-              )}
+              <div className="mb-4 w-full shrink-0">
+                <QuestionImage src={q.image || null} questionText={q.q} alt={q.imageAlt || 'Flashcard illustration'} className="max-h-[140px]" />
+              </div>
               <p className="font-display text-sm sm:text-base md:text-lg font-bold text-white leading-relaxed text-center rtl:text-right w-full">
                 {q.q}
               </p>

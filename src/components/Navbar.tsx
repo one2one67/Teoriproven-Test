@@ -4,6 +4,7 @@ import { cn } from '@/src/lib/utils';
 import { useStore } from '@/src/lib/store';
 import { useUser } from '../lib/AuthContext';
 import { supabase } from '../lib/supabase';
+import { LogOut } from 'lucide-react';
 
 export default function Navbar() {
   const { isSignedIn, user } = useUser();
@@ -154,9 +155,12 @@ export default function Navbar() {
 
                 <button 
                   onClick={handleSignOut}
-                  className="text-xs font-bold text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer h-9 px-3 border border-brand-border rounded-lg bg-white/5 hover:bg-white/10"
+                  className="text-xs font-bold text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer h-9 px-2.5 sm:px-3 border border-brand-border rounded-lg bg-white/5 hover:bg-white/10 flex items-center gap-1.5 whitespace-nowrap shrink-0"
                 >
-                  {lang === 'no' ? 'Logg ut' : lang === 'en' ? 'Log out' : lang === 'ar' ? 'خروج' : 'Wyloguj'}
+                  <LogOut className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                  <span>
+                    {lang === 'no' ? 'Logg ut' : lang === 'en' ? 'Log out' : lang === 'ar' ? 'خروج' : 'Wyloguj'}
+                  </span>
                 </button>
               </div>
             )}

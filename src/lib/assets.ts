@@ -92,3 +92,75 @@ export async function getAssetByCode(assetCode: string): Promise<QuestionAsset |
 export function getImageUrlForAsset(asset: QuestionAsset): string {
   return getAssetPublicUrl(asset.storage_path);
 }
+
+// Local SVGs mapped cleanly to real Supabase image storage paths
+const LOCAL_SVG_MAP: Record<string, string> = {
+  'warning_curve_right': 'signs/warning/100_1 Skarp sving til høyre.jpg',
+  'no_entry': 'signs/prohibition/302_0.jpg',
+  'no_overtaking': 'signs/prohibition/334_0.jpg',
+  'mandatory_right': 'signs/mandatory/402_1.jpg',
+  'priority_road': 'signs/priority/206_0.jpg',
+  'priority_oncoming': 'signs/priority/214_0.jpg',
+  'pedestrian_crossing': 'signs/warning/140_0.jpg',
+  'no_stopping': 'signs/prohibition/370_0.jpg',
+  'yield': 'signs/priority/202_0.jpg',
+  'speed_50': 'signs/prohibition/362_50.jpg',
+  'intersection': 'signs/warning/124_0.jpg',
+  'unregulated_intersection': 'signs/warning/124_0.jpg',
+  'roundabout_situation': 'signs/warning/126_0.jpg',
+  'lane_positioning': 'signs/information/530_01.jpg',
+  'fog_lights': 'signs/warning/132_0.jpg'
+};
+
+import assetMatchesRaw from '../scripts/asset_matches.json';
+
+interface AssetMatch {
+  categoryId: string;
+  qTextSnippet: string;
+  currentImage: string | null;
+  proposedAssetCode: string | null;
+  proposedAssetPath: string | null;
+  proposedAssetName: string | null;
+  confidence: string;
+  score: number;
+}
+
+const assetMatches = assetMatchesRaw as AssetMatch[];
+const textMatchMap = new Map<string, string>();
+
+assetMatches.forEach((m) => {
+  if (m.proposedAssetPath && (m.confidence === 'high' || m.confidence === 'medium')) {
+    // Index by category & lowercase start of the question text
+    const key = `${m.categoryId}:${m.qTextSnippet.trim().toLowerCase().substring(0, 30)}`;
+    textMatchMap.set(key, m.proposedAssetPath);
+  }
+});
+
+/**
+ * Resolves any image (local, placeholder, or missing) into the beautiful high-quality Supabase counterpart
+ */
+export function resolveQuestionImage(categoryId: string, questionText: string, currentImage: string | null): string | null {
+  if (currentImage) {
+    if (currentImage.startsWith('http') && !currentImage.includes('placehold.co')) {
+      return currentImage;
+    }
+
+    const lastPart = currentImage.split('/').pop() || '';
+    const nameWithoutExt = lastPart.replace(/\.[^/.]+$/, "").toLowerCase();
+    
+    if (LOCAL_SVG_MAP[nameWithoutExt]) {
+      return getAssetPublicUrl(LOCAL_SVG_MAP[nameWithoutExt]);
+    }
+  }
+
+  // Look up via question text matching
+  const cleanQ = questionText.trim().toLowerCase().substring(0, 30);
+  const key = `${categoryId}:${cleanQ}`;
+  
+  const matchedPath = textMatchMap.get(key);
+  if (matchedPath) {
+    return getAssetPublicUrl(matchedPath);
+  }
+
+  return currentImage || null;
+}

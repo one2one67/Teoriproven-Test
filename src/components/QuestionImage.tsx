@@ -1,28 +1,33 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ZoomIn } from 'lucide-react';
+import { useStore } from '../lib/store';
+import { resolveQuestionImage } from '../lib/assets';
 
 interface QuestionImageProps {
-  src: string;
+  src: string | null;
   alt?: string;
   className?: string;
+  questionText?: string;
 }
 
-export function QuestionImage({ src, alt, className = '' }: QuestionImageProps) {
+export function QuestionImage({ src, alt, className = '', questionText }: QuestionImageProps) {
   const [zoomed, setZoomed] = useState(false);
+  const { catId } = useStore();
+  const resolvedSrc = resolveQuestionImage(catId || 'personbil_b', questionText || alt || '', src);
 
-  if (!src) return null;
+  if (!resolvedSrc) return null;
 
   return (
     <>
       <div 
-        className={`relative group rounded-xl overflow-hidden bg-brand-dark flex items-center justify-center border border-[rgba(255,255,255,0.08)] cursor-pointer ${className}`}
+        className={`relative group rounded-xl overflow-hidden bg-brand-dark/40 flex items-center justify-center border border-brand-border/40 cursor-pointer w-full ${className}`}
         onClick={() => setZoomed(true)}
       >
         <img 
-          src={src} 
+          src={resolvedSrc} 
           alt={alt || 'Question illustration'} 
-          className="max-w-full max-h-[180px] md:max-h-[220px] object-contain transition-transform duration-300 group-hover:scale-[1.02]" 
+          className="w-full h-auto max-h-[260px] md:max-h-[320px] object-contain transition-all duration-300 group-hover:scale-[1.01] p-1" 
           loading="lazy"
         />
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -50,9 +55,9 @@ export function QuestionImage({ src, alt, className = '' }: QuestionImageProps) 
               className="relative max-w-5xl max-h-[90vh] w-full flex flex-col pointer-events-none"
             >
               <img 
-                src={src} 
+                src={resolvedSrc} 
                 alt={alt || 'Question illustration'} 
-                className="w-full h-full object-contain pointer-events-auto rounded-lg shadow-2xl" 
+                className="w-full h-auto max-h-[85vh] object-contain pointer-events-auto rounded-lg shadow-2xl" 
                 onClick={(e) => e.stopPropagation()}
               />
               <button 

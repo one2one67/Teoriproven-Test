@@ -18,9 +18,9 @@ export default function QuizTab() {
   const [topic, setTopic] = useState<string>('all');
 
   const ui = UI[lang] || UI['no'];
-  if (!catId) return null;
+  if (!catId || !QDATA[catId]) return null;
   
-  const th = QDATA[catId].themes[lang] || QDATA[catId].themes['no'];
+  const th = QDATA[catId].themes?.[lang] || QDATA[catId].themes?.['no'] || {};
   const recentHist = hist.filter(h => h.ty === 'q' && h.cat === catId).slice(-4).reverse();
 
   const start = () => {
@@ -213,6 +213,22 @@ export default function QuizTab() {
     );
   }
 
+  if (playing && qPool.length === 0) {
+    return (
+      <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-6 text-center space-y-4">
+        <p className="text-sm text-slate-300">
+          {lang === 'no' ? 'Ingen spørsmål funnet for dette temaet.' : 'No questions found for this topic.'}
+        </p>
+        <button 
+          onClick={() => setPlaying(false)} 
+          className="mx-auto px-4 py-2 bg-brand-blue text-white rounded-xl text-xs font-semibold cursor-pointer"
+        >
+          {ui.qrHome || 'Home'}
+        </button>
+      </div>
+    );
+  }
+
   const q = qPool[qIdx];
   const ans = answers[qIdx];
   const color = th[q.t] || 'var(--color-brand-blue)';
@@ -245,11 +261,9 @@ export default function QuizTab() {
             {q.t.replace(/T\d+[^:]*:\s*/, '')}
           </span>
         </div>
-        {q.image && (
-          <div className="mb-3 mt-1">
-            <QuestionImage src={q.image} alt={q.imageAlt || 'Illustration for question'} />
-          </div>
-        )}
+        <div className="mb-3 mt-1">
+          <QuestionImage src={q.image || null} questionText={q.q} alt={q.imageAlt || 'Illustration for question'} />
+        </div>
         <h4 className="font-display text-sm sm:text-base font-bold text-white leading-relaxed mt-1">
           {q.q}
         </h4>

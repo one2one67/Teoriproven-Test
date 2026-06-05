@@ -18,7 +18,7 @@ export default function ExamTab() {
   const [timeLeft, setTimeLeft] = useState(45 * 60);
 
   const ui = UI[lang] || UI['no'];
-  if (!catId) return null;
+  if (!catId || !QDATA[catId]) return null;
   
 
   useEffect(() => {
@@ -79,11 +79,20 @@ export default function ExamTab() {
 
   const selectQuestion = (idx: number) => {
     if (idx >= 0 && idx < qPool.length) {
+      // Prevent skipping ahead if current is unanswered
+      const currentAns = answers[qIdx];
+      if (idx > qIdx && (!currentAns || currentAns.chosen === undefined)) {
+        return;
+      }
       setQIdx(idx);
     }
   };
 
   const next = () => {
+    const currentAns = answers[qIdx];
+    if (!currentAns || currentAns.chosen === undefined) {
+      return; // Must answer current first
+    }
     if (qIdx + 1 >= qPool.length) {
       finishExam();
     } else {
@@ -223,13 +232,29 @@ export default function ExamTab() {
     );
   }
 
+  if (playing && qPool.length === 0) {
+    return (
+      <div className="bg-brand-dark-2 border border-brand-border rounded-2xl p-6 text-center space-y-4">
+        <p className="text-sm text-slate-300">
+          {lang === 'no' ? 'Ingen spørsmål funnet for denne kategorien.' : 'No questions found for this category.'}
+        </p>
+        <button 
+          onClick={() => setPlaying(false)} 
+          className="mx-auto px-4 py-2 bg-brand-blue text-white rounded-xl text-xs font-semibold cursor-pointer"
+        >
+          {ui.exHome || 'Home'}
+        </button>
+      </div>
+    );
+  }
+
   const m = Math.floor(timeLeft / 60);
   const s = timeLeft % 60;
   const isCrucialTime = timeLeft < 120; // less than 2 minutes
   const timerBorderClass = timeLeft < 60 ? 'border-red-500 animate-pulse bg-red-500/10' : timeLeft < 300 ? 'border-amber-500 bg-amber-500/5' : 'border-emerald-500 bg-emerald-500/5';
   const q = qPool[qIdx];
   const ans = answers[qIdx];
-  const pctProgress = Math.round((qIdx / qPool.length) * 100);
+  const pctProgress = qPool.length > 0 ? Math.round((qIdx / qPool.length) * 100) : 0;
 
   return (
     <div className="animate-in fade-in flex flex-col -mx-3.5 -mt-3.5 relative">
@@ -288,11 +313,9 @@ export default function ExamTab() {
               {lang === 'no' ? 'Spørsmål' : lang === 'en' ? 'Question' : lang === 'ar' ? 'سؤال' : 'Pytanie'} {qIdx + 1}
             </div>
           </div>
-          {q.image && (
-            <div className="mb-3 mt-1">
-              <QuestionImage src={q.image} alt={q.imageAlt || 'Exam illustration'} />
-            </div>
-          )}
+          <div className="mb-3 mt-1">
+            <QuestionImage src={q.image || null} questionText={q.q} alt={q.imageAlt || 'Exam illustration'} />
+          </div>
           <h4 className="font-display text-sm sm:text-base font-bold text-white leading-relaxed mt-1">
             {q.q}
           </h4>
@@ -334,20 +357,25 @@ export default function ExamTab() {
             {qPool.map((_, idx) => {
               const itemAns = answers[idx];
               const isSelected = qIdx === idx;
+              const isLocked = idx > qIdx && (!ans || ans.chosen === undefined);
               
-              let blockClass = "border-brand-border text-slate-400 bg-brand-dark hover:border-slate-500";
+              let blockClass = "border-brand-border text-slate-400 bg-brand-dark hover:border-slate-500 cursor-pointer";
               if (itemAns && itemAns.chosen !== -1) {
-                blockClass = "border-brand-blue/40 text-brand-blue-lt bg-brand-blue/5 hover:border-brand-blue";
+                blockClass = "border-brand-blue/40 text-brand-blue-lt bg-brand-blue/5 hover:border-brand-blue cursor-pointer";
               }
               if (isSelected) {
-                blockClass = "border-brand-blue text-white bg-brand-blue shadow-sm shadow-brand-blue/20";
+                blockClass = "border-brand-blue text-white bg-brand-blue shadow-sm shadow-brand-blue/20 cursor-pointer";
+              }
+              if (isLocked) {
+                blockClass = "border-brand-border/40 text-slate-600 bg-brand-dark/20 cursor-not-allowed opacity-40";
               }
 
               return (
                 <button 
                   key={idx}
+                  disabled={isLocked}
                   onClick={() => selectQuestion(idx)}
-                  className={cn("w-[28px] h-[28px] rounded-md border text-[11px] font-mono font-bold flex items-center justify-center transition-all cursor-pointer focus:outline-none", blockClass)}
+                  className={cn("w-[28px] h-[28px] rounded-md border text-[11px] font-mono font-bold flex items-center justify-center transition-all focus:outline-none", blockClass)}
                 >
                   {idx + 1}
                 </button>
@@ -361,14 +389,26 @@ export default function ExamTab() {
           {qIdx + 1 >= qPool.length ? (
             <button 
               onClick={() => finishExam()} 
-              className="w-full bg-gradient-to-br from-emerald-500 to-emerald-600 hover:brightness-105 text-white font-display text-sm font-bold rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer shadow-sm shadow-emerald-500/20"
+              disabled={!ans || ans.chosen === undefined}
+              className={cn(
+                "w-full text-white font-display text-sm font-bold rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-sm",
+                (!ans || ans.chosen === undefined)
+                  ? "bg-brand-dark-2 text-slate-500 border border-brand-border cursor-not-allowed opacity-50"
+                  : "bg-gradient-to-br from-emerald-500 to-emerald-600 hover:brightness-105 cursor-pointer shadow-emerald-500/20"
+              )}
             >
               <UserCheck className="w-4 h-4 shrink-0" /> {ui.submitEx}
             </button>
           ) : (
             <button 
               onClick={next} 
-              className="w-full bg-[#1a2235] text-slate-200 border-[1.5px] border-brand-border hover:border-slate-400 font-display text-sm font-bold rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
+              disabled={!ans || ans.chosen === undefined}
+              className={cn(
+                "w-full font-display text-sm font-bold rounded-xl py-3.5 flex items-center justify-center gap-2 transition-all active:scale-[0.98]",
+                (!ans || ans.chosen === undefined)
+                  ? "bg-brand-dark-2 text-slate-500 border border-brand-border cursor-not-allowed opacity-50"
+                  : "bg-[#1a2235] text-slate-200 border-[1.5px] border-brand-border hover:border-slate-400 cursor-pointer"
+              )}
             >
               {ui.nextQ} <ArrowRight className="w-4 h-4 rtl:scale-x-[-1]" />
             </button>
