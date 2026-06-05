@@ -107,14 +107,14 @@ export function getQuestionsForCategory(catId: CategoryId, lang: Language): Univ
       }
       
       return {
+        ...qObj,
         gi: index,
         _no_t: qObj.topicId || qObj.t,
         t: qObj.t || '',
         q: qObj.q || '',
         o: rawOptions,
         c: correctIndex,
-        e: qObj.e || '',
-        ...qObj
+        e: qObj.e || ''
       } as UniversalQuestion;
     }
   });

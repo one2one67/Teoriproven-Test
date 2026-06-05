@@ -137,30 +137,8 @@ assetMatches.forEach((m) => {
 });
 
 /**
- * Resolves any image (local, placeholder, or missing) into the beautiful high-quality Supabase counterpart
+ * Resolves any image (local, placeholder, or missing)
  */
 export function resolveQuestionImage(categoryId: string, questionText: string, currentImage: string | null): string | null {
-  if (currentImage) {
-    if (currentImage.startsWith('http') && !currentImage.includes('placehold.co')) {
-      return currentImage;
-    }
-
-    const lastPart = currentImage.split('/').pop() || '';
-    const nameWithoutExt = lastPart.replace(/\.[^/.]+$/, "").toLowerCase();
-    
-    if (LOCAL_SVG_MAP[nameWithoutExt]) {
-      return getAssetPublicUrl(LOCAL_SVG_MAP[nameWithoutExt]);
-    }
-  }
-
-  // Look up via question text matching
-  const cleanQ = questionText.trim().toLowerCase().substring(0, 30);
-  const key = `${categoryId}:${cleanQ}`;
-  
-  const matchedPath = textMatchMap.get(key);
-  if (matchedPath) {
-    return getAssetPublicUrl(matchedPath);
-  }
-
   return currentImage || null;
 }
