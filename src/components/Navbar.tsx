@@ -95,7 +95,7 @@ export default function Navbar() {
                 onClick={() => navigate('/auth')} 
                 className="text-sm font-bold text-white hover:text-brand-blue transition-colors px-2.5 py-2 cursor-pointer"
               >
-                {lang === 'no' ? 'Logg inn' : lang === 'en' ? 'Log in' : lang === 'ar' ? 'تسجيل الدخول' : 'Zaloguj'}
+                {lang === 'no' ? 'Logg inn med kode' : lang === 'en' ? 'Log in with code' : lang === 'ar' ? 'تسجيل الدخول بالرمز' : 'Zaloguj kodem'}
               </button>
             )}
 
