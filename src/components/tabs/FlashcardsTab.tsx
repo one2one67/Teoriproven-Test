@@ -289,8 +289,8 @@ export default function FlashcardsTab() {
             </div>
             
             <div className="flex-1 flex flex-col items-center justify-center py-4 overflow-y-auto custom-scrollbar">
-              <div className="mb-4 w-full shrink-0">
-                <QuestionImage src={q.image || null} questionText={q.q} alt={q.imageAlt || 'Flashcard illustration'} className="max-h-[160px] md:max-h-[220px]" />
+              <div className="mb-4 shrink-0 w-full">
+                <QuestionImage src={q.image || null} questionText={q.q} alt={q.imageAlt || 'Flashcard illustration'} className="w-full h-[140px] md:h-[180px]" />
               </div>
               <p className="font-display text-sm sm:text-base md:text-lg font-bold text-white leading-relaxed text-center rtl:text-right w-full">
                 {q.q}

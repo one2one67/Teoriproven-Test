@@ -140,21 +140,34 @@ assetMatches.forEach((m) => {
  * Resolves any image (local, placeholder, or missing)
  */
 export function resolveQuestionImage(categoryId: string, questionText: string, currentImage: string | null): string | null {
-  if (currentImage && !currentImage.includes('placehold.co')) {
-    // Keep existing valid remote URLs or local SVGs
-    return currentImage;
-  }
-
-  // Look up via question text matching
   const cleanQ = questionText.trim().toLowerCase().substring(0, 30);
   const key = `${categoryId}:${cleanQ}`;
   
+  // 1. Check if we have a match in the asset catalog (this brings in high-quality images from text)
   const matchedPath = textMatchMap.get(key);
   if (matchedPath) {
-    // Manually encode to avoid 400 Bad Request
     const encodedPath = matchedPath.split('/').map(part => encodeURIComponent(part)).join('/');
     return getAssetPublicUrl(encodedPath);
   }
 
-  return currentImage || null;
+  // 2. Fall back to current image if not matched
+  if (currentImage) {
+    // We do NOT want to use placehold.co images if we can avoid it.
+    if (currentImage.includes('placehold.co')) {
+      return null; // hide placeholders
+    }
+
+    const lastPart = currentImage.split('/').pop() || '';
+    const nameWithoutExt = lastPart.replace(/\.[^/.]+$/, "").toLowerCase();
+    
+    // If it's a known SVG, maybe map to the beautiful real-life image from the database
+    if (LOCAL_SVG_MAP[nameWithoutExt]) {
+      const encodedPath = LOCAL_SVG_MAP[nameWithoutExt].split('/').map(part => encodeURIComponent(part)).join('/');
+      return getAssetPublicUrl(encodedPath);
+    }
+    
+    return currentImage;
+  }
+
+  return null;
 }
