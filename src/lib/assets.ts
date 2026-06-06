@@ -140,5 +140,21 @@ assetMatches.forEach((m) => {
  * Resolves any image (local, placeholder, or missing)
  */
 export function resolveQuestionImage(categoryId: string, questionText: string, currentImage: string | null): string | null {
+  if (currentImage && !currentImage.includes('placehold.co')) {
+    // Keep existing valid remote URLs or local SVGs
+    return currentImage;
+  }
+
+  // Look up via question text matching
+  const cleanQ = questionText.trim().toLowerCase().substring(0, 30);
+  const key = `${categoryId}:${cleanQ}`;
+  
+  const matchedPath = textMatchMap.get(key);
+  if (matchedPath) {
+    // Manually encode to avoid 400 Bad Request
+    const encodedPath = matchedPath.split('/').map(part => encodeURIComponent(part)).join('/');
+    return getAssetPublicUrl(encodedPath);
+  }
+
   return currentImage || null;
 }

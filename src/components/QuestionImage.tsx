@@ -18,18 +18,16 @@ export function QuestionImage({ src, alt, className = '', questionText }: Questi
 
   if (!resolvedSrc) return null;
 
-  const hasHeightConstraint = className.includes('h-') || className.includes('max-h-');
-
   return (
     <>
       <div 
-        className={`relative group rounded-xl bg-brand-dark/40 flex items-center justify-center border border-brand-border/40 cursor-pointer overflow-hidden ${hasHeightConstraint ? className : 'w-full max-h-[260px] md:max-h-[320px] ' + className}`}
+        className={`relative group rounded-xl bg-brand-dark/40 flex items-center justify-center border border-brand-border/40 cursor-pointer overflow-hidden max-h-[300px] w-full ${className}`}
         onClick={() => setZoomed(true)}
       >
         <img 
           src={resolvedSrc} 
           alt={alt || 'Question illustration'} 
-          className="w-full h-full max-h-[inherit] object-contain transition-all duration-300 group-hover:scale-[1.01] p-2" 
+          className="w-full h-auto max-h-[inherit] object-contain transition-all duration-300 group-hover:scale-[1.03] p-3" 
           loading="lazy"
         />
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
